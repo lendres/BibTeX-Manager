@@ -119,12 +119,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AssemblyInfo.cs">
+    <Compile Include="Forms\ProjectForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ProjectForm.Designer.cs">
+      <DependentUpon>ProjectForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Project\BibtexProject.cs" />
     <Compile Include="Project\CustomClass1.cs" />
-    <Compile Include="RegistryAccess.cs">
+    <Compile Include="Program\RegistryAccess.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Forms\BibtexManagerForm.cs">
@@ -133,7 +139,7 @@
     <Compile Include="Forms\BibtexManagerForm.Designer.cs">
       <DependentUpon>BibtexManagerForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Program.cs" />
+    <Compile Include="Program\Program.cs" />
     <Content Include="Test Files\Test File 1.html" />
     <Content Include="Test Files\Test File 2.html" />
     <None Include="app.config" />
@@ -153,6 +159,9 @@
       <DependentUpon>BibtexManagerForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ProjectForm.resx">
+      <DependentUpon>ProjectForm.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
@@ -162,6 +171,10 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\BibTeXLibrary\BibTeXLibrary\BibTeXLibrary.csproj">
+      <Project>{e453ff0b-97b0-4575-9a2e-b15dcbf7c47f}</Project>
+      <Name>BibTeXLibrary</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\C-Sharp-Library\Library\Digital Production.csproj">
       <Project>{078ea7c0-7ee8-4d51-9421-8eedc779acbb}</Project>
       <Name>Digital Production</Name>
