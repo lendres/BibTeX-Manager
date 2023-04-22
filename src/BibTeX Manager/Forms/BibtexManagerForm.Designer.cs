@@ -7,24 +7,31 @@ namespace DigitalProduction.LineCounter
 	/// </summary>
 	partial class BibtexManagerForm
 	{
-		#region Members / Variables.
+		#region Members
 
 		private DigitalProduction.Forms.StatusBarWithProgress		statusBar;
 		private System.Windows.Forms.StatusBarPanel					statusBarPanel1;
 		private System.Windows.Forms.StatusBarPanel					statusBarPanel2;
 		private System.Windows.Forms.StatusBarPanel					statusBarPanel3;
-		private System.Windows.Forms.Timer							tmrClock;
+		private System.Windows.Forms.Timer							timerClock;
 
 		private System.Windows.Forms.Button btnCount;
 		private System.Windows.Forms.Button							btnGetFiles;
 		private System.Windows.Forms.TextBox						txtbxFileLocation;
 		private System.Windows.Forms.Label							lblFileLocation;
 
-		private System.Windows.Forms.MenuStrip						mnuMain;
-		private System.Windows.Forms.ToolStripMenuItem				mnuFile;
-		private System.Windows.Forms.ToolStripMenuItem				mnuExit;
-		private System.Windows.Forms.ToolStripSeparator				mnusepFile1;
-		private System.Windows.Forms.ToolStripMenuItem				mnuHelp;
+		private System.Windows.Forms.MenuStrip						menuMain;
+		private System.Windows.Forms.ToolStripMenuItem				fileToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem				newToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem				openToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem				closeToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem				saveToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem				saveAsToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem				exitToolStripMenuItem;
+
+
+		private System.Windows.Forms.ToolStripSeparator				toolStripSeparatorFile1;
+		private System.Windows.Forms.ToolStripMenuItem				viewHelpToolStripMenuItem;
 
 		private System.ComponentModel.IContainer					components;
 
@@ -60,18 +67,25 @@ namespace DigitalProduction.LineCounter
 			this.components = new System.ComponentModel.Container();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BibtexManagerForm));
 			this.btnCount = new System.Windows.Forms.Button();
-			this.tmrClock = new System.Windows.Forms.Timer(this.components);
+			this.timerClock = new System.Windows.Forms.Timer(this.components);
 			this.btnGetFiles = new System.Windows.Forms.Button();
 			this.txtbxFileLocation = new System.Windows.Forms.TextBox();
 			this.lblFileLocation = new System.Windows.Forms.Label();
-			this.mnuMain = new System.Windows.Forms.MenuStrip();
-			this.mnuFile = new System.Windows.Forms.ToolStripMenuItem();
-			this.mnuHelp = new System.Windows.Forms.ToolStripMenuItem();
-			this.mnusepFile1 = new System.Windows.Forms.ToolStripSeparator();
-			this.mnuExit = new System.Windows.Forms.ToolStripMenuItem();
+			this.menuMain = new System.Windows.Forms.MenuStrip();
+			this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.closeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripSeparatorFile1 = new System.Windows.Forms.ToolStripSeparator();
+			this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.viewHelpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.grpbxFiles = new System.Windows.Forms.GroupBox();
 			this.lnkReport = new System.Windows.Forms.LinkLabel();
-			this.mnuMain.SuspendLayout();
+			this.projectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.menuMain.SuspendLayout();
 			this.grpbxFiles.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -118,45 +132,97 @@ namespace DigitalProduction.LineCounter
 			this.lblFileLocation.Text = "Location of Files:";
 			this.lblFileLocation.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
 			// 
-			// mnuMain
+			// menuMain
 			// 
-			this.mnuMain.BackColor = System.Drawing.SystemColors.Control;
-			this.mnuMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuFile});
-			this.mnuMain.Location = new System.Drawing.Point(0, 0);
-			this.mnuMain.Name = "mnuMain";
-			this.mnuMain.Size = new System.Drawing.Size(540, 24);
-			this.mnuMain.TabIndex = 0;
-			this.mnuMain.Text = "Menu Bar";
+			this.menuMain.BackColor = System.Drawing.SystemColors.Control;
+			this.menuMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fileToolStripMenuItem,
+            this.projectToolStripMenuItem,
+            this.helpToolStripMenuItem});
+			this.menuMain.Location = new System.Drawing.Point(0, 0);
+			this.menuMain.Name = "menuMain";
+			this.menuMain.Size = new System.Drawing.Size(540, 24);
+			this.menuMain.TabIndex = 0;
+			this.menuMain.Text = "Menu Bar";
 			// 
-			// mnuFile
+			// fileToolStripMenuItem
 			// 
-			this.mnuFile.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuHelp,
-            this.mnusepFile1,
-            this.mnuExit});
-			this.mnuFile.Name = "mnuFile";
-			this.mnuFile.Size = new System.Drawing.Size(37, 20);
-			this.mnuFile.Text = "&File";
+			this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.newToolStripMenuItem,
+            this.openToolStripMenuItem,
+            this.closeToolStripMenuItem,
+            this.saveToolStripMenuItem,
+            this.saveAsToolStripMenuItem,
+            this.toolStripSeparatorFile1,
+            this.exitToolStripMenuItem});
+			this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+			this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+			this.fileToolStripMenuItem.Text = "&File";
 			// 
-			// mnuHelp
+			// newToolStripMenuItem
 			// 
-			this.mnuHelp.Name = "mnuHelp";
-			this.mnuHelp.Size = new System.Drawing.Size(99, 22);
-			this.mnuHelp.Text = "&Help";
-			this.mnuHelp.Click += new System.EventHandler(this.MenuHelp_Click);
+			this.newToolStripMenuItem.Name = "newToolStripMenuItem";
+			this.newToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
+			this.newToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.newToolStripMenuItem.Text = "&New...";
+			this.newToolStripMenuItem.Click += new System.EventHandler(this.MenuFileNew_Click);
 			// 
-			// mnusepFile1
+			// openToolStripMenuItem
 			// 
-			this.mnusepFile1.Name = "mnusepFile1";
-			this.mnusepFile1.Size = new System.Drawing.Size(96, 6);
+			this.openToolStripMenuItem.Name = "openToolStripMenuItem";
+			this.openToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
+			this.openToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.openToolStripMenuItem.Text = "&Open...";
+			this.openToolStripMenuItem.Click += new System.EventHandler(this.MenuFileOpen_Click);
 			// 
-			// mnuExit
+			// closeToolStripMenuItem
 			// 
-			this.mnuExit.Name = "mnuExit";
-			this.mnuExit.Size = new System.Drawing.Size(99, 22);
-			this.mnuExit.Text = "E&xit";
-			this.mnuExit.Click += new System.EventHandler(this.MenuExit_Click);
+			this.closeToolStripMenuItem.Name = "closeToolStripMenuItem";
+			this.closeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.closeToolStripMenuItem.Text = "&Close";
+			this.closeToolStripMenuItem.Click += new System.EventHandler(this.MenuFileClose_Click);
+			// 
+			// saveToolStripMenuItem
+			// 
+			this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
+			this.saveToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
+			this.saveToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.saveToolStripMenuItem.Text = "&Save";
+			this.saveToolStripMenuItem.Click += new System.EventHandler(this.MenuFileSave_Click);
+			// 
+			// saveAsToolStripMenuItem
+			// 
+			this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
+			this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.saveAsToolStripMenuItem.Text = "Save &As...";
+			this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.MenuFileSaveAs_Click);
+			// 
+			// toolStripSeparatorFile1
+			// 
+			this.toolStripSeparatorFile1.Name = "toolStripSeparatorFile1";
+			this.toolStripSeparatorFile1.Size = new System.Drawing.Size(177, 6);
+			// 
+			// exitToolStripMenuItem
+			// 
+			this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+			this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.exitToolStripMenuItem.Text = "E&xit";
+			this.exitToolStripMenuItem.Click += new System.EventHandler(this.MenuExit_Click);
+			// 
+			// helpToolStripMenuItem
+			// 
+			this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.viewHelpToolStripMenuItem});
+			this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+			this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+			this.helpToolStripMenuItem.Text = "&Help";
+			// 
+			// viewHelpToolStripMenuItem
+			// 
+			this.viewHelpToolStripMenuItem.Name = "viewHelpToolStripMenuItem";
+			this.viewHelpToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.viewHelpToolStripMenuItem.Text = "&View Help";
+			this.viewHelpToolStripMenuItem.Click += new System.EventHandler(this.MenuHelp_Click);
 			// 
 			// grpbxFiles
 			// 
@@ -185,22 +251,28 @@ namespace DigitalProduction.LineCounter
 			this.lnkReport.Visible = false;
 			this.lnkReport.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkReport_LinkClicked);
 			// 
-			// BibTeXManager
+			// projectToolStripMenuItem
+			// 
+			this.projectToolStripMenuItem.Name = "projectToolStripMenuItem";
+			this.projectToolStripMenuItem.Size = new System.Drawing.Size(56, 20);
+			this.projectToolStripMenuItem.Text = "&Project";
+			// 
+			// BibtexManagerForm
 			// 
 			this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
 			this.ClientSize = new System.Drawing.Size(540, 502);
 			this.Controls.Add(this.lnkReport);
 			this.Controls.Add(this.grpbxFiles);
 			this.Controls.Add(this.btnCount);
-			this.Controls.Add(this.mnuMain);
+			this.Controls.Add(this.menuMain);
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-			this.MainMenuStrip = this.mnuMain;
+			this.MainMenuStrip = this.menuMain;
 			this.MinimumSize = new System.Drawing.Size(330, 530);
-			this.Name = "BibTeXManager";
+			this.Name = "BibtexManagerForm";
 			this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
 			this.Text = "BibTeX Manager";
-			this.mnuMain.ResumeLayout(false);
-			this.mnuMain.PerformLayout();
+			this.menuMain.ResumeLayout(false);
+			this.menuMain.PerformLayout();
 			this.grpbxFiles.ResumeLayout(false);
 			this.grpbxFiles.PerformLayout();
 			this.ResumeLayout(false);
@@ -211,6 +283,7 @@ namespace DigitalProduction.LineCounter
 
 		private System.Windows.Forms.GroupBox grpbxFiles;
 		private System.Windows.Forms.LinkLabel lnkReport;
-
+		private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem projectToolStripMenuItem;
 	} // End class.
 } // End namespace.

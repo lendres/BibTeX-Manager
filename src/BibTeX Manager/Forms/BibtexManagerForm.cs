@@ -72,9 +72,9 @@ namespace DigitalProduction.LineCounter
 			this.statusBar.ProgressBar.Minimum	= 0;
 
 			this.statusBarPanel2.Text			= System.DateTime.Now.ToLongTimeString();
-			this.tmrClock.Interval				= 1000;
-			this.tmrClock.Enabled				= true;
-			this.tmrClock.Tick					+= new EventHandler(TimerClock_Tick);
+			this.timerClock.Interval				= 1000;
+			this.timerClock.Enabled				= true;
+			this.timerClock.Tick					+= new EventHandler(TimerClock_Tick);
 
 			this.Controls.Add(this.statusBar);
 
@@ -125,6 +125,53 @@ namespace DigitalProduction.LineCounter
 
 		#region Menu Event Handlers
 
+		#region File
+
+		/// <summary>
+		/// Menu item click handler.
+		/// </summary>
+		/// <param name="sender">Sender.</param>
+		/// <param name="e">Event arguments.</param>
+		private void MenuFileNew_Click(object sender, EventArgs e)
+		{
+		}
+
+		/// <summary>
+		/// Menu item click handler.
+		/// </summary>
+		/// <param name="sender">Sender.</param>
+		/// <param name="e">Event arguments.</param>
+		private void MenuFileOpen_Click(object sender, EventArgs e)
+		{
+		}
+
+		/// <summary>
+		/// Menu item click handler.
+		/// </summary>
+		/// <param name="sender">Sender.</param>
+		/// <param name="e">Event arguments.</param>
+		private void MenuFileClose_Click(object sender, EventArgs e)
+		{
+		}
+
+		/// <summary>
+		/// Menu item click handler.
+		/// </summary>
+		/// <param name="sender">Sender.</param>
+		/// <param name="e">Event arguments.</param>
+		private void MenuFileSave_Click(object sender, EventArgs e)
+		{
+		}
+
+		/// <summary>
+		/// Menu item click handler.
+		/// </summary>
+		/// <param name="sender">Sender.</param>
+		/// <param name="e">Event arguments.</param>
+		private void MenuFileSaveAs_Click(object sender, EventArgs e)
+		{
+		}
+
 		/// <summary>
 		/// Close the application.
 		/// </summary>
@@ -135,6 +182,10 @@ namespace DigitalProduction.LineCounter
 			this.Close();
 		}
 
+		#endregion
+
+		#region Help
+
 		/// <summary>
 		/// Show help.
 		/// </summary>
@@ -144,6 +195,8 @@ namespace DigitalProduction.LineCounter
 		{
 			Help.ShowHelp(this, "Help\\Line Counter.chm");
 		}
+
+		#endregion
 
 		#endregion
 
