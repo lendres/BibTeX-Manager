@@ -1,13 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Serialization;
+﻿using BibTeXLibrary;
 using DigitalProduction.Projects;
+using System.Collections.Generic;
+using System.IO;
+using System.Text;
+using System.Xml.Serialization;
 
 namespace BibTeXManager
 {
+	/// <summary>
+	/// The model.
+	/// </summary>
 	internal class BibtexProject : Project
 	{
 		#region Members
@@ -20,7 +22,7 @@ namespace BibTeXManager
 		#region Construction
 
 		/// <summary>
-		/// Default constructor for designer.
+		/// Default constructor.
 		/// </summary>
 		public BibtexProject()
 		{
@@ -76,6 +78,16 @@ namespace BibTeXManager
 			}
 		}
 
+
+		#endregion
+
+		#region Methods
+
+		public void ReadBibFile()
+		{
+			BibParser parser		= new BibParser(new StreamReader(_bibFile, Encoding.Default));
+			List<BibEntry> entries	= parser.GetAllResult();
+		}
 
 		#endregion
 
