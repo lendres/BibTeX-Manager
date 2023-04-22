@@ -1,0 +1,1418 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Templates.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Use author's name as they appear in the article!
+%
+%article{ref:a,
+%	author			= {},
+%	title			= {},
+%	booktitle		= {},
+%	journal			= {},
+%	volume			= {},
+%	number			= {},
+%	month			= {},
+%	year			= {},
+%	pages			= {},
+%	organization	= {},
+%	address			= {},
+%	issn			= {},
+%	speid			= {SPE },
+%	abstract		= {}
+%}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Regular Expressions
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Find periods followed by a single character that is not a newline or space.
+%\.^[^\n ]
+% Finds periods followed by a character.  This will ignore newlines, spaces, and numbers after the period.
+%\.[a-zA-Z]
+
+% Finds periods followed by one or more letter that is not the string "org", "pdf", et cetera.
+%\.+[a-zA-Z]{\#~{{org}|{pdf}|{net}|{com}|{xml}|{html}|{codeproject}|{w3}}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% BOOKS / PAPERS IN JOURNALS / PAPERS IN CONFERENCE PRECEDINGS.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+@article{ref:abbassian1998a,
+	author			= {Fereidoun Abbassian and V. A. Dunayevsky},
+	title			= {Application of Stability Approach to Torsional and Lateral Bit dynamics},
+	journal			= SPEDRILLCOMP,
+	volume			= {13},
+	number			= {2},
+	year			= {1998},
+	month			= {June},
+	pages			= {99--107},
+	organization	= SPE,
+	speid			= {SPE 30478-PA},
+	abstract		= {This paper addresses the dynamic stability of polycrystalline diamond compact (PDC) bits under induced torsional and lateral vibrations. Dynamic stability is investigated by considering three simple mechanical systems representing string-torsional vibration, bit-lateral dynamics, and coupled torsional-lateral vibration of the bit-string assembly. For each system, the rotary-speed (rev/min)/ weight-on-bit (WOB) domain within which the system is dynamically stable is determined. The influence of various drillstring and bit parameters on the stability of bit motion is studied through their effect on the size of the stability zone on (rev/min)/WOB plots. These illustrate the power of the stability approach in providing valuable qualitative information on the main parameters influencing bit stability.}
+}
+
+@inproceedings{ref:alsaeedi2008a,
+	author			= {M. J. Al-Saeedi and V. S. Mahesh and H. S. Al-Ajmi and D. Al-Enezi and D. C. McKinnell},
+	title			= {Breakthrough in 22" Hole Drilling in Kuwait Deep Wells},
+	booktitle		= SPEASIATECHCONFERENCE,
+	year			= {2008},
+	month			= {August},
+	address			= {Jakarta, Indonesia},
+	speid			= {114635},
+	abstract		= {This paper presents the results of a study showing that the most harmful polycrystalline-diamond-compact (PDC) bit vibrations can be attributed to a phenomenon called 'bit whirl.'  During whirl, the instantaneous center of rotation moves around the face of the bit, and the bit whirls backward around the hole. Cutters on a whirling bit can move sideways, backward, and much faster than those on a true rotating bit. The impact loads associated with this motion cause PDC cutters to chip, which, in turn, accelerates wear. Laboratory and field results show the detrimental effects of whirl on PDC bit rate of penetration (ROP) and life.}
+}
+
+@inproceedings{ref:ambrus2017a,
+	author			= {Ambrus, A.  and Ashok, P.  and Chintapalli, A.  and Ramos, D.  and Behounek, M.  and Thetford, T. S. and Nelson, B.},
+	title			= {A Novel Probabilistic Rig Based Drilling Optimization Index to Improve Drilling Performance},
+	volume			= {Day 1 Tue, September 05, 2017},
+	series			= {SPE Offshore Europe Conference and Exhibition},
+	year			= {2017},
+	month			= {September},
+	doi				= {10.2118/186166-MS},
+	url				= {https://doi.org/10.2118/186166-MS},
+	note			= {D011S001R002},
+	eprint			= {https://onepetro.org/SPEOE/proceedings-pdf/17OE/1-17OE/D011S001R002/1312825/spe-186166-ms.pdf},
+	abstract		= {Currently, real-time adjustments to drilling parameters such as weight on bit (WOB), drillstring revolutions per minute (RPM), flow rate, etc., are based primarily on experience. This is mainly due to the uncertain nature of information (both downhole and surface) available and inability of humans to aggregate multiple data streams in real-time to make optimal decisions. The objective therefore is to build a decision support tool that can overcome these limitations by automatically aggregating this data, identifying drilling inefficiency and suggesting optimal drilling parameters.  The methodology presented in this paper uses a Bayesian network to represent the drilling process and is capable of representing uncertainty in a way that is robust to bad sensor data. The model is updated in real-time and tracks variations in drilling conditions. Various dysfunctions such as bit balling, bit bounce, whirl, torsional vibrations, high mechanical specific energy (MSE), auto-driller erratic behavior, etc., are identified by tracking the movement characteristics of various sensor data in relation to model predicted values. A holistic drilling optimization index is thus derived by aggregating all this information. This index coupled with the drilling dysfunction prediction ultimately enables recommendation of drilling parameter corrections.  The drilling optimization index has been integrated into a drilling rig data aggregation system currently in operation on twenty rigs in North America. The system has access to real-time data, both at low frequency (less than 1 Hz) as well as data in the 1 to 10 Hz range, and also contextual data (such as data typically available in a tour sheet or well plan). In deploying the system, human factors aspects were given significant consideration. A typical driller is not familiar with concepts such as Bayesian networks, MSE, etc. By displaying the effectiveness of drilling as a single, dimensionless parameter, an index that varies between 0 and 1, with 0 representing inefficient drilling and 1 representing optimal drilling, the message is effectively communicated to the driller. The index is currently depicted in a very intuitive "speedometer" type of visual. Values are low and closer to 0 when dysfunctions occur, and when that happens suggestions are provided on how to mitigate the dysfunctions. These suggestions are visually presented in the form of operational cones in the WOB-RPM space. Additionally, the variation of the index with drilling depth is displayed to enable the driller to identify how formation changes impact drilling performance. This was found to be useful to drilling engineers who are generally tasked with optimizing the drilling process.},
+}
+
+@book{ref:ammeraal2000a,
+	author			= {Leendert Ammeraal},
+	title			= {C++ for Programmers},
+	publisher		= JOHNWILEY,
+	year			= {2000},
+	edition			= {Third},
+	isbn			= {0-471-60697-9}
+}
+
+@book{ref:baker1994a,
+	author			= {Ron Baker},
+	title			= {A Primer of Oilwell Drilling},
+	publisher		= PETEX,
+	year			= {1994},
+	edition			= {Fifth},
+	address			= {Austin, TX},
+	isbn			= {0-88698-159-X}
+}
+
+@inproceedings{ref:behr1991a,
+	author			= {Behr, S. M. and Warren, T. M. and Sinor, L. A. and Brett, J. F.},
+	title			= {Three-Dimensional Modeling of PDC Bits},
+	volume			= {All Days},
+	series			= SPEIADCDRILLINGCONFERENCEEXHBITION,
+	year			= {1991},
+	month			= {March},
+	doi				= {10.2118/21928-MS},
+	url				= {https://doi.org/10.2118/21928-MS},
+	note			= {SPE-21928-MS},
+	eprint			= {https://onepetro.org/SPEDC/proceedings-pdf/91DC/All-91DC/SPE-21928-MS/2000574/spe-21928-ms.pdf},
+	abstract		= {PDC bit modeling has historically incorporated the assumption that cutter forces are constant for a full revolution of the bit. This assumption places considerable limitations on the model's ability to simulate drilling in nonhomogeneous rock and in cases where the bit whirls. Recent studies have shown that cutter damage due to impact loading is a primary cause of PDC bit failure. These impacts may be caused by both bit whirl and drilling through nonhomogeneous rock. The three dimensional model presented in this paper provides the capability to evaluate cutter loading for both of these conditions. It shows that the cutter loads for common drilling situations may be as much as ten times greater than those calculated with previously available two dimensional models.  PDC bit development has been facilitated by models which predict cutter loading, volumes of rock removed, work rates, and cutter wear for a particular bit design. Modeling of the drag style bits was initiated in the 1960's in an effort to better understand the drilling stresses on the hard metal blades which were used as cutting structures. The high stresses were thought to be the cause of the metal fractures, as well as the rapid wear which occurred in the more abrasive formations. The impact stresses on the blades, resulting from dynamic movement of the bit axis away from the hole axis (due to bit wobble), were believed to be a primary cause of the fracturing along the gauge edges of the blades. Two dimensional calculations showed the stresses to be increased by a factor of five for a small misalignment of the bit/hole axes.}
+}
+
+@article{ref:behr1993a,
+	author			= {S. M. Behr and T. M. Warren and L. A. Sinor and  J. F. Brett},
+	title			= {{3D PDC} Bit Model Predicts Higher Cutter Loads},
+	journal			= SPEDRILLCOMP,
+	year			= {1993},
+	volume			= {8},
+	number			= {4},
+	pages			= {253--258},
+	speid			= {21928}
+}
+
+@phdthesis{ref:brakel1986a,
+	author			= {Johannes Daniel Brakel},
+	title			= {Prediction of Wellbore Trajectory Considering Bottom Hole Assembly and Drillbit Dynamics},
+	school			= {University of Tulsa},
+	year			= {1986}
+}
+
+@article{ref:brakel1989a,
+	author			= {J. D. Brakel and J. J. Azar},
+	title			= {Prediction of Wellbore Trajectory Considering Bottomhole Assembly and Drill-Bit Dynamics},
+	journal			= SPEDRILLING,
+	volume			= {4},
+	number			= {3},
+	month			= {June},
+	year			= {1989},
+	pages			= {109--118},
+	speid			= {SPE 16172-PA},
+	abstract		= {A numerical dynamic model is presented to predict wellbore trajectory in both the vertical and horizontal planes. The model is three-dimensional (3D) and consists of the idealization of the bottomhole assembly (BHA) into a number of finite elements. Inertia properties are included to predict the transient dynamic behavior of the assembly during drilling. To ensure the correct boundary condition at the bit/rock interface, two rock/bit interaction models, one for a roller-cone bit and one for a polycrystalline-diamond-compact (PDC) bit, are developed.}
+}
+
+% {J. Ford Brett and Thomas M. Warren and Suzanne M. Behr},
+@inproceedings{ref:brett1989a,
+	author			= {J. F. Brett and T. M. Warren and S. M. Behr},
+	title			= {Bit Whirl: A New Theory of {PDC} Bit Failure},
+	booktitle		= SPEANNUALTECHCONFERENCE,
+	year			= {1989},
+	month			= {October},
+	pages			= {521--536},
+	address			= {San Antonio, TX},
+	speid			= {SPE 19571-MS},
+	abstract		= {This paper presents the results of a study showing that the most harmful polycrystalline-diamond-compact (PDC) bit vibrations can be attributed to a phenomenon called 'bit whirl.' During whirl, the instantaneous center of rotation moves around the face of the bit, and the bit whirls backward around the hole. Cutters on a whirling bit can move sideways, backward, and much faster than those on a true rotating bit. The impact loads associated with this motion cause PDC cutters to chip, which, in turn, accelerates wear. Laboratory and field results show the detrimental effects of whirl on PDC bit rate of penetration (ROP) and life.}
+}
+
+@article{ref:brett1990a,
+	author			= {J. Ford Brett and Thomas M. Warren and Suzanne M. Behr},
+	title			= {Bit Whirl --- A New Theory of {PDC} Bit Failure},
+	journal			= SPEDRILLING,
+	volume			= {5},
+	number			= {6},
+	month			= {December},
+	year			= {1990},
+	pages			= {275--281},
+	abstract		= {This paper presents the results of a study showing that the most harmful polycrystalline-diamond-compact (PDC) bit vibrations can be attributed to a phenomenon called 'bit whirl.' During whirl, the instantaneous center of rotation moves around the face of the bit, and the bit whirls backward around the hole. Cutters on a whirling bit can move sideways, backward, and much faster than those on a true rotating bit. The impact loads associated with this motion cause PDC cutters to chip, which, in turn, accelerates wear. Laboratory and field results show the detrimental effects of whirl on PDC bit rate of penetration (ROP) and life.},
+	speid			= {SPE 19571}
+}
+
+@article{ref:brett1992a,
+	author			= {J. Ford Brett},
+	title			= {The Genesis of Torsional Drillstring Vibrations},
+	journal			= SPEDRILLING,
+	volume			= {7},
+	number			= {6},
+	month			= {September},
+	year			= {1992},
+	pages			= {168--174},
+	speid			= {SPE 21943-PA}
+}
+
+@mastersthesis{ref:briggs1968a,
+	author			= {M. D. Briggs},
+	title			= {Forces Required to Roll an Idealized Drill Bit Across a Coulomb Plastic Material},
+	school			= {Rice},
+	year			= {1968},
+}
+
+@article{ref:briggs1969a,
+	author			= {M. D. Briggs and  J. B. Chetham, Jr.},
+	title			= {Theoretical Forces for Prescribed Motion of a Roller Bit},
+	journal			= SPEJ,
+	volume			= {9},
+	number			= {4},
+	year			= {1969},
+	month			= {December},
+	pages			= {473--481},
+}
+
+@inproceedings{ref:clegg1992a,
+	author			= {J. M. Clegg},
+	title			= {An Analysis of the Field Performance of Antiwhirl PDC Bits},
+	booktitle		= SPEDRILLINGCONFERENCE,
+	month			= {February},
+	year			= {1992},
+	organization	= SPE,
+	address			= {New Orleans, LA},
+	pages			= {243--252},
+	speid			= {23868}
+}
+
+@book{ref:cook1989a,
+	author			= {R. D. Cook and D. S. Malkus and M. E. Plesha},
+	title			= {Concepts and Applications of Finite Element Analysis},
+	publisher		= JOHNWILEY,
+	year			= {1989},
+	edition			= {Third},
+	address			= {New York, NY},
+	isbn			= {0-471-84788-7}
+}
+
+@inproceedings{ref:cooley1992a,
+	author			= {C. H. Cooley and P. E. Pastusek and L. A. Sinor},
+	title			= {The Design and Testing of Anti-Whirl Bits},
+	booktitle		= SPEANNUALTECHCONFERENCE,
+	month			= {October},
+	year			= {1992},
+	organization	= SPE,
+	address			= {Washington, D.C.},
+	pages			= {403--412},
+	speid			= {24586}
+}
+
+@article{ref:detournay1992a,
+	author			= {E. Detournay and P. Defourny},
+	title			= {A phenomenological model for the drilling action of drag bits},
+	journal			= IJRMMSGA,
+	volume			= {29},
+	number			= {1},
+	year			= {1992},
+	pages			= {13--23}
+}
+
+@article{ref:dong2016a,
+	author			= {Dong, Guangjian and Chen, Ping},
+	year			= {2016},
+	month			= {January},
+	pages			= {1-34},
+	title			= {A Review of the Evaluation, Control, and Application Technologies for Drill String Vibrations and Shocks in Oil and Gas Well},
+	volume			= {2016},
+	journal			= SHOCKANDVIB,
+	doi				= {10.1155/2016/7418635},
+	publisher		= HINDAWI,
+	abstract		= {Drill string vibrations and shocks (V\&S) can limit the optimization of drilling performance, which is a key problem for trajectory optimizing, wellbore design, increasing drill tools life, rate of penetration, and intelligent drilling. The directional wells and other special trajectory drilling technologies are often used in deep water, deep well, hard rock, and brittle shale formations.  In drilling these complex wells, the cost caused by V\&S increases. According to past theories, indoor experiments, and field studies, the relations among ten kinds of V\&S, which contain basic forms, response frequency, and amplitude, are summarized and discussed. Two evaluation methods are compared systematically, such as theoretical and measurement methods. Typical vibration measurement tools are investigated and discussed. The control technologies for drill string V\&S are divided into passive control, active control, and semiactive control. Key methods for and critical equipment of three control types are compared. Based on the past development, a controlling program of drill string V\&S is devised. Application technologies of the drill string V\&S are discussed, such as improving the rate of penetration, controlling borehole trajectory, finding source of seismic while drilling, and reducing the friction of drill string. Related discussions and recommendations for evaluating, controlling, and applying the drill string V\&S are made.}
+}
+
+@article{ref:dormand1980a,
+	author			= {J. R. Dormand and P. J. Prince},
+	title			= {A Family of Embedded Runge-Kutta Formulae},
+	journal			= JCAM,
+	volume			= {6},
+	number			= {1},
+	year			= {1980},
+	pages			= {19--26}
+}
+
+@inproceedings{ref:dupriest2022a,
+	author			= {Fred Dupriest and Paul Pastusek and Stephen Lai and Bob Best and Michael Behounek and Bryan Cook and Wendell Basarath and Chris Cutts and Jared Collins and Mohammadreza Kamyab and Dennis Moore and Eric Pulpan and Austin Jeske and JJ Wilson and Jamie Sheets},
+	title			= {Standardization of Mechanical Specific Energy Equations and Nomenclature},
+	volume			= {Day 1 Tue, March 08, 2022},
+	series			= SPEIADCDRILLINGCONFERENCEEXHBITION,
+	year			= {2022},
+	month			= {March},
+	doi				= {10.2118/208777-MS},
+	url				= {https://doi.org/10.2118/208777-MS},
+	note			= {D011S008R001},
+	eprint			= {https://onepetro.org/SPEDC/proceedings-pdf/22DC/1-22DC/D011S008R001/2650673/spe-208777-ms.pdf},
+	abstract		= {This paper recommends standardized names and equations for the two most common uses of Mechanical Specific Energy (MSE) concepts: ``Total MSE'' and "Downhole MSE". These names and their equations should be used uniformly in all applications, including electronic drilling recorder (EDR) pick lists, rig site surveillance, engineering surveillance, data analytics, research, and technical publications.  Mechanical Specific Energy, used as a metric for drilling efficiency, is a mathematical calculation of the energy used per volume of rock drilled. The Downhole MSE equation calculates the efficiency of the bit alone, while the Total MSE equation includes both the bit and drill string. Those who use MSE in surveillance or analytics know the negative effects created by the lack of standardization over the years; it is certainly not a new problem.  The lack of standardized nomenclature has resulted in the use of the same name for different equations, or different names are given two equations that are identical. This affects the ability of drill teams to engage vendors in redesign of performance limitations or to communicate new operational practices between teams or rigs. In addition, this standard corrects a mathematical error that is common in calculating the Total MSE.  The concen with the inconsistencies has increased as MSE has become a key element in many automated optimization schemes. Inconsistencies or uncertainties in the basis of MSE values calculated in real time or shared in large data sets will affect the industry's ablity to develop useful analytics or to automate rig control platforms and data-driven decisions.  This paper also includes a discussion of the MSE measurement errors and their effect on calculated values, which is of particular interest to controls engineers and those involved in data analytics. Examples are provided to illustrate how the two different MSE values are used in field operations. Also, a substantial reference list of current and potential future uses of MSE is included to encourage better MSE-based practices to potentially lead to the development of new uses in the future, including automation.  This ad hoc MSE Standardization Committee is a volunteer group with representation from operators, rig contractors, service companies, and data acquisition vendors. The guidance given reflects there shared experienec in utilizing MSE in surveillance and analytics, and the recommended equations are technically correct.},
+}
+
+@inproceedings{ref:dykstra1994a,
+	author			= {M. W. Dykstra and D. C.-K. Chen and T. M. Warren and S. A. Zannoni},
+	title			= {Experimental Evaluations of Drill Bit and Drill String Dynamics},
+	booktitle		= SPEANNUALTECHCONFERENCE,
+	month			= {September},
+	year			= {1994},
+	organization	= SPE,
+	address			= {New Orleans, LA},
+	speid			= {SPE 28323}
+}
+
+@inproceedings{ref:dykstra2001a,
+	author			= {M. W. Dykstra and M. Neubert and J. M. Hanson and M. J. Meiners},
+	title			= {Improving Drilling Performance by Applying Advanced Dynamics Models},
+	booktitle		= SPEDRILLINGCONFERENCE,
+	volume			= {1},
+	year			= {2001},
+	month			= {February},
+	pages			= {101--118},
+	organization	= {SPEIADC},
+	address			= {Amsterdam},
+	speid			= {SPE/IADC 67697}
+}
+
+@inproceedings{ref:endres2003a,
+	author			= {L. Endres and P. Krysl},
+	title			= {Refinement of Finite Element Approximations on Tetrahedral Meshes Using Charms},
+	booktitle		= {Seventh U.S. National Congress on Computational Mechanics},
+	year			= {2003},
+	month			= {July},
+	address			= {Albuquerque, NM}
+}
+
+@article{ref:endres2004a,
+	author			= {L. Endres and P. Krysl},
+	title			= {Octasection-based refinement of finite element approximations on tetrahedral meshes that guarantees shape quality},
+	journal			= IJNME,
+	volume			= {59},
+	number			= {1},
+	year			= {2004},
+	pages			= {69--82}
+}
+
+% Formerly: ref:tdbdum
+@manual{ref:endres2004b,
+	author			= {Lance A. Endres},
+	title			= {Three Dimensional Bit Dynamics: User's Manual},
+	organization	= {University of California, San Diego},
+	address			= {9500 Gilman Dr., La Jolla, CA \ 92093},
+	month			= {February},
+	year			= {2004}
+}
+
+% Formerly: ref:tdbdscd
+@manual{ref:endres2004c,
+	author			= {Lance A. Endres},
+	title			= {Three Dimensional Bit Dynamics: Source Code Documentation},
+	organization	= {University of California, San Diego},
+	address			= {9500 Gilman Dr., La Jolla, CA \ 92093},
+	month			= {January},
+	year			= {2004}
+}
+
+@article{ref:endres2007a,
+	author			= {L. Endres and P. Krysl},
+	title			= {Second-Order Explicit Integrator Via Composition for Coupled Rotating Rigid Bodies Applied to Roller Cone Drill Bits},
+	journal			= CANM,
+	volume			= {24},
+	number			= {12},
+	year			= {2008},
+	pages			= {1923--1940},
+	issn			= {1069-8299}
+}
+
+@phdthesis{ref:endres2007b,
+	author			= {Lanson Adam Endres},
+	title			= {Computation Modeling of Drill Bits: A New Method for Reproducing Bottom Hole Geometry and a Second-Order Explicit Integrator via Composition for Coupled Rotating Rigid Bodies},
+	school			= {University of California, San Diego},
+	year			= {2007},
+	address			= {La Jolla, CA},
+	month			= {December}
+}
+
+@phdthesis{ref:endres2007bshort,
+	author			= {Lanson Adam Endres},
+	title			= {Computation Modeling of Drill Bits: A New Method for Reproducing Bottom Hole Geometry and a Second-Order Explicit Integrator via Composition for Coupled Rotating Rigid Bodies},
+	school			= {UCSD},
+	year			= {2007},
+	address			= {La Jolla, CA},
+	month			= {December}
+}
+
+@inproceedings{ref:endres2014a,
+	author			= {Lance Endres and Andrey Pavlenko and Elena Ivanova and David Stockey and Egor Vtorushin and Gregory Ricks and Mark Blackman and Jayesh Jain},
+	title			= {Modeling and Optimizing {PDC}, Roller-Cone and Hybrid Bits, a Novel Software Approach},
+	booktitle		= {World Petroleum Congress},
+	year			= {2014},
+	month			= {Submitted to conference},
+	address			= {Moscow, RU}
+}	
+
+@article{ref:endres2015a,
+	author			= {L. Endres},
+	title			= {Signal Segmentation Algorithm of {Radhakrishnan}, et al. Ported to {C} and {C}\#},
+	journal			= CODEPROJ,
+	volume			= {online article},
+	month			= {June},
+	year			= {2015},
+	url				= {http://www.codeproject.com/Articles/999650/Signal-Segmentation-Algorithm-of-Radhakrishnan-et}
+}
+
+@article{ref:endres2019a,
+	author			= {L. Endres},
+	title			= {Rotated Text Control for {.NET} ({C}\#)},
+	journal			= CODEPROJ,
+	volume			= {online article},
+	month			= {October},
+	year			= {2019},
+	url		    	= {https://www.codeproject.com/Articles/5248739/Rotated-Text-Control-for-NET-Csharp}
+}
+
+@article{ref:endres2022a,
+	author			= {L. Endres},
+	title			= {Geometry, equations, and modeling techniques of Hirth joints/couplings},
+	journal			= {},
+	volume			= {online article},
+	month			= {January},
+	year			= {2022},
+	url		    	= {}
+}
+
+@phdthesis{ref:eronini1978a,
+	author			= {Iheanyi Eronini Eronini},
+	title			= {A Dynamic Model for Optimization and Control of Rock Drilling},
+	school			= {University of California, Berkeley},
+	year			= {1978},
+	month			= {June}
+}
+
+@article{ref:eronini1982a,
+	author			= {I. E. Eronini and W. H. Somerton and D. M. Auslander},
+	title			= {Dynamic Model for Rotary Rock Drilling},
+	journal			= JERT,
+	volume			= {104},
+	number			= {2},
+	year			= {1982},
+	pages			= {108--120},
+	issn			= {0195-0738},
+	abstract		= {A rock drilling model is developed as a set of ordinary differential equations describing discrete segments of the drilling rig, including the bit and the rock. The end segment consists of a description of the bit as a left double quote nonideal right double quote transformer and a characterization of the rock behavior. The effects on rock drilling of bottom hole cleaning, drill string-borehole interaction, and tooth wear are represented in the model. Simulated drilling under various conditions, using this model, gave results which are similar to those found in field and laboratory drilling performance data.}
+}
+
+@article{ref:eronini1983a,
+	author			= {E. I. Umez-Eronini},
+	title			= {Rotary Drill Bit/Rock Model with Cutter Offset},
+	journal			= JERT,
+	volume			= {105},
+	number			= {3},
+	year			= {1983},
+	pages			= {356--361},
+	issn			= {0195-0738},
+	abstract		= {A kinematic model of a roller cone bit is developed and integrated with a rock fracture description to simulate test data from a study on the effects of bit offset. The model predicted bit tooth patterns on the rock face similar to those in the experiment. Larger cutter offsets induced increased dragging action to the motion of the bit teeth.}
+}
+
+@inproceedings{ref:esmaeili2013a,
+	author			= {Esmaeili, Abdolali  and Elahifar, Behzad  and Fruhwirth, Rudolf K. and Thonhauser, Gerhard },
+	title			= {Formation Prediction Model based on Drill String Vibration Measurements Using Laboratory Scale Rig},
+	volume			= {All Days},
+	series			= {SPE/IADC Middle East Drilling Technology Conference and Exhibition},
+	year			= {2013},
+	month			= {October},
+	doi				= {10.2118/166793-MS},
+	url			 	= {https://doi.org/10.2118/166793-MS},
+	note			= {SPE-166793-MS},
+	eprint			= {https://onepetro.org/SPEMEDT/proceedings-pdf/13MEDT/All-13MEDT/SPE-166793-MS/1590971/spe-166793-ms.pdf},
+	abstract		= {Characteristics of formations usually cause changes in the drilling parameters such as weight on bit and drill string rotational speed as well as drill string dynamic behavior. When the drill bit breaks up formations, some of the energy dedicated to drilling is transmitted to the drill string as axial, lateral and torsional vibrations. Although these vibrations are affected by the drilling parameters, it has been experienced that vibration measurements can be used to evaluate formations during drilling a well. For this purpose a laboratory scale drilling rig was used to perform numerous experiments. During the drilling operations, several drilling parameters as well as vibrations with three-component accelerometers attached to the drill string were recorded continuously. Numerous uniform concrete and rock samples were drilled by a double roller cone bit. The uniaxial compressive strength of all concretes and rocks were measured prior to the experiments. The tests were executed using different combinations of weight on bit and rotary speed.For a subsequent evaluation statistical features were extracted in a first step from the recorded data in both, the time domain and the frequency domain. Those features formed the base for the formation classification by linear and non-linear models. Although linear models like Bayesian inference are not suited for that challenge, it turned out that non-linear models like neural networks provide excellent results in both, the training and the test data-set. Finally, the application of parameter selection methods showed that mechanical specific energy and rate of penetration in combination with higher order frequency moments of all recorded vibration types play the major role in the formation classification.},
+}
+
+@book{ref:frey2000a,
+	author			= {Pascal Jean Frey and Paul-Louis George},
+	title			= {Mesh Generation Application to Finite Elements},
+	publisher		= {Hermes Science Publishing},
+	year			= {2000},
+	address			= {Oxford, United Kingdom},
+	isbn			= {1-903398-00-2}
+}
+
+@book{ref:gerding1986a,
+	author			= {Mildred Gerding},
+	title			= {Fundamentals of Petroleum},
+	publisher		= PETEX,
+	year			= {1986},
+	edition			= {Third},
+	address			= {Austin, TX},
+	isbn			= {0-88698-122-0}
+}
+
+@book{ref:ginsberg1998a,
+	author			= {Jerry H. Ginsberg},
+	title			= {Advanced Engineering Dynamics},
+	publisher		= {Cambridge University Press},
+	year			= {1998},
+	edition			= {Second},
+	isbn			= {0-521-64604-9}
+}
+
+@techreport{ref:glowka1986a,
+	author			= {David A. Glowka},
+	title			= {Development of a Method for Predicting the Performance and Wear of {PDC} Drill Bits},
+	institution		= {Sandia National Laboratories},
+	year			= {1986},
+	address			= {Albuquerque, NM}
+}
+
+@article{ref:glowka1989a,
+	author			= {David A. Glowka},
+	title			= {Use of Single-Cutter Data in the Analysis of {PDC} Bit Designs: Part 1 --- Development of a {PDC} Cutting Force Model},
+	journal			= JPT,
+	volume			= {41},
+	number			= {8},
+	year			= {1989},
+	month			= {August},
+	pages			= {797--849},
+	organization	= SPE,
+	issn			= {0022-3522},
+	speid			= {15619-PA}
+}
+
+@article{ref:glowka1989b,
+	author			= {David A. Glowka},
+	title			= {Use of Single-Cutter Data in the Analysis of {PDC} Bit Designs: Part 2 --- Development and Use of the {PDCWEAR} Computer Code},
+	journal			= JPT,
+	volume			= {41},
+	number			= {8},
+	year			= {1989},
+	month			= {August},
+	pages			= {850--859},
+	organization	= SPE,
+	issn			= {0022-3522},
+	speid			= {19309-PA}
+}
+
+@inproceedings{ref:hanson1995a,
+	author			= {J. M. Hanson and W. R. Hansen},
+	title			= {Dynamics Modeling of {PDC} Bits},
+	booktitle		= SPEDRILLINGCONFERENCE,
+	month			= {February},
+	year			= {1995},
+	pages			= {589--604},
+	organization	= SPEDRILLINGCONFERENCE,
+	address			= {Amsterdam},
+	speid			= {SPE 29401}
+}
+
+@book{ref:jarvis2016a,
+	author			= {Matt Jarvis},
+	title			= {Waves and Normal Modes},
+	day				= {2},
+	month			= {February},
+	year			= {2016},
+	note			= {},
+	isbn			= {}
+}
+
+@article{ref:johnson2008a,
+	author			= {S. Johnson},
+	title			= {A New Method of Producing Laterally Stable {PDC} Bits},
+	journal			= SPEDRILLCOMP,
+	volume			= {23},
+	number			= {3},
+	month			= {September},
+	year			= {2008},
+	pages			= {314--324},
+	organization	= SPE,
+	speid			= {98986}
+}
+
+@book{ref:hairer2002a,
+	author			= {Ernst Hairer and Christian Lubich and Gerhard Wanner},
+	title			= {Geometric Numerical Integration: Structure Preserving Algorithms for Ordinary Differential Equations},
+	publisher		= {Springer},
+	volume			= {31},
+	year			= {2002},
+	address			= {Berlin},
+	note			= {Springer Series in Computational Mathematics},
+	isbn			= {3-540-43003-2}
+}
+
+@phdthesis{ref:hoffman2006a,
+	author			= {Olivier Jean-Marie Hoffmann},
+	title			= {Drilling Induced Vibration Apparatus},
+	school			= {University of Minnesota},
+	year			= {2006},
+	address			= {Minneapolis, MN},
+	month			= {June}
+}
+
+@inproceedings{ref:hood2001a,
+	author			= {J. A. Hood and B. T. Leidland and H. Haldorsen and G. Heisig},
+	title			= {Aggressive Drilling Parameter Management Based on Downhole Vibration Diagnostics Boosts Drilling Performance in Difficult Formation},
+	booktitle		= SPEANNUALTECHCONFERENCE,
+	month			= {September},
+	year			= {2001},
+	organization	= SPE,
+	address			= {New Orleans, LA},
+	speid			= {SPE 71391}
+}
+
+@book{ref:hubbard2000a,
+	author			= {John R. Hubbard},
+	title			= {Schaum's Outlines Programming with C++},
+	publisher		= MCGRAWHILL,
+	year			= {2000},
+	edition			= {Second},
+	isbn			= {0-07-135346-1}
+}
+
+@article{ref:hulbert1992a,
+	author			= {G. M. Hulbert},
+	title			= {Explicit Momentum Conserving Algorithms for Rigid Body Dynamics},
+	journal			= COMPSTRUCT,
+	publisher		= ELSEVIER,
+	volume			= {44},
+	number			= {6},
+	month			= {September},
+	year			= {1992},
+	pages			= {1291--1303},
+	issn			= {0045-7949}
+}
+
+@book{ref:hughes2004a,
+	author			= {Cameron Hughes and Tracey Hughes},
+	title			= {Parallel and Distributed Programming Using C++},
+	publisher		= ADDISONWESLEY,
+	year			= {2004},
+	isbn			= {0-13-101376-9}
+}
+
+@book{ref:hughes2000a,
+	author			= {Thomas J. R. Hughes},
+	title			= {The Finite Element Method: Linear Static and Dynamic Finite Element Analysis},
+	publisher		= DOVER,
+	year			= {2000},
+	note			= {Originally printed by Pretice-Hall, Inc. 1987 and reprinted by Dover in 2000},
+	isbn			= {0-486-41181-8}
+}
+
+@inproceedings{ref:isbell1999,
+	author			= {M. R. Isbell and S. K. Brezas},
+	title			= {Re-Engineered Drilling Laboratory is a Premium Tool Advancing Drilling Technology by Simulating Downhole Evironments},
+	booktitle		= ASMEENERGYTECHCONFERENCE,
+	year			= {1999},
+	organization	= ASME,
+	address			= {Houston, TX},
+	etceid			= {ETCE99-6653}
+}
+
+@article{ref:iserles2000a,
+	author			= {Arieh Iserles and Hans Z. Munthe-Kass and Syvert P. N{\o}rsett and Antonella Zanna},
+	title			= {{Lie}-group Methods},
+	journal			= {Acta Numerica},
+	volume			= {9},
+	year			= {2000},
+	pages			= {215--365}
+}
+
+@inproceedings{ref:jain2011a,
+	author			= {Jain, Jayesh R. and Ledgerwood, L. W. and Hoffmann, Olivier J. and Schwefe, Thorsten  and Fuselier, Danielle M.},
+	title			= {Mitigation of Torsional Stick-Slip Vibrations in Oil Well Drilling through PDC Bit Design: Putting Theories to the Test},
+	volume			= {All Days},
+	series			= {SPE Annual Technical Conference and Exhibition},
+	year			= {2011},
+	month			= {October},
+	doi				= {10.2118/146561-MS},
+	url				= {https://doi.org/10.2118/146561-MS},
+	note			= {SPE-146561-MS},
+	eprint			= {https://onepetro.org/SPEATCE/proceedings-pdf/11ATCE/All-11ATCE/SPE-146561-MS/1665460/spe-146561-ms.pdf},
+	abstract		= {Stick-slip vibrations of drillstrings have been studied by researchers for several decades. The subject is gaining renewed interest as operating parameters for PDC bits have shifted to the stick-slip regime of higher bit weight and lower rotary speed for enhanced drilling performance. In Ledgerwood et al. (2010), stick-slip was identified as a primary cause of bit damage. The main objective of the current investigation is to answer the longstanding question: Do bit designs influence stick-slip behavior of the drilling system? Five prevailing industry perceptions reported in the literature are that anti-whirl bits, reduced exposure bits, and bits with bit-rock interaction number $\beta>1$ are less prone to stick-slip, while highly aggressive bits and worn bits are more prone to stick-slip. Although the phenomenological basis of these theories has been provided, validation in most cases is based on anecdotal evidence from the field. Data with diagnosis based on downhole measurements in a controlled environment are scarce. Consequently, conflicting opinions continue to exist about whether any of these theories work in reality.To assess their validity, the five leading theories were reviewed and pairs of PDC bits were designed and manufactured. Each pair consisted of a bit with a standard design and a bit that embodied one of the theories. The bits were first tested in the laboratory to characterize their response. Full-scale wells were then drilled under controlled conditions using a research drill rig in Oklahoma. In these wells, only the operating parameters were varied while BHA, formation, and other variables were unchanged for a given bit pair. The downhole vibrations were measured with a new in-bit device and an industry-proven MWD vibration monitoring service.The most important conclusion emerging from this study is that PDC bit design has a significant effect on stick-slip vibrations. While some of the theories held true, evidence from this study did not support others. The details of test results are provided and various aspects of bit design are discussed in an attempt to enhance the understanding of stick-slip mitigation.},
+}
+
+@inproceedings{ref:kenner1994a,
+	author			= {J. V. Kenner and M. R. Isbell},
+	title			= {Dynamic Analysis Reveals Stability of Roller Cone Rock Bits},
+	booktitle		= SPEANNUALTECHCONFERENCE,
+	month			= {September},
+	year			= {1994},
+	days			= {25--28},
+	organization	= SPE,
+	address			= {New Orleans, LA},
+	pages			= {227--236},
+	speid			= {28314}
+}
+
+@techreport{ref:kol1997a,
+	author			= {A. Kol and B. Laird and B. Leimkuhler},
+	title			= {A Symplectic Method for Rigid-Body Molecular Simulation},
+	institution		= {University of Cambridge},
+	number			= {DAMTP 1997/NA5},
+	month			= {March},
+	year			= {1997},
+	address			= {Cambridge, UK}
+}
+
+@book{ref:kopka1999a,
+	author			= {Helmut Kopka and Patrick W. Daly},
+	title			= {A Guide to \LaTeX{}},
+	publisher		= ADDISONWESLEY,
+	year			= {1999},
+	edition			= {Third},
+	isbn			= {0-201-39825-7},
+	abstract		= {Describes how to use the text-preparation system to create documents, covering such topics as inputting text, symbols, graphics, and mathematics}
+}
+
+@inproceedings{ref:kovalyshen2012a,
+	author			= {Kovalyshen, Yevhen},
+	title			= {A New Model of Bit Whirl},
+	volume			= {All Days},
+	series			= SPEASIATECHCONFERENCE,
+	year			= {2012},
+	month			= {July},
+	doi				= {10.2118/156240-MS},
+	url				= {https://doi.org/10.2118/156240-MS},
+	note			= {SPE-156240-MS},
+	eprint			= {https://onepetro.org/SPEAPDT/proceedings-pdf/12APDT/All-12APDT/SPE-156240-MS/1607870/spe-156240-ms.pdf},
+	abstract		= {A simple analytical model of bit whirl is presented. In contrast to the previous works, which consider BHA mass imbalance to model bit whirl, the model here takes into account the history-dependent boundary conditions at the bit-rock interface. Within this model, the geometry of the bit is characterized by three dimensionless parameters. The results have shown that, depending on the value of these parameters, the system can be stable or undergo forward or backward whirl. As a result, the model has potential application as a tool that assists bit design.},
+}
+
+@article{ref:krysl2005a,
+	author			= {P. Krysl and L. Endres},
+	title			= {Explicit {Newmark/Verlet} Algorithm for Time Integration of the Rotational Dynamics of Rigid Bodies},
+	journal			= IJNME,
+	volume			= {62},
+	number			= {15},
+	year			= {2005},
+	pages			= {2154--2177}
+}
+
+@article{ref:krysl2005b,
+	author			= {P. Krysl},
+	title			= {Explicit Momentum-conserving Integrator for Dynamics of Rigid Bodies Approximating the Midpoint {Lie} Algorithm},
+	journal			= IJNME,
+	volume			= {63},
+	year			= {2005},
+	pages			= {2171--2193}
+}
+
+@article{ref:krysl2005c,
+	author			= {P. Krysl},
+	title			= {Direct Time Integration of Rigid Body Motion with Discrete-Impulse Midpoint Approximations: Explicit {Newmark} Algorithms},
+	journal			= CANM,
+	volume			= {22},
+	year			= {2005},
+	pages			= {441--451}
+}
+
+@inproceedings{ref:langeveld1992a,
+	author			= {C. J. Langeveld},
+	title			= {{PDC} Bit Dynamics},
+	booktitle		= SPEDRILLINGCONFERENCE,
+	month			= {February},
+	year			= {1992},
+	pages			= {227--241},
+	organization	= {SPEIADC},
+	address			= {New Orleans, LA},
+	doi				= {10.2118/23867-MS},
+	url				= {https://doi.org/10.2118/23867-MS},
+	speid			= {SPE/IADC 23867},
+	eprint			= {https://onepetro.org/SPEDC/proceedings-pdf/92DC/All-92DC/SPE-23867-MS/1992515/spe-23867-ms.pdf},
+	abstract		= {The poor performance of PDC bits in harder formations is caused by downhole vibrations. However, proper operating conditions (i.e.\ low rotary speed and high weight on bit) and new technology for vibration control (anti-whirl PDC bits and a soft-torque rotary system) can successfully extend the application of PDC bits to harder formations. This conclusion is based on numerical modelling of PDC bit/drillstring assemblies and is supported by recent developments in PDC bit technology and torsional vibration control systems. The PDC bit model is fully dynamic and three-dimensional and is used to simulate normal rotary drilling. Sensitivity analyses of different PDC bit designs show bit-induced torsional, axial and lateral vibrations. Moreover, these analyses show that conventional PDC bits tend to whirl backward, resulting in reduced penetration rates and bit life. Anti-whirl PDC bits effectively reduce this tendency when run under the proper operating conditions of low rotary speed and high weight on bit.  Downhole measurements and numerical analyses clearly demonstrate that, during normal rotary drilling, the drillstring vibrates in several modes of vibration. Downhole vibrations frequently result in inconsistent bit performance, drillstring failure, problems with directional control, lack of measurement while drilling (MWD) signal detection and borehole instability. In particular in harder formations severe vibrations cause particular in harder formations severe vibrations cause premature polycrystalline diamond compact (PDC) bit premature polycrystalline diamond compact (PDC) bit failure. This has led to the generally accepted field practice that PDC bits are run mainly in soft to practice that PDC bits are run mainly in soft to medium-hard formations. This is rather disappointing, considering artificial diamond cutters can cut very hard rock under controlled conditions. The work presented in this paper was initiated to investigate the presented in this paper was initiated to investigate the effects of PDC-bit-induced vibrations and to address the problems associated with drilling harder formations.  For a better understanding of the complex phenomena experienced during drilling, numerical phenomena experienced during drilling, numerical simulation of the drillstring behaviour is essential. In general, the computer programs for drillstring dynamics reported in literature deal with boundary conditions at the bit only or use a simple bit model. The drilling motion of the bit, including formation removal, is not taken into account. On the other hand, dedicated PDC bit models are kinematic, i.e. the bit motion is prescribed, and two-dimensional, and therefore cannot be used for the investigation of the dynamic behaviour of PDC bits. Recently a three-dimensional PDC bit model was presented by Behr et al. Again it is a kinematic presented by Behr et al. Again it is a kinematic model, although it is possible to compute the cutting forces for more complex bit motions like bit whirl. Brett uses an experimentally derived PDC bit model and a simple mass-spring model of the torsional drillstring motion.}
+}
+
+@inproceedings{ref:langeveld1992b,
+	author			= {C. J. Langeveld},
+	title			= {{PDC} Bit Dynamics (Supplement to {IADC/SPE} 23867)},
+	booktitle		= SPEDRILLINGCONFERENCE,
+	month			= {February},
+	year			= {1992},
+	organization	= {SPEIADC},
+	address			= {New Orleans, LA},
+	speid			= {SPE/IADC 23873}
+}
+
+@inproceedings{ref:ledgerwood1991a,
+	author			= {L. W. Ledgerwood and J. L. Kelly},
+	title			= {High Pressure Facility Re-Creates Downhole Conditions in Testing Full Size Drill Bits},
+	booktitle		= ASMEENERGYTECHCONFERENCE,
+	month			= {January},
+	year			= {1991},
+	organization	= ASME,
+	address			= {New Orleans, LA}
+}
+
+@inproceedings{ref:ledgerwood2010a,
+	author			= {Ledgerwood, L. W. and Hoffmann, Olivier J. and Jain, Jayesh R. and El Hakam, Carmel  and Herbig, Christian  and Spencer, Reed W.},
+	title			= {Downhole Vibration Measurement, Monitoring, and Modeling Reveal Stick/Slip as a Primary Cause of PDC-Bit Damage in Today},
+	volume			= {All Days},
+	series			= {SPE Annual Technical Conference and Exhibition},
+	year			= {2010},
+	month			= {September},
+	doi				= {10.2118/134488-MS},
+	url				= {https://doi.org/10.2118/134488-MS},
+	note			= {SPE-134488-MS},
+	eprint			= {https://onepetro.org/SPEATCE/proceedings-pdf/10ATCE/All-10ATCE/SPE-134488-MS/1725923/spe-134488-ms.pdf},
+	abstract		= {Since backward whirl was discovered as a severe cause of PDC bit failure, our industry has made great strides toward creating whirl-resistant bits and operating practices. But is whirl still the major cause of PDC bit damage in today's applications? This paper reports on a recent field study in which downhole vibrations were measured using a newly available in-bit vibration-monitoring device. The focus of this study was to understand today's North American vertical conventional rotary applications. In addition, four wells were also drilled using a research drill rig in Oklahoma. In these tests, PDC bits, BHAs, and operating parameters were varied to document their effect on downhole vibrations. In these four wells, vibration measurements from the new in-bit measuring device were validated against a commercially available and industry-proven MWD vibration monitoring service. Also, a computer model that accounts for the coupled response of bits and BHAs was run for selected tests in field wells and the research drilling rig. The models agreed well with the measured cases in both whirl and stick-slip. The model also allowed the authors to confirm that high-frequency torsional oscillations (4-9 Hz) which we observed were, as a previous industry paper suggests, due to BHA torsional resonance.The results of this study indicate that the most common field vibration today in hard rock PDC drilling is stick-slip, not whirl, in the target test region. In field tests, stick-slip was almost exclusively observed. For typical field applications with a surface rotary speed of about 70, we have measured peak downhole RPM during the slip phase as high as 500. This paper will report on these findings, document damage resulting from stick-slip, and suggest potential solutions to mitigate downhole vibrations.},
+}
+
+@article{ref:ledgerwood2013a,
+	author 			= {Ledgerwood, L.W. and Jain, Jayesh R. and Hoffmann, Olivier J. and Spencer, Reed W.},
+	title			= {Downhole Measurement and Monitoring Lead to an Enhanced Understanding of Drilling Vibrations and Polycrystalline Diamond Compact Bit Damage},
+	journal			= SPEDRILLCOMP,
+	volume			= {28},
+	number			= {03},
+	pages 			= {254-262},
+	year			= {2013},
+	month 			= {July},
+	abstract		= {Since backward whirl was discovered as a severe cause of polycrystalline diamond compact (PDC) bit failure, the oil and gas industry has made great strides toward creating whirl-resistant bits and operating practices. But is whirl still the major cause of PDC bit damage in conventional rotary applications? This paper reports on a recent field study in which downhole vibrations were measured by use of a newly available in-bit vibration-monitoring device. The focus of this study was to understand the primary source of bit damage. In addition, four wells were also drilled by use of a research drilling rig in Oklahoma. In these tests, the PDC bits, bottomhole assemblies (BHAs), and operating parameters were varied to document their effect on downhole vibrations. In these four wells, vibration measurements from the new in-bit measuring device were validated against a commercially available and industry-proven measurement-while-drilling (MWD) vibration-monitoring service.The results of this study indicate that the most common field vibration in hard-rock vertical conventional rotary drilling is stick/slip, not whirl. In field tests, stick/slip was observed almost exclusively. For typical field applications with a surface rotary speed of approximately 70 rpm, the team measured a peak downhole rpm as high as 500 during the slip phase. Stick/slip was identified as the primary cause of bit damage in these applications. Lateral vibration occurring during the slip phase correlated well with the observed damage and is proposed as a new mode of damage during stick/slip. The characterization of the lateral vibrations coupled with stick/slip is presented on the basis of downhole measurements.},
+	issn			= {1064-6671},
+	doi				= {10.2118/134488-PA},
+	url				= {https://doi.org/10.2118/134488-PA},
+	eprint			= {https://onepetro.org/DC/article-pdf/28/03/254/2091983/spe-134488-pa.pdf},
+}
+
+@inproceedings{ref:lee2005a,
+	author			= {Taeyoung Lee and N. Harris McClamrock},
+	title			= {A {Lie} Group Variational Integrator for the Attitude Dynamics of a Rigid Body with Applications the {3D} Pendulum},
+	booktitle		= IEEECONTROLAPPS,
+	month			= {August},
+	year			= {2005},
+	organization	= IEEE,
+	address			= {Toronto, CA}
+}
+
+@article{ref:leine2000a,
+	author			= {R.I. Leine and D.H. Van Campen and W.J.G Keultjes},
+	title			= {Stick-slip Whirl Interaction in Drillstring Dynamics},
+	journal			= JVA,
+	volume			= {124},
+	number			= {2},
+	year			= {2002},
+	pages			= {209--220}
+}
+
+@article{ref:li2021a,
+	author			= {Li, Lixin and Wang, Jin and Yu, Yingmei and Xing, Yifei and Zhang, Fengyan and Zhang, Yi and Li, Yanyan},
+	editor			= {Alfano, Marco},
+	year			= {2021},
+	month			= {June},
+	day				= {28},
+	title			= {A Review of the Research and Development of High-Frequency Measurement Technologies Used for Nonlinear Dynamics of Drillstring},
+	id				= {8821986},
+	volume			= {2021},
+	%SN  - 1070-9622
+	url				= {https://doi.org/10.1155/2021/8821986},
+	doi 			= {10.1155/2021/8821986},
+	journal			= SHOCKANDVIB,
+	publisher		= HINDAWI,
+	abstract		= {High-frequency measurements can provide much more new insights for drillstring dynamics compared to traditional instruments, leading to a new realm of understanding of drillstring behaviors in great detail than before. In this paper, data acquisition tools with high-frequency sample rates and the data processing are introduced. Based on high-frequency data, progress of drilling dynamics is summarized, including new understandings of low-frequency drillstring dynamics, high-frequency torsional oscillations (HFTOs), and high-frequency axial oscillations (HFAOs) and new findings for the coupling of vibrations and motions, as well as models and simulation methods to deeply comprehend high-frequency dynamics of drillstring. High-frequency measurements have been used for enabling drillers to improve drill performance, especially for field decision making, BHA selection, and bit design, usually through the ways of minimizing vibrations to obtain high-efficient drilling conditions, the high-frequency response near bit can also be used for lithology identification during drilling. Though there still exists a gap between research perspective and drilling practice, the industry of high-frequency measurements has gotten off a good start, which has huge potential to avoid nonproductive time thereupon reducing drilling cost in the future.}
+}
+
+@inproceedings{ref:liu2010a,
+	author			= {Liu, Wei and Zhou, Yingcao and Zhao, Qing},
+	title			= {A New Analytical Model On Lateral Vibration And Impact of Drill String},
+	volume			= {All Days},
+	series			= {International Ocean and Polar Engineering Conference},
+	year			= {2010},
+	month			= {June},
+	note			= {ISOPE-I-10-483},
+	eprint			= {https://onepetro.org/ISOPEIOPEC/proceedings-pdf/ISOPE10/All-ISOPE10/ISOPE-I-10-483/1714709/isope-i-10-483.pdf},
+	abstract		= {The severe lateral vibration and impact of drill string will not only cause the damage of drill string but also have bad effects on the quality of directional drilling operation. It is difficult to control lateral vibration amplitude and impact intensity even with advanced measurement apparatus. So it is feasible to use a theoretic method to analyze and predict lateral vibration in order to adjust drilling parameters in realtime. On the basis of beam-column series and spring-concentrated mass model, a new analytical model is established to realize the control of lateral vibration and impact.  The severe lateral vibration and impact of drill string will not only cause the fatigue and fracture of drill string [1–2], but also broaden hole and change side force and bending angle of bit which lead to damage quality of a directional well [3]. But it is difficult to control lateral vibration amplitude and impact intensity because the phenomenon of lateral vibration and impact of drill string can not be observed at surface without the expensive MWD (measurement while drilling) apparatus [4–5]. In order to improve the control and prediction method of lateral vibration comparatively, this paper tries to attest the feasibility to use a theoretic method to analyze and predict lateral vibration and impact. The present drill string dynamic methods mainly use finite element method [6–7] which needs too complex calculation to be used in drilling field. Consequently, it is necessary to establish a simple analytical model of lateral vibration and impact to design and adjust drilling parameters in real-time. On the basis of beam-column series and spring-concentrated mass model, a new analytical model is established which consider many factors, such as: BHA (bottom-hole assemble), WOB (weight on bit) fluctuation, ROB (rotation of bit).},
+}
+
+@article{ref:liu2014a,
+	author			= {Liu, Xianbo and Vlajic, Nicholas and Long, Xinhua and Meng, Guang and Balachandran, Balakumar},
+	year			= {2014},
+	month			= {November},
+	pages			= {1891-1906},
+	title			= {Coupled axial-torsional dynamics in rotary drilling with state-dependent delay: stability and control},
+	volume			= {78},
+	journal			= {Nonlinear Dynamics},
+	doi				= {10.1007/s11071-014-1567-y},
+	abstract		= {Nonlinear motions of a rotary drilling mechanism are considered, and a two degree-of-freedom model is developed to study the coupled axial-torsional dynamics of this system. In the model development, state-dependent time delay and nonlinearities that arise due to dry friction and loss of contact are considered. Stability analysis is carried out by using a semi-discretization scheme, and the results are presented in terms of stability volumes in the three-dimensional parameter space of spin speed, cutting depth, and a cutting coefficient. These stability volume plots can serve as a guide for choosing parameters for rotary drilling operations. A control strategy based on state and delayed-state feedback is presented with the goal of enlargening the stability region, and the effectiveness of this strategy to suppress stick-slip oscillations is illustrated.}
+}
+
+@inproceedings{ref:losoya2020a,
+	author 			= {Losoya, Enrique Zarate and Gildin, Eduardo and Noynaert, Samuel F and Medina-Zetina, Zenon and Crain, Tim and Stewart, Shaun and Hicks, Jimmy },
+	title			= {An Open-Source Enabled Drilling Simulation Consortium for Academic and Commercial Applications},
+	volume			= {Day 4 Thu, July 30, 2020},
+	series			= {SPE Latin America and Caribbean Petroleum Engineering Conference},
+	year			= {2020},
+	month			= {July},
+	doi				= {10.2118/198943-MS},
+	url				= {https://doi.org/10.2118/198943-MS},
+	note			= {D041S035R001},
+	eprint			= {https://onepetro.org/SPELACP/proceedings-pdf/19LACP/4-19LACP/D041S035R001/2356325/spe-198943-ms.pdf},
+	abstract		= {Simulation of drilling processes involves the seamless integration of strongly coupled physics, numeric, and economic models. Operators desire advanced drilling simulation software that can mimic reality and yet be practical for daily operations. At the same time, academic researchers are devoting time and effort to develop robust and accurate models of every module of an integrated drilling environment but are challenged with translating their original contributions into the operational setting. We seek to solve both of these issues through a distinctive collaboration consortium based on an open-source paradigm. We describe and propose an advanced drilling simulation developed through a joint industry consortium at Texas A\&M University. The simulator provides free access to sophisticated and reliable drilling dynamics solvers. This includes drill string dynamics, torque and drag analysis, geologic modeling, hydraulics, and wellbore pressure modeling, visualization, and operator interfaces. The simulator is written in C++ and is built on top of high-performance open source libraries that leverages parallel computing, GPU acceleration, multibody, and computational fluid dynamics solvers as well as other tools (see figure for further details). We will assist industry and academic users to employ our open-source tool. In addition, we will help said parties further develop our framework into proprietary and protected business software via the addition of custom functionality. The simulator core was successfully developed and has been used to model horizontal drilling, while providing near real-time performance. The framework has been used in several applications successfully, including modeling shallow horizontal jetting, rock drilling, and steering; as well as reconstructing spatial data from high fidelity downhole signals for borehole evaluation, and the development of improved downhole navigation algorithms. We believe that a collaborative development effort between academia and industry will bring solutions to complex modeling needs faster and more economically than any individual endeavor. To this end, the authors will also show how one can partner with Texas A\&M University to obtain access to the open-source enabled drilling simulation framework and platform to collaborate, improve and create solutions for new and existing problems.},
+}
+
+@article{ref:ma1985a,
+	author			= {D. Ma and S. Yang},
+	title			= {Kinematics of the Cone Bit},
+	journal			= SPEJ,
+	volume			= {25},
+	number			= {3},
+	month			= {June},
+	year			= {1985},
+	pages			= {321--329},
+	speid			= {SPE 10563}
+}
+
+@article{ref:ma1985b,
+	author			= {D. Ma and J. J. Azar},
+	title			= {Dynamics of Roller Cone Bits},
+	journal			= JERT,
+	volume			= {107},
+	number			= {4},
+	month			= {December},
+	year			= {1985},
+	pages			= {543--548},
+	issn			= {0195-0738},
+}
+
+@article{ref:ma1989a,
+	author			= {D. Ma and J. J. Azar},
+	title			= {A New Way to Characterize the Gouging-Scraping Action of Roller Cone Bits},
+	journal			= {OnePetro},
+	year			= {1989},
+	organization	= SPE,
+	speid			= {19448-MS}
+}
+
+@inproceedings{ref:ma1995a,
+	author			= {Dekun Ma and Desheng Zhou and Rong Deng},
+	title			= {The Computer Simulation of the Interaction Between Roller Bit and Rock},
+	booktitle		= IMPE,
+	volume			= {1},
+	month			= {November},
+	year			= {1995},
+	pages			= {309--319},
+	organization	= SPE,
+	address			= {Beijing},
+	speid			= {SPE 29922}
+}
+
+@book{ref:ma1996a,
+	author			= {Dekun Ma},
+	title			= {The Operational Mechanics of the Rock Bit},
+	publisher		= {Petroleum Industry Press},
+	year			= {1996},
+	address			= {Beijing},
+	isbn			= {7-5021-1954-X/TE1644},
+}
+
+@book{ref:marks1941a,
+	author			= {Lionel S. Marks},
+	title			= {Mechanical Engineers' Handbook},
+	publisher		= {McGraw-Hill Book Company, Inc.},
+	year			= {1941},
+	edition			= {Fourth},
+	address			= {New York and London},
+	isbn			= {}
+}
+
+@book{ref:mase1999a,
+	author			= {G. Thomas Mase and George E. Mase},
+	title			= {Continuum Mechanics for Engineers},
+	publisher		= {CRC Press LLC},
+	year			= {1999},
+	edition			= {Second},
+	address			= {Boca Raton, FL},
+	isbn			= {0-8493-1855-6}
+}
+
+@inproceedings{ref:mason2007a,
+    author			= {Colin J. Mason and David C.-K. Chen},
+    title			= {Step Changes Needed To Modernize {T\&D} Software},
+    volume			= {All Days},
+    series			= SPEIADCDRILLINGCONFERENCEEXHBITION,
+    year			= {2007},
+    month			= {February},
+    doi				= {10.2118/104609-MS},
+    url				= {https://doi.org/10.2118/104609-MS},
+    eprint			= {https://onepetro.org/SPEDC/proceedings-pdf/07DC/All-07DC/SPE-104609-MS/2767152/spe-104609-ms.pdf},
+    speid			= {SPE-104609-MS},
+    abstract		= {Torque and drag (T\&D) modeling is regarded as an invaluable process to assist in well planning and to predict and prevent drilling problems. Although T\&D software has existed for over 20 years, some confusion still exists over the validity of the models used to characterize drilling and completion operations. This paper provides an assessment of current limitations of the various T\&D models (soft-string and stiff-string) and appraises their validity. Field data from various operations is used to illustrate certain limitations. The paper defines future requirements for what is considered to be the next generation of T\&D models. Probably the most important technical requirement is a more realistic stiff-string model to correctly account for the impact of tubular stiffness, hole clearance and tortuosity effects.},
+}
+
+@article{ref:maurer1965a,
+	author			= {William C. Maurer},
+	title			= {Bit-Tooth Penetration Under Simulated Borehole Conditions},
+	journal			= JPT,
+	volume			= {17},
+	number			= {12},
+	month			= {December},
+	year			= {1965},
+	pages			= {1433-1442},
+	organization	= SPE,
+	speid			= {SPE 1260-PA}
+}
+
+@inproceedings{ref:melaugh1981a,
+	author			= {J. F. Melaugh and J. A. Saltzer},
+	title			= {Development of a Predictive Model for Drilling Pressurized Shale with Stratapax Blank Bits},
+	booktitle		= {ASME Energy Technology Conference},
+	month			= {January},
+	year			= {1981},
+	address			= {Houston, TX}
+}
+
+@book{ref:moon1998a,
+	author			= {Francis C. Moon},
+	title			= {Applied Dynamics: With Applications to Multibody and Mechatronic Systems},
+	publisher		= JOHNWILEY,
+	year			= {1998},
+	address			= {New York, NY},
+	isbn			= {0-471-13828-2}
+}
+
+@inproceedings{ref:naganawa1995a,
+	author			= {Shigemi Naganawa and Shoichi Tanaka and Naoki Sugaya},
+	title			= {Experimental and Theoretical Analysis of Roller Cone Bit Vibrations},
+	booktitle		= ASMEENERGYTECHCONFERENCE,
+	month			= {January},
+	year			= {1995},
+	pages			= {6},
+	organization	= ASME,
+	address			= {Houston, TX}
+}
+
+@article{ref:newmark1959a,
+	author			= {Nathan M. Newmark},
+	title			= {A Method of Computation for Structural Dynamics},
+	journal			= JEM,
+	volume			= {85},
+	number			= {EM3},
+	year			= {1959},
+	pages			= {67--94}
+}
+
+@inproceedings{ref:matthews2021a,
+	author			= {Oliver Matthews and Xu Huang and John Abhishek Bomidi},
+	title			= {3D Simulation Workflow for Performance of Sharp and Worn PDC Drill Bits},
+	volume			= {Day 5 Fri, March 12, 2021},
+	series			= {SPE/IADC Drilling Conference and Exhibition},
+	year			= {2021},
+	month			= {March},
+	doi				= {10.2118/204031-MS},
+	url				= {https://doi.org/10.2118/204031-MS},
+	eprint			= {https://onepetro.org/SPEDC/proceedings-pdf/21DC/5-21DC/D051S022R004/2415553/spe-204031-ms.pdf},
+	speid			= {D051S022R004},
+	abstract		= {This paper describes the development of an improved polycrystalline diamond cutter (PDC) drilling performance simulation in 3D which includes worn cutters. A polygonal mesh model is used to improve the geometric data needed for the drilling performance model calculations. Methods for active face identification have been developed to consistently identify a variety of polygonal face types. The simple wear flat definition used for data input is shown to adequately capture the geometry compared to field worn bit scans and provide valuable insights with active face identification. Drilling performance calculation and results from the calibration to laboratory drilling data and validation to both laboratory and field data are shown. Additionally, including a velocity parameter in the drilling performance model reduced model error.},
+}
+
+@inproceedings{ref:pastusek1992a,
+	author			= {P. E. Pastusek and C. H. Cooley and L. A. Sinor and Mark Anderson},
+	title			= {Directional and Stability Characteristics of Anti-Whirl Bits With Non-Axisymmetric Loading},
+	booktitle		= SPEANNUALTECHCONFERENCE,
+	month			= {October},
+	year			= {1992},
+	organization	= SPE,
+	address			= {Washington, D.C.},
+	pages			= {727--740},
+	speid			= {24614}
+}
+
+@inproceedings{ref:pastusek2007a,
+	author			= {Pastusek, Paul and Sullivan, Eric and Harris, Tommy},
+	title			= {Development and Utilization of a Bit-Based Data-Acquisition System in Hard-Rock PDC Applications},
+	volume			= {All Days},
+	series			= SPEIADCDRILLINGCONFERENCEEXHBITION,
+	year			= {2007},
+	month			= {February},
+	doi				= {10.2118/105017-MS},
+	url				= {https://doi.org/10.2118/105017-MS},
+	note			= {SPE-105017-MS},
+	eprint			= {https://onepetro.org/SPEDC/proceedings-pdf/07DC/All-07DC/SPE-105017-MS/2766913/spe-105017-ms.pdf},
+	abstract		= {Drill bits are iteratively developed for specific applications to meet performance objectives such as aggressiveness, durability, stability, steerability, etc. The transition from one iteration to the next occurs when dull bits are examined, run data is analyzed and the inferences are implemented as revisions to the bit design and/or the operating parameters. Experience has shown that the efficiency of the process depends strongly upon the appropriateness and significance of the data collected. If, for example, a dominant cutter failure mechanism is incorrectly characterized as abrasive wear and is, in fact, impact wear, then the proposed solution and the development time will both be significantly affected.One method for improving the significance of the data collected is to implement a special-purpose data-acquisition system within the bit. Such a device has at least three significant advantages over available sub-based data-acquisition systems: (1) its bit-based sensors will more accurately detect bit-based events, (2) it can be economically deployed over many bits and (3) it is relatively transparent to the user.The paper describes an effort to develop, validate, and utilize a bit-based module designed to monitor accelerometer and magnetometer sensors and to record selected data. The authors also describe the effort to infer dynamic dysfunction(s) from the data in the fast-growing hard rock PDC bit application and to mitigate them via modifications to drilling parameters and bit designs.},
+}
+
+@inproceedings{ref:pastusek2019a,
+	author			= {Paul Pastusek and Greg Payette and Roman Shor and Eric Cayeux and Ulf Jakob Aarsnes and John Hedengren and St\'{e}phane Menand and John Macpherson and Raju Gandikota and Michael Behounek and Richard Harmer and Emmanuel Detournay and Roland Illerhaus and Yu Liu},
+	title			= {Creating Open Source Models, Test Cases, and Data for Oilfield Drilling Challenges},
+	volume			= {Day 3 Thu, March 07, 2019},
+	series			= SPEIADCDRILLINGCONFERENCEEXHBITION,
+	year			= {2019},
+	month			= {03},
+	doi				= {10.2118/194082-MS},
+	url				= {https://doi.org/10.2118/194082-MS},
+	note			= {D031S016R001},
+	eprint			= {https://onepetro.org/SPEDC/proceedings-pdf/19DC/3-19DC/D031S016R001/1164608/spe-194082-ms.pdf},
+	abstract		= {The drilling industry has substantially improved performance based on knowledge from physics-based, statistical, and empirical models of components and systems.  However, most models and source code have been recreated multiple times, which requires significant effort and energy with little additional benefit or step-wise improvements.  The authors propose that it is time to form a coalition of industry and academic leaders to support an open source effort for drilling, to encourage the reuse of continuously improving models and coding efforts.  The vision for this guiding coalition is to 1) set up a repository for source code, data, benchmarks, and documentation, 2) encourage good coding practices, 3) review and comment on the models and data submitted, 4) test, use and improve the code, 5) propose and collect anonymized real data, 6) attract talent and support to the effort, and 7) mentor those getting started.  Those interested to add their time and talent to the cause may publish their results through peer-reviewed literature.  Several online meetings are planned to create this coalition, establish a charter, and layout the guiding principles.  Multiple support avenues are proposed to sustain the effort such as: annual user group meetings, create a SPE Technical Section, and initiating a Joint Industry Program (JIP).  The Open Porous Media Initiative is just one example of how this could be organized and maintained.  As a starting point, this paper reviews existing published drilling models and highlights the similarities and differences for commonly used drillstring hydraulics, dynamics, directional, and bit-rock interaction models.  The key requirements for re-usability of the models and code are: 1) The model itself must be available as open source, well documented with the objective and expected outcomes, include commented code, and shared in a publicly available repository which can be updated, 2) A user's guide must include how to run the core software, how to extend software capabilities, i.e., plug in new features or elements, 3) Include a "theory" manual to explain the fundamental principles, the base equations, any assumptions, and the known limitations, 4) Data examples and formatting requirements to cover a diversity of drilling operations, and 5) Test cases to benchmark the performance and output of different proposed models.  In May 2018 at "The 4th International Colloquium on Non-linear dynamics and control of deep drilling systems," the keynote question was, "Is it time to start using open source models?" The answer is "yes".  Modeling the drilling process is done to help drill a round, ledge free hole, without patterns, with minimum vibration, minimum unplanned dog legs, that reaches all geological targets, in one run per section, and in the least time possible.  An open source repository for drilling will speed up the rate of learning and automation efforts to achieve this goal throughout the entire well execution workflow, including planning, BHA design, real-time operations, and post well analysis.},
+}
+
+@inproceedings{ref:payne1994a,
+	author			= {M. L. Payne and D. A. Cooking and A. J. Hatch},
+	title			= {Critical Technologies for Success in Extended Reach Drilling},
+	booktitle		= SPEANNUALTECHCONFERENCE,
+	month			= {September},
+	year			= {1994},
+	pages			= {23--37},
+	organization	= SPE,
+	address			= {New Orleans, LA},
+	speid			= {SPE 28293}
+}
+
+@inproceedings{ref:pelfrene2019a,
+	author			= {Gilles Pelfrene and Olivier Stab and Danny Tilleman and Thomas Gallifet and Bruno Cuillier and Julien Carlos},
+	title			= {Modelling the 3D Bit-Rock Interaction Helps Designing Better PDC Bits},
+	volume			= {Day 1 Tue, March 05, 2019},
+	series			= SPEIADCDRILLINGCONFERENCEEXHBITION,
+	year			= {2019},
+	month			= {March},
+	doi				= {10.2118/194134-MS},
+	url				= {https://doi.org/10.2118/194134-MS},
+	note			= {D011S004R004},
+	eprint			= {https://onepetro.org/SPEDC/proceedings-pdf/19DC/1-19DC/D011S004R004/2348972/spe-194134-ms.pdf},
+	abstract		= {The bit-rock interaction has long been studied to assess PDC drill bit performance, which is driven both by cutting and non-cutting parts of the drill bit. While the cutter-rock interaction has been studied by many authors in the literature, only a few studies have focused on the interaction between the rock and non-cutting parts of the drill bit.  In this paper, we introduce a new method designed to model the interaction between the whole drill bit and the rock formation within a full three-dimensional framework. This approach is based on a generic computational geometry algorithm which simulates the drilling process considering both the drill bit and the hole being drilled as a set of 3D meshed surfaces. The volume of rock removed by the PDC cutters as well as the area and the volume of contact between the rock and the non-cutting parts of the drill bit can be computed with a high accuracy based on the 3D CAD model of the drill bit.  The in-house drill bit simulator implementing this algorithm primarily allows the engineer to estimate how bit-rock interactions distribute between cutting and non-cutting parts of the drill bit and to balance the bit design in the 3D space accordingly over a given range of drilling parameters. This approach has been brought to the field in order to address cutter breakage based on rubbing contacts optimization. Field results associated to some case studies in US shale plays and Canada are described and clearly show that contact points predictions closely match field observations. Moreover, design modifications applied following this process have led to an overall increase in bit performance and bit durability while preventing core-out issues.  The bit design methodology presented in this paper is dedicated to design drill bits whose interaction with the rock formation is predicted with a higher accuracy by accounting for the exact 3D shape of the drill bit.},
+}
+
+@inproceedings{ref:pelfrene2019b,
+	author			= {Pelfrene, Gilles and Al-Ajmi, Hadi and Bashir, Jomah and Al-Otaibi, Fahad and Al-Nuaimi, Ahmad and Al-Jiran, Hamad and Baroun, Ahmad and Al-Kandari, Abdulaziz and Huseen, Talal and Mikhail, Boktor and El-Genidy, Ehab and Reboul, Sebastien and Carlos, Julien },
+	title			= {Statistical Optimization of PDC Bit Designs Based on 3D Simulations Applied to Demanding Directional Applications},
+	volume			= {Day 3 Wed, November 13, 2019},
+	series			= {Abu Dhabi International Petroleum Exhibition and Conference},
+	year			= {2019},
+	month			= {November},
+	doi				= {10.2118/197359-MS},
+	url				= {https://doi.org/10.2118/197359-MS},
+	note			= {D031S084R004},
+	eprint			= {https://onepetro.org/SPEADIP/proceedings-pdf/19ADIP/3-19ADIP/D031S084R004/1122652/spe-197359-ms.pdf},
+	abstract		= {Simulating the mechanical response of PDC drill bits contains a lot of uncertainties. Rock and fluid properties are generally poorly known, complex interactions occur downhole and physical models can hardly capture the full complexity of downhole phenomena. This paper presents a statistical approach that improves the reliability of the PDC bit design optimization process by ensuring that the expected directional behavior of the drill bit is robust over a well-defined range of drilling parameters.  It is first examined how uncertainty propagates through an accurate bit/rock interaction model which simulates numerically the interaction between a given PDC drill bit geometry and a given rock formation, both represented as 3D meshed surfaces. Series of simulations have been launched with simulation parameters defined as probability density functions. The focus has been set on directional drilling simulations where the drill bit is subjected to significant variations in contact loads on gage pads along its trajectory. A global sensitivity analysis has also been performed to identify the key parameters which control drilling performance.  Directional system parameters are critical in terms of steerability and tool face control, particularly in high dogleg severity applications. Based on these simulations, a statistical optimization strategy has then been implemented to ensure that the directional performance of the drill bit remains effective under a given uncertain drilling environment. Statistical analysis combined with drilling simulations indicated that ROP improvements could even be achieved without compromising steerability. A balanced bit design was selected and manufactured in an 8 1/2-in. model to drill a 714 ft section of a Kuwait field. The bit was run on a high dogleg rotary steerable system and directional assembly. The bit achieved the high steerability goals required by the application while showing a good compatibility with the directional tool. Moreover, ROP was increased by approximately 27\% compared to offset wells, setting a record rate of penetration in the field.  Whereas statistical analyses are commonly conducted in the field of geosciences, it has rarely been applied in the field of drilling applications. The statistical bit design optimization strategy deployed in this work has allowed to improve both the drilling performance of the drill bit and its reliability.},
+}
+
+@inproceedings{ref:richard2002a,
+	author			= {T. Richard and E. Detournay and M. Fear and B. Miller and R. Clayton and O. Matthews},
+	title			= {Influence of Bit-Rock Interaction on Stick-Slip Vibrations of {PDC} Bits},
+	booktitle		= SPEANNUALTECHCONFERENCE,
+	month			= {September},
+	year			= {2002},
+	pages			= {2407--2418},
+	organization	= SPE,
+	address			= {San Antonio, TX},
+	speid			= {SPE 77616},
+	abstract		= {This paper describes a new approach to understand the causes of stick-slip vibrations experienced by PDC bits. This new model takes into consideration not only the axial and torsional modes of vibration, but also the coupling between these two modes through bit-rock interaction laws, which are consistent with laboratory results from single cutter experiments. These interaction laws, which account for both frictional contact and cutting processes at the bit-rock interface, are formulated in terms of the depth of cut, a variable that brings into the equations the position of the bit at a previous a priori unknown time. They also account for potential loss of frictional contact between the wear-flats and the rock. The delayed and coupled nature of this interaction is ultimately responsible for the occurrence of self-excited vibrations, which can degenerate into stick-slip oscillations under certain conditions. The features of the torsional vibrations that are predicted with this model are well in accordance with field observations. Furthermore, the results reveal that the model predicts apparent rate effects as an inherent outcome of the nature of the bit-rock interface.}
+}
+
+@inproceedings{ref:schwefe2014a,
+	author			= {T. Schwefe and L. W. Ledgerwood III and J. R. Jain and D. M. Fuselier and L. Endres and H. Oueslati},
+	title			= {Development and Testing of Stick/Slip-Resistant {PDC} Bits},
+	booktitle		= SPEDRILLINGCONFERENCEEXHBITION,
+	month			= {March},
+	year			= {2014},
+	pages			= {},
+	address			= {Fort Worth, TX},
+	speid			= {},
+	abstract		= {}
+}
+
+@inproceedings{ref:sheppard1988a,
+	author			= {M. C. Sheppard and M. Lesage},
+	title			= {Forces at the Teeth of a Drilling Rollercone Bit: Theory and Experiment},
+	booktitle		= SPEANNUALTECHCONFERENCE,
+	month			= {October},
+	year			= {1988},
+	pages			= {253--260},
+	address			= {Houston, TX},
+	speid			= {SPE 18042},
+	abstract		= {A mathematical model has been developed for the drilling action of a tricone bit which gives quantitative predictions for torque, given the bit geometry and the force/penetration relationships for the individual indentors. The results of the model are substantiated by a number of laboratory experiments conducted on a fully instrumented bit. Using this device the details of the indentor motion can be analysed and the forces acting on certain of the indentors can be obtained while drilling. The detailed mathematical model can be simplified to a field interpretation model in which the torque response is described in terms of a contribution from the gouging action of the bit teeth and a contribution associated with the indenting action of the teeth.}
+}
+
+@book{ref:shreiner2003a,
+	author			= {Dave Shreiner and Mason Woo and Jackie Neider and Tom Davis},
+	title			= {OpenGL Programming Guide: The Official Guide to Learning OpenGL, Version 1.4},
+	publisher		= ADDISONWESLEY,
+	year			= {2003},
+	edition			= {Fourth},
+	isbn			= {0321173481}
+}
+
+@article{ref:simo1991a,
+	author			= {J. C. Simo and K. K. Wong},
+	title			= {Unconditionally Stable Algorithms for the Orthogonal Group that Exactly Preserve Energy and Momentum},
+	journal			= IJNME,
+	volume			= {31},
+	number			= {1},
+	year			= {1991},
+	pages			= {19--52},
+	issn			= {0029-5981}
+}
+
+@book{ref:stewart1995a,
+	author			= {James Stewart},
+	title			= {Calculus},
+	publisher		= {Brooks/Cole Publishing},
+	year			= {1995},
+	edition			= {Third},
+	address			= {Pacific Grove, CA},
+	isbn			= {0534217982}
+}
+
+@article{ref:warren1986a,
+	author			= {T. M. Warren and A. Sinor},
+	title			= {Drag Bit Performance Modeling},
+	journal			= SPEANNUALTECHCONFERENCE,
+	month			= {October},
+	year			= {1986},
+	address			= {New Orleans, LA},
+	speid			= {SPE 15618}
+}
+
+@article{ref:warren1990a,
+	author			= {Thomas M. Warren and J. Ford Brett and L. Allen Sinor},
+	title			= {Development of a Whirl-Resistant Bit},
+	journal			= SPEDRILLING,
+	volume			= {5},
+	number			= {6},
+	month			= {December},
+	year			= {1990},
+	pages			= {267--275},
+	speid			= {SPE 19572-PA}
+}
+
+@inproceedings{ref:willerth2021a,
+	author			= {Marc Willerth and Briana Dodson and Kelton McCue and Mahmoud Farrag},
+	title			= {When Slick is Not Smooth: Bottom-Hole Assembly Selection and Its Impact on Wellbore Quality},
+	volume			= {Day 5 Fri, March 12, 2021},
+	series			= SPEIADCDRILLINGCONFERENCEEXHBITION,
+	year			= {2021},
+	month			= {March},
+	doi				= {10.2118/204129-MS},
+	url				= {https://doi.org/10.2118/204129-MS},
+	note			= {D051S023R001},
+	eprint			= {https://onepetro.org/SPEDC/proceedings-pdf/21DC/5-21DC/D051S023R001/2415283/spe-204129-ms.pdf},
+	abstract		= {Appropriate selection of a bottom-hole assembly (BHA) is critical to the success of a drilling operation.  In US Land drilling, these assemblies are often selected using local heuristics rather than rigorous analysis. These heuristics are frequently derived from the incentives of the directional contractor as opposed to incentives for the operator. Large motor bends enable more rotation though the curve and reduce the possibility of tripping for build rates. Unstabilized motors are believed to aid sliding and tool face control. Both of these practices lead to drilling a more tortuous wellbore and may cause problems later in the well’s life. This study quantifies the impact of these practices and proposes alternatives that can balance the needs of directional companies with the desire of operators for high-quality wellbores. Over 60 conventional motor assemblies used to drill curves in the Eagle Ford and Permian were analyzed for directional performance using commercial drillstring analysis software. The sliding and rotary tendencies were modelled through the curve across a range of potential drilling conditions. Expected build-rate models were validated by comparison to the maximum achieved doglegs in the directional surveys. When available, additional validation was performed using motor yields calculated from slide sheets. The validated models were compared to the dogleg severity requirements for each assembly’s respective well plan. Comparisons of slide ratios and slide/rotate tendencies of the BHAs were used to estimate the impact on wellbore quality using the tortuosity metric proposed by Jamieson (2019).  Typical well plans for both basins had curves of 10 degrees/100ft with no well plan greater than 12 degrees/100ft. Typical bottom hole assemblies were capable of $>$15 degrees/100ft under normal sliding conditions, with some assemblies capable of $>$20 degrees/100ft of build. Predicted build rates were validated by slide sheets and observed dogleg severities. Common characteristics among assemblies with excess capacity were high bend angles ($>=$2 degrees) and minimal stabilization. These slick assemblies also had a strong drop tendency in rotation at low inclinations. The combination of high-build rate with rotary drop greatly increases tortuosity, particularly in the early stages of well. A minority of the assemblies used a lower motor bend angle ($<$2 degrees) combined with multiple stabilizers. These assemblies had a more consistent directional capability throughout the curve and held angle in rotation. The success of these assemblies confirms that a higher quality wellbore with an improved BHA design is technically achievable.  As increasing attention is afforded to the topic of wellbore quality it is important to have methods available to technically achieve high-quality wellbores.  In addition to the management of drilling practices, it is also important to have an appropriate BHA design that can enable those practices},
+}
+
+@inproceedings{ref:winters1987a,
+	author			= {W. J. Winters and T. M. Warren and E. C. Onyia},
+	title			= {Roller Bit Model with Rock Ductility and Cone Offset},
+	booktitle		= SPEANNUALTECHCONFERENCE,
+	journal			= {Society of Petroleum Engineers of AIME, (Paper) SPE},
+	year			= {1987},
+	pages			= {421--432},
+	address			= {Dallas, TX},
+	speid			= {SPE 16696},
+	abstract		= {This paper presents a model which relates roller bit penetration rates to the bit design, the operating conditions, and the rock mechanics. Rock ductility is identified as a major influence on bit performance. Cone offset is recognized as an important design feature. Each roller bit style is characterized via a laboratory drilling procedure. Mechanical behavior is characterized via triaxial compression tests. The model relates these factors to predict the drilling response of each bit. The roller bit model provides two modes of field application. First, field data can be interpreted to generate a continuous rock strength log. The rock strength log can then be utilized to predict and interpret roller bit performance in offset wells.}
+}
+
+@book{ref:wright1999a,
+	author			= {Richard S. Wright Jr. and Michael R. Sweet},
+	title			= {OpenGL SuperBible},
+	publisher		= PEARSON,
+	year			= {2003},
+	edition			= {Second},
+	isbn			= {1571691642}
+}
+
+@book{ref:young1989a,
+	author			= {Warren C. Young},
+	title			= {Roark's Formulas for Stress and Strain},
+	publisher		= MCGRAWHILL,
+	year			= {1989},
+	edition			= {Sixth},
+	isbn			= {978-0070725416}
+}
+
+@article{ref:zanna2001a,
+	author			= {A. Zanna and K. Eng{\o} and H. Z. Munthe-Kaas},
+	title			= {Adjoint and Self-Adjoint {Lie}-Group Methods},
+	journal			= {BIT Numerical Mathematics},
+	volume			= {41},
+	number			= {2},
+	month			= {March},
+	year			= {2001},
+	pages			= {395--421}
+}
+
+@article{ref:zhang2021a,
+	author			= {Chun-Liang Zhang and Ying-Xin Yang and Hai-Tao Ren and Can Cai and Yong Liu and Ming Yang},
+	title			= {Investigation of the Cross-Cutting Polycrystalline Diamond Compact Bit Drilling Efficiency},
+	journal			= {Shock and Vibration},
+	publisher		= {Hindawi},
+	volume			= {},
+	number			= {},
+	year			= {2021},
+	month			= {February},
+	day				= {26},
+	doi				= {10.1155/2021/8841255},
+	url				= {https://doi.org/10.1155/2021/8841255},
+	abstract		= {The parallel track scraping principle of conventional PDC bits largely limits the cutting efficiency and working life in deep formations. Cross-cutting polycrystalline diamond compact (PDC) bit may be an efficient drilling tool that increases the rock-breaking efficiency through both cross-cutting and alternate-cutting modes of the PDC cutter. The motion track equation of the cross-cutting PDC bit was derived by using the compound coordinate system, and the motion track was analyzed. Meanwhile, through the unit experiment and discrete element simulation, the cutting force, volume-specific load, and crack propagation were analyzed under different cutting modes. Through establishing a nonlinear dynamic model of the bit-rock system, the speed-up mechanism of the novel bit was analyzed based on rock damage, rock stress state, and motion characteristic of the bit during the rock-breaking process. Compared with unidirectional cutting, cross-cutting produces less cutting force, more brittle fracture, and a greater decrease of formation strength. The novel PDC bit can put more rock elements into a tensile stress condition than a conventional PDC bit, and the plastic energy dissipation ratio of the cross-cutting PDC bit is lower while the damage energy consumption ratio is higher than they are for conventional bits, which is beneficial to increasing the ratio of fracture failure and improving rock-breaking efficiency. Laboratory drilling tests show that the cross-cutting PDC bit can create mesh-like bottom-hole features. Drilling contrast experiments show that a mesh-like bottom-hole pattern can be obtained by using the cross-cutting PDC bit, of which the ROP is obviously higher than that of the conventional bit when drilling in sandstone or limestone formation. Meanwhile, the influence of deviation angle, weight on bit, and rock properties on cutting efficiency of the cross-cutting PDC bit are studied.}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% PATENTS.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+@patent{ref:endres2013a,
+	author			= {Lance A. Endres and Gregory C. Prevost and Tyler R. Reynolds},
+	title			= {Drill bit with distributed force profile},
+	assignee		= {Baker Hughes Incorporated},
+	number			= {20130008724},
+	publisher		= {U.S. Patent},
+	filedday		= {14},
+	filedmonth		= {June},
+	filedyear		= {2012},
+	pubday			= {1},
+	pubmonth		= {October},
+	pubyear			= {2013},
+	issuedday		= {},
+	issuedmonth		= {},
+	issuedyear		= {}
+}
+
+@patent{ref:endres2013b,
+	author			= {Lance A. Endres and Tyler R. Reynolds and Gregory C. Prevost},
+	title			= {METHODS OF DESIGNING EARTH-BORING TOOLS USING A PLURALITY OF WEAR STATE VALUES AND RELATED METHODS OF FORMING EARTH-BORING TOOLS},
+	assignee		= {Baker Hughes Incorporated},
+	number			= {201300835902},
+	filedday		= {5},
+	filedmonth		= {August},
+	filedyear		= {2011},
+	publisher		= {U.S. Patent},
+	pubday			= {7},
+	pubmonth		= {February},
+	pubyear			= {2013},
+	issuedday		= {26},
+	issuedmonth		= {August},
+	issuedyear		= {2014}
+}
+
+@patent{ref:hohl2015a,
+	author			= {Andreas Hohl and Mathias Tergeist and Hatem Oueslati and Christian Herbig and Jayesh J. Jain and Hanno Reckmann and Lance A. Endres},
+	title			= {Method to mitigate bit induced vibrations by intentionally modifying mode shapes of drill strings by mass or stiffness changes},
+	assignee		= {Baker Hughes Incorporated},
+	number			= {20150122547},
+	publisher		= {U.S. Patent},
+	filedday		= {1},
+	filedmonth		= {November},
+	filedyear		= {2013},
+	publisher		= {U.S. Patent},
+	pubday			= {7},
+	pubmonth		= {May},
+	pubyear			= {2015},
+	issuedday		= {},
+	issuedmonth		= {},
+	issuedyear		= {},
+	url				= {http://www.google.com.ar/patents/US20150122547},
+	note			= {}
+}
+
+@patent{ref:huang2003a,
+	author			= {Sujian Huang and Chris E. Cawthorne},
+	title			= {Method for Simulating Drilling of Roller Cone Bits and Its Application to Roller Cone Bit Design and Performance},
+	assignee		= {Smith International, Inc.},
+	number			= {6516293},
+	publisher		= {U.S. Patent},
+	filedday		= {13},
+	filedmonth		= {March},
+	filedyear		= {2000},
+	pubday			= {4},
+	pubmonth		= {February},
+	pubyear			= {2003}
+}
+
+@patent{ref:huang2005a,
+	author			= {Sujian Huang and Chris E. Cawthorne},
+	title			= {Method for Simulating Drilling of Roller Cone Bits and Its Application to Roller Cone Bit Design and Performance},
+	assignee		= {Smith International, Inc.},
+	number			= {6873947},
+	publisher		= {U.S. Patent},
+	filedday		= {9},
+	filedmonth		= {August},
+	filedyear		= {2000},
+	pubday			= {29},
+	pubmonth		= {March},
+	pubyear			= {2005}
+}
+
+@patent{ref:huang2005b,
+	author			= {Sujian Huang and Peter T. Cariveau},
+	title			= {Methods for Modeling, Displaying, Designing, and Optimizing Fixed Cutter Bits},
+	assignee		= {Smith International, Inc.},
+	number			= {20050133272A1},
+	publisher		= {U.S. Patent},
+	filedday		= {9},
+	filedmonth		= {July},
+	filedyear		= {2004},
+	pubday			= {23},
+	pubmonth		= {June},
+	pubyear			= {2005}
+}
+
+@patent{ref:prevost2013a,
+	author			= {Gregory C. Prevost and Lance A. Endres and Tyler R. Reynolds},
+	title			= {METHODS OF DESIGNING EARTH-BORING TOOLS USING A PLURALITY OF DEPTH OF CUT VALUES AND RELATED METHODS OF FORMING EARTH-BORING TOOLS},
+	assignee		= {Baker Hughes Incorporated},
+	number			= {20130035903},
+	publisher		= {U.S. Patent},
+	filedday		= {5},
+	filedmonth		= {August},
+	filedyear		= {2011},
+	pubday			= {2},
+	pubmonth		= {July},
+	pubyear			= {2013},
+	issuedday		= {},
+	issuedmonth		= {},
+	issuedyear		= {}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% WEBSITES.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+@webhref{ref:webw3c,
+	author			= {Ian Jacobs},
+	title			= {About the World Wide Web Consortium},
+	websitename		= {W3C World Wide Web Consortium},
+	year			= {2004},
+	url				= {http://www.w3.org/Consortium/}
+}
+
+@webhref{ref:webxml,
+	author			= {{O'Reilly Media, Inc.}},
+	title			= {{O'Reilly XML.com}},
+	websitename		= {O'Reilly XML.com},
+	year			= {2005},
+	url				= {http://www.xml.com/}
+}
+
+@webhref{ref:weissteinrodrotformula,
+	author			= {Eric W. Weisstein and et al},
+	title			= {Rodrigues' Rotation Formula},
+	websitename		= {From MathWorld-A Wolfram Web Resource},
+	year			= {1999},
+	url				= {http://mathworld.wolfram.com/RodriguesRotationFormula.html}
+}

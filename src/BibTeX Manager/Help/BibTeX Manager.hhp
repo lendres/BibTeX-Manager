@@ -1,0 +1,36 @@
+[OPTIONS]
+Auto Index=Yes
+Compatibility=1.1 or later
+Compiled file=LineCounter.chm
+Contents file=LineCounter.hhc
+Index file=LineCounter.hhk
+Default topic=HIDD_ROOT_DIALOG.HTM
+Display compile progress=No
+Full-text search=Yes
+Language=0x409 English (United States)
+
+[FILES]
+HIDD_ROOT_DIALOG.HTM
+lc_select_files.htm
+lc_counting_lines.htm
+lc_when_finished.htm
+lc_name_buffer_overflow.htm
+lc_file_not_found.htm
+main_index.htm
+
+[ALIAS]
+HIDD_LINECOUNTER_DIALOG		= HIDD_ROOT_DIALOG.htm
+lc_select_files				= lc_select_files.htm
+lc_counting_lines			= lc_counting_lines.htm
+lc_when_finished			= lc_when_finished.htm
+lc_name_buffer_overflow		= lc_name_buffer_overflow.htm
+lc_file_not_found			= lc_file_not_found.htm
+main_index					= main_index.htm
+
+[MAP]
+#include HTMLDefines.h
+
+[TEXT POPUPS]
+HTMLDefines.h
+
+[INFOTYPES]

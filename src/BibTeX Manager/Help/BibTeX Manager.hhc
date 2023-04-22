@@ -1,0 +1,49 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML>
+<HEAD>
+<meta name="GENERATOR" content="Microsoft&reg; HTML Help Workshop 4.1">
+<!-- Sitemap 1.0 -->
+</HEAD><BODY>
+<OBJECT type="text/site properties">
+	<param name="Window Styles" value="0x800225">
+	<param name="ImageType" value="Folder">
+</OBJECT>
+<UL>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Add Your App's help topics here">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Welcome">
+		<param name="Local" value="HIDD_ROOT_DIALOG.htm">
+		<param name="ImageNumber" value="17">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Selecting Files">
+		<param name="Local" value="lc_select_files.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Counting Lines">
+		<param name="Local" value="lc_counting_lines.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Exiting Line Counter">
+		<param name="Local" value="lc_when_finished.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Possible Errors">
+		<param name="Local" value="lc_name_buffer_overflow.htm">
+		<param name="Local" value="lc_file_not_found.htm">
+		<param name="ImageNumber" value="1">
+		</OBJECT>
+	<UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="File Name Buffer Overflow">
+			<param name="Local" value="lc_name_buffer_overflow.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="File Not Selected">
+			<param name="Local" value="lc_file_not_found.htm">
+			</OBJECT>
+	</UL>
+</UL>
+</BODY></HTML>
