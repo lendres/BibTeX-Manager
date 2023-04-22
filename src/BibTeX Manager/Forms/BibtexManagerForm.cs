@@ -5,14 +5,16 @@ using System.IO;
 using System.Threading;
 
 using DigitalProduction.Forms;
+using DigitalProduction.Projects;
 using DigitalProduction.IO;
+using BibTeXManager;
 
 namespace DigitalProduction.LineCounter
 {
 	/// <summary>
 	/// Summary description for Form1.
 	/// </summary>
-	public partial class BibTeXManager : DPMForm
+	public partial class BibtexManagerForm : DigitalProductionProjectForm
 	{
         #region Members
 
@@ -21,8 +23,8 @@ namespace DigitalProduction.LineCounter
 
 		#region Construction / Timer
 
-		public BibTeXManager() :
-			base("DPM", "Line Counter")
+		public BibtexManagerForm() :
+			base(BibtexProject.FilterString, "DigitalProduction", "BibTeX Manager")
 		{
 			InitializeComponent();
 
@@ -72,7 +74,7 @@ namespace DigitalProduction.LineCounter
 			this.statusBarPanel2.Text			= System.DateTime.Now.ToLongTimeString();
 			this.tmrClock.Interval				= 1000;
 			this.tmrClock.Enabled				= true;
-			this.tmrClock.Tick					+= new EventHandler(tmrClock_Tick);
+			this.tmrClock.Tick					+= new EventHandler(TimerClock_Tick);
 
 			this.Controls.Add(this.statusBar);
 
@@ -84,9 +86,21 @@ namespace DigitalProduction.LineCounter
 		/// </summary>
 		/// <param name="sender">Sender.</param>
 		/// <param name="e">Event arguments.</param>
-		private void tmrClock_Tick(object sender, EventArgs e)
+		private void TimerClock_Tick(object sender, EventArgs e)
 		{
 			this.statusBarPanel2.Text = System.DateTime.Now.ToLongTimeString();
+		}
+
+		#endregion
+
+		#region Abstract Function Implementations
+
+		/// <summary>
+		/// Create a new BibtexProject.
+		/// </summary>
+		protected override Project NewProject()
+		{
+			return (Project)(new BibtexProject());
 		}
 
 		#endregion
@@ -100,7 +114,7 @@ namespace DigitalProduction.LineCounter
 		/// </summary>
 		/// <param name="sender">Sender.</param>
 		/// <param name="e">Event arguments.</param>
-		private void btnGetFiles_Click(object sender, System.EventArgs e)
+		private void ButtonGetFiles_Click(object sender, System.EventArgs e)
 		{
 
 		}
@@ -116,7 +130,7 @@ namespace DigitalProduction.LineCounter
 		/// </summary>
 		/// <param name="sender">Sender.</param>
 		/// <param name="e">Event arguments.</param>
-		private void mnuExit_Click(object sender, System.EventArgs e)
+		private void MenuExit_Click(object sender, System.EventArgs e)
 		{
 			this.Close();
 		}
@@ -126,7 +140,7 @@ namespace DigitalProduction.LineCounter
 		/// </summary>
 		/// <param name="sender">Sender.</param>
 		/// <param name="e">Event arguments.</param>
-		private void mnuHelp_Click(object sender, System.EventArgs e)
+		private void MenuHelp_Click(object sender, System.EventArgs e)
 		{
 			Help.ShowHelp(this, "Help\\Line Counter.chm");
 		}

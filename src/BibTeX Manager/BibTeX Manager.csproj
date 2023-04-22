@@ -6,10 +6,10 @@
     <ProjectGuid>{F42EE1BE-ECB7-48E3-BF6C-13FE01B37919}</ProjectGuid>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ApplicationIcon>BibTex Manager.ico</ApplicationIcon>
+    <ApplicationIcon>Forms\BibTex Manager.ico</ApplicationIcon>
     <AssemblyKeyContainerName>
     </AssemblyKeyContainerName>
-    <AssemblyName>Line Counter</AssemblyName>
+    <AssemblyName>BibTeXManager</AssemblyName>
     <AssemblyOriginatorKeyFile>
     </AssemblyOriginatorKeyFile>
     <DefaultClientScript>JScript</DefaultClientScript>
@@ -17,7 +17,7 @@
     <DefaultTargetSchema>IE50</DefaultTargetSchema>
     <DelaySign>false</DelaySign>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>DigitalProduction.LineCounter</RootNamespace>
+    <RootNamespace>BibTeXManager</RootNamespace>
     <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
     <StartupObject>
     </StartupObject>
@@ -96,9 +96,6 @@
     <Reference Include="CbtHook">
       <HintPath>..\..\References\CbtHook.dll</HintPath>
     </Reference>
-    <Reference Include="DigitalProduction">
-      <HintPath>..\..\References\DigitalProduction.dll</HintPath>
-    </Reference>
     <Reference Include="Plossum CommandLine">
       <HintPath>..\..\References\Plossum CommandLine.dll</HintPath>
     </Reference>
@@ -125,88 +122,35 @@
     <Compile Include="AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Project\BibtexProject.cs" />
+    <Compile Include="Project\CustomClass1.cs" />
     <Compile Include="RegistryAccess.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="BibTeXManager.cs">
+    <Compile Include="Forms\BibtexManagerForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="BibTeXManager.Designer.cs">
-      <DependentUpon>BibTeXManager.cs</DependentUpon>
+    <Compile Include="Forms\BibtexManagerForm.Designer.cs">
+      <DependentUpon>BibtexManagerForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
-    <Content Include="Commenting Styles\All.lcs">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Commenting Styles\Code.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Commenting Styles\TDBD.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Commenting Styles\XML.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Commenting Styles\HTML.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Commenting Styles\LaTeX.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Commenting Styles\Matlab.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Commenting Styles\Matlab.lcs">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="Test Files\Test File 1.html" />
     <Content Include="Test Files\Test File 2.html" />
     <None Include="app.config" />
+    <None Include="Help\BibTeX Manager.hhc" />
+    <None Include="Help\BibTeX Manager.hhk" />
+    <None Include="Help\BibTeX Manager.hhp" />
     <None Include="Help\HIDD_ROOT_DIALOG.htm" />
-    <None Include="Help\lc_counting_lines.htm" />
-    <None Include="Help\lc_file_not_found.htm" />
-    <None Include="Help\lc_name_buffer_overflow.htm" />
-    <None Include="Help\lc_select_files.htm" />
-    <None Include="Help\lc_when_finished.htm" />
     <None Include="Help\main_index.htm" />
-    <Content Include="BibTex Manager.ico" />
+    <Content Include="Forms\BibTex Manager.ico" />
     <Content Include="Notes.txt" />
     <None Include="Test Files\C Test File 1.cpp" />
     <None Include="Test Files\C Test File 2.cpp" />
     <None Include="Test Files\C Test File 3.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Commenting Styles\Code.lcs">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Commenting Styles\Osiris.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Commenting Styles\TDBD.lcs">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Commenting Styles\XML.lcs">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Commenting Styles\HTML.lcs">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Commenting Styles\LaTeX.lcs">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Help\Line Counter.chm">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Commenting Styles\Osiris.lcs">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <None Include="Help\Line Counter.hhc" />
-    <None Include="Help\Line Counter.hhk" />
-    <None Include="Help\Line Counter.hhp" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="BibTeXManager.resx">
-      <DependentUpon>BibTeXManager.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\BibtexManagerForm.resx">
+      <DependentUpon>BibtexManagerForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
@@ -216,6 +160,12 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\C-Sharp-Library\Library\Digital Production.csproj">
+      <Project>{078ea7c0-7ee8-4d51-9421-8eedc779acbb}</Project>
+      <Name>Digital Production</Name>
+    </ProjectReference>
   </ItemGroup>
   <ProjectExtensions>
     <VisualStudio>

@@ -5,7 +5,7 @@ namespace DigitalProduction.LineCounter
 	/// <summary>
 	/// Summary not provided for the class LineCounter.
 	/// </summary>
-	partial class BibTeXManager
+	partial class BibtexManagerForm
 	{
 		#region Members / Variables.
 
@@ -58,7 +58,7 @@ namespace DigitalProduction.LineCounter
 		private void InitializeComponent()
 		{
 			this.components = new System.ComponentModel.Container();
-			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BibTeXManager));
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BibtexManagerForm));
 			this.btnCount = new System.Windows.Forms.Button();
 			this.tmrClock = new System.Windows.Forms.Timer(this.components);
 			this.btnGetFiles = new System.Windows.Forms.Button();
@@ -94,7 +94,7 @@ namespace DigitalProduction.LineCounter
 			this.btnGetFiles.Size = new System.Drawing.Size(75, 23);
 			this.btnGetFiles.TabIndex = 4;
 			this.btnGetFiles.Text = "&Get Files";
-			this.btnGetFiles.Click += new System.EventHandler(this.btnGetFiles_Click);
+			this.btnGetFiles.Click += new System.EventHandler(this.ButtonGetFiles_Click);
 			// 
 			// txtbxFileLocation
 			// 
@@ -144,7 +144,7 @@ namespace DigitalProduction.LineCounter
 			this.mnuHelp.Name = "mnuHelp";
 			this.mnuHelp.Size = new System.Drawing.Size(99, 22);
 			this.mnuHelp.Text = "&Help";
-			this.mnuHelp.Click += new System.EventHandler(this.mnuHelp_Click);
+			this.mnuHelp.Click += new System.EventHandler(this.MenuHelp_Click);
 			// 
 			// mnusepFile1
 			// 
@@ -156,7 +156,7 @@ namespace DigitalProduction.LineCounter
 			this.mnuExit.Name = "mnuExit";
 			this.mnuExit.Size = new System.Drawing.Size(99, 22);
 			this.mnuExit.Text = "E&xit";
-			this.mnuExit.Click += new System.EventHandler(this.mnuExit_Click);
+			this.mnuExit.Click += new System.EventHandler(this.MenuExit_Click);
 			// 
 			// grpbxFiles
 			// 

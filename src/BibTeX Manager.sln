@@ -1,8 +1,10 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27004.2005
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33530.505
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BibTeX Manager", "BibTeX Manager\BibTeX Manager.csproj", "{F42EE1BE-ECB7-48E3-BF6C-13FE01B37919}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Digital Production", "..\..\C-Sharp-Library\Library\Digital Production.csproj", "{078EA7C0-7EE8-4D51-9421-8EEDC779ACBB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -14,6 +16,10 @@ Global
 		{F42EE1BE-ECB7-48E3-BF6C-13FE01B37919}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F42EE1BE-ECB7-48E3-BF6C-13FE01B37919}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F42EE1BE-ECB7-48E3-BF6C-13FE01B37919}.Release|Any CPU.Build.0 = Release|Any CPU
+		{078EA7C0-7EE8-4D51-9421-8EEDC779ACBB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{078EA7C0-7EE8-4D51-9421-8EEDC779ACBB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{078EA7C0-7EE8-4D51-9421-8EEDC779ACBB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{078EA7C0-7EE8-4D51-9421-8EEDC779ACBB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -25,7 +25,7 @@ namespace DigitalProduction.LineCounter
 		{
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
-			Application.Run(new BibTeXManager());
+			Application.Run(new BibtexManagerForm());
 		}
 
 		#region Properties

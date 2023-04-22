@@ -15,7 +15,7 @@ namespace DigitalProduction.LineCounter
 		/// Constructor.
 		/// </summary>
 		/// <param name="owner">Owner of this registry access.</param>
-		public RegistryAccess(DPMForm owner) :
+		public RegistryAccess(DigitalProductionForm owner) :
             base(owner)
 		{
             this.Install += this.OnInstall;
@@ -31,7 +31,6 @@ namespace DigitalProduction.LineCounter
         public void OnInstall()
         {
             this.LastPathUsed			= "";
-            this.LastCommentingStyle	= "All Types.xml";
         }
 
         #endregion 
@@ -42,22 +41,6 @@ namespace DigitalProduction.LineCounter
         #endregion
 
         #region Properties
-
-        /// <summary>
-        /// Comment mode.
-        /// </summary>
-        public CommentMode CommentMode
-		{
-			get
-			{
-				return (CommentMode)GetValue(AppKey(), "Comment Mode", (int)CommentMode.FileExtension);
-			}
-
-			set
-			{
-				SetValue(AppKey(), "Comment Mode", (int)value);
-			}
-		}
 
 		/// <summary>
 		/// The path (location) that the last set of files was openned from.
@@ -75,21 +58,6 @@ namespace DigitalProduction.LineCounter
 			}
 		}
 
-		/// <summary>
-		/// The commenting style configuration file used.
-		/// </summary>
-		public string LastCommentingStyle
-		{
-			get
-			{
-				return GetValue(AppKey(), "Last Commenting Style", "All Types.xml");
-			}
-
-			set
-			{
-				SetValue(AppKey(), "Last Commenting Style", value);
-			}
-		}
 
 		/// <summary>
 		/// The last filter string selected in the file select dialog box.
