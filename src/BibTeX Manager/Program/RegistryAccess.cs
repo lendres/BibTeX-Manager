@@ -1,7 +1,7 @@
 using DigitalProduction.Forms;
 using DigitalProduction.Registry;
 
-namespace DigitalProduction.LineCounter
+namespace BibtexManager
 {
 	/// <summary>
 	/// Windows registry access.

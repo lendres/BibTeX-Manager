@@ -1,7 +1,7 @@
 using System;
 using System.Windows.Forms;
 
-namespace DigitalProduction.LineCounter
+namespace BibtexManager
 {
 	/// <summary>
 	/// Main program entry.
