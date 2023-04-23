@@ -140,8 +140,6 @@
       <DependentUpon>BibtexManagerForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program\Program.cs" />
-    <Content Include="Test Files\Test File 1.html" />
-    <Content Include="Test Files\Test File 2.html" />
     <None Include="app.config" />
     <None Include="Help\BibTeX Manager.hhc" />
     <None Include="Help\BibTeX Manager.hhk" />
@@ -150,9 +148,6 @@
     <None Include="Help\main_index.htm" />
     <Content Include="Forms\BibTex Manager.ico" />
     <Content Include="Notes.txt" />
-    <None Include="Test Files\C Test File 1.cpp" />
-    <None Include="Test Files\C Test File 2.cpp" />
-    <None Include="Test Files\C Test File 3.cpp" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Forms\BibtexManagerForm.resx">
@@ -179,6 +174,9 @@
       <Project>{078ea7c0-7ee8-4d51-9421-8eedc779acbb}</Project>
       <Name>Digital Production</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Test Files\" />
   </ItemGroup>
   <ProjectExtensions>
     <VisualStudio>
