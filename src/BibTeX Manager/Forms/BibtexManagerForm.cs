@@ -1,15 +1,10 @@
-using System;
-using System.Collections;
-using System.Windows.Forms;
-using System.IO;
-using System.Threading;
-
+using BibTeXManager;
 using DigitalProduction.Forms;
 using DigitalProduction.Projects;
-using DigitalProduction.IO;
-using BibTeXManager;
+using System;
+using System.Windows.Forms;
 
-namespace DigitalProduction.LineCounter
+namespace BibtexManager
 {
 	/// <summary>
 	/// Summary description for Form1.
@@ -21,7 +16,7 @@ namespace DigitalProduction.LineCounter
 
 		#endregion
 
-		#region Construction / Timer
+		#region Construction
 
 		public BibtexManagerForm() :
 			base(BibtexProject.FilterString, "DigitalProduction", "BibTeX Manager")
@@ -31,64 +26,11 @@ namespace DigitalProduction.LineCounter
 			// Registry access has to be created in constructor and done before setting controls.
 			Program.Registry = new RegistryAccess(this);
 
-			// Registry access has to be created in constructor and done before setting controls.
-			Program.Registry = new RegistryAccess(this);
-
 			// Allows for the installation event to occur.  Largely useful for debugging or resetting the software if the
 			// registry gets messed up.
 			Program.Registry.RaiseInstallEvent();
 
 			InitializeFromRegistry();
-
-
-			#region Status Bar
-
-			this.statusBar						= new DigitalProduction.Forms.StatusBarWithProgress();
-			this.statusBarPanel1				= new System.Windows.Forms.StatusBarPanel();
-			this.statusBarPanel2				= new System.Windows.Forms.StatusBarPanel();
-			this.statusBarPanel3				= new System.Windows.Forms.StatusBarPanel();
-
-			this.statusBar.Location				= new System.Drawing.Point(0, 488);
-			this.statusBar.Name					= "Status Bar";
-			this.statusBar.Panels.AddRange(new System.Windows.Forms.StatusBarPanel[] {this.statusBarPanel1,
-																					  this.statusBarPanel3,
-																					  this.statusBarPanel2});
-			this.statusBar.SetProgressBarPanel	= 1;
-			this.statusBar.ShowPanels			= true;
-			this.statusBar.Size					= new System.Drawing.Size(492, 22);
-			this.statusBar.TabStop				= false;
-			
-			this.statusBarPanel1.AutoSize		= System.Windows.Forms.StatusBarPanelAutoSize.None;
-			this.statusBarPanel1.MinWidth		= 80;
-			this.statusBarPanel1.Text			= "Ready.";
-			this.statusBarPanel1.Width			= 100;
-
-			this.statusBarPanel3.AutoSize		= System.Windows.Forms.StatusBarPanelAutoSize.Spring;
-			this.statusBarPanel3.Style			= System.Windows.Forms.StatusBarPanelStyle.OwnerDraw;
-			this.statusBarPanel3.Width			= 188;
-
-			this.statusBar.ProgressBar.Visible	= false;
-			this.statusBar.ProgressBar.Step		= 1;
-			this.statusBar.ProgressBar.Minimum	= 0;
-
-			this.statusBarPanel2.Text			= System.DateTime.Now.ToLongTimeString();
-			this.timerClock.Interval				= 1000;
-			this.timerClock.Enabled				= true;
-			this.timerClock.Tick					+= new EventHandler(TimerClock_Tick);
-
-			this.Controls.Add(this.statusBar);
-
-			#endregion
-		}
-
-		/// <summary>
-		/// Updates the clock on the status bar.
-		/// </summary>
-		/// <param name="sender">Sender.</param>
-		/// <param name="e">Event arguments.</param>
-		private void TimerClock_Tick(object sender, EventArgs e)
-		{
-			this.statusBarPanel2.Text = System.DateTime.Now.ToLongTimeString();
 		}
 
 		#endregion
@@ -100,7 +42,30 @@ namespace DigitalProduction.LineCounter
 		/// </summary>
 		protected override Project NewProject()
 		{
-			return (Project)(new BibtexProject());
+			BibtexProject project	= new BibtexProject();
+
+			ProjectForm projectForm	= new ProjectForm(project);
+			DialogResult result		= projectForm.ShowDialog(this);
+
+			return (Project)project;
+		}
+
+		/// <summary>
+		/// Have the subclass of this class create a new instance of the Subclass project type from a file.
+		/// </summary>
+		public override ProjectExtractor DeserializeProject(string path)
+		{
+			ProjectExtractor projectExtractor	= ProjectExtractor.ExtractAndDeserializeProject<BibtexProject>(path);
+			_project							= (BibtexProject)projectExtractor.Project;
+			return projectExtractor;
+		}
+
+		/// <summary>
+		/// Set up a project.  An initialization related to the subclassed Project and any controls related to the subclassed Project.
+		/// For example, Project related events can be hooked up.
+		/// </summary>
+		protected override void SetupProject()
+		{
 		}
 
 		#endregion
@@ -134,6 +99,7 @@ namespace DigitalProduction.LineCounter
 		/// <param name="e">Event arguments.</param>
 		private void MenuFileNew_Click(object sender, EventArgs e)
 		{
+			New();
 		}
 
 		/// <summary>
@@ -143,6 +109,7 @@ namespace DigitalProduction.LineCounter
 		/// <param name="e">Event arguments.</param>
 		private void MenuFileOpen_Click(object sender, EventArgs e)
 		{
+			Open();
 		}
 
 		/// <summary>
@@ -152,6 +119,7 @@ namespace DigitalProduction.LineCounter
 		/// <param name="e">Event arguments.</param>
 		private void MenuFileClose_Click(object sender, EventArgs e)
 		{
+			Close();
 		}
 
 		/// <summary>
@@ -161,6 +129,7 @@ namespace DigitalProduction.LineCounter
 		/// <param name="e">Event arguments.</param>
 		private void MenuFileSave_Click(object sender, EventArgs e)
 		{
+			Save();
 		}
 
 		/// <summary>
@@ -170,6 +139,7 @@ namespace DigitalProduction.LineCounter
 		/// <param name="e">Event arguments.</param>
 		private void MenuFileSaveAs_Click(object sender, EventArgs e)
 		{
+			SaveAs();
 		}
 
 		/// <summary>
@@ -197,10 +167,6 @@ namespace DigitalProduction.LineCounter
 		}
 
 		#endregion
-
-		#endregion
-
-		#region Count
 
 		#endregion
 

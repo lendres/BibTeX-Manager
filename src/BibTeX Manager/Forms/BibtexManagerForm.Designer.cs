@@ -1,6 +1,4 @@
-using System;
-
-namespace DigitalProduction.LineCounter
+namespace BibtexManager
 {
 	/// <summary>
 	/// Summary not provided for the class LineCounter.
@@ -8,12 +6,6 @@ namespace DigitalProduction.LineCounter
 	partial class BibtexManagerForm
 	{
 		#region Members
-
-		private DigitalProduction.Forms.StatusBarWithProgress		statusBar;
-		private System.Windows.Forms.StatusBarPanel					statusBarPanel1;
-		private System.Windows.Forms.StatusBarPanel					statusBarPanel2;
-		private System.Windows.Forms.StatusBarPanel					statusBarPanel3;
-		private System.Windows.Forms.Timer							timerClock;
 
 		private System.Windows.Forms.Button btnCount;
 		private System.Windows.Forms.Button							btnGetFiles;
@@ -67,7 +59,6 @@ namespace DigitalProduction.LineCounter
 			this.components = new System.ComponentModel.Container();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BibtexManagerForm));
 			this.btnCount = new System.Windows.Forms.Button();
-			this.timerClock = new System.Windows.Forms.Timer(this.components);
 			this.btnGetFiles = new System.Windows.Forms.Button();
 			this.txtbxFileLocation = new System.Windows.Forms.TextBox();
 			this.lblFileLocation = new System.Windows.Forms.Label();
