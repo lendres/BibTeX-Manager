@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
+﻿using DigitalProduction.Forms;
+using System;
 using System.Windows.Forms;
+using System.Linq;
 
-namespace BibTeXManager.Forms
+namespace BibTeXManager
 {
 	/// <summary>
 	/// 
@@ -16,6 +12,10 @@ namespace BibTeXManager.Forms
 	{
 		#region Members
 
+		static string		_filterString		= "\"BibTeX files (*.bib)|*.bib|Text files (*.txt)|*.txt|All files (*.*)|*.*\"";
+
+		BibtexProject		_project;
+
 		#endregion
 
 		#region Construction
@@ -23,10 +23,11 @@ namespace BibTeXManager.Forms
 		/// <summary>
 		/// Default constructor.
 		/// </summary>
-		public ProjectForm()
+		public ProjectForm(BibtexProject project)
 		{
-			InitializeComponent();
+			_project = project;
 
+			InitializeComponent();
 			PopulateControls();
 		}
 
@@ -39,11 +40,59 @@ namespace BibTeXManager.Forms
 		#region Event Handlers
 
 		/// <summary>
+		/// Browse for the BibTeX file.
+		/// </summary>
+		/// <param name="sender">Sender.</param>
+		/// <param name="eventArgs">Event arguments.</param>
+		private void BrowseBibFileButton_Click(object sender, EventArgs e)
+		{
+			string initialDirectory	= System.IO.Path.GetDirectoryName(_project.BibFile);
+
+			string path = FileSelect.BrowseForAFile(this, _filterString, "Select BibTeX File", initialDirectory, true);
+
+			if (path != "")
+			{
+				this.bibFileLocationTextBox.Text = path;
+			}
+		}
+
+		private void AddButton_Click(object sender, EventArgs e)
+		{
+			string initialDirectory = System.IO.Path.GetDirectoryName(_project.BibFile);
+
+			string[] paths = FileSelect.BrowseForMultipleFiles(this, _filterString, "Select BibTeX File", initialDirectory, true);
+
+			if (paths != null)
+			{
+				this.assessoryFilesListBox.Items.AddRange(paths);
+			}
+
+		}
+
+		private void RemoveButton_Click(object sender, EventArgs e)
+		{
+			ListBox.SelectedObjectCollection selectedItems = this.assessoryFilesListBox.SelectedItems;
+
+			int size = selectedItems.Count;
+			string[] names = new string[size];
+
+			for (int i = 0; i < size; i++)
+			{
+				names[i] = selectedItems[i].ToString();
+			}
+
+			foreach (string file in selectedItems.OfType<string>().ToList())
+			{
+				this.assessoryFilesListBox.Items.Remove(file);
+			}
+		}
+
+		/// <summary>
 		/// Ok button event handler.
 		/// </summary>
 		/// <param name="sender">Sender.</param>
 		/// <param name="eventArgs">Event arguments.</param>
-		private void buttonOK_Click(object sender, EventArgs eventArgs)
+		private void ButtonOK_Click(object sender, EventArgs eventArgs)
 		{
 			// TODO: Validation code goes here.
 
@@ -70,7 +119,7 @@ namespace BibTeXManager.Forms
 		/// </summary>
 		protected void PopulateControls()
 		{
-
+			this.bibFileLocationTextBox.Text = _project.BibFile;
 		}
 
 		/// <summary>
@@ -80,6 +129,8 @@ namespace BibTeXManager.Forms
 		{
 
 		}
+
+
 
 		#endregion
 

@@ -10,7 +10,7 @@ namespace BibTeXManager
 	/// <summary>
 	/// The model.
 	/// </summary>
-	internal class BibtexProject : Project
+	public class BibtexProject : Project
 	{
 		#region Members
 
