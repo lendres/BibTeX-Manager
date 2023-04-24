@@ -7,6 +7,7 @@ namespace BibtexManager
 	{
 		#region Members
 
+		// Menu.
 		private System.Windows.Forms.MenuStrip									menuMain;
 		private System.Windows.Forms.ToolStripMenuItem							fileToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem							newToolStripMenuItem;
@@ -15,6 +16,8 @@ namespace BibtexManager
 		private DigitalProduction.Forms.SaveToolStripMenuItem					saveToolStripMenuItem;
 		private DigitalProduction.Forms.EnableOpenProjectToolStripMenuItem		saveAsToolStripMenuItem;
 		private System.Windows.Forms.ToolStripSeparator							toolStripSeparatorFile1;
+		private System.Windows.Forms.ToolStripMenuItem							recentFilesToolStripMenuItem;
+		private System.Windows.Forms.ToolStripSeparator							toolStripSeparatorFile2;
 		private System.Windows.Forms.ToolStripMenuItem							exitToolStripMenuItem;
 
 
@@ -23,12 +26,30 @@ namespace BibtexManager
 
 		private System.Windows.Forms.ToolStripMenuItem							helpToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem							viewHelpToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem							aboutToolStripMenuItem;
 
+		// DataGridView.
+		internal System.Windows.Forms.DataGridView								bibEntriesDataGridView;
+		private System.Windows.Forms.BindingSource								referencesBindingSource;
+		private System.Windows.Forms.DataGridViewTextBoxColumn					keyDataGridViewTextBoxColumn;
+		private System.Windows.Forms.DataGridViewTextBoxColumn					authorDataGridViewTextBoxColumn;
+		private System.Windows.Forms.DataGridViewTextBoxColumn					titleDataGridViewTextBoxColumn;
+
+		// Controls for the DataGridView.
+		private System.Windows.Forms.Panel										dataGridControlsPanel;
+		private DigitalProduction.Forms.EnableOpenProjectButton					editButton;
+		private DigitalProduction.Forms.EnableOpenProjectButton					addButton;
+		private DigitalProduction.Forms.EnableOpenProjectButton					deleteButton;
+
+		// Components.
 		private System.ComponentModel.IContainer								components;
+
+		private System.Windows.Forms.DataGridViewTextBoxColumn Key;
+		private System.Windows.Forms.DataGridViewTextBoxColumn Title;
 
 		#endregion
 
-		#region Disposing.
+		#region Disposing
 
 		/// <summary>
 		/// Clean up any resources being used.
@@ -47,7 +68,7 @@ namespace BibtexManager
 
 		#endregion
 
-		#region Windows Form Designer generated code.
+		#region Windows Form Designer Generated Code
 
 		/// <summary>
 		/// Required method for Designer support - do not modify
@@ -69,7 +90,7 @@ namespace BibtexManager
 			this.closeToolStripMenuItem = new DigitalProduction.Forms.EnableOpenProjectToolStripMenuItem();
 			this.saveToolStripMenuItem = new DigitalProduction.Forms.SaveToolStripMenuItem();
 			this.saveAsToolStripMenuItem = new DigitalProduction.Forms.EnableOpenProjectToolStripMenuItem();
-			this.toolStripSeparatorFile1 = new System.Windows.Forms.ToolStripSeparator();
+			this.toolStripSeparatorFile2 = new System.Windows.Forms.ToolStripSeparator();
 			this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.projectToolStripMenuItem = new DigitalProduction.Forms.EnableOpenProjectToolStripMenuItem();
 			this.modifyProjectToolStripMenuItem = new DigitalProduction.Forms.EnableOpenProjectToolStripMenuItem();
@@ -77,17 +98,20 @@ namespace BibtexManager
 			this.viewHelpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.bibEntriesDataGridView = new System.Windows.Forms.DataGridView();
 			this.Key = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.Title = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.panel1 = new System.Windows.Forms.Panel();
-			this.deleteButton = new System.Windows.Forms.Button();
-			this.editButton = new System.Windows.Forms.Button();
-			this.addButton = new System.Windows.Forms.Button();
 			this.authorDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.Title = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.referencesBindingSource = new System.Windows.Forms.BindingSource(this.components);
+			this.dataGridControlsPanel = new System.Windows.Forms.Panel();
+			this.deleteButton = new DigitalProduction.Forms.EnableOpenProjectButton();
+			this.editButton = new DigitalProduction.Forms.EnableOpenProjectButton();
+			this.addButton = new DigitalProduction.Forms.EnableOpenProjectButton();
+			this.recentFilesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripSeparatorFile1 = new System.Windows.Forms.ToolStripSeparator();
+			this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.menuMain.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.bibEntriesDataGridView)).BeginInit();
-			this.panel1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.referencesBindingSource)).BeginInit();
+			this.dataGridControlsPanel.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// menuMain
@@ -112,6 +136,8 @@ namespace BibtexManager
             this.saveToolStripMenuItem,
             this.saveAsToolStripMenuItem,
             this.toolStripSeparatorFile1,
+            this.recentFilesToolStripMenuItem,
+            this.toolStripSeparatorFile2,
             this.exitToolStripMenuItem});
 			this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
 			this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
@@ -130,7 +156,7 @@ namespace BibtexManager
 			this.openToolStripMenuItem.Name = "openToolStripMenuItem";
 			this.openToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
 			this.openToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-			this.openToolStripMenuItem.Text = "&Open...";
+			this.openToolStripMenuItem.Text = "&Open..";
 			this.openToolStripMenuItem.Click += new System.EventHandler(this.MenuFileOpen_Click);
 			// 
 			// closeToolStripMenuItem
@@ -139,6 +165,7 @@ namespace BibtexManager
 			this.closeToolStripMenuItem.Name = "closeToolStripMenuItem";
 			this.closeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
 			this.closeToolStripMenuItem.Text = "&Close";
+			this.closeToolStripMenuItem.Click += new System.EventHandler(this.MenuFileClose_Click);
 			// 
 			// saveToolStripMenuItem
 			// 
@@ -159,8 +186,8 @@ namespace BibtexManager
 			// 
 			// toolStripSeparatorFile1
 			// 
-			this.toolStripSeparatorFile1.Name = "toolStripSeparatorFile1";
-			this.toolStripSeparatorFile1.Size = new System.Drawing.Size(177, 6);
+			this.toolStripSeparatorFile2.Name = "toolStripSeparatorFile1";
+			this.toolStripSeparatorFile2.Size = new System.Drawing.Size(177, 6);
 			// 
 			// exitToolStripMenuItem
 			// 
@@ -182,14 +209,15 @@ namespace BibtexManager
 			// 
 			this.modifyProjectToolStripMenuItem.Enabled = false;
 			this.modifyProjectToolStripMenuItem.Name = "modifyProjectToolStripMenuItem";
-			this.modifyProjectToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.modifyProjectToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
 			this.modifyProjectToolStripMenuItem.Text = "&Modify Project";
 			this.modifyProjectToolStripMenuItem.Click += new System.EventHandler(this.ModifyProjectToolStripMenuItem_Click);
 			// 
 			// helpToolStripMenuItem
 			// 
 			this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.viewHelpToolStripMenuItem});
+            this.viewHelpToolStripMenuItem,
+            this.aboutToolStripMenuItem});
 			this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
 			this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
 			this.helpToolStripMenuItem.Text = "&Help";
@@ -197,7 +225,7 @@ namespace BibtexManager
 			// viewHelpToolStripMenuItem
 			// 
 			this.viewHelpToolStripMenuItem.Name = "viewHelpToolStripMenuItem";
-			this.viewHelpToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
+			this.viewHelpToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
 			this.viewHelpToolStripMenuItem.Text = "&View Help";
 			this.viewHelpToolStripMenuItem.Click += new System.EventHandler(this.MenuHelp_Click);
 			// 
@@ -261,6 +289,15 @@ namespace BibtexManager
 			this.Key.Name = "Key";
 			this.Key.ReadOnly = true;
 			// 
+			// authorDataGridViewTextBoxColumn
+			// 
+			this.authorDataGridViewTextBoxColumn.DataPropertyName = "Author";
+			this.authorDataGridViewTextBoxColumn.FillWeight = 80F;
+			this.authorDataGridViewTextBoxColumn.HeaderText = "Author";
+			this.authorDataGridViewTextBoxColumn.MinimumWidth = 80;
+			this.authorDataGridViewTextBoxColumn.Name = "authorDataGridViewTextBoxColumn";
+			this.authorDataGridViewTextBoxColumn.ReadOnly = true;
+			// 
 			// Title
 			// 
 			this.Title.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
@@ -275,20 +312,26 @@ namespace BibtexManager
 			this.Title.Name = "Title";
 			this.Title.ReadOnly = true;
 			// 
-			// panel1
+			// referencesBindingSource
 			// 
-			this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+			this.referencesBindingSource.DataSource = typeof(BibTeXLibrary.BibEntry);
+			// 
+			// dataGridControlsPanel
+			// 
+			this.dataGridControlsPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.panel1.Controls.Add(this.deleteButton);
-			this.panel1.Controls.Add(this.editButton);
-			this.panel1.Controls.Add(this.addButton);
-			this.panel1.Location = new System.Drawing.Point(12, 99);
-			this.panel1.Name = "panel1";
-			this.panel1.Size = new System.Drawing.Size(516, 36);
-			this.panel1.TabIndex = 25;
+			this.dataGridControlsPanel.Controls.Add(this.deleteButton);
+			this.dataGridControlsPanel.Controls.Add(this.editButton);
+			this.dataGridControlsPanel.Controls.Add(this.addButton);
+			this.dataGridControlsPanel.Location = new System.Drawing.Point(12, 99);
+			this.dataGridControlsPanel.Name = "dataGridControlsPanel";
+			this.dataGridControlsPanel.Size = new System.Drawing.Size(516, 36);
+			this.dataGridControlsPanel.TabIndex = 25;
 			// 
 			// deleteButton
 			// 
+			this.deleteButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.deleteButton.Enabled = false;
 			this.deleteButton.Image = global::BibTeXManager.Properties.Resources.minus_red;
 			this.deleteButton.Location = new System.Drawing.Point(473, 3);
 			this.deleteButton.Name = "deleteButton";
@@ -298,6 +341,7 @@ namespace BibtexManager
 			// 
 			// editButton
 			// 
+			this.editButton.Enabled = false;
 			this.editButton.Image = global::BibTeXManager.Properties.Resources.edit_5_20;
 			this.editButton.Location = new System.Drawing.Point(49, 3);
 			this.editButton.Name = "editButton";
@@ -307,6 +351,7 @@ namespace BibtexManager
 			// 
 			// addButton
 			// 
+			this.addButton.Enabled = false;
 			this.addButton.Image = global::BibTeXManager.Properties.Resources.plus_green;
 			this.addButton.Location = new System.Drawing.Point(3, 3);
 			this.addButton.Name = "addButton";
@@ -314,24 +359,29 @@ namespace BibtexManager
 			this.addButton.TabIndex = 0;
 			this.addButton.UseVisualStyleBackColor = true;
 			// 
-			// authorDataGridViewTextBoxColumn
+			// recentFilesToolStripMenuItem
 			// 
-			this.authorDataGridViewTextBoxColumn.DataPropertyName = "Author";
-			this.authorDataGridViewTextBoxColumn.FillWeight = 80F;
-			this.authorDataGridViewTextBoxColumn.HeaderText = "Author";
-			this.authorDataGridViewTextBoxColumn.MinimumWidth = 80;
-			this.authorDataGridViewTextBoxColumn.Name = "authorDataGridViewTextBoxColumn";
-			this.authorDataGridViewTextBoxColumn.ReadOnly = true;
+			this.recentFilesToolStripMenuItem.Name = "recentFilesToolStripMenuItem";
+			this.recentFilesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.recentFilesToolStripMenuItem.Text = "&Recent Files";
 			// 
-			// referencesBindingSource
+			// toolStripSeparator1
 			// 
-			this.referencesBindingSource.DataSource = typeof(BibTeXLibrary.BibEntry);
+			this.toolStripSeparatorFile1.Name = "toolStripSeparator1";
+			this.toolStripSeparatorFile1.Size = new System.Drawing.Size(177, 6);
+			// 
+			// aboutToolStripMenuItem
+			// 
+			this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+			this.aboutToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.aboutToolStripMenuItem.Text = "&About...";
+			this.aboutToolStripMenuItem.Click += new System.EventHandler(this.AboutToolStripMenuItem_Click);
 			// 
 			// BibtexManagerForm
 			// 
 			this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
 			this.ClientSize = new System.Drawing.Size(540, 502);
-			this.Controls.Add(this.panel1);
+			this.Controls.Add(this.dataGridControlsPanel);
 			this.Controls.Add(this.bibEntriesDataGridView);
 			this.Controls.Add(this.menuMain);
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -343,22 +393,13 @@ namespace BibtexManager
 			this.menuMain.ResumeLayout(false);
 			this.menuMain.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.bibEntriesDataGridView)).EndInit();
-			this.panel1.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.referencesBindingSource)).EndInit();
+			this.dataGridControlsPanel.ResumeLayout(false);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
 		}
 		#endregion
 
-		internal System.Windows.Forms.DataGridView bibEntriesDataGridView;
-		private System.Windows.Forms.BindingSource referencesBindingSource;
-		private System.Windows.Forms.DataGridViewTextBoxColumn Key;
-		private System.Windows.Forms.DataGridViewTextBoxColumn authorDataGridViewTextBoxColumn;
-		private System.Windows.Forms.DataGridViewTextBoxColumn Title;
-		private System.Windows.Forms.Panel panel1;
-		private System.Windows.Forms.Button editButton;
-		private System.Windows.Forms.Button addButton;
-		private System.Windows.Forms.Button deleteButton;
 	} // End class.
 } // End namespace.

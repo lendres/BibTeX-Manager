@@ -152,6 +152,7 @@
     <None Include="Help\main_index.htm" />
     <Content Include="Forms\BibTex Manager.ico" />
     <Content Include="Forms\Resources\edit_5_20.png" />
+    <None Include="Forms\Resources\LELaTeX Logo-Rotated-CroppedForAbout.bmp" />
     <Content Include="Forms\Resources\minus_red.png" />
     <Content Include="Forms\Resources\plus_green.png" />
     <Content Include="Notes.txt" />

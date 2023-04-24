@@ -4,13 +4,15 @@ using DigitalProduction.Projects;
 using System;
 using System.ComponentModel;
 using System.Windows.Forms;
+using System.Resources;
+using System.Drawing;
 
 namespace BibtexManager
 {
 	/// <summary>
 	/// Summary description for Form1.
 	/// </summary>
-	public partial class BibtexManagerForm : DigitalProductionProjectForm
+	public partial class BibtexManagerForm : DigitalProduction.Forms.ProjectForm
 	{
         #region Members
 
@@ -32,6 +34,9 @@ namespace BibtexManager
 			Program.Registry.RaiseInstallEvent();
 
 			InitializeFromRegistry();
+
+			// Our recent files menu.
+			SetUpRecentFilesList(this.recentFilesToolStripMenuItem, Program.Registry);
 
 			FindProjectControls(this);
 		}
@@ -82,6 +87,7 @@ namespace BibtexManager
 		protected override void SetupProject()
 		{
 			InitializeControls();
+			this.Project.OnClosed += this.ProjectClosed;
 		}
 
 		#endregion
@@ -112,6 +118,16 @@ namespace BibtexManager
 		private void MenuFileOpen_Click(object sender, EventArgs e)
 		{
 			Open();
+		}
+
+		/// <summary>
+		/// Menu item click handler.
+		/// </summary>
+		/// <param name="sender">Sender.</param>
+		/// <param name="e">Event arguments.</param>
+		private void MenuFileClose_Click(object sender, EventArgs e)
+		{
+			CloseProject();
 		}
 
 		/// <summary>
@@ -173,6 +189,20 @@ namespace BibtexManager
 			Help.ShowHelp(this, "Help\\Line Counter.chm");
 		}
 
+		/// <summary>
+		/// Show the About dialog.
+		/// </summary>
+		/// <param name="sender">Sender.</param>
+		/// <param name="e">Event arguments.</param>
+		private void AboutToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			// The resource manager will retrieve the value of the resource.
+			ResourceManager resourceManager = BibTeXManager.Properties.Resources.ResourceManager;
+			Bitmap leftSideImage			= (Bitmap)resourceManager.GetObject("LELaTeX_Logo_Rotated_CroppedForAbout");
+			AboutForm1 about				= new AboutForm1("lendres@fifthrace.com", leftSideImage);
+			about.ShowDialog(this);
+		}
+
 		#endregion
 
 		#endregion
@@ -201,9 +231,17 @@ namespace BibtexManager
 			{
 				// Bind the data source to the DrillStringParts.  This will allow the parts to show up in the DataGridView, which references
 				// the same binding source.
-				BindingList<BibEntry> bindingList = new BindingList<BibEntry>(this.Project.Entries);
+				BindingList<BibEntry> bindingList		= new BindingList<BibEntry>(this.Project.Bibliography.Entries);
 				this.referencesBindingSource.DataSource = bindingList;
 			}
+		}
+
+		/// <summary>
+		/// Handle the project closing.
+		/// </summary>
+		private void ProjectClosed()
+		{
+			this.referencesBindingSource.DataSource = null;
 		}
 
 		#endregion
