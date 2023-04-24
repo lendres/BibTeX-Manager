@@ -148,6 +148,7 @@
     <None Include="Help\main_index.htm" />
     <Content Include="Forms\BibTex Manager.ico" />
     <Content Include="Notes.txt" />
+    <None Include="Properties\DataSources\BibTeXLibrary.BibEntry.datasource" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Forms\BibtexManagerForm.resx">

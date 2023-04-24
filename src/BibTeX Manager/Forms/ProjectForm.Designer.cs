@@ -1,4 +1,4 @@
-﻿namespace BibTeXManager
+﻿namespace BibtexManager
 {
 	partial class ProjectForm
 	{

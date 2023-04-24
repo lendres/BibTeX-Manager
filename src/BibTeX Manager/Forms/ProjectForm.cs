@@ -2,8 +2,9 @@
 using System;
 using System.Windows.Forms;
 using System.Linq;
+using System.Collections.Generic;
 
-namespace BibTeXManager
+namespace BibtexManager
 {
 	/// <summary>
 	/// 
@@ -56,6 +57,11 @@ namespace BibTeXManager
 			}
 		}
 
+		/// <summary>
+		/// Add assessory files.
+		/// </summary>
+		/// <param name="sender">Sender.</param>
+		/// <param name="eventArgs">Event arguments.</param>
 		private void AddButton_Click(object sender, EventArgs e)
 		{
 			string initialDirectory = System.IO.Path.GetDirectoryName(_project.BibFile);
@@ -69,17 +75,14 @@ namespace BibTeXManager
 
 		}
 
+		/// <summary>
+		/// Remove assessory files.
+		/// </summary>
+		/// <param name="sender">Sender.</param>
+		/// <param name="eventArgs">Event arguments.</param>
 		private void RemoveButton_Click(object sender, EventArgs e)
 		{
 			ListBox.SelectedObjectCollection selectedItems = this.assessoryFilesListBox.SelectedItems;
-
-			int size = selectedItems.Count;
-			string[] names = new string[size];
-
-			for (int i = 0; i < size; i++)
-			{
-				names[i] = selectedItems[i].ToString();
-			}
 
 			foreach (string file in selectedItems.OfType<string>().ToList())
 			{
@@ -120,6 +123,8 @@ namespace BibTeXManager
 		protected void PopulateControls()
 		{
 			this.bibFileLocationTextBox.Text = _project.BibFile;
+			this.assessoryFilesListBox.Items.AddRange(_project.AssessoryFiles.ToArray());
+
 		}
 
 		/// <summary>
@@ -127,10 +132,19 @@ namespace BibTeXManager
 		/// </summary>
 		protected void PushEntriesToDataStructure()
 		{
+			_project.BibFile				= this.bibFileLocationTextBox.Text;
+			ListBox.ObjectCollection items	= this.assessoryFilesListBox.Items;
 
+			int size		= items.Count;
+			List<string> files	= new List<string>();
+
+			for (int i = 0; i < size; i++)
+			{
+				files.Add(items[i].ToString());
+			}
+
+			_project.AssessoryFiles = files;
 		}
-
-
 
 		#endregion
 

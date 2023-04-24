@@ -1,7 +1,8 @@
-using BibTeXManager;
+using BibTeXLibrary;
 using DigitalProduction.Forms;
 using DigitalProduction.Projects;
 using System;
+using System.ComponentModel;
 using System.Windows.Forms;
 
 namespace BibtexManager
@@ -31,6 +32,23 @@ namespace BibtexManager
 			Program.Registry.RaiseInstallEvent();
 
 			InitializeFromRegistry();
+
+			FindProjectControls(this);
+		}
+
+		#endregion
+
+		#region Properties
+
+		/// <summary>
+		/// Casts the project variable to the specific type.
+		/// </summary>
+		private BibtexProject Project
+		{
+			get
+			{
+				return (BibtexProject)_project;
+			}
 		}
 
 		#endregion
@@ -43,9 +61,6 @@ namespace BibtexManager
 		protected override Project NewProject()
 		{
 			BibtexProject project	= new BibtexProject();
-
-			ProjectForm projectForm	= new ProjectForm(project);
-			DialogResult result		= projectForm.ShowDialog(this);
 
 			return (Project)project;
 		}
@@ -66,25 +81,8 @@ namespace BibtexManager
 		/// </summary>
 		protected override void SetupProject()
 		{
+			InitializeControls();
 		}
-
-		#endregion
-
-		#region Get Files
-
-		#region Event Handler
-
-		/// <summary>
-		/// Get files to count the lines of.
-		/// </summary>
-		/// <param name="sender">Sender.</param>
-		/// <param name="e">Event arguments.</param>
-		private void ButtonGetFiles_Click(object sender, System.EventArgs e)
-		{
-
-		}
-
-		#endregion
 
 		#endregion
 
@@ -100,6 +98,10 @@ namespace BibtexManager
 		private void MenuFileNew_Click(object sender, EventArgs e)
 		{
 			New();
+
+			// After we create a new project, it needs to be set up.
+			ProjectForm projectForm = new ProjectForm(this.Project);
+			DialogResult result		= projectForm.ShowDialog(this);
 		}
 
 		/// <summary>
@@ -110,16 +112,6 @@ namespace BibtexManager
 		private void MenuFileOpen_Click(object sender, EventArgs e)
 		{
 			Open();
-		}
-
-		/// <summary>
-		/// Menu item click handler.
-		/// </summary>
-		/// <param name="sender">Sender.</param>
-		/// <param name="e">Event arguments.</param>
-		private void MenuFileClose_Click(object sender, EventArgs e)
-		{
-			Close();
 		}
 
 		/// <summary>
@@ -149,7 +141,22 @@ namespace BibtexManager
 		/// <param name="e">Event arguments.</param>
 		private void MenuExit_Click(object sender, System.EventArgs e)
 		{
-			this.Close();
+			Close();
+		}
+
+		#endregion
+
+		#region Project
+
+		/// <summary>
+		/// Modify the project.
+		/// </summary>
+		/// <param name="sender">Sender.</param>
+		/// <param name="e">Event arguments.</param>
+		private void ModifyProjectToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			ProjectForm projectForm	= new ProjectForm(this.Project);
+			DialogResult result		= projectForm.ShowDialog(this);
 		}
 
 		#endregion
@@ -185,17 +192,18 @@ namespace BibtexManager
 			//this.textBoxPostProcessor.Text = Program.Registry.PostProcessorFile;
 		}
 
-		#endregion
-
-		#region Events
-
-		/// Open the report when the link is clicked.
-		/// </summary>
-		/// <param name="sender">Sender.</param>
-		/// <param name="e">Event arguments.</param>
-		private void lnkReport_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+		///<summary>
+		///Initialize the controls with the values from the data structure.
+		///</summary>
+		private void InitializeControls()
 		{
-			//System.Diagnostics.Process.Start(_logFile);
+			if (_project != null)
+			{
+				// Bind the data source to the DrillStringParts.  This will allow the parts to show up in the DataGridView, which references
+				// the same binding source.
+				BindingList<BibEntry> bindingList = new BindingList<BibEntry>(this.Project.Entries);
+				this.referencesBindingSource.DataSource = bindingList;
+			}
 		}
 
 		#endregion
