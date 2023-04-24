@@ -129,7 +129,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Project\BibtexProject.cs" />
-    <Compile Include="Project\CustomClass1.cs" />
     <Compile Include="Program\RegistryAccess.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -140,6 +139,11 @@
       <DependentUpon>BibtexManagerForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program\Program.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <None Include="app.config" />
     <None Include="Help\BibTeX Manager.hhc" />
     <None Include="Help\BibTeX Manager.hhk" />
@@ -147,6 +151,9 @@
     <None Include="Help\HIDD_ROOT_DIALOG.htm" />
     <None Include="Help\main_index.htm" />
     <Content Include="Forms\BibTex Manager.ico" />
+    <Content Include="Forms\Resources\edit_5_20.png" />
+    <Content Include="Forms\Resources\minus_red.png" />
+    <Content Include="Forms\Resources\plus_green.png" />
     <Content Include="Notes.txt" />
     <None Include="Properties\DataSources\BibTeXLibrary.BibEntry.datasource" />
   </ItemGroup>
@@ -157,6 +164,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ProjectForm.resx">
       <DependentUpon>ProjectForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
@@ -177,6 +188,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Controls\" />
     <Folder Include="Test Files\" />
   </ItemGroup>
   <ProjectExtensions>
