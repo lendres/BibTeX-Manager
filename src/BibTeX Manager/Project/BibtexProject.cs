@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Text;
 using System.Xml.Serialization;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ToolTip;
 
 namespace BibtexManager
 {
@@ -17,7 +18,7 @@ namespace BibtexManager
 
 		private string								_bibFile;
 		private List<string>						_assessoryFiles		= new List<string>();
-		private ObservableCollection<BibEntry>		_entries			= new ObservableCollection<BibEntry>();
+		private Bibliography						_bibliography;
 
 		#endregion
 
@@ -90,18 +91,14 @@ namespace BibtexManager
 		}
 
 		/// <summary>
-		/// BibTeX entries.
+		/// Bibliography.
 		/// </summary>
 		[XmlIgnore()]
-		public ObservableCollection<BibEntry> Entries
+		public Bibliography Bibliography
 		{
 			get
 			{
-				return _entries;
-			}
-			set
-			{
-				_entries = value;
+				return _bibliography;
 			}
 		}
 
@@ -111,17 +108,35 @@ namespace BibtexManager
 
 		public void ReadBibFile()
 		{
-			BibParser parser		= new BibParser(new StreamReader(_bibFile, Encoding.Default));
-			_entries.Clear();
-			foreach (BibEntry bibEntry in parser.GetAllResult())
-			{
-				_entries.Add(bibEntry);
-			}
+			_bibliography = new Bibliography();
+			_bibliography.Read(_bibFile);
+		}
+
+		/// <summary>
+		/// Clean up.
+		/// </summary>
+		public override void Close()
+		{
+			_bibliography.Close();
+			base.Close();
 		}
 
 		#endregion
 
 		#region XML
+
+		/// <summary>
+		/// Writes a Project file (compressed file containing all the project's files).  Uses a ProjectCompressor to zip all files.  An
+		/// event of RaiseOnSavingEvent fires allowing other files to be added to the project.
+		///
+		/// The this.Path must be set and represent a valid path or this method will throw an exception.
+		/// </summary>
+		/// <exception cref="InvalidOperationException">Thrown when the projects path is not set or not valid.</exception>
+		public override void Serialize()
+		{
+			base.Serialize();
+
+		}
 
 		/// <summary>
 		/// Initialize references.
