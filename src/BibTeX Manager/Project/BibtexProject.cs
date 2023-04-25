@@ -18,7 +18,7 @@ namespace BibtexManager
 
 		private string								_bibFile;
 		private List<string>						_assessoryFiles		= new List<string>();
-		private Bibliography						_bibliography;
+		private Bibliography						_bibliography		= new Bibliography();
 
 		#endregion
 
@@ -108,7 +108,6 @@ namespace BibtexManager
 
 		public void ReadBibFile()
 		{
-			_bibliography = new Bibliography();
 			_bibliography.Read(_bibFile);
 		}
 
