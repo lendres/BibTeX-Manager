@@ -24,8 +24,6 @@ namespace BibtexManager
 		public BibtexManagerForm() :
 			base(BibtexProject.FilterString, "DigitalProduction", "BibTeX Manager")
 		{
-			InitializeComponent();
-
 			// Registry access has to be created in constructor and done before setting controls.
 			Program.Registry = new RegistryAccess(this);
 
@@ -33,12 +31,16 @@ namespace BibtexManager
 			// registry gets messed up.
 			Program.Registry.RaiseInstallEvent();
 
-			InitializeFromRegistry();
+			AddFileToolBar();
+			InitializeComponent();
+			SetUpFileMenuItems(null, this.openToolStripMenuItem, this.saveToolStripMenuItem, this.saveAsToolStripMenuItem, this.closeToolStripMenuItem);
 
-			// Our recent files menu.
+			// Add a recent files menu.
 			SetUpRecentFilesList(this.recentFilesToolStripMenuItem, Program.Registry);
-
+			
 			FindProjectControls(this);
+
+			InitializeFromRegistry();
 		}
 
 		#endregion
@@ -86,8 +88,8 @@ namespace BibtexManager
 		/// </summary>
 		protected override void SetupProject()
 		{
-			InitializeControls();
-			this.Project.OnClosed += this.ProjectClosed;
+			InitializeDataBinding();
+			this.Project.OnClosed += this.RemoveDataBinding;
 		}
 
 		#endregion
@@ -97,57 +99,17 @@ namespace BibtexManager
 		#region File
 
 		/// <summary>
-		/// Menu item click handler.
+		/// New item click handler.
 		/// </summary>
 		/// <param name="sender">Sender.</param>
-		/// <param name="e">Event arguments.</param>
-		private void MenuFileNew_Click(object sender, EventArgs e)
+		/// <param name="eventArgs">Event arguments.</param>
+		protected override void NewToolStripItem_Click(object sender, EventArgs eventArgs)
 		{
-			New();
+			base.NewToolStripItem_Click(sender, eventArgs);
 
 			// After we create a new project, it needs to be set up.
-			ProjectForm projectForm = new ProjectForm(this.Project);
+			ProjectForm projectForm	= new ProjectForm(this.Project);
 			DialogResult result		= projectForm.ShowDialog(this);
-		}
-
-		/// <summary>
-		/// Menu item click handler.
-		/// </summary>
-		/// <param name="sender">Sender.</param>
-		/// <param name="e">Event arguments.</param>
-		private void MenuFileOpen_Click(object sender, EventArgs e)
-		{
-			Open();
-		}
-
-		/// <summary>
-		/// Menu item click handler.
-		/// </summary>
-		/// <param name="sender">Sender.</param>
-		/// <param name="e">Event arguments.</param>
-		private void MenuFileClose_Click(object sender, EventArgs e)
-		{
-			CloseProject();
-		}
-
-		/// <summary>
-		/// Menu item click handler.
-		/// </summary>
-		/// <param name="sender">Sender.</param>
-		/// <param name="e">Event arguments.</param>
-		private void MenuFileSave_Click(object sender, EventArgs e)
-		{
-			Save();
-		}
-
-		/// <summary>
-		/// Menu item click handler.
-		/// </summary>
-		/// <param name="sender">Sender.</param>
-		/// <param name="e">Event arguments.</param>
-		private void MenuFileSaveAs_Click(object sender, EventArgs e)
-		{
-			SaveAs();
 		}
 
 		/// <summary>
@@ -183,8 +145,8 @@ namespace BibtexManager
 		/// Show help.
 		/// </summary>
 		/// <param name="sender">Sender.</param>
-		/// <param name="e">Event arguments.</param>
-		private void MenuHelp_Click(object sender, System.EventArgs e)
+		/// <param name="eventArgs">Event arguments.</param>
+		private void MenuHelp_Click(object sender, System.EventArgs eventArgs)
 		{
 			Help.ShowHelp(this, "Help\\Line Counter.chm");
 		}
@@ -193,8 +155,8 @@ namespace BibtexManager
 		/// Show the About dialog.
 		/// </summary>
 		/// <param name="sender">Sender.</param>
-		/// <param name="e">Event arguments.</param>
-		private void AboutToolStripMenuItem_Click(object sender, EventArgs e)
+		/// <param name="eventArgs">Event arguments.</param>
+		private void AboutToolStripMenuItem_Click(object sender, EventArgs eventArgs)
 		{
 			// The resource manager will retrieve the value of the resource.
 			ResourceManager resourceManager = BibTeXManager.Properties.Resources.ResourceManager;
@@ -204,6 +166,55 @@ namespace BibtexManager
 		}
 
 		#endregion
+
+		#endregion
+
+		#region Data Binding
+
+		///<summary>
+		///Initialize the controls with the values from the data structure.
+		///</summary>
+		private void InitializeDataBinding()
+		{
+			if (_project != null)
+			{
+
+				// This will allow the entries to show up in the DataGridView.
+				BindingList<BibEntry> bindingList = new BindingList<BibEntry>(this.Project.Bibliography.Entries);
+				this.referencesBindingSource.DataSource = bindingList;
+				bindingList.ListChanged += OnListChanged;
+			}
+		}
+
+		/// <summary>
+		/// Make sure the project knows when the list has been changed.
+		/// </summary>
+		/// <param name="sender">Sender.</param>
+		/// <param name="eventArgs">Event arguments.</param>
+		private void OnListChanged(object sender, ListChangedEventArgs e)
+		{
+			this.Project.Modified = true;
+		}
+
+		/// <summary>
+		/// Handle the project closing.
+		/// </summary>
+		private void RemoveDataBinding()
+		{
+			this.referencesBindingSource.DataSource = null;
+		}
+
+		/// <summary>
+		/// Add a new entry to the references.
+		/// </summary>
+		/// <param name="sender">Sender.</param>
+		/// <param name="eventArgs">Event arguments.</param>
+		private void AddButton_Click(object sender, EventArgs eventArgs)
+		{
+			BibEntry entry = new BibEntry { Type = "inbook", Key = "ref:weasel2023a", ["author"] = "Weasel, Thanksgiving", ["Title"] = "A treaty in testing." };
+			this.referencesBindingSource.Add(entry);
+		}
+
 
 		#endregion
 
@@ -220,28 +231,6 @@ namespace BibtexManager
 			//this.textBoxOutputFile.Text = Program.Registry.OutputFile;
 			//this.checkBoxPostProcessor.Checked = Program.Registry.RunPostProcessor;
 			//this.textBoxPostProcessor.Text = Program.Registry.PostProcessorFile;
-		}
-
-		///<summary>
-		///Initialize the controls with the values from the data structure.
-		///</summary>
-		private void InitializeControls()
-		{
-			if (_project != null)
-			{
-				// Bind the data source to the DrillStringParts.  This will allow the parts to show up in the DataGridView, which references
-				// the same binding source.
-				BindingList<BibEntry> bindingList		= new BindingList<BibEntry>(this.Project.Bibliography.Entries);
-				this.referencesBindingSource.DataSource = bindingList;
-			}
-		}
-
-		/// <summary>
-		/// Handle the project closing.
-		/// </summary>
-		private void ProjectClosed()
-		{
-			this.referencesBindingSource.DataSource = null;
 		}
 
 		#endregion
