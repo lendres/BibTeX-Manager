@@ -6,6 +6,8 @@ using System.ComponentModel;
 using System.Windows.Forms;
 using System.Resources;
 using System.Drawing;
+using static DigitalProduction.Forms.MessageBoxYesNoToAll;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 
 namespace BibtexManager
 {
@@ -41,6 +43,9 @@ namespace BibtexManager
 			FindProjectControls(this);
 
 			InitializeFromRegistry();
+
+			this.dataGridViewInterfaceControl.ShowEditDialog = this.ShowEditDialog;
+			this.dataGridViewInterfaceControl.ShowAddDialog = this.ShowAddDialog;
 		}
 
 		#endregion
@@ -215,6 +220,22 @@ namespace BibtexManager
 			this.referencesBindingSource.Add(entry);
 		}
 
+		public DialogResultPair ShowEditDialog(object obj)
+		{
+			MessageBox.Show(this, "Edit the entry", "Edit", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+			return new DialogResultPair();
+		}
+
+		/// <summary>
+		/// Show the Add dialog box.
+		/// </summary>
+		public DialogResultPair ShowAddDialog()
+		{
+			BibEntry entry = new BibEntry { Type = "inbook", Key = "ref:weasel2023a", ["author"] = "Weasel, Thanksgiving", ["Title"] = "A treaty in testing." };
+			this.referencesBindingSource.Add(entry);
+
+			return new DialogResultPair();
+		}
 
 		#endregion
 
