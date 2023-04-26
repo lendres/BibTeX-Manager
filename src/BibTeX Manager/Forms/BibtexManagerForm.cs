@@ -33,8 +33,10 @@ namespace BibtexManager
 			// registry gets messed up.
 			Program.Registry.RaiseInstallEvent();
 
-			AddFileToolBar();
+			// Have to add the file tool bar before calling InitializeComponent.
 			InitializeComponent();
+
+			// Establish event handles for the common File menu items.
 			SetUpFileMenuItems(null, this.openToolStripMenuItem, this.saveToolStripMenuItem, this.saveAsToolStripMenuItem, this.closeToolStripMenuItem);
 
 			// Add a recent files menu.
@@ -42,10 +44,11 @@ namespace BibtexManager
 			
 			FindProjectControls(this);
 
-			InitializeFromRegistry();
 
-			this.dataGridViewInterfaceControl.ShowEditDialog = this.ShowEditDialog;
-			this.dataGridViewInterfaceControl.ShowAddDialog = this.ShowAddDialog;
+			this.dataGridViewInterfaceControl.ShowEditDialog	= this.ShowEditDialog;
+			this.dataGridViewInterfaceControl.ShowAddDialog		= this.ShowAddDialog;
+
+			InitializeFromRegistry();
 		}
 
 		#endregion
