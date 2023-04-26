@@ -174,6 +174,31 @@ namespace BibtexManager
 
 		#endregion
 
+		#region Control Event Handlers
+
+		///<summary>
+		/// Key press event handler.
+		///</summary>
+		///<param name="sender">Sender.</param>
+		///<param name="eventArgs">Event arguments.</param>
+		private void DataGridView_KeyDown(object sender, KeyEventArgs eventArgs)
+		{
+			switch (eventArgs.KeyCode)
+			{
+				case Keys.F2:
+				case Keys.Enter:
+					{
+						this.dataGridViewInterfaceControl.EditEntry();
+						eventArgs.Handled = true;
+						break;
+					}
+			}
+
+			eventArgs.Handled = false;
+		}
+
+		#endregion
+
 		#region Data Binding
 
 		///<summary>
@@ -206,18 +231,8 @@ namespace BibtexManager
 		/// </summary>
 		private void RemoveDataBinding()
 		{
-			this.referencesBindingSource.DataSource = null;
-		}
-
-		/// <summary>
-		/// Add a new entry to the references.
-		/// </summary>
-		/// <param name="sender">Sender.</param>
-		/// <param name="eventArgs">Event arguments.</param>
-		private void AddButton_Click(object sender, EventArgs eventArgs)
-		{
-			BibEntry entry = new BibEntry { Type = "inbook", Key = "ref:weasel2023a", ["author"] = "Weasel, Thanksgiving", ["Title"] = "A treaty in testing." };
-			this.referencesBindingSource.Add(entry);
+			this.bibEntriesDataGridView.DataSource	= null;
+			this.referencesBindingSource.DataSource	= null;
 		}
 
 		public DialogResultPair ShowEditDialog(object obj)

@@ -74,32 +74,144 @@ namespace BibtexManager
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BibtexManagerForm));
-			this.bibEntriesDataGridView = new System.Windows.Forms.DataGridView();
+			this.referencesBindingSource = new System.Windows.Forms.BindingSource(this.components);
 			this.menuMain = new System.Windows.Forms.MenuStrip();
 			this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripSeparatorFile1 = new System.Windows.Forms.ToolStripSeparator();
 			this.recentFilesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripSeparatorFile2 = new System.Windows.Forms.ToolStripSeparator();
-			this.projectToolStripMenuItem = new DigitalProduction.Forms.EnableOpenProjectToolStripMenuItem();
-			this.modifyProjectToolStripMenuItem = new DigitalProduction.Forms.EnableOpenProjectToolStripMenuItem();
+			this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.viewHelpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.dataGridViewInterfaceControl = new DigitalProduction.Forms.DataGridViewInterfaceControl();
+			this.enableOpenProjectPanel = new DigitalProduction.Forms.EnableOpenProjectPanel();
+			this.bibEntriesDataGridView = new System.Windows.Forms.DataGridView();
 			this.Key = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.authorDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.Title = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.referencesBindingSource = new System.Windows.Forms.BindingSource(this.components);
-			this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.dataGridViewInterfaceControl = new DigitalProduction.Forms.DataGridViewInterfaceControl();
 			this.saveToolStripMenuItem = new DigitalProduction.Forms.SaveToolStripMenuItem();
 			this.saveAsToolStripMenuItem = new DigitalProduction.Forms.EnableOpenProjectToolStripMenuItem();
 			this.closeToolStripMenuItem = new DigitalProduction.Forms.EnableOpenProjectToolStripMenuItem();
-			this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			((System.ComponentModel.ISupportInitialize)(this.bibEntriesDataGridView)).BeginInit();
-			this.menuMain.SuspendLayout();
+			this.projectToolStripMenuItem = new DigitalProduction.Forms.EnableOpenProjectToolStripMenuItem();
+			this.modifyProjectToolStripMenuItem = new DigitalProduction.Forms.EnableOpenProjectToolStripMenuItem();
 			((System.ComponentModel.ISupportInitialize)(this.referencesBindingSource)).BeginInit();
+			this.menuMain.SuspendLayout();
+			this.enableOpenProjectPanel.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.bibEntriesDataGridView)).BeginInit();
 			this.SuspendLayout();
+			// 
+			// referencesBindingSource
+			// 
+			this.referencesBindingSource.DataSource = typeof(BibTeXLibrary.BibEntry);
+			// 
+			// menuMain
+			// 
+			this.menuMain.BackColor = System.Drawing.SystemColors.Control;
+			this.menuMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fileToolStripMenuItem,
+            this.projectToolStripMenuItem,
+            this.helpToolStripMenuItem});
+			this.menuMain.Location = new System.Drawing.Point(0, 0);
+			this.menuMain.Name = "menuMain";
+			this.menuMain.Size = new System.Drawing.Size(540, 24);
+			this.menuMain.TabIndex = 0;
+			this.menuMain.Text = "Menu Bar";
+			// 
+			// fileToolStripMenuItem
+			// 
+			this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.newToolStripMenuItem,
+            this.openToolStripMenuItem,
+            this.saveToolStripMenuItem,
+            this.saveAsToolStripMenuItem,
+            this.closeToolStripMenuItem,
+            this.toolStripSeparatorFile1,
+            this.recentFilesToolStripMenuItem,
+            this.toolStripSeparatorFile2,
+            this.exitToolStripMenuItem});
+			this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+			this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+			this.fileToolStripMenuItem.Text = "&File";
+			// 
+			// newToolStripMenuItem
+			// 
+			this.newToolStripMenuItem.Image = global::BibTeXManager.Properties.Resources.NewFile_16x;
+			this.newToolStripMenuItem.Name = "newToolStripMenuItem";
+			this.newToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
+			this.newToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.newToolStripMenuItem.Text = "&New...";
+			this.newToolStripMenuItem.Click += new System.EventHandler(this.NewToolStripItem_Click);
+			// 
+			// openToolStripMenuItem
+			// 
+			this.openToolStripMenuItem.Image = global::BibTeXManager.Properties.Resources.OpenFile_16x;
+			this.openToolStripMenuItem.Name = "openToolStripMenuItem";
+			this.openToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
+			this.openToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.openToolStripMenuItem.Text = "&Open..";
+			// 
+			// toolStripSeparatorFile1
+			// 
+			this.toolStripSeparatorFile1.Name = "toolStripSeparatorFile1";
+			this.toolStripSeparatorFile1.Size = new System.Drawing.Size(149, 6);
+			// 
+			// recentFilesToolStripMenuItem
+			// 
+			this.recentFilesToolStripMenuItem.Name = "recentFilesToolStripMenuItem";
+			this.recentFilesToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.recentFilesToolStripMenuItem.Text = "&Recent Files";
+			// 
+			// toolStripSeparatorFile2
+			// 
+			this.toolStripSeparatorFile2.Name = "toolStripSeparatorFile2";
+			this.toolStripSeparatorFile2.Size = new System.Drawing.Size(149, 6);
+			// 
+			// exitToolStripMenuItem
+			// 
+			this.exitToolStripMenuItem.Image = global::BibTeXManager.Properties.Resources.Exit_16x;
+			this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+			this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.exitToolStripMenuItem.Text = "E&xit";
+			this.exitToolStripMenuItem.Click += new System.EventHandler(this.MenuExit_Click);
+			// 
+			// helpToolStripMenuItem
+			// 
+			this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.viewHelpToolStripMenuItem,
+            this.aboutToolStripMenuItem});
+			this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+			this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+			this.helpToolStripMenuItem.Text = "&Help";
+			// 
+			// viewHelpToolStripMenuItem
+			// 
+			this.viewHelpToolStripMenuItem.Name = "viewHelpToolStripMenuItem";
+			this.viewHelpToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
+			this.viewHelpToolStripMenuItem.Text = "&View Help";
+			this.viewHelpToolStripMenuItem.Click += new System.EventHandler(this.MenuHelp_Click);
+			// 
+			// aboutToolStripMenuItem
+			// 
+			this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+			this.aboutToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
+			this.aboutToolStripMenuItem.Text = "&About...";
+			this.aboutToolStripMenuItem.Click += new System.EventHandler(this.AboutToolStripMenuItem_Click);
+			// 
+			// enableOpenProjectPanel
+			// 
+			this.enableOpenProjectPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.enableOpenProjectPanel.Controls.Add(this.bibEntriesDataGridView);
+			this.enableOpenProjectPanel.Controls.Add(this.dataGridViewInterfaceControl);
+			this.enableOpenProjectPanel.Enabled = false;
+			this.enableOpenProjectPanel.Location = new System.Drawing.Point(0, 50);
+			this.enableOpenProjectPanel.Name = "enableOpenProjectPanel";
+			this.enableOpenProjectPanel.Size = new System.Drawing.Size(540, 535);
+			this.enableOpenProjectPanel.TabIndex = 26;
 			// 
 			// bibEntriesDataGridView
 			// 
@@ -133,7 +245,7 @@ namespace BibtexManager
 			dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
 			dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
 			this.bibEntriesDataGridView.DefaultCellStyle = dataGridViewCellStyle4;
-			this.bibEntriesDataGridView.Location = new System.Drawing.Point(12, 140);
+			this.bibEntriesDataGridView.Location = new System.Drawing.Point(12, 48);
 			this.bibEntriesDataGridView.Name = "bibEntriesDataGridView";
 			this.bibEntriesDataGridView.ReadOnly = true;
 			dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
@@ -147,111 +259,9 @@ namespace BibtexManager
 			this.bibEntriesDataGridView.RowHeadersVisible = false;
 			this.bibEntriesDataGridView.RowHeadersWidth = 20;
 			this.bibEntriesDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-			this.bibEntriesDataGridView.Size = new System.Drawing.Size(516, 273);
+			this.bibEntriesDataGridView.Size = new System.Drawing.Size(516, 484);
 			this.bibEntriesDataGridView.TabIndex = 24;
-			// 
-			// menuMain
-			// 
-			this.menuMain.BackColor = System.Drawing.SystemColors.Control;
-			this.menuMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem,
-            this.projectToolStripMenuItem,
-            this.helpToolStripMenuItem});
-			this.menuMain.Location = new System.Drawing.Point(0, 0);
-			this.menuMain.Name = "menuMain";
-			this.menuMain.Size = new System.Drawing.Size(540, 24);
-			this.menuMain.TabIndex = 0;
-			this.menuMain.Text = "Menu Bar";
-			// 
-			// fileToolStripMenuItem
-			// 
-			this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.newToolStripMenuItem,
-            this.openToolStripMenuItem,
-            this.saveToolStripMenuItem,
-            this.saveAsToolStripMenuItem,
-            this.closeToolStripMenuItem,
-            this.toolStripSeparatorFile1,
-            this.recentFilesToolStripMenuItem,
-            this.toolStripSeparatorFile2,
-            this.exitToolStripMenuItem});
-			this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-			this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
-			this.fileToolStripMenuItem.Text = "&File";
-			// 
-			// toolStripSeparatorFile1
-			// 
-			this.toolStripSeparatorFile1.Name = "toolStripSeparatorFile1";
-			this.toolStripSeparatorFile1.Size = new System.Drawing.Size(149, 6);
-			// 
-			// recentFilesToolStripMenuItem
-			// 
-			this.recentFilesToolStripMenuItem.Name = "recentFilesToolStripMenuItem";
-			this.recentFilesToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-			this.recentFilesToolStripMenuItem.Text = "&Recent Files";
-			// 
-			// toolStripSeparatorFile2
-			// 
-			this.toolStripSeparatorFile2.Name = "toolStripSeparatorFile2";
-			this.toolStripSeparatorFile2.Size = new System.Drawing.Size(149, 6);
-			// 
-			// projectToolStripMenuItem
-			// 
-			this.projectToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.modifyProjectToolStripMenuItem});
-			this.projectToolStripMenuItem.Enabled = false;
-			this.projectToolStripMenuItem.Name = "projectToolStripMenuItem";
-			this.projectToolStripMenuItem.Size = new System.Drawing.Size(56, 20);
-			this.projectToolStripMenuItem.Text = "&Project";
-			// 
-			// modifyProjectToolStripMenuItem
-			// 
-			this.modifyProjectToolStripMenuItem.Enabled = false;
-			this.modifyProjectToolStripMenuItem.Name = "modifyProjectToolStripMenuItem";
-			this.modifyProjectToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-			this.modifyProjectToolStripMenuItem.Text = "&Modify Project";
-			this.modifyProjectToolStripMenuItem.Click += new System.EventHandler(this.ModifyProjectToolStripMenuItem_Click);
-			// 
-			// helpToolStripMenuItem
-			// 
-			this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.viewHelpToolStripMenuItem,
-            this.aboutToolStripMenuItem});
-			this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-			this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
-			this.helpToolStripMenuItem.Text = "&Help";
-			// 
-			// viewHelpToolStripMenuItem
-			// 
-			this.viewHelpToolStripMenuItem.Name = "viewHelpToolStripMenuItem";
-			this.viewHelpToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
-			this.viewHelpToolStripMenuItem.Text = "&View Help";
-			this.viewHelpToolStripMenuItem.Click += new System.EventHandler(this.MenuHelp_Click);
-			// 
-			// aboutToolStripMenuItem
-			// 
-			this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-			this.aboutToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
-			this.aboutToolStripMenuItem.Text = "&About...";
-			this.aboutToolStripMenuItem.Click += new System.EventHandler(this.AboutToolStripMenuItem_Click);
-			// 
-			// dataGridViewInterfaceControl
-			// 
-			this.dataGridViewInterfaceControl.AddLocation = DigitalProduction.Forms.DataGridViewAddLocation.Bottom;
-			this.dataGridViewInterfaceControl.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.dataGridViewInterfaceControl.AutoValidate = System.Windows.Forms.AutoValidate.Disable;
-			this.dataGridViewInterfaceControl.BindingSource = this.referencesBindingSource;
-			this.dataGridViewInterfaceControl.DataGridView = this.bibEntriesDataGridView;
-			this.dataGridViewInterfaceControl.Location = new System.Drawing.Point(12, 103);
-			this.dataGridViewInterfaceControl.Name = "dataGridViewInterfaceControl";
-			this.dataGridViewInterfaceControl.ReadOnly = false;
-			this.dataGridViewInterfaceControl.ShowAddDialog = null;
-			this.dataGridViewInterfaceControl.ShowEditDialog = null;
-			this.dataGridViewInterfaceControl.ShowInsertButtons = false;
-			this.dataGridViewInterfaceControl.ShowMoveButtons = false;
-			this.dataGridViewInterfaceControl.Size = new System.Drawing.Size(516, 31);
-			this.dataGridViewInterfaceControl.TabIndex = 25;
+			this.bibEntriesDataGridView.KeyDown += new System.Windows.Forms.KeyEventHandler(this.DataGridView_KeyDown);
 			// 
 			// Key
 			// 
@@ -287,26 +297,23 @@ namespace BibtexManager
 			this.Title.Name = "Title";
 			this.Title.ReadOnly = true;
 			// 
-			// referencesBindingSource
+			// dataGridViewInterfaceControl
 			// 
-			this.referencesBindingSource.DataSource = typeof(BibTeXLibrary.BibEntry);
-			// 
-			// newToolStripMenuItem
-			// 
-			this.newToolStripMenuItem.Image = global::BibTeXManager.Properties.Resources.NewFile_16x;
-			this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-			this.newToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-			this.newToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-			this.newToolStripMenuItem.Text = "&New...";
-			this.newToolStripMenuItem.Click += new System.EventHandler(this.NewToolStripItem_Click);
-			// 
-			// openToolStripMenuItem
-			// 
-			this.openToolStripMenuItem.Image = global::BibTeXManager.Properties.Resources.OpenFile_16x;
-			this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-			this.openToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-			this.openToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-			this.openToolStripMenuItem.Text = "&Open..";
+			this.dataGridViewInterfaceControl.AddLocation = DigitalProduction.Forms.DataGridViewAddLocation.Bottom;
+			this.dataGridViewInterfaceControl.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.dataGridViewInterfaceControl.AutoValidate = System.Windows.Forms.AutoValidate.Disable;
+			this.dataGridViewInterfaceControl.BindingSource = this.referencesBindingSource;
+			this.dataGridViewInterfaceControl.DataGridView = this.bibEntriesDataGridView;
+			this.dataGridViewInterfaceControl.Location = new System.Drawing.Point(12, 13);
+			this.dataGridViewInterfaceControl.Name = "dataGridViewInterfaceControl";
+			this.dataGridViewInterfaceControl.ReadOnly = false;
+			this.dataGridViewInterfaceControl.ShowAddDialog = null;
+			this.dataGridViewInterfaceControl.ShowEditDialog = null;
+			this.dataGridViewInterfaceControl.ShowInsertButtons = false;
+			this.dataGridViewInterfaceControl.ShowMoveButtons = false;
+			this.dataGridViewInterfaceControl.Size = new System.Drawing.Size(516, 31);
+			this.dataGridViewInterfaceControl.TabIndex = 25;
 			// 
 			// saveToolStripMenuItem
 			// 
@@ -333,20 +340,28 @@ namespace BibtexManager
 			this.closeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
 			this.closeToolStripMenuItem.Text = "&Close";
 			// 
-			// exitToolStripMenuItem
+			// projectToolStripMenuItem
 			// 
-			this.exitToolStripMenuItem.Image = global::BibTeXManager.Properties.Resources.Exit_16x;
-			this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-			this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-			this.exitToolStripMenuItem.Text = "E&xit";
-			this.exitToolStripMenuItem.Click += new System.EventHandler(this.MenuExit_Click);
+			this.projectToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.modifyProjectToolStripMenuItem});
+			this.projectToolStripMenuItem.Enabled = false;
+			this.projectToolStripMenuItem.Name = "projectToolStripMenuItem";
+			this.projectToolStripMenuItem.Size = new System.Drawing.Size(56, 20);
+			this.projectToolStripMenuItem.Text = "&Project";
+			// 
+			// modifyProjectToolStripMenuItem
+			// 
+			this.modifyProjectToolStripMenuItem.Enabled = false;
+			this.modifyProjectToolStripMenuItem.Name = "modifyProjectToolStripMenuItem";
+			this.modifyProjectToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.modifyProjectToolStripMenuItem.Text = "&Modify Project";
+			this.modifyProjectToolStripMenuItem.Click += new System.EventHandler(this.ModifyProjectToolStripMenuItem_Click);
 			// 
 			// BibtexManagerForm
 			// 
 			this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
-			this.ClientSize = new System.Drawing.Size(540, 502);
-			this.Controls.Add(this.dataGridViewInterfaceControl);
-			this.Controls.Add(this.bibEntriesDataGridView);
+			this.ClientSize = new System.Drawing.Size(540, 609);
+			this.Controls.Add(this.enableOpenProjectPanel);
 			this.Controls.Add(this.menuMain);
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.MainMenuStrip = this.menuMain;
@@ -354,10 +369,11 @@ namespace BibtexManager
 			this.Name = "BibtexManagerForm";
 			this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
 			this.Text = "BibTeX Manager";
-			((System.ComponentModel.ISupportInitialize)(this.bibEntriesDataGridView)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.referencesBindingSource)).EndInit();
 			this.menuMain.ResumeLayout(false);
 			this.menuMain.PerformLayout();
-			((System.ComponentModel.ISupportInitialize)(this.referencesBindingSource)).EndInit();
+			this.enableOpenProjectPanel.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.bibEntriesDataGridView)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -365,5 +381,6 @@ namespace BibtexManager
 		#endregion
 
 		private DigitalProduction.Forms.DataGridViewInterfaceControl dataGridViewInterfaceControl;
+		private DigitalProduction.Forms.EnableOpenProjectPanel enableOpenProjectPanel;
 	} // End class.
 } // End namespace.

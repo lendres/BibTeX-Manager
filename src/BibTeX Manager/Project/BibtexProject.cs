@@ -116,8 +116,10 @@ namespace BibtexManager
 		/// </summary>
 		public override void Close()
 		{
-			_bibliography.Close();
+			// Must call base first.  This calls the OnClose event which should clear all forms (unbind) and
+			// make it safe to close the Bibliography.
 			base.Close();
+			_bibliography.Close();
 		}
 
 		#endregion
