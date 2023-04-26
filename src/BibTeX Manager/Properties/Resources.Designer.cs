@@ -63,39 +63,9 @@ namespace BibTeXManager.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap edit_5_20 {
-            get {
-                object obj = ResourceManager.GetObject("edit_5_20", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap LELaTeX_Logo_Rotated_CroppedForAbout {
             get {
                 object obj = ResourceManager.GetObject("LELaTeX_Logo_Rotated_CroppedForAbout", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap minus_red {
-            get {
-                object obj = ResourceManager.GetObject("minus_red", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap plus_green {
-            get {
-                object obj = ResourceManager.GetObject("plus_green", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

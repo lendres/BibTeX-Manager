@@ -143,7 +143,7 @@ namespace BibtexManager
 			// 
 			// newToolStripMenuItem
 			// 
-			this.newToolStripMenuItem.Image = global::BibTeXManager.Properties.Resources.NewFile_16x;
+			this.newToolStripMenuItem.Image = DigitalProduction.Properties.Resources.NewFile_16x;
 			this.newToolStripMenuItem.Name = "newToolStripMenuItem";
 			this.newToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
 			this.newToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
@@ -152,7 +152,7 @@ namespace BibtexManager
 			// 
 			// openToolStripMenuItem
 			// 
-			this.openToolStripMenuItem.Image = global::BibTeXManager.Properties.Resources.OpenFile_16x;
+			this.openToolStripMenuItem.Image = DigitalProduction.Properties.Resources.OpenFile_16x;
 			this.openToolStripMenuItem.Name = "openToolStripMenuItem";
 			this.openToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
 			this.openToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
@@ -161,7 +161,7 @@ namespace BibtexManager
 			// saveToolStripMenuItem
 			// 
 			this.saveToolStripMenuItem.Enabled = false;
-			this.saveToolStripMenuItem.Image = global::BibTeXManager.Properties.Resources.Save_16x;
+			this.saveToolStripMenuItem.Image = DigitalProduction.Properties.Resources.Save_16x;
 			this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
 			this.saveToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
 			this.saveToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
@@ -170,7 +170,7 @@ namespace BibtexManager
 			// saveAsToolStripMenuItem
 			// 
 			this.saveAsToolStripMenuItem.Enabled = false;
-			this.saveAsToolStripMenuItem.Image = global::BibTeXManager.Properties.Resources.Save_16x;
+			this.saveAsToolStripMenuItem.Image = DigitalProduction.Properties.Resources.Save_16x;
 			this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
 			this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
 			this.saveAsToolStripMenuItem.Text = "Save &As...";
@@ -178,7 +178,7 @@ namespace BibtexManager
 			// closeToolStripMenuItem
 			// 
 			this.closeToolStripMenuItem.Enabled = false;
-			this.closeToolStripMenuItem.Image = global::BibTeXManager.Properties.Resources.CloseDocument_16x;
+			this.closeToolStripMenuItem.Image = DigitalProduction.Properties.Resources.CloseDocument_16x;
 			this.closeToolStripMenuItem.Name = "closeToolStripMenuItem";
 			this.closeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
 			this.closeToolStripMenuItem.Text = "&Close";
@@ -201,7 +201,7 @@ namespace BibtexManager
 			// 
 			// exitToolStripMenuItem
 			// 
-			this.exitToolStripMenuItem.Image = global::BibTeXManager.Properties.Resources.Exit_16x;
+			this.exitToolStripMenuItem.Image = DigitalProduction.Properties.Resources.Exit_16x;
 			this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
 			this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
 			this.exitToolStripMenuItem.Text = "E&xit";
