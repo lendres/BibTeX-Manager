@@ -1,110 +1,110 @@
 <?xml version="1.0" encoding="us-ascii"?>
 <bibentryinitialization xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <typemaps>
-        <typemap name="article" templatename="article"/>
-        <typemap name="book" templatename="book"/>
-        <typemap name="booklet" templatename="basic"/>
-        <typemap name="conference" templatename="basic"/>
-        <typemap name="inbook" templatename="basic"/>
-        <typemap name="incollection" templatename="inproceedings"/>
-        <typemap name="inproceedings" templatename="inproceedings"/>
-        <typemap name="manual" templatename="manual"/>
-        <typemap name="mastersthesis" templatename="thesis"/>
-        <typemap name="misc" templatename="basic"/>
-        <typemap name="patent" templatename="patent"/>
-        <typemap name="phdthesis" templatename="thesis"/>
-        <typemap name="proceedings" templatename="inproceedings"/>
-        <typemap name="techreport" templatename="basic"/>
-        <typemap name="unpublished" templatename="basic"/>
-        <typemap name="webhref" templatename="webhref"/>
-    </typemaps>
+	<typetotemplatemap>
+        <item key="article"> <value>article</value></item>
+        <item key="book"> <value>book</value></item>
+        <item key="booklet"> <value>basic</value></item>
+        <item key="conference"> <value>basic</value></item>
+        <item key="inbook"> <value>basic</value></item>
+        <item key="incollection"> <value>inproceedings</value></item>
+        <item key="inproceedings"> <value>inproceedings</value></item>
+        <item key="manual"> <value>manual</value></item>
+        <item key="mastersthesis"> <value>thesis</value></item>
+        <item key="misc"> <value>basic</value></item>
+        <item key="patent"> <value>patent</value></item>
+        <item key="phdthesis"> <value>thesis</value></item>
+        <item key="proceedings"> <value>inproceedings</value></item>
+        <item key="techreport"> <value>basic</value></item>
+        <item key="unpublished"> <value>basic</value></item>
+        <item key="webhref"> <value>webhref</value></item>
+    </typetotemplatemap>
 
     <templates>
-        <template name="article">
-            <tag>author</tag>
-            <tag>title</tag>
-            <tag>journal</tag>
-            <tag>volume</tag>
-            <tag>number</tag>
-            <tag>month</tag>
-            <tag>year</tag>
-            <tag>pages</tag>
-        </template>
-        <template name="basic">
-            <tag>author</tag>
-            <tag>title</tag>
-        </template>
-        <template name="book">
-            <tag>author</tag>
-            <tag>title</tag>
-            <tag>publisher</tag>
-            <tag>year</tag>
-            <tag>edition</tag>
-            <tag>isbn</tag>
-        </template>
-        <template name="inproceedings">
-            <tag>author</tag>
-            <tag>affiliation</tag>
-            <tag>title</tag>
-            <tag>booktitle</tag>
-            <tag>month</tag>
-            <tag>year</tag>
-            <tag>volume</tag>
-            <tag>organization</tag>
-            <tag>address</tag>
-            <tag>speid</tag>
-            <tag>doi</tag>
-            <tag>url</tag>
-            <tag>logline</tag>
-            <tag>abstract</tag>
-        </template>
-        <template name="manual">
+        <item key="article">
+            <value>author</value>
+            <value>title</value>
+            <value>journal</value>
+            <value>volume</value>
+            <value>number</value>
+            <value>month</value>
+            <value>year</value>
+            <value>pages</value>
+        </item>
+        <item key="basic">
+            <value>author</value>
+            <value>title</value>
+        </item>
+        <item key="book">
+            <value>author</value>
+            <value>title</value>
+            <value>publisher</value>
+            <value>year</value>
+            <value>edition</value>
+            <value>isbn</value>
+        </item>
+        <item key="inproceedings">
+            <value>author</value>
+            <value>affiliation</value>
+            <value>title</value>
+            <value>booktitle</value>
+            <value>month</value>
+            <value>year</value>
+            <value>volume</value>
+            <value>organization</value>
+            <value>address</value>
+            <value>speid</value>
+            <value>doi</value>
+            <value>url</value>
+            <value>logline</value>
+            <value>abstract</value>
+        </item>
+        <item key="manual">
             <tags>
-                <tag>author</tag>
-                <tag>title</tag>
-                <tag>organization</tag>
-                <tag>address</tag>
-                <tag>month</tag>
-                <tag>year</tag>
+                <value>author</value>
+                <value>title</value>
+                <value>organization</value>
+                <value>address</value>
+                <value>month</value>
+                <value>year</value>
             </tags>
-        </template>
-        <template name="patent">
+        </item>
+        <item key="patent">
             <tags>
-                <tag>author</tag>
-                <tag>title</tag>
-                <tag>assignee</tag>
-                <tag>number</tag>
-                <tag>publisher</tag>
-                <tag>filedday</tag>
-                <tag>filedmonth</tag>
-                <tag>filedyear</tag>
-                <tag>pubday</tag>
-                <tag>pubmonth</tag>
-                <tag>pubyear</tag>
-                <tag>issuedday</tag>
-                <tag>issuedmonth</tag>
-                <tag>issuedyear</tag>
+                <value>author</value>
+                <value>title</value>
+                <value>assignee</value>
+                <value>number</value>
+                <value>publisher</value>
+                <value>filedday</value>
+                <value>filedmonth</value>
+                <value>filedyear</value>
+                <value>pubday</value>
+                <value>pubmonth</value>
+                <value>pubyear</value>
+                <value>issuedday</value>
+                <value>issuedmonth</value>
+                <value>issuedyear</value>
             </tags>
-        </template>
-        <template name="thesis">
+        </item>
+        <item key="thesis">
             <tags>
-                <tag>author</tag>
-                <tag>title</tag>
-                <tag>school</tag>
-                <tag>year</tag>
-                <tag>url</tag>
-                <tag>doi</tag>
-                <tag>abstract</tag>
+                <value>author</value>
+                <value>title</value>
+                <value>school</value>
+                <value>year</value>
+                <value>url</value>
+                <value>doi</value>
+                <value>abstract</value>
             </tags>
-        </template>
-        <template name="webhref">
+        </item>
+        <item key="webhref">
             <tags>
-                <tag>author</tag>
-                <tag>title</tag>
-                <tag>websitename</tag>
-                <tag>year</tag>
-                <tag>url</tag>
+                <value>author</value>
+                <value>title</value>
+                <value>websitename</value>
+                <value>year</value>
+                <value>url</value>
             </tags>
-        </template>
+        </item>
     </templates>
 </bibentryinitialization>
