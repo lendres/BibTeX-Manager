@@ -81,6 +81,7 @@
             <value>month</value>
             <value>year</value>
             <value>volume</value>
+			<value>pages</value>
             <value>organization</value>
             <value>address</value>
             <value>speid</value>
