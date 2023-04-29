@@ -3,13 +3,14 @@ using System;
 using System.Windows.Forms;
 using System.Linq;
 using System.Collections.Generic;
+using BibTeXLibrary;
 
 namespace BibtexManager
 {
 	/// <summary>
 	/// 
 	/// </summary>
-	public partial class ProjectForm : Form
+	public partial class ProjectSettingsForm : Form
 	{
 		#region Members
 
@@ -24,12 +25,13 @@ namespace BibtexManager
 		/// <summary>
 		/// Default constructor.
 		/// </summary>
-		public ProjectForm(BibtexProject project)
+		public ProjectSettingsForm(BibtexProject project)
 		{
 			_project = project;
 
 			InitializeComponent();
 			PopulateControls();
+			SetControls();
 		}
 
 		#endregion
@@ -39,6 +41,16 @@ namespace BibtexManager
 		#endregion
 
 		#region Event Handlers
+
+		/// <summary>
+		/// Align tag values checked change event handler.
+		/// </summary>
+		/// <param name="sender">Sender.</param>
+		/// <param name="e">Event arguments.</param>
+		private void alignTagValuesCheckBox_CheckedChanged(object sender, EventArgs e)
+		{
+			SetControls();
+		}
 
 		/// <summary>
 		/// Browse for the BibTeX file.
@@ -125,6 +137,18 @@ namespace BibtexManager
 			this.bibFileLocationTextBox.Text = _project.BibFile;
 			this.assessoryFilesListBox.Items.AddRange(_project.AssessoryFiles.ToArray());
 
+			// Write settings.
+			WriteSettings writeSettings					= _project.WriteSettings;
+
+			// Tabs.
+			this.tabSizeNumericUpDown.Value				= writeSettings.TabSize;
+			this.insertSpacesRadioButton.Checked		= writeSettings.WhiteSpace == WhiteSpace.Space;
+			this.insertTabsRadioButton.Checked			= writeSettings.WhiteSpace == WhiteSpace.Tab;
+
+			// Alignment.
+			this.alignTagValuesCheckBox.Checked			= writeSettings.AlignTagValues;
+			this.alignmentColumnNumericUpDown.Value		= writeSettings.AlignAtColumn;
+			this.alignmentTabStopNumericUpDown.Value	= writeSettings.AlignAtTabStop;
 		}
 
 		/// <summary>
@@ -133,17 +157,50 @@ namespace BibtexManager
 		protected void PushEntriesToDataStructure()
 		{
 			_project.BibFile				= this.bibFileLocationTextBox.Text;
+			
 			ListBox.ObjectCollection items	= this.assessoryFilesListBox.Items;
-
-			int size		= items.Count;
-			List<string> files	= new List<string>();
-
-			for (int i = 0; i < size; i++)
+			List<string> files				= new List<string>();
+			foreach (object item in items)
 			{
-				files.Add(items[i].ToString());
+				files.Add(item.ToString());
+			}
+			_project.AssessoryFiles = files;
+
+			// Write settings.
+			WriteSettings writeSettings = _project.WriteSettings;
+
+			// Tabs.
+			_project.WriteSettings.TabSize			= (int)this.tabSizeNumericUpDown.Value;
+			if (this.insertSpacesRadioButton.Checked)
+			{
+				writeSettings.WhiteSpace = WhiteSpace.Space;
+			}
+			else
+			{
+				writeSettings.WhiteSpace = WhiteSpace.Tab;
 			}
 
-			_project.AssessoryFiles = files;
+			// Alignment.
+			writeSettings.AlignTagValues	= this.alignTagValuesCheckBox.Checked;
+			writeSettings.AlignAtColumn		= (int)this.alignmentColumnNumericUpDown.Value;
+			writeSettings.AlignAtTabStop	= (int)this.alignmentTabStopNumericUpDown.Value;
+		}
+
+		/// <summary>
+		/// Sets the control states.  For this simple form, just use one catch all function.
+		/// </summary>
+		private void SetControls()
+		{
+			if (this.alignTagValuesCheckBox.Checked)
+			{
+				this.alignmentColumnNumericUpDown.Enabled	= this.insertSpacesRadioButton.Checked;
+				this.alignmentTabStopNumericUpDown.Enabled	= this.insertTabsRadioButton.Checked;
+			}
+			else
+			{
+				this.alignmentColumnNumericUpDown.Enabled	= false;
+				this.alignmentTabStopNumericUpDown.Enabled	= false;
+			}
 		}
 
 		#endregion
