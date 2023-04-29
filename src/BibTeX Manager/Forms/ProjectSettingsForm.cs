@@ -14,9 +14,9 @@ namespace BibtexManager
 	{
 		#region Members
 
-		static string		_filterString		= "\"BibTeX files (*.bib)|*.bib|Text files (*.txt)|*.txt|All files (*.*)|*.*\"";
+		private static string				_filterString		= "\"BibTeX files (*.bib)|*.bib|Text files (*.txt)|*.txt|All files (*.*)|*.*\"";
 
-		BibtexProject		_project;
+		private readonly BibtexProject		_project;
 
 		#endregion
 
@@ -46,8 +46,8 @@ namespace BibtexManager
 		/// Align tag values checked change event handler.
 		/// </summary>
 		/// <param name="sender">Sender.</param>
-		/// <param name="e">Event arguments.</param>
-		private void alignTagValuesCheckBox_CheckedChanged(object sender, EventArgs e)
+		/// <param name="eventArgs">Event arguments.</param>
+		private void alignTagValuesCheckBox_CheckedChanged(object sender, EventArgs eventArgs)
 		{
 			SetControls();
 		}
@@ -57,7 +57,7 @@ namespace BibtexManager
 		/// </summary>
 		/// <param name="sender">Sender.</param>
 		/// <param name="eventArgs">Event arguments.</param>
-		private void BrowseBibFileButton_Click(object sender, EventArgs e)
+		private void BrowseBibFileButton_Click(object sender, EventArgs eventArgs)
 		{
 			string initialDirectory	= System.IO.Path.GetDirectoryName(_project.BibFile);
 
@@ -74,7 +74,7 @@ namespace BibtexManager
 		/// </summary>
 		/// <param name="sender">Sender.</param>
 		/// <param name="eventArgs">Event arguments.</param>
-		private void AddButton_Click(object sender, EventArgs e)
+		private void AddButton_Click(object sender, EventArgs eventArgs)
 		{
 			string initialDirectory = System.IO.Path.GetDirectoryName(_project.BibFile);
 
@@ -92,7 +92,7 @@ namespace BibtexManager
 		/// </summary>
 		/// <param name="sender">Sender.</param>
 		/// <param name="eventArgs">Event arguments.</param>
-		private void RemoveButton_Click(object sender, EventArgs e)
+		private void RemoveButton_Click(object sender, EventArgs eventArgs)
 		{
 			ListBox.SelectedObjectCollection selectedItems = this.assessoryFilesListBox.SelectedItems;
 
