@@ -59,52 +59,44 @@
             <value>abstract</value>
         </item>
         <item key="manual">
-            <tags>
-                <value>author</value>
-                <value>title</value>
-                <value>organization</value>
-                <value>address</value>
-                <value>month</value>
-                <value>year</value>
-            </tags>
+			<value>author</value>
+			<value>title</value>
+			<value>organization</value>
+			<value>address</value>
+			<value>month</value>
+			<value>year</value>
         </item>
         <item key="patent">
-            <tags>
-                <value>author</value>
-                <value>title</value>
-                <value>assignee</value>
-                <value>number</value>
-                <value>publisher</value>
-                <value>filedday</value>
-                <value>filedmonth</value>
-                <value>filedyear</value>
-                <value>pubday</value>
-                <value>pubmonth</value>
-                <value>pubyear</value>
-                <value>issuedday</value>
-                <value>issuedmonth</value>
-                <value>issuedyear</value>
-            </tags>
+			<value>author</value>
+			<value>title</value>
+			<value>assignee</value>
+			<value>number</value>
+			<value>publisher</value>
+			<value>filedday</value>
+			<value>filedmonth</value>
+			<value>filedyear</value>
+			<value>pubday</value>
+			<value>pubmonth</value>
+			<value>pubyear</value>
+			<value>issuedday</value>
+			<value>issuedmonth</value>
+			<value>issuedyear</value>
         </item>
         <item key="thesis">
-            <tags>
-                <value>author</value>
-                <value>title</value>
-                <value>school</value>
-                <value>year</value>
-                <value>url</value>
-                <value>doi</value>
-                <value>abstract</value>
-            </tags>
+			<value>author</value>
+			<value>title</value>
+			<value>school</value>
+			<value>year</value>
+			<value>url</value>
+			<value>doi</value>
+			<value>abstract</value>
         </item>
         <item key="webhref">
-            <tags>
-                <value>author</value>
-                <value>title</value>
-                <value>websitename</value>
-                <value>year</value>
-                <value>url</value>
-            </tags>
+			<value>author</value>
+			<value>title</value>
+			<value>websitename</value>
+			<value>year</value>
+			<value>url</value>
         </item>
     </templates>
 </bibentryinitialization>
