@@ -8,7 +8,6 @@ namespace BibtexManager
 	/// </summary>
 	public class RegistryAccess : FormWinRegistryAccess
     {
-
 		#region Construction
 
 		/// <summary>
@@ -30,7 +29,6 @@ namespace BibtexManager
         /// </summary>
         public void OnInstall()
         {
-            this.LastPathUsed			= "";
         }
 
         #endregion 
@@ -43,35 +41,18 @@ namespace BibtexManager
         #region Properties
 
 		/// <summary>
-		/// The path (location) that the last set of files was openned from.
+		/// Load last project as start up.
 		/// </summary>
-		public string LastPathUsed
+		public bool LoadLastProjectAtStartUp
 		{
 			get
 			{
-				return GetValue(AppKey(), "Last Path Used", "");
+				return GetValue(OptionsKey(), "Load Last Project At Start Up", true);
 			}
 
 			set
 			{
-				SetValue(AppKey(), "Last Path Used", value);
-			}
-		}
-
-
-		/// <summary>
-		/// The last filter string selected in the file select dialog box.
-		/// </summary>
-		public int LastSelectedFilterString
-		{
-			get
-			{
-				return GetValue(AppKey(), "Last Selected Filter String", 1);
-			}
-
-			set
-			{
-				SetValue(AppKey(), "Last Selected Filter String", value);
+				SetValue(OptionsKey(), "Load Last Project At Start Up", value);
 			}
 		}
 

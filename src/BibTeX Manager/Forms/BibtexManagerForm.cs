@@ -8,6 +8,7 @@ using System.Resources;
 using System.Drawing;
 using static DigitalProduction.Forms.MessageBoxYesNoToAll;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
+using BibTeXManager.Forms;
 
 namespace BibtexManager
 {
@@ -24,7 +25,7 @@ namespace BibtexManager
 		#region Construction
 
 		public BibtexManagerForm() :
-			base(BibtexProject.FilterString, "DigitalProduction", "BibTeX Manager")
+			base(BibtexProject.FilterString, "Digital Production", "BibTeX Manager")
 		{
 			// Registry access has to be created in constructor and done before setting controls.
 			Program.Registry = new RegistryAccess(this);
@@ -43,7 +44,6 @@ namespace BibtexManager
 			SetUpRecentFilesList(this.recentFilesToolStripMenuItem, Program.Registry);
 			
 			FindProjectControls(this);
-
 
 			this.dataGridViewInterfaceControl.ShowEditDialog	= this.ShowEditDialog;
 			this.dataGridViewInterfaceControl.ShowAddDialog		= this.ShowAddDialog;
@@ -76,7 +76,6 @@ namespace BibtexManager
 		protected override Project NewProject()
 		{
 			BibtexProject project	= new BibtexProject();
-
 			return (Project)project;
 		}
 
@@ -116,7 +115,7 @@ namespace BibtexManager
 			base.NewToolStripItem_Click(sender, eventArgs);
 
 			// After we create a new project, it needs to be set up.
-			ProjectForm projectForm	= new ProjectForm(this.Project);
+			ProjectSettingsForm projectForm	= new ProjectSettingsForm(this.Project);
 			DialogResult result		= projectForm.ShowDialog(this);
 		}
 
@@ -141,8 +140,28 @@ namespace BibtexManager
 		/// <param name="e">Event arguments.</param>
 		private void ModifyProjectToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			ProjectForm projectForm	= new ProjectForm(this.Project);
+			ProjectSettingsForm projectForm	= new ProjectSettingsForm(this.Project);
 			DialogResult result		= projectForm.ShowDialog(this);
+		}
+
+		#endregion
+
+		#region Tools
+
+		/// <summary>
+		/// Display the options dialog box.
+		/// </summary>
+		/// <param name="sender">Sender.</param>
+		/// <param name="eventArgs">Event args.</param>
+		private void OptionsToolStripMenuItem_Click(object sender, EventArgs eventArgs)
+		{
+			OptionsForm options = new OptionsForm();
+			DialogResult result = options.ShowDialog(this);
+
+			if (result == DialogResult.OK && this.IsProjectOpened)
+			{
+				// Do we need to update the project?
+			}
 		}
 
 		#endregion
@@ -211,11 +230,9 @@ namespace BibtexManager
 		{
 			if (_project != null)
 			{
-
 				// This will allow the entries to show up in the DataGridView.
-				BindingList<BibEntry> bindingList = new BindingList<BibEntry>(this.Project.Bibliography.Entries);
-				this.referencesBindingSource.DataSource = bindingList;
-				bindingList.ListChanged += OnListChanged;
+				this.referencesBindingSource.DataSource = this.Project.Bibliography.Entries;
+				this.Project.Bibliography.Entries.ListChanged += OnListChanged;
 			}
 		}
 
@@ -234,8 +251,8 @@ namespace BibtexManager
 		/// </summary>
 		private void RemoveDataBinding()
 		{
-			this.bibEntriesDataGridView.DataSource	= null;
 			this.referencesBindingSource.DataSource	= null;
+			this.Project.Bibliography.Entries.ListChanged -= OnListChanged;
 		}
 
 		public DialogResultPair ShowEditDialog(object obj)
@@ -250,9 +267,7 @@ namespace BibtexManager
 		public DialogResultPair ShowAddDialog()
 		{
 			BibEntry entry = new BibEntry { Type = "inbook", Key = "ref:weasel2023a", ["author"] = "Weasel, Thanksgiving", ["Title"] = "A treaty in testing." };
-			this.referencesBindingSource.Add(entry);
-
-			return new DialogResultPair();
+			return new DialogResultPair(DialogResult.OK, entry);
 		}
 
 		#endregion
@@ -264,12 +279,12 @@ namespace BibtexManager
 		/// </summary>
 		private void InitializeFromRegistry()
 		{
-			//this.textBoxInputFile.Text = Program.Registry.InputFile;
-			//this.textBoxXsltFile.Text = Program.Registry.XsltFile;
-			//this.textBoxXsltArguments.Text = Program.Registry.XsltArguments;
-			//this.textBoxOutputFile.Text = Program.Registry.OutputFile;
-			//this.checkBoxPostProcessor.Checked = Program.Registry.RunPostProcessor;
-			//this.textBoxPostProcessor.Text = Program.Registry.PostProcessorFile;
+			RegistryAccess registryAccess = Program.Registry;
+
+			if (registryAccess.LoadLastProjectAtStartUp)
+			{
+				OpenRecentFile();
+			}
 		}
 
 		#endregion

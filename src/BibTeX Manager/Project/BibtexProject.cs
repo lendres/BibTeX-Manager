@@ -19,6 +19,7 @@ namespace BibtexManager
 		private string								_bibFile;
 		private List<string>						_assessoryFiles		= new List<string>();
 		private Bibliography						_bibliography		= new Bibliography();
+		private WriteSettings						_writeSettings		= new WriteSettings();
 
 		#endregion
 
@@ -50,6 +51,9 @@ namespace BibtexManager
 
 		#region Properties
 
+		/// <summary>
+		/// The path to the bibiography file.
+		/// </summary>
 		[XmlAttribute("bibfile")]
 		public string BibFile
 		{
@@ -102,6 +106,23 @@ namespace BibtexManager
 			}
 		}
 
+		/// <summary>
+		/// The settings for writing the bibliography file.
+		/// </summary>
+		[XmlElement("writesettings")]
+		public WriteSettings WriteSettings
+		{
+			get
+			{
+				return _writeSettings;
+			}
+
+			set
+			{
+				_writeSettings = value;
+			}
+		}
+
 		#endregion
 
 		#region Methods
@@ -135,8 +156,8 @@ namespace BibtexManager
 		/// <exception cref="InvalidOperationException">Thrown when the projects path is not set or not valid.</exception>
 		public override void Serialize()
 		{
+			_bibliography.Write(_bibFile+".output.bib", _writeSettings);
 			base.Serialize();
-
 		}
 
 		/// <summary>

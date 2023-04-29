@@ -119,11 +119,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Forms\ProjectForm.cs">
+    <Compile Include="Forms\OptionsForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\ProjectForm.Designer.cs">
-      <DependentUpon>ProjectForm.cs</DependentUpon>
+    <Compile Include="Forms\OptionsForm.Designer.cs">
+      <DependentUpon>OptionsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ProjectSettingsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ProjectSettingsForm.Designer.cs">
+      <DependentUpon>ProjectSettingsForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -144,6 +150,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Content Include="User Files\Bib Entry Initialization.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="Resources\Save_16x.png" />
     <None Include="app.config" />
     <None Include="Help\BibTeX Manager.hhc" />
@@ -172,8 +181,11 @@
       <DependentUpon>BibtexManagerForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\ProjectForm.resx">
-      <DependentUpon>ProjectForm.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\OptionsForm.resx">
+      <DependentUpon>OptionsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ProjectSettingsForm.resx">
+      <DependentUpon>ProjectSettingsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
