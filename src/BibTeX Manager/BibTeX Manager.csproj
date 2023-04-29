@@ -150,7 +150,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Content Include="User Files\Bib Entry Initialization.xml">
+    <Content Include="Test Files\Bib Entry Initialization.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <None Include="Resources\Save_16x.png" />
