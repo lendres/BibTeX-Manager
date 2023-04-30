@@ -149,6 +149,9 @@ namespace BibtexManager
 			this.alignTagValuesCheckBox.Checked			= writeSettings.AlignTagValues;
 			this.alignmentColumnNumericUpDown.Value		= writeSettings.AlignAtColumn;
 			this.alignmentTabStopNumericUpDown.Value	= writeSettings.AlignAtTabStop;
+
+			// Style.
+			this.removeLastCommaCheckBox.Checked		= writeSettings.RemoveLastComma;
 		}
 
 		/// <summary>
@@ -184,6 +187,9 @@ namespace BibtexManager
 			writeSettings.AlignTagValues	= this.alignTagValuesCheckBox.Checked;
 			writeSettings.AlignAtColumn		= (int)this.alignmentColumnNumericUpDown.Value;
 			writeSettings.AlignAtTabStop	= (int)this.alignmentTabStopNumericUpDown.Value;
+
+			// Style
+			writeSettings.RemoveLastComma	= this.removeLastCommaCheckBox.Checked;
 		}
 
 		/// <summary>

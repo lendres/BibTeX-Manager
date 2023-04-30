@@ -9,6 +9,7 @@ using System.Drawing;
 using static DigitalProduction.Forms.MessageBoxYesNoToAll;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 using BibTeXManager.Forms;
+using BibTeXManager;
 
 namespace BibtexManager
 {
@@ -116,7 +117,7 @@ namespace BibtexManager
 
 			// After we create a new project, it needs to be set up.
 			ProjectSettingsForm projectForm	= new ProjectSettingsForm(this.Project);
-			DialogResult result		= projectForm.ShowDialog(this);
+			DialogResult result				= projectForm.ShowDialog(this);
 		}
 
 		/// <summary>
@@ -257,8 +258,9 @@ namespace BibtexManager
 
 		public DialogResultPair ShowEditDialog(object obj)
 		{
-			MessageBox.Show(this, "Edit the entry", "Edit", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-			return new DialogResultPair();
+			EditRawBibEntryForm editRawBibEntryForm = new EditRawBibEntryForm();
+			return editRawBibEntryForm.ShowDialog(this, (BibEntry)obj, this.Project.WriteSettings);
+				//(EditRawBibEntry)obj;
 		}
 
 		/// <summary>

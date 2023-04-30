@@ -55,25 +55,28 @@
 			this.insertTabsRadioButton = new System.Windows.Forms.RadioButton();
 			this.insertSpacesRadioButton = new System.Windows.Forms.RadioButton();
 			this.alignmentGroupBox = new System.Windows.Forms.GroupBox();
+			this.alignmentTabStopLabel = new System.Windows.Forms.Label();
+			this.alignmentTabStopNumericUpDown = new System.Windows.Forms.NumericUpDown();
 			this.alignmentColumnLabel = new System.Windows.Forms.Label();
 			this.alignmentColumnNumericUpDown = new System.Windows.Forms.NumericUpDown();
 			this.alignTagValuesCheckBox = new System.Windows.Forms.CheckBox();
-			this.alignmentTabStopLabel = new System.Windows.Forms.Label();
-			this.alignmentTabStopNumericUpDown = new System.Windows.Forms.NumericUpDown();
+			this.styleGroupBox = new System.Windows.Forms.GroupBox();
+			this.removeLastCommaCheckBox = new System.Windows.Forms.CheckBox();
 			this.bibFileGroupBox.SuspendLayout();
 			this.accessoryFilesGroupBox.SuspendLayout();
 			this.tabsGroupBox.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.tabSizeNumericUpDown)).BeginInit();
 			this.alignmentGroupBox.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.alignmentColumnNumericUpDown)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.alignmentTabStopNumericUpDown)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.alignmentColumnNumericUpDown)).BeginInit();
+			this.styleGroupBox.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// cancelButton
 			// 
 			this.cancelButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.cancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-			this.cancelButton.Location = new System.Drawing.Point(629, 322);
+			this.cancelButton.Location = new System.Drawing.Point(629, 328);
 			this.cancelButton.Name = "cancelButton";
 			this.cancelButton.Size = new System.Drawing.Size(80, 23);
 			this.cancelButton.TabIndex = 25;
@@ -84,7 +87,7 @@
 			// 
 			this.oKbutton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.oKbutton.DialogResult = System.Windows.Forms.DialogResult.OK;
-			this.oKbutton.Location = new System.Drawing.Point(531, 322);
+			this.oKbutton.Location = new System.Drawing.Point(531, 328);
 			this.oKbutton.Name = "oKbutton";
 			this.oKbutton.Size = new System.Drawing.Size(80, 23);
 			this.oKbutton.TabIndex = 24;
@@ -260,6 +263,32 @@
 			this.alignmentGroupBox.TabStop = false;
 			this.alignmentGroupBox.Text = "Alignment";
 			// 
+			// alignmentTabStopLabel
+			// 
+			this.alignmentTabStopLabel.AutoSize = true;
+			this.alignmentTabStopLabel.Location = new System.Drawing.Point(7, 70);
+			this.alignmentTabStopLabel.Name = "alignmentTabStopLabel";
+			this.alignmentTabStopLabel.Size = new System.Drawing.Size(97, 13);
+			this.alignmentTabStopLabel.TabIndex = 7;
+			this.alignmentTabStopLabel.Text = "Alignment tab stop:";
+			// 
+			// alignmentTabStopNumericUpDown
+			// 
+			this.alignmentTabStopNumericUpDown.Location = new System.Drawing.Point(106, 66);
+			this.alignmentTabStopNumericUpDown.Minimum = new decimal(new int[] {
+            4,
+            0,
+            0,
+            0});
+			this.alignmentTabStopNumericUpDown.Name = "alignmentTabStopNumericUpDown";
+			this.alignmentTabStopNumericUpDown.Size = new System.Drawing.Size(54, 20);
+			this.alignmentTabStopNumericUpDown.TabIndex = 6;
+			this.alignmentTabStopNumericUpDown.Value = new decimal(new int[] {
+            15,
+            0,
+            0,
+            0});
+			// 
 			// alignmentColumnLabel
 			// 
 			this.alignmentColumnLabel.AutoSize = true;
@@ -297,31 +326,25 @@
 			this.alignTagValuesCheckBox.UseVisualStyleBackColor = true;
 			this.alignTagValuesCheckBox.CheckedChanged += new System.EventHandler(this.AlignTagValuesCheckBox_CheckedChanged);
 			// 
-			// alignmentTabStopLabel
+			// styleGroupBox
 			// 
-			this.alignmentTabStopLabel.AutoSize = true;
-			this.alignmentTabStopLabel.Location = new System.Drawing.Point(7, 70);
-			this.alignmentTabStopLabel.Name = "alignmentTabStopLabel";
-			this.alignmentTabStopLabel.Size = new System.Drawing.Size(97, 13);
-			this.alignmentTabStopLabel.TabIndex = 7;
-			this.alignmentTabStopLabel.Text = "Alignment tab stop:";
+			this.styleGroupBox.Controls.Add(this.removeLastCommaCheckBox);
+			this.styleGroupBox.Location = new System.Drawing.Point(378, 219);
+			this.styleGroupBox.Name = "styleGroupBox";
+			this.styleGroupBox.Size = new System.Drawing.Size(176, 100);
+			this.styleGroupBox.TabIndex = 30;
+			this.styleGroupBox.TabStop = false;
+			this.styleGroupBox.Text = "Style";
 			// 
-			// alignmentTabStopNumericUpDown
+			// removeLastCommaCheckBox
 			// 
-			this.alignmentTabStopNumericUpDown.Location = new System.Drawing.Point(106, 66);
-			this.alignmentTabStopNumericUpDown.Minimum = new decimal(new int[] {
-            4,
-            0,
-            0,
-            0});
-			this.alignmentTabStopNumericUpDown.Name = "alignmentTabStopNumericUpDown";
-			this.alignmentTabStopNumericUpDown.Size = new System.Drawing.Size(54, 20);
-			this.alignmentTabStopNumericUpDown.TabIndex = 6;
-			this.alignmentTabStopNumericUpDown.Value = new decimal(new int[] {
-            15,
-            0,
-            0,
-            0});
+			this.removeLastCommaCheckBox.AutoSize = true;
+			this.removeLastCommaCheckBox.Location = new System.Drawing.Point(7, 20);
+			this.removeLastCommaCheckBox.Name = "removeLastCommaCheckBox";
+			this.removeLastCommaCheckBox.Size = new System.Drawing.Size(167, 17);
+			this.removeLastCommaCheckBox.TabIndex = 0;
+			this.removeLastCommaCheckBox.Text = "Remove comma after last tag.";
+			this.removeLastCommaCheckBox.UseVisualStyleBackColor = true;
 			// 
 			// ProjectSettingsForm
 			// 
@@ -329,7 +352,8 @@
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.CancelButton = this.cancelButton;
-			this.ClientSize = new System.Drawing.Size(721, 357);
+			this.ClientSize = new System.Drawing.Size(721, 363);
+			this.Controls.Add(this.styleGroupBox);
 			this.Controls.Add(this.alignmentGroupBox);
 			this.Controls.Add(this.tabsGroupBox);
 			this.Controls.Add(this.accessoryFilesGroupBox);
@@ -350,8 +374,10 @@
 			((System.ComponentModel.ISupportInitialize)(this.tabSizeNumericUpDown)).EndInit();
 			this.alignmentGroupBox.ResumeLayout(false);
 			this.alignmentGroupBox.PerformLayout();
-			((System.ComponentModel.ISupportInitialize)(this.alignmentColumnNumericUpDown)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.alignmentTabStopNumericUpDown)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.alignmentColumnNumericUpDown)).EndInit();
+			this.styleGroupBox.ResumeLayout(false);
+			this.styleGroupBox.PerformLayout();
 			this.ResumeLayout(false);
 
 		}
@@ -376,5 +402,7 @@
 		private System.Windows.Forms.CheckBox alignTagValuesCheckBox;
 		private System.Windows.Forms.Label alignmentTabStopLabel;
 		private System.Windows.Forms.NumericUpDown alignmentTabStopNumericUpDown;
+		private System.Windows.Forms.GroupBox styleGroupBox;
+		private System.Windows.Forms.CheckBox removeLastCommaCheckBox;
 	} // End class.
 } // End namespace.
