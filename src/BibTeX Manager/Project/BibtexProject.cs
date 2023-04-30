@@ -1,6 +1,8 @@
 ﻿using BibTeXLibrary;
 using DigitalProduction.Projects;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Xml.Serialization;
 
 namespace BibtexManager
@@ -13,9 +15,11 @@ namespace BibtexManager
 		#region Fields
 
 		private string								_bibFile;
-		private List<string>						_assessoryFiles		= new List<string>();
-		private readonly Bibliography				_bibliography		= new Bibliography();
-		private WriteSettings						_writeSettings		= new WriteSettings();
+		private bool								_useBibEntryInitialization;
+		private string								_bibEntryInitializationFile;
+		private List<string>						_assessoryFiles					= new List<string>();
+		private readonly Bibliography				_bibliography					= new Bibliography();
+		private WriteSettings						_writeSettings					= new WriteSettings();
 
 		#endregion
 
@@ -63,9 +67,43 @@ namespace BibtexManager
 				if (_bibFile != value)
 				{
 					_bibFile		= value;
-					ReadBibFile();
+					ReadBibliographyFile();
 					this.Modified	= true;
 				}
+			}
+		}
+
+		/// <summary>
+		/// Determines if the bibiography entry initialization file.
+		/// </summary>
+		[XmlAttribute("usebibentryinitialization")]
+		public bool UseBibEntryInitialization
+		{
+			get
+			{
+				return _useBibEntryInitialization;
+			}
+
+			set
+			{
+				_useBibEntryInitialization = value;
+			}
+		}
+
+		/// <summary>
+		/// The path to the bibiography entry initialization file.
+		/// </summary>
+		[XmlAttribute("bibentryinitializationfile")]
+		public string BibEntryInitializationFile
+		{
+			get
+			{
+				return _bibEntryInitializationFile;
+			}
+
+			set
+			{
+				_bibEntryInitializationFile = value;
 			}
 		}
 
@@ -123,9 +161,38 @@ namespace BibtexManager
 
 		#region Methods
 
-		public void ReadBibFile()
+		/// <summary>
+		/// Read the bibliography file.
+		/// </summary>
+		public void ReadBibliographyFile()
 		{
-			_bibliography.Read(_bibFile);
+			if (_useBibEntryInitialization)
+			{
+				_bibliography.Read(_bibFile, _bibEntryInitializationFile);
+			}
+			else
+			{
+				_bibliography.Read(_bibFile);
+			}
+		}
+
+		/// <summary>
+		/// Parse a string and return BibEntrys.
+		/// </summary>
+		/// <param name="text">Text to process.</param>
+		public List<BibEntry> ParseText(string text)
+		{
+			StringReader textReader = new StringReader(text);
+			Tuple<List<string>, List<BibEntry>> result;
+			if (_useBibEntryInitialization)
+			{
+				result = BibParser.Parse(textReader, _bibEntryInitializationFile);
+			}
+			else
+			{
+				result = BibParser.Parse(textReader);
+			}
+			return result.Item2;
 		}
 
 		/// <summary>

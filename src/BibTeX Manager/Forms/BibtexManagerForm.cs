@@ -262,7 +262,7 @@ namespace BibtexManager
 		/// <param name="obj">Object to edit, the BibEntry.</param>
 		public DialogResultPair ShowEditRawBibEntryDialog(object obj)
 		{
-			EditRawBibEntryForm editRawBibEntryForm = new EditRawBibEntryForm(this);
+			EditRawBibEntryForm editRawBibEntryForm = new EditRawBibEntryForm(this, this.Project);
 			return editRawBibEntryForm.ShowDialog(this, (BibEntry)obj, this.Project.WriteSettings);
 		}
 
@@ -271,7 +271,7 @@ namespace BibtexManager
 		/// </summary>
 		public DialogResultPair ShowAddRawBibEntryDialog()
 		{
-			EditRawBibEntryForm editRawBibEntryForm = new EditRawBibEntryForm(this);
+			EditRawBibEntryForm editRawBibEntryForm = new EditRawBibEntryForm(this, this.Project);
 			return editRawBibEntryForm.ShowDialog(this, null, this.Project.WriteSettings);
 			//BibEntry entry = new BibEntry { Type = "inbook", Key = "ref:weasel2023a", ["author"] = "Weasel, Thanksgiving", ["Title"] = "A treaty in testing." };
 			//return new DialogResultPair(DialogResult.OK, entry);

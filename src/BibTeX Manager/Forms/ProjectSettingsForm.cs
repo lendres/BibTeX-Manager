@@ -14,7 +14,8 @@ namespace BibtexManager
 	{
 		#region Fields
 
-		private readonly static string		_filterString		= "\"BibTeX files (*.bib)|*.bib|Text files (*.txt)|*.txt|All files (*.*)|*.*\"";
+		private readonly static string		_bibFileFilterString							= "\"BibTeX files (*.bib)|*.bib|Text files (*.txt)|*.txt|All files (*.*)|*.*\"";
+		private readonly static string		_bibEntryInitializationFileFilterString			= "\"Bibliography Tag Order files (*.tagord)|*.tagord|XML files (*.xml)|*.xml|All files (*.*)|*.*\"";
 
 		private readonly BibtexProject		_project;
 
@@ -61,11 +62,38 @@ namespace BibtexManager
 		{
 			string initialDirectory	= System.IO.Path.GetDirectoryName(_project.BibFile);
 
-			string path = FileSelect.BrowseForAFile(this, _filterString, "Select BibTeX File", initialDirectory, true);
+			string path = FileSelect.BrowseForAFile(this, _bibFileFilterString, "Select BibTeX File", initialDirectory, true);
 
 			if (path != "")
 			{
 				this.bibFileLocationTextBox.Text = path;
+			}
+		}
+
+		/// <summary>
+		/// Use bib entry initialization checked change event handler.
+		/// </summary>
+		/// <param name="sender">Sender.</param>
+		/// <param name="eventArgs">Event arguments.</param>
+		private void UseBibEntryInitializationCheckBox_CheckedChanged(object sender, EventArgs eventArgs)
+		{
+			SetControls();
+		}
+
+		/// <summary>
+		/// Browse for the bibliography tag order file.
+		/// </summary>
+		/// <param name="sender">Sender.</param>
+		/// <param name="eventArgs">Event arguments.</param>
+		private void BrowseBibEntryInitializationButton_Click(object sender, EventArgs eventArgs)
+		{
+			string initialDirectory = System.IO.Path.GetDirectoryName(_project.BibEntryInitializationFile);
+
+			string path = FileSelect.BrowseForAFile(this, _bibEntryInitializationFileFilterString, "Select a Bibliography Tag Order File", initialDirectory, true);
+
+			if (path != "")
+			{
+				this.bibEntryInitializationFileTextBox.Text = path;
 			}
 		}
 
@@ -78,13 +106,12 @@ namespace BibtexManager
 		{
 			string initialDirectory = System.IO.Path.GetDirectoryName(_project.BibFile);
 
-			string[] paths = FileSelect.BrowseForMultipleFiles(this, _filterString, "Select BibTeX File", initialDirectory, true);
+			string[] paths = FileSelect.BrowseForMultipleFiles(this, _bibFileFilterString, "Select BibTeX File", initialDirectory, true);
 
 			if (paths != null)
 			{
 				this.assessoryFilesListBox.Items.AddRange(paths);
 			}
-
 		}
 
 		/// <summary>
@@ -110,19 +137,34 @@ namespace BibtexManager
 		private void ButtonOK_Click(object sender, EventArgs eventArgs)
 		{
 			// TODO: Validation code goes here.
+			if (!System.IO.File.Exists(this.bibFileLocationTextBox.Text))
+			{
+				InvalidDataMessage("The bibliography file does not exist.");
+				return;
+			}
+
+			if (this.bibEntryInitializationFileTextBox.Text != "" && !System.IO.File.Exists(this.bibEntryInitializationFileTextBox.Text))
+			{
+				InvalidDataMessage("The bibliography entry initialization file does not exist.");
+				return;
+			}
 
 			// Ensure the data is valid.
 			if (!ValidateChildren())
 			{
 				// Tell the user to fix the errors.
 				MessageBox.Show(this, "Errors exist on the form.", "Invalid Data", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-				// Have to set the DialogResult to none to prevent the form from closing.
-				this.DialogResult = DialogResult.None;
 				return;
 			}
 
 			PushEntriesToDataStructure();
+		}
+
+		private void InvalidDataMessage(string message)
+		{
+			MessageBox.Show(this, message, "Invalid Data", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			// Have to set the DialogResult to none to prevent the form from closing.
+			this.DialogResult = DialogResult.None;
 		}
 
 		#endregion
@@ -134,24 +176,31 @@ namespace BibtexManager
 		/// </summary>
 		protected void PopulateControls()
 		{
-			this.bibFileLocationTextBox.Text = _project.BibFile;
+			// Bibliography file.
+			this.bibFileLocationTextBox.Text				= _project.BibFile;
+
+			// Bibliography entry initialization.
+			this.useBibEntryInitializationCheckBox.Checked	= _project.UseBibEntryInitialization;
+			this.bibEntryInitializationFileTextBox.Text		= _project.BibEntryInitializationFile;
+
+			// Assessory files.
 			this.assessoryFilesListBox.Items.AddRange(_project.AssessoryFiles.ToArray());
 
 			// Write settings.
-			WriteSettings writeSettings					= _project.WriteSettings;
+			WriteSettings writeSettings						= _project.WriteSettings;
 
 			// Tabs.
-			this.tabSizeNumericUpDown.Value				= writeSettings.TabSize;
-			this.insertSpacesRadioButton.Checked		= writeSettings.WhiteSpace == WhiteSpace.Space;
-			this.insertTabsRadioButton.Checked			= writeSettings.WhiteSpace == WhiteSpace.Tab;
+			this.tabSizeNumericUpDown.Value					= writeSettings.TabSize;
+			this.insertSpacesRadioButton.Checked			= writeSettings.WhiteSpace == WhiteSpace.Space;
+			this.insertTabsRadioButton.Checked				= writeSettings.WhiteSpace == WhiteSpace.Tab;
 
 			// Alignment.
-			this.alignTagValuesCheckBox.Checked			= writeSettings.AlignTagValues;
-			this.alignmentColumnNumericUpDown.Value		= writeSettings.AlignAtColumn;
-			this.alignmentTabStopNumericUpDown.Value	= writeSettings.AlignAtTabStop;
+			this.alignTagValuesCheckBox.Checked				= writeSettings.AlignTagValues;
+			this.alignmentColumnNumericUpDown.Value			= writeSettings.AlignAtColumn;
+			this.alignmentTabStopNumericUpDown.Value		= writeSettings.AlignAtTabStop;
 
 			// Style.
-			this.removeLastCommaCheckBox.Checked		= writeSettings.RemoveLastComma;
+			this.removeLastCommaCheckBox.Checked			= writeSettings.RemoveLastComma;
 		}
 
 		/// <summary>
@@ -159,10 +208,16 @@ namespace BibtexManager
 		/// </summary>
 		protected void PushEntriesToDataStructure()
 		{
-			_project.BibFile				= this.bibFileLocationTextBox.Text;
-			
-			ListBox.ObjectCollection items	= this.assessoryFilesListBox.Items;
-			List<string> files				= new List<string>();
+			// Bibliography file.
+			_project.BibFile						= this.bibFileLocationTextBox.Text;
+
+			// Bibliography entry initialization.
+			_project.UseBibEntryInitialization		= this.useBibEntryInitializationCheckBox.Checked;
+			_project.BibEntryInitializationFile		= this.bibEntryInitializationFileTextBox.Text;
+
+			// Assessory files.
+			ListBox.ObjectCollection items			= this.assessoryFilesListBox.Items;
+			List<string> files						= new List<string>();
 			foreach (object item in items)
 			{
 				files.Add(item.ToString());
@@ -170,7 +225,7 @@ namespace BibtexManager
 			_project.AssessoryFiles = files;
 
 			// Write settings.
-			WriteSettings writeSettings = _project.WriteSettings;
+			WriteSettings writeSettings				= _project.WriteSettings;
 
 			// Tabs.
 			_project.WriteSettings.TabSize			= (int)this.tabSizeNumericUpDown.Value;
@@ -184,12 +239,12 @@ namespace BibtexManager
 			}
 
 			// Alignment.
-			writeSettings.AlignTagValues	= this.alignTagValuesCheckBox.Checked;
-			writeSettings.AlignAtColumn		= (int)this.alignmentColumnNumericUpDown.Value;
-			writeSettings.AlignAtTabStop	= (int)this.alignmentTabStopNumericUpDown.Value;
+			writeSettings.AlignTagValues			= this.alignTagValuesCheckBox.Checked;
+			writeSettings.AlignAtColumn				= (int)this.alignmentColumnNumericUpDown.Value;
+			writeSettings.AlignAtTabStop			= (int)this.alignmentTabStopNumericUpDown.Value;
 
 			// Style
-			writeSettings.RemoveLastComma	= this.removeLastCommaCheckBox.Checked;
+			writeSettings.RemoveLastComma			= this.removeLastCommaCheckBox.Checked;
 		}
 
 		/// <summary>
@@ -207,6 +262,9 @@ namespace BibtexManager
 				this.alignmentColumnNumericUpDown.Enabled	= false;
 				this.alignmentTabStopNumericUpDown.Enabled	= false;
 			}
+
+			this.bibEntryInitializationFileTextBox.Enabled		= this.useBibEntryInitializationCheckBox.Checked;
+			this.browseBibEntryInitializationFileButton.Enabled	= this.useBibEntryInitializationCheckBox.Checked;
 		}
 
 		#endregion

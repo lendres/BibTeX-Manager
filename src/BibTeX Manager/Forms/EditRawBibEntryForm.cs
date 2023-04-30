@@ -22,18 +22,21 @@ namespace BibTeXManager
 		#region Fields
 
 		private BibEntry		_bibEntry;
+		private BibtexProject	_project;
 
 		#endregion
 
 		#region Construction
 
 		/// <summary>
-		/// Default constructor.
+		/// Constructor.
 		/// </summary>
-		public EditRawBibEntryForm(BibtexManagerForm parentForm) :
+		public EditRawBibEntryForm(BibtexManagerForm parentForm, BibtexProject project) :
 			base(parentForm, "Edit Raw BibTeX Entry Form")
 		{
+			_project = project;
 			InitializeComponent();
+			this.richTextBox.Select();
 
 			//PopulateControls();
 		}
@@ -56,9 +59,9 @@ namespace BibTeXManager
 			// TODO: Validation code goes here.
 			try
 			{
-				StringReader textReader						= new StringReader(this.richTextBox.Text);
-				Tuple<List<string>, List<BibEntry>> result	= BibParser.Parse(textReader);
-				_bibEntry									= result.Item2[0];
+				List<BibEntry> entries = _project.ParseText(this.richTextBox.Text);
+				_bibEntry = entries[0];
+
 			}
 			catch (Exception exception)
 			{
