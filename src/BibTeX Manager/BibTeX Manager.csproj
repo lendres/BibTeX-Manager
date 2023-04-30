@@ -159,7 +159,6 @@
     <Content Include="Test Files\Bib Entry Initialization.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <None Include="Resources\Save_16x.png" />
     <None Include="app.config" />
     <None Include="Help\BibTeX Manager.hhc" />
     <None Include="Help\BibTeX Manager.hhk" />
@@ -220,6 +219,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controls\" />
+    <Folder Include="Resources\" />
   </ItemGroup>
   <ProjectExtensions>
     <VisualStudio>

@@ -1,4 +1,5 @@
 ﻿using BibTeXLibrary;
+using BibtexManager;
 using DigitalProduction.Forms;
 using System;
 using System.Collections.Generic;
@@ -9,15 +10,18 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using static DigitalProduction.Forms.MessageBoxYesNoToAll;
 
 namespace BibTeXManager
 {
 	/// <summary>
 	/// 
 	/// </summary>
-	public partial class EditRawBibEntryForm : Form
+	public partial class EditRawBibEntryForm : DigitalProductionForm
 	{
 		#region Fields
+
+		private BibEntry		_bibEntry;
 
 		#endregion
 
@@ -26,11 +30,12 @@ namespace BibTeXManager
 		/// <summary>
 		/// Default constructor.
 		/// </summary>
-		public EditRawBibEntryForm()
+		public EditRawBibEntryForm(BibtexManagerForm parentForm) :
+			base(parentForm, "Edit Raw BibTeX Entry Form")
 		{
 			InitializeComponent();
 
-			PopulateControls();
+			//PopulateControls();
 		}
 
 		#endregion
@@ -49,6 +54,21 @@ namespace BibTeXManager
 		private void OkButton_Click(object sender, EventArgs eventArgs)
 		{
 			// TODO: Validation code goes here.
+			try
+			{
+				StringReader textReader						= new StringReader(this.richTextBox.Text);
+				Tuple<List<string>, List<BibEntry>> result	= BibParser.Parse(textReader);
+				_bibEntry									= result.Item2[0];
+			}
+			catch (Exception exception)
+			{
+				// The text entered contained an error.  Display it and cancel the "ok" (return).
+				MessageBox.Show(this, exception.Message, "Error Parsing Entry", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+				// Have to set the DialogResult to none to prevent the form from closing.
+				this.DialogResult = DialogResult.None;
+				return;
+			}
 
 			// Ensure the data is valid.
 			if (!ValidateChildren())
@@ -74,22 +94,25 @@ namespace BibTeXManager
 		/// <param name="parent">Parent form.</param>
 		public DialogResultPair ShowDialog(IWin32Window parent, BibEntry bibEntry, WriteSettings writeSettings)
 		{
-			int tabSize = writeSettings.TabSize * (richTextBox.Font.Height);
-
+			// Set tab size.  It is set in pixels, so we have to convert the font size to pixels.  We make an assumption the height is a good
+			// proxy for a space width.  We multiply that the tab size (number of spaces in a tab) to get the tab size.
+			int tabSize						= writeSettings.TabSize * (richTextBox.Font.Height);
 			this.richTextBox.SelectionTabs	= new int[] { tabSize, 2*tabSize, 3*tabSize, 4*tabSize, 5*tabSize, 6*tabSize, 7*tabSize, 8*tabSize };
-			this.richTextBox.Text			= bibEntry.ToString(writeSettings);
 
-			// Create the new return instance.
-			DialogResultPair dialogResultPair = new DialogResultPair();
+			// If there is a BibEntry provided, populate the form.
+			if (bibEntry != null)
+			{
+				this.richTextBox.Text = bibEntry.ToString(writeSettings);
+			}
 
-			// Show the dialog.
-			dialogResultPair.Result = this.ShowDialog(parent);
+			// Create the new return instance and show the dialog, storing the result.
+			DialogResultPair dialogResultPair	= new DialogResultPair();
+			dialogResultPair.Result				= this.ShowDialog(parent);
 
+			// If the Ok button was pressed, we try to create a new BibEntry.
 			if (dialogResultPair.Result == DialogResult.OK)
 			{
-				StringReader textReader						= new StringReader(this.richTextBox.Text);
-				Tuple<List<string>, List<BibEntry>> result	= BibParser.Parse(textReader);
-				dialogResultPair.Object						= result.Item2[0];
+				dialogResultPair.Object = _bibEntry;
 			}
 
 			// Returned value.
@@ -101,7 +124,6 @@ namespace BibTeXManager
 		/// </summary>
 		protected void PopulateControls()
 		{
-
 		}
 
 		/// <summary>
@@ -109,7 +131,6 @@ namespace BibTeXManager
 		/// </summary>
 		protected void PushEntriesToDataStructure()
 		{
-
 		}
 
 		#endregion

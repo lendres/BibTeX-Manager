@@ -46,8 +46,8 @@ namespace BibtexManager
 			
 			FindProjectControls(this);
 
-			this.dataGridViewInterfaceControl.ShowEditDialog	= this.ShowEditDialog;
-			this.dataGridViewInterfaceControl.ShowAddDialog		= this.ShowAddDialog;
+			this.dataGridViewInterfaceControl.ShowEditDialog	= this.ShowEditRawBibEntryDialog;
+			this.dataGridViewInterfaceControl.ShowAddDialog		= this.ShowAddRawBibEntryDialog;
 
 			InitializeFromRegistry();
 		}
@@ -256,20 +256,25 @@ namespace BibtexManager
 			this.Project.Bibliography.Entries.ListChanged -= OnListChanged;
 		}
 
-		public DialogResultPair ShowEditDialog(object obj)
+		/// <summary>
+		/// Show the Edit Raw BibTeX Entry form.
+		/// </summary>
+		/// <param name="obj">Object to edit, the BibEntry.</param>
+		public DialogResultPair ShowEditRawBibEntryDialog(object obj)
 		{
-			EditRawBibEntryForm editRawBibEntryForm = new EditRawBibEntryForm();
+			EditRawBibEntryForm editRawBibEntryForm = new EditRawBibEntryForm(this);
 			return editRawBibEntryForm.ShowDialog(this, (BibEntry)obj, this.Project.WriteSettings);
-				//(EditRawBibEntry)obj;
 		}
 
 		/// <summary>
 		/// Show the Add dialog box.
 		/// </summary>
-		public DialogResultPair ShowAddDialog()
+		public DialogResultPair ShowAddRawBibEntryDialog()
 		{
-			BibEntry entry = new BibEntry { Type = "inbook", Key = "ref:weasel2023a", ["author"] = "Weasel, Thanksgiving", ["Title"] = "A treaty in testing." };
-			return new DialogResultPair(DialogResult.OK, entry);
+			EditRawBibEntryForm editRawBibEntryForm = new EditRawBibEntryForm(this);
+			return editRawBibEntryForm.ShowDialog(this, null, this.Project.WriteSettings);
+			//BibEntry entry = new BibEntry { Type = "inbook", Key = "ref:weasel2023a", ["author"] = "Weasel, Thanksgiving", ["Title"] = "A treaty in testing." };
+			//return new DialogResultPair(DialogResult.OK, entry);
 		}
 
 		#endregion
