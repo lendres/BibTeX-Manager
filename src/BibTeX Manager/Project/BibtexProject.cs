@@ -18,7 +18,7 @@ namespace BibtexManager
 
 		private string								_bibFile;
 		private List<string>						_assessoryFiles		= new List<string>();
-		private Bibliography						_bibliography		= new Bibliography();
+		private readonly Bibliography				_bibliography		= new Bibliography();
 		private WriteSettings						_writeSettings		= new WriteSettings();
 
 		#endregion

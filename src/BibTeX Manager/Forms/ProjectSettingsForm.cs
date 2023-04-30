@@ -14,7 +14,7 @@ namespace BibtexManager
 	{
 		#region Members
 
-		private static string				_filterString		= "\"BibTeX files (*.bib)|*.bib|Text files (*.txt)|*.txt|All files (*.*)|*.*\"";
+		private readonly static string		_filterString		= "\"BibTeX files (*.bib)|*.bib|Text files (*.txt)|*.txt|All files (*.*)|*.*\"";
 
 		private readonly BibtexProject		_project;
 
@@ -47,7 +47,7 @@ namespace BibtexManager
 		/// </summary>
 		/// <param name="sender">Sender.</param>
 		/// <param name="eventArgs">Event arguments.</param>
-		private void alignTagValuesCheckBox_CheckedChanged(object sender, EventArgs eventArgs)
+		private void AlignTagValuesCheckBox_CheckedChanged(object sender, EventArgs eventArgs)
 		{
 			SetControls();
 		}

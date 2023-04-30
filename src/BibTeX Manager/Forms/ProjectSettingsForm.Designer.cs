@@ -232,7 +232,7 @@
 			this.insertTabsRadioButton.TabStop = true;
 			this.insertTabsRadioButton.Text = "Insert tabs";
 			this.insertTabsRadioButton.UseVisualStyleBackColor = true;
-			this.insertTabsRadioButton.CheckedChanged += new System.EventHandler(this.alignTagValuesCheckBox_CheckedChanged);
+			this.insertTabsRadioButton.CheckedChanged += new System.EventHandler(this.AlignTagValuesCheckBox_CheckedChanged);
 			// 
 			// insertSpacesRadioButton
 			// 
@@ -244,7 +244,7 @@
 			this.insertSpacesRadioButton.TabStop = true;
 			this.insertSpacesRadioButton.Text = "Insert spaces";
 			this.insertSpacesRadioButton.UseVisualStyleBackColor = true;
-			this.insertSpacesRadioButton.CheckedChanged += new System.EventHandler(this.alignTagValuesCheckBox_CheckedChanged);
+			this.insertSpacesRadioButton.CheckedChanged += new System.EventHandler(this.AlignTagValuesCheckBox_CheckedChanged);
 			// 
 			// alignmentGroupBox
 			// 
@@ -295,7 +295,7 @@
 			this.alignTagValuesCheckBox.TabIndex = 0;
 			this.alignTagValuesCheckBox.Text = "Align tab values.";
 			this.alignTagValuesCheckBox.UseVisualStyleBackColor = true;
-			this.alignTagValuesCheckBox.CheckedChanged += new System.EventHandler(this.alignTagValuesCheckBox_CheckedChanged);
+			this.alignTagValuesCheckBox.CheckedChanged += new System.EventHandler(this.AlignTagValuesCheckBox_CheckedChanged);
 			// 
 			// alignmentTabStopLabel
 			// 
