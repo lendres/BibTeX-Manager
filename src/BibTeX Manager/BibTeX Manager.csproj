@@ -156,9 +156,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Content Include="Test Files\Bib Entry Initialization.xml">
+    <None Include="Test Files\Bib Entry Initialization.tagord">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    </None>
     <None Include="app.config" />
     <None Include="Help\BibTeX Manager.hhc" />
     <None Include="Help\BibTeX Manager.hhk" />

@@ -61,6 +61,7 @@
             <value>year</value>
             <value>pages</value>
 			<value>speid</value>
+			<value>issn</value>
 			<value>doi</value>
 			<value>url</value>
 			<value>href</value>
