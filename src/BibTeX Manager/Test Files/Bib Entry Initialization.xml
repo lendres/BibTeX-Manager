@@ -60,6 +60,13 @@
             <value>month</value>
             <value>year</value>
             <value>pages</value>
+			<value>speid</value>
+			<value>doi</value>
+			<value>url</value>
+			<value>href</value>
+			<value>eprint</value>
+			<value>logline</value>
+			<value>abstract</value>
         </item>
         <item key="basic">
             <value>author</value>
