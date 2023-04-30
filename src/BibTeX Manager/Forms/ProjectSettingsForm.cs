@@ -8,11 +8,11 @@ using BibTeXLibrary;
 namespace BibtexManager
 {
 	/// <summary>
-	/// 
+	/// A form for configuring a Project.
 	/// </summary>
 	public partial class ProjectSettingsForm : Form
 	{
-		#region Members
+		#region Fields
 
 		private readonly static string		_filterString		= "\"BibTeX files (*.bib)|*.bib|Text files (*.txt)|*.txt|All files (*.*)|*.*\"";
 

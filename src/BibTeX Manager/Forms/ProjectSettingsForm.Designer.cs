@@ -3,7 +3,7 @@
 	partial class ProjectSettingsForm
 	{
 
-		#region Members
+		#region Fields
 
 		private System.Windows.Forms.Button cancelButton;
 		private System.Windows.Forms.Button oKbutton;

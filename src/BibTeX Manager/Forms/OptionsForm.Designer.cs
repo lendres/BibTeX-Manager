@@ -3,7 +3,7 @@
 	partial class OptionsForm
 	{
 
-		#region Members
+		#region Fields
 
 		private System.Windows.Forms.Button buttonCancel;
 		private System.Windows.Forms.Button buttonOK;

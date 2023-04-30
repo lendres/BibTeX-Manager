@@ -5,7 +5,7 @@ namespace BibtexManager
 	/// </summary>
 	partial class BibtexManagerForm
 	{
-		#region Members
+		#region Fields
 
 		// Menu.
 		private System.Windows.Forms.MenuStrip									menuMain;

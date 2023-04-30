@@ -15,7 +15,7 @@ namespace BibTeXManager.Forms
 	/// </summary>
 	public partial class OptionsForm : Form
 	{
-		#region Members
+		#region Fields
 
 		#endregion
 

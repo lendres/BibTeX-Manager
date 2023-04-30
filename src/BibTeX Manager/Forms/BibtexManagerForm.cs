@@ -17,7 +17,7 @@ namespace BibtexManager
 	/// </summary>
 	public partial class BibtexManagerForm : DigitalProduction.Forms.ProjectForm
 	{
-        #region Members
+        #region Fields
 
 
 		#endregion

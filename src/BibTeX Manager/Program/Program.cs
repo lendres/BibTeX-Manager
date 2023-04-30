@@ -8,7 +8,7 @@ namespace BibtexManager
 	/// </summary>
 	static class Program
 	{
-		#region Members
+		#region Fields
 
 		/// <summary>
 		/// Access to the registry settings.  Since there is only one registry, this is static.  It also is convenient to allow access to the registry

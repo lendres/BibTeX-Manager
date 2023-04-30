@@ -14,7 +14,7 @@ namespace BibtexManager
 	/// </summary>
 	public class BibtexProject : Project
 	{
-		#region Members
+		#region Fields
 
 		private string								_bibFile;
 		private List<string>						_assessoryFiles		= new List<string>();
