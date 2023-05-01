@@ -66,6 +66,7 @@
 			this.useBibEntryInitializationCheckBox = new System.Windows.Forms.CheckBox();
 			this.bibEntryInitializationFileTextBox = new System.Windows.Forms.TextBox();
 			this.browseBibEntryInitializationFileButton = new System.Windows.Forms.Button();
+			this.autoGenerateKeysCheckBox = new System.Windows.Forms.CheckBox();
 			this.bibFileGroupBox.SuspendLayout();
 			this.accessoryFilesGroupBox.SuspendLayout();
 			this.tabsGroupBox.SuspendLayout();
@@ -334,6 +335,7 @@
 			// styleGroupBox
 			// 
 			this.styleGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.styleGroupBox.Controls.Add(this.autoGenerateKeysCheckBox);
 			this.styleGroupBox.Controls.Add(this.removeLastCommaCheckBox);
 			this.styleGroupBox.Location = new System.Drawing.Point(378, 268);
 			this.styleGroupBox.Name = "styleGroupBox";
@@ -345,7 +347,7 @@
 			// removeLastCommaCheckBox
 			// 
 			this.removeLastCommaCheckBox.AutoSize = true;
-			this.removeLastCommaCheckBox.Location = new System.Drawing.Point(7, 20);
+			this.removeLastCommaCheckBox.Location = new System.Drawing.Point(7, 44);
 			this.removeLastCommaCheckBox.Name = "removeLastCommaCheckBox";
 			this.removeLastCommaCheckBox.Size = new System.Drawing.Size(167, 17);
 			this.removeLastCommaCheckBox.TabIndex = 0;
@@ -397,6 +399,16 @@
 			this.browseBibEntryInitializationFileButton.TabIndex = 4;
 			this.browseBibEntryInitializationFileButton.Text = "Browse";
 			this.browseBibEntryInitializationFileButton.Click += new System.EventHandler(this.BrowseBibEntryInitializationButton_Click);
+			// 
+			// autoGenerateKeysCheckBox
+			// 
+			this.autoGenerateKeysCheckBox.AutoSize = true;
+			this.autoGenerateKeysCheckBox.Location = new System.Drawing.Point(7, 20);
+			this.autoGenerateKeysCheckBox.Name = "autoGenerateKeysCheckBox";
+			this.autoGenerateKeysCheckBox.Size = new System.Drawing.Size(161, 17);
+			this.autoGenerateKeysCheckBox.TabIndex = 1;
+			this.autoGenerateKeysCheckBox.Text = "Automatically generate keys.";
+			this.autoGenerateKeysCheckBox.UseVisualStyleBackColor = true;
 			// 
 			// ProjectSettingsForm
 			// 
@@ -463,5 +475,6 @@
 		private System.Windows.Forms.TextBox bibEntryInitializationFileTextBox;
 		private System.Windows.Forms.Button browseBibEntryInitializationFileButton;
 		private System.Windows.Forms.CheckBox useBibEntryInitializationCheckBox;
+		private System.Windows.Forms.CheckBox autoGenerateKeysCheckBox;
 	} // End class.
 } // End namespace.

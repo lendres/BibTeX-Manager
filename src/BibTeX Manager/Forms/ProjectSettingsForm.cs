@@ -200,6 +200,7 @@ namespace BibtexManager
 			this.alignmentTabStopNumericUpDown.Value		= writeSettings.AlignAtTabStop;
 
 			// Style.
+			this.autoGenerateKeysCheckBox.Checked			= _project.AutoGenerateKeys;
 			this.removeLastCommaCheckBox.Checked			= writeSettings.RemoveLastComma;
 		}
 
@@ -244,6 +245,7 @@ namespace BibtexManager
 			writeSettings.AlignAtTabStop			= (int)this.alignmentTabStopNumericUpDown.Value;
 
 			// Style
+			_project.AutoGenerateKeys				= this.autoGenerateKeysCheckBox.Checked;
 			writeSettings.RemoveLastComma			= this.removeLastCommaCheckBox.Checked;
 		}
 

@@ -59,9 +59,8 @@ namespace BibTeXManager
 			// TODO: Validation code goes here.
 			try
 			{
-				List<BibEntry> entries = _project.ParseText(this.richTextBox.Text);
-				_bibEntry = entries[0];
-
+				List<BibEntry> entries	= _project.ParseText(this.richTextBox.Text);
+				_bibEntry				= entries[0];
 			}
 			catch (Exception exception)
 			{
@@ -97,9 +96,14 @@ namespace BibTeXManager
 		/// <param name="parent">Parent form.</param>
 		public DialogResultPair ShowDialog(IWin32Window parent, BibEntry bibEntry, WriteSettings writeSettings)
 		{
+			
+
 			// Set tab size.  It is set in pixels, so we have to convert the font size to pixels.  We make an assumption the height is a good
 			// proxy for a space width.  We multiply that the tab size (number of spaces in a tab) to get the tab size.
+
 			int tabSize						= writeSettings.TabSize * (richTextBox.Font.Height);
+			Size spaceSize = TextRenderer.MeasureText(new string(' ', writeSettings.TabSize), this.richTextBox.Font, new Size(int.MaxValue, int.MaxValue), TextFormatFlags.LeftAndRightPadding);
+			tabSize = spaceSize.Width;
 			this.richTextBox.SelectionTabs	= new int[] { tabSize, 2*tabSize, 3*tabSize, 4*tabSize, 5*tabSize, 6*tabSize, 7*tabSize, 8*tabSize };
 
 			// If there is a BibEntry provided, populate the form.

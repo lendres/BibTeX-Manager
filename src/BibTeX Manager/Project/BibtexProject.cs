@@ -160,7 +160,17 @@ namespace BibtexManager
 			{
 				result = BibParser.Parse(textReader);
 			}
-			return result.Item2;
+
+			List<BibEntry> entries = result.Item2;
+			foreach (BibEntry entry in entries)
+			{
+				if (_autoGenerateKeys)
+				{
+					_bibliography.GenerateUniqueKey(entry);
+				}
+			}
+
+			return entries;
 		}
 
 		/// <summary>
