@@ -20,6 +20,7 @@ namespace BibtexManager
 		private List<string>						_assessoryFiles					= new List<string>();
 		private readonly Bibliography				_bibliography					= new Bibliography();
 		private WriteSettings						_writeSettings					= new WriteSettings();
+		private bool								_autoGenerateKeys				= true;
 
 		#endregion
 
@@ -77,35 +78,13 @@ namespace BibtexManager
 		/// Determines if the bibiography entry initialization file.
 		/// </summary>
 		[XmlAttribute("usebibentryinitialization")]
-		public bool UseBibEntryInitialization
-		{
-			get
-			{
-				return _useBibEntryInitialization;
-			}
-
-			set
-			{
-				_useBibEntryInitialization = value;
-			}
-		}
+		public bool UseBibEntryInitialization { get => _useBibEntryInitialization; set => _useBibEntryInitialization = value; }
 
 		/// <summary>
 		/// The path to the bibiography entry initialization file.
 		/// </summary>
 		[XmlAttribute("bibentryinitializationfile")]
-		public string BibEntryInitializationFile
-		{
-			get
-			{
-				return _bibEntryInitializationFile;
-			}
-
-			set
-			{
-				_bibEntryInitializationFile = value;
-			}
-		}
+		public string BibEntryInitializationFile { get => _bibEntryInitializationFile; set => _bibEntryInitializationFile = value; }
 
 		/// <summary>
 		/// Assessory files that contain things like strings.
@@ -132,30 +111,19 @@ namespace BibtexManager
 		/// Bibliography.
 		/// </summary>
 		[XmlIgnore()]
-		public Bibliography Bibliography
-		{
-			get
-			{
-				return _bibliography;
-			}
-		}
+		public Bibliography Bibliography { get => _bibliography; }
 
 		/// <summary>
 		/// The settings for writing the bibliography file.
 		/// </summary>
 		[XmlElement("writesettings")]
-		public WriteSettings WriteSettings
-		{
-			get
-			{
-				return _writeSettings;
-			}
+		public WriteSettings WriteSettings { get => _writeSettings; set => _writeSettings = value; }
 
-			set
-			{
-				_writeSettings = value;
-			}
-		}
+		/// <summary>
+		/// The settings for writing the bibliography file.
+		/// </summary>
+		[XmlAttribute("autogenerateekeys")]
+		public bool AutoGenerateKeys { get => _autoGenerateKeys; set => _autoGenerateKeys = value; }
 
 		#endregion
 
