@@ -93,6 +93,8 @@ namespace BibtexManager
 			this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.projectToolStripMenuItem = new DigitalProduction.Forms.EnableOpenProjectToolStripMenuItem();
 			this.modifyProjectToolStripMenuItem = new DigitalProduction.Forms.EnableOpenProjectToolStripMenuItem();
+			this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.viewHelpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -102,8 +104,6 @@ namespace BibtexManager
 			this.authorDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.Title = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.dataGridViewInterfaceControl = new DigitalProduction.Forms.DataGridViewInterfaceControl();
-			this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			((System.ComponentModel.ISupportInitialize)(this.referencesBindingSource)).BeginInit();
 			this.menuMain.SuspendLayout();
 			this.enableOpenProjectPanel.SuspendLayout();
@@ -223,9 +223,24 @@ namespace BibtexManager
 			// 
 			this.modifyProjectToolStripMenuItem.Enabled = false;
 			this.modifyProjectToolStripMenuItem.Name = "modifyProjectToolStripMenuItem";
-			this.modifyProjectToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.modifyProjectToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
 			this.modifyProjectToolStripMenuItem.Text = "Project &Settings";
 			this.modifyProjectToolStripMenuItem.Click += new System.EventHandler(this.ModifyProjectToolStripMenuItem_Click);
+			// 
+			// toolsToolStripMenuItem
+			// 
+			this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.optionsToolStripMenuItem});
+			this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
+			this.toolsToolStripMenuItem.Size = new System.Drawing.Size(46, 20);
+			this.toolsToolStripMenuItem.Text = "&Tools";
+			// 
+			// optionsToolStripMenuItem
+			// 
+			this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
+			this.optionsToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+			this.optionsToolStripMenuItem.Text = "&Options";
+			this.optionsToolStripMenuItem.Click += new System.EventHandler(this.OptionsToolStripMenuItem_Click);
 			// 
 			// helpToolStripMenuItem
 			// 
@@ -311,7 +326,6 @@ namespace BibtexManager
 			this.bibEntriesDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
 			this.bibEntriesDataGridView.Size = new System.Drawing.Size(516, 484);
 			this.bibEntriesDataGridView.TabIndex = 24;
-			this.bibEntriesDataGridView.KeyDown += new System.Windows.Forms.KeyEventHandler(this.DataGridView_KeyDown);
 			// 
 			// Key
 			// 
@@ -365,21 +379,6 @@ namespace BibtexManager
 			this.dataGridViewInterfaceControl.Size = new System.Drawing.Size(516, 31);
 			this.dataGridViewInterfaceControl.TabIndex = 25;
 			// 
-			// toolsToolStripMenuItem
-			// 
-			this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.optionsToolStripMenuItem});
-			this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
-			this.toolsToolStripMenuItem.Size = new System.Drawing.Size(46, 20);
-			this.toolsToolStripMenuItem.Text = "&Tools";
-			// 
-			// optionsToolStripMenuItem
-			// 
-			this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-			this.optionsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-			this.optionsToolStripMenuItem.Text = "&Options";
-			this.optionsToolStripMenuItem.Click += new System.EventHandler(this.OptionsToolStripMenuItem_Click);
-			// 
 			// BibtexManagerForm
 			// 
 			this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
@@ -393,6 +392,7 @@ namespace BibtexManager
 			this.ShowProjectToolbar = true;
 			this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
 			this.Text = "BibTeX Manager";
+			this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Form_KeyUp);
 			((System.ComponentModel.ISupportInitialize)(this.referencesBindingSource)).EndInit();
 			this.menuMain.ResumeLayout(false);
 			this.menuMain.PerformLayout();

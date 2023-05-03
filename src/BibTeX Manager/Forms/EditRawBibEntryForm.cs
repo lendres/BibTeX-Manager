@@ -37,6 +37,7 @@ namespace BibTeXManager
 			_project = project;
 			InitializeComponent();
 			this.richTextBox.Select();
+			this.KeyPreview = true;
 
 			//PopulateControls();
 		}
@@ -47,7 +48,78 @@ namespace BibTeXManager
 
 		#endregion
 
-		#region Event Handlers
+		#region Form Event Handlers
+
+		/// <summary>
+		/// Keyboard press event handler.
+		/// </summary>
+		/// <param name="sender">Sender.</param>
+		/// <param name="eventArgs">Event arguments.</param>
+		private void Form_KeyUp(object sender, KeyEventArgs eventArgs)
+		{
+			switch (eventArgs.KeyCode)
+			{
+				case Keys.V:
+					if (eventArgs.Control && eventArgs.Shift)
+					{
+						eventArgs.Handled = true;
+						Paste();
+						CheckQuality();
+					}
+					break;
+
+				case Keys.F4:
+					eventArgs.Handled = true;
+					Paste();
+					CheckQuality();
+					break;
+
+				case Keys.F5:
+					eventArgs.Handled = true;
+					PerformOk();
+					break;
+
+				case Keys.F6:
+					eventArgs.Handled = true;
+					CheckQuality();
+					break;
+			}
+		}
+
+		#endregion
+
+		#region Control Event Handlers
+
+		/// <summary>
+		/// Paste button event handler.
+		/// </summary>
+		/// <param name="sender">Sender.</param>
+		/// <param name="eventArgs">Event arguments.</param>
+		private void PasteButton_Click(object sender, EventArgs eventArgs)
+		{
+			Paste();
+		}
+
+		/// <summary>
+		/// Paste and check quality button event handler.
+		/// </summary>
+		/// <param name="sender">Sender.</param>
+		/// <param name="eventArgs">Event arguments.</param>
+		private void PasteAndCheckQualityButton_Click(object sender, EventArgs eventArgs)
+		{
+			Paste();
+			CheckQuality();
+		}
+
+		/// <summary>
+		/// Quality check button event handler.
+		/// </summary>
+		/// <param name="sender">Sender.</param>
+		/// <param name="eventArgs">Event arguments.</param>
+		private void CheckQualityButton_Click(object sender, EventArgs eventArgs)
+		{
+			CheckQuality();
+		}
 
 		/// <summary>
 		/// Ok button event handler.
@@ -56,17 +128,66 @@ namespace BibTeXManager
 		/// <param name="eventArgs">Event arguments.</param>
 		private void OkButton_Click(object sender, EventArgs eventArgs)
 		{
-			// TODO: Validation code goes here.
+			PerformOk();
+		}
+
+		#endregion
+
+		#region Processing Methods
+
+		/// <summary>
+		/// Paste from the clipboard to the text box.
+		/// </summary>
+		private void Paste()
+		{
+			this.richTextBox.Text = Clipboard.GetText();
+		}
+
+		/// <summary>
+		/// Check the quality of the text in the text box.
+		/// </summary>
+		private void CheckQuality()
+		{
+			if (Parse())
+			{
+				_project.CleanEntry(_bibEntry);
+				this.richTextBox.Text = _bibEntry.ToString(_project.WriteSettings);
+			}
+		}
+
+		/// <summary>
+		/// Parse the text in the text box.  Returns true if successful and false otherwise.
+		/// </summary>
+		private bool Parse()
+		{
+			bool success = true;
+
 			try
 			{
-				List<BibEntry> entries	= _project.ParseText(this.richTextBox.Text);
-				_bibEntry				= entries[0];
+				List<BibEntry> entries = _project.ParseText(this.richTextBox.Text);
+				_bibEntry = entries[0];
 			}
 			catch (Exception exception)
 			{
 				// The text entered contained an error.  Display it and cancel the "ok" (return).
 				MessageBox.Show(this, exception.Message, "Error Parsing Entry", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				success = false;
+			}
 
+			return success;
+		}
+
+		#endregion
+
+		#region Dialog Methods
+
+		/// <summary>
+		/// The main work of the ok button.
+		/// </summary>
+		private void PerformOk()
+		{
+			if (!Parse())
+			{
 				// Have to set the DialogResult to none to prevent the form from closing.
 				this.DialogResult = DialogResult.None;
 				return;
@@ -86,21 +207,14 @@ namespace BibTeXManager
 			PushEntriesToDataStructure();
 		}
 
-		#endregion
-
-		#region Methods
-
 		/// <summary>
 		/// Show the edit dialog.
 		/// </summary>
 		/// <param name="parent">Parent form.</param>
 		public DialogResultPair ShowDialog(IWin32Window parent, BibEntry bibEntry, WriteSettings writeSettings)
 		{
-			
-
 			// Set tab size.  It is set in pixels, so we have to convert the font size to pixels.  We make an assumption the height is a good
 			// proxy for a space width.  We multiply that the tab size (number of spaces in a tab) to get the tab size.
-
 			int tabSize						= writeSettings.TabSize * (richTextBox.Font.Height);
 			Size spaceSize = TextRenderer.MeasureText(new string(' ', writeSettings.TabSize), this.richTextBox.Font, new Size(int.MaxValue, int.MaxValue), TextFormatFlags.LeftAndRightPadding);
 			tabSize = spaceSize.Width;

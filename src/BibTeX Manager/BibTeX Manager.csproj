@@ -166,14 +166,11 @@
     <None Include="Help\HIDD_ROOT_DIALOG.htm" />
     <None Include="Help\main_index.htm" />
     <Content Include="Forms\BibTex Manager.ico" />
-    <None Include="Forms\Resources\CloseDocument_16x.png" />
-    <Content Include="Forms\Resources\edit_5_20.png" />
     <None Include="Forms\Resources\LELaTeX Logo-Rotated-CroppedForAbout.bmp" />
-    <None Include="Forms\Resources\Exit_16x.png" />
-    <Content Include="Forms\Resources\minus_red.png" />
-    <None Include="Forms\Resources\NewFile_16x.png" />
-    <None Include="Forms\Resources\OpenFile_16x.png" />
-    <Content Include="Forms\Resources\plus_green.png" />
+    <None Include="Forms\Resources\Paste_64.png" />
+    <None Include="Forms\Resources\Paste_40.png" />
+    <None Include="Forms\Resources\Paste_Quality_40.png" />
+    <None Include="Forms\Resources\Quality Check_40.png" />
     <Content Include="Notes.txt" />
     <None Include="Properties\DataSources\BibTeXLibrary.BibEntry.datasource" />
     <None Include="Test Files\le-long.bib" />
@@ -197,6 +194,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>

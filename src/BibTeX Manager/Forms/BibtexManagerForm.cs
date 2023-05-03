@@ -10,6 +10,7 @@ using static DigitalProduction.Forms.MessageBoxYesNoToAll;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 using BibTeXManager.Forms;
 using BibTeXManager;
+using System.Diagnostics.Tracing;
 
 namespace BibtexManager
 {
@@ -50,6 +51,9 @@ namespace BibtexManager
 			this.dataGridViewInterfaceControl.ShowAddDialog		= this.ShowAddRawBibEntryDialog;
 
 			InitializeFromRegistry();
+
+			// Allow the form to see key presses.
+			this.KeyPreview = true;
 		}
 
 		#endregion
@@ -102,16 +106,38 @@ namespace BibtexManager
 
 		#endregion
 
-		#region Menu Event Handlers
+		#region Form Event Handlers
 
-		#region File
+		private void Form_KeyUp(object sender, KeyEventArgs eventArgs)
+		{
+			switch (eventArgs.KeyCode)
+			{
+				case Keys.A:
+					// Need to set this to true before opening the new form or that form will see the key press as well.
+					eventArgs.Handled = true;
+					this.dataGridViewInterfaceControl.Add();
+					break;
+				case Keys.E:
+				case Keys.F2:
+					// Need to set this to true before opening the new form or that form will see the key press as well.
+					eventArgs.Handled = true;
+					this.dataGridViewInterfaceControl.Edit();
+					break;
+			}
+		}
 
-		/// <summary>
-		/// New item click handler.
-		/// </summary>
-		/// <param name="sender">Sender.</param>
-		/// <param name="eventArgs">Event arguments.</param>
-		protected override void NewToolStripItem_Click(object sender, EventArgs eventArgs)
+        #endregion
+
+        #region Menu Event Handlers
+
+        #region File
+
+        /// <summary>
+        /// New item click handler.
+        /// </summary>
+        /// <param name="sender">Sender.</param>
+        /// <param name="eventArgs">Event arguments.</param>
+        protected override void NewToolStripItem_Click(object sender, EventArgs eventArgs)
 		{
 			base.NewToolStripItem_Click(sender, eventArgs);
 
@@ -199,26 +225,21 @@ namespace BibtexManager
 
 		#region Control Event Handlers
 
-		///<summary>
-		/// Key press event handler.
-		///</summary>
-		///<param name="sender">Sender.</param>
-		///<param name="eventArgs">Event arguments.</param>
-		private void DataGridView_KeyDown(object sender, KeyEventArgs eventArgs)
-		{
-			switch (eventArgs.KeyCode)
-			{
-				case Keys.F2:
-				case Keys.Enter:
-					{
-						this.dataGridViewInterfaceControl.EditEntry();
-						eventArgs.Handled = true;
-						break;
-					}
-			}
+		//private void DataGridView_KeyDown(object sender, KeyEventArgs eventArgs)
+		//{
+		//	switch (eventArgs.KeyCode)
+		//	{
+		//		case Keys.A:
+		//			this.dataGridViewInterfaceControl.Add();
+		//			eventArgs.Handled = true;
+		//			break;
 
-			eventArgs.Handled = false;
-		}
+		//		case Keys.F2:
+		//			this.dataGridViewInterfaceControl.Edit();
+		//			eventArgs.Handled = true;
+		//			break;
+		//	}
+		//}
 
 		#endregion
 
@@ -296,5 +317,17 @@ namespace BibtexManager
 
 		#endregion
 
+		//private void BibtexManagerForm_PreviewKeyDown(object sender, PreviewKeyDownEventArgs eventArgs)
+		//{
+		//	switch (eventArgs.KeyCode)
+		//	{
+		//		case Keys.F2:
+		//			this.dataGridViewInterfaceControl.Edit();
+
+		//			eventArgs.Handled = true;
+		//			break;
+		//	}
+
+		//}
 	} // End class.
 } // End namespace.

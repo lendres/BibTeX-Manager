@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Xml.Serialization;
+using static DigitalProduction.Forms.MessageBoxYesNoToAll;
 
 namespace BibtexManager
 {
@@ -161,16 +162,15 @@ namespace BibtexManager
 				result = BibParser.Parse(textReader);
 			}
 
-			List<BibEntry> entries = result.Item2;
-			foreach (BibEntry entry in entries)
-			{
-				if (_autoGenerateKeys)
-				{
-					_bibliography.GenerateUniqueKey(entry);
-				}
-			}
+			return result.Item2;
+		}
 
-			return entries;
+		public void CleanEntry(BibEntry entry)
+		{
+			if (_autoGenerateKeys)
+			{
+				_bibliography.AutoKeyEntry(entry);
+			}
 		}
 
 		/// <summary>

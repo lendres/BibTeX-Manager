@@ -6,7 +6,7 @@
 		#region Fields
 
 		private System.Windows.Forms.Button cancelButton;
-		private System.Windows.Forms.Button oKbutton;
+		private System.Windows.Forms.Button okButton;
 
 		/// <summary>
 		/// Required designer variable.
@@ -41,7 +41,7 @@
 		private void InitializeComponent()
 		{
 			this.cancelButton = new System.Windows.Forms.Button();
-			this.oKbutton = new System.Windows.Forms.Button();
+			this.okButton = new System.Windows.Forms.Button();
 			this.bibFileGroupBox = new System.Windows.Forms.GroupBox();
 			this.bibFileLocationTextBox = new System.Windows.Forms.TextBox();
 			this.browseBibFileButton = new System.Windows.Forms.Button();
@@ -61,12 +61,12 @@
 			this.alignmentColumnNumericUpDown = new System.Windows.Forms.NumericUpDown();
 			this.alignTagValuesCheckBox = new System.Windows.Forms.CheckBox();
 			this.styleGroupBox = new System.Windows.Forms.GroupBox();
+			this.autoGenerateKeysCheckBox = new System.Windows.Forms.CheckBox();
 			this.removeLastCommaCheckBox = new System.Windows.Forms.CheckBox();
 			this.bibEntryInitializationGroupBox = new System.Windows.Forms.GroupBox();
 			this.useBibEntryInitializationCheckBox = new System.Windows.Forms.CheckBox();
 			this.bibEntryInitializationFileTextBox = new System.Windows.Forms.TextBox();
 			this.browseBibEntryInitializationFileButton = new System.Windows.Forms.Button();
-			this.autoGenerateKeysCheckBox = new System.Windows.Forms.CheckBox();
 			this.bibFileGroupBox.SuspendLayout();
 			this.accessoryFilesGroupBox.SuspendLayout();
 			this.tabsGroupBox.SuspendLayout();
@@ -82,24 +82,24 @@
 			// 
 			this.cancelButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.cancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-			this.cancelButton.Location = new System.Drawing.Point(629, 377);
+			this.cancelButton.Location = new System.Drawing.Point(473, 377);
 			this.cancelButton.Name = "cancelButton";
 			this.cancelButton.Size = new System.Drawing.Size(80, 23);
 			this.cancelButton.TabIndex = 25;
 			this.cancelButton.Text = "&Cancel";
 			this.cancelButton.UseVisualStyleBackColor = true;
 			// 
-			// oKbutton
+			// okButton
 			// 
-			this.oKbutton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.oKbutton.DialogResult = System.Windows.Forms.DialogResult.OK;
-			this.oKbutton.Location = new System.Drawing.Point(531, 377);
-			this.oKbutton.Name = "oKbutton";
-			this.oKbutton.Size = new System.Drawing.Size(80, 23);
-			this.oKbutton.TabIndex = 24;
-			this.oKbutton.Text = "&OK";
-			this.oKbutton.UseVisualStyleBackColor = true;
-			this.oKbutton.Click += new System.EventHandler(this.ButtonOK_Click);
+			this.okButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.okButton.DialogResult = System.Windows.Forms.DialogResult.OK;
+			this.okButton.Location = new System.Drawing.Point(375, 377);
+			this.okButton.Name = "okButton";
+			this.okButton.Size = new System.Drawing.Size(80, 23);
+			this.okButton.TabIndex = 24;
+			this.okButton.Text = "&OK";
+			this.okButton.UseVisualStyleBackColor = true;
+			this.okButton.Click += new System.EventHandler(this.ButtonOK_Click);
 			// 
 			// bibFileGroupBox
 			// 
@@ -109,7 +109,7 @@
 			this.bibFileGroupBox.Controls.Add(this.browseBibFileButton);
 			this.bibFileGroupBox.Location = new System.Drawing.Point(12, 12);
 			this.bibFileGroupBox.Name = "bibFileGroupBox";
-			this.bibFileGroupBox.Size = new System.Drawing.Size(697, 51);
+			this.bibFileGroupBox.Size = new System.Drawing.Size(541, 51);
 			this.bibFileGroupBox.TabIndex = 26;
 			this.bibFileGroupBox.TabStop = false;
 			this.bibFileGroupBox.Text = "Bibliography File";
@@ -120,7 +120,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.bibFileLocationTextBox.Location = new System.Drawing.Point(10, 21);
 			this.bibFileLocationTextBox.Name = "bibFileLocationTextBox";
-			this.bibFileLocationTextBox.Size = new System.Drawing.Size(596, 20);
+			this.bibFileLocationTextBox.Size = new System.Drawing.Size(440, 20);
 			this.bibFileLocationTextBox.TabIndex = 3;
 			this.bibFileLocationTextBox.TabStop = false;
 			// 
@@ -128,7 +128,7 @@
 			// 
 			this.browseBibFileButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.browseBibFileButton.FlatStyle = System.Windows.Forms.FlatStyle.System;
-			this.browseBibFileButton.Location = new System.Drawing.Point(612, 19);
+			this.browseBibFileButton.Location = new System.Drawing.Point(456, 19);
 			this.browseBibFileButton.Name = "browseBibFileButton";
 			this.browseBibFileButton.Size = new System.Drawing.Size(75, 23);
 			this.browseBibFileButton.TabIndex = 4;
@@ -145,7 +145,7 @@
 			this.accessoryFilesGroupBox.Controls.Add(this.assessoryFilesListBox);
 			this.accessoryFilesGroupBox.Location = new System.Drawing.Point(12, 156);
 			this.accessoryFilesGroupBox.Name = "accessoryFilesGroupBox";
-			this.accessoryFilesGroupBox.Size = new System.Drawing.Size(697, 104);
+			this.accessoryFilesGroupBox.Size = new System.Drawing.Size(541, 104);
 			this.accessoryFilesGroupBox.TabIndex = 27;
 			this.accessoryFilesGroupBox.TabStop = false;
 			this.accessoryFilesGroupBox.Text = "Assessory Files";
@@ -153,7 +153,7 @@
 			// addButton
 			// 
 			this.addButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.addButton.Location = new System.Drawing.Point(612, 17);
+			this.addButton.Location = new System.Drawing.Point(456, 17);
 			this.addButton.Name = "addButton";
 			this.addButton.Size = new System.Drawing.Size(80, 23);
 			this.addButton.TabIndex = 4;
@@ -164,7 +164,7 @@
 			// removeButton
 			// 
 			this.removeButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.removeButton.Location = new System.Drawing.Point(612, 46);
+			this.removeButton.Location = new System.Drawing.Point(456, 46);
 			this.removeButton.Name = "removeButton";
 			this.removeButton.Size = new System.Drawing.Size(80, 23);
 			this.removeButton.TabIndex = 3;
@@ -182,7 +182,7 @@
 			this.assessoryFilesListBox.Location = new System.Drawing.Point(10, 18);
 			this.assessoryFilesListBox.Name = "assessoryFilesListBox";
 			this.assessoryFilesListBox.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
-			this.assessoryFilesListBox.Size = new System.Drawing.Size(596, 69);
+			this.assessoryFilesListBox.Size = new System.Drawing.Size(440, 69);
 			this.assessoryFilesListBox.TabIndex = 2;
 			// 
 			// tabsGroupBox
@@ -344,6 +344,16 @@
 			this.styleGroupBox.TabStop = false;
 			this.styleGroupBox.Text = "Style";
 			// 
+			// autoGenerateKeysCheckBox
+			// 
+			this.autoGenerateKeysCheckBox.AutoSize = true;
+			this.autoGenerateKeysCheckBox.Location = new System.Drawing.Point(7, 20);
+			this.autoGenerateKeysCheckBox.Name = "autoGenerateKeysCheckBox";
+			this.autoGenerateKeysCheckBox.Size = new System.Drawing.Size(161, 17);
+			this.autoGenerateKeysCheckBox.TabIndex = 1;
+			this.autoGenerateKeysCheckBox.Text = "Automatically generate keys.";
+			this.autoGenerateKeysCheckBox.UseVisualStyleBackColor = true;
+			// 
 			// removeLastCommaCheckBox
 			// 
 			this.removeLastCommaCheckBox.AutoSize = true;
@@ -363,7 +373,7 @@
 			this.bibEntryInitializationGroupBox.Controls.Add(this.browseBibEntryInitializationFileButton);
 			this.bibEntryInitializationGroupBox.Location = new System.Drawing.Point(12, 73);
 			this.bibEntryInitializationGroupBox.Name = "bibEntryInitializationGroupBox";
-			this.bibEntryInitializationGroupBox.Size = new System.Drawing.Size(697, 73);
+			this.bibEntryInitializationGroupBox.Size = new System.Drawing.Size(541, 73);
 			this.bibEntryInitializationGroupBox.TabIndex = 27;
 			this.bibEntryInitializationGroupBox.TabStop = false;
 			this.bibEntryInitializationGroupBox.Text = "Bibliography Enty Tag Order";
@@ -385,7 +395,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.bibEntryInitializationFileTextBox.Location = new System.Drawing.Point(10, 43);
 			this.bibEntryInitializationFileTextBox.Name = "bibEntryInitializationFileTextBox";
-			this.bibEntryInitializationFileTextBox.Size = new System.Drawing.Size(596, 20);
+			this.bibEntryInitializationFileTextBox.Size = new System.Drawing.Size(440, 20);
 			this.bibEntryInitializationFileTextBox.TabIndex = 3;
 			this.bibEntryInitializationFileTextBox.TabStop = false;
 			// 
@@ -393,30 +403,20 @@
 			// 
 			this.browseBibEntryInitializationFileButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.browseBibEntryInitializationFileButton.FlatStyle = System.Windows.Forms.FlatStyle.System;
-			this.browseBibEntryInitializationFileButton.Location = new System.Drawing.Point(612, 41);
+			this.browseBibEntryInitializationFileButton.Location = new System.Drawing.Point(456, 41);
 			this.browseBibEntryInitializationFileButton.Name = "browseBibEntryInitializationFileButton";
 			this.browseBibEntryInitializationFileButton.Size = new System.Drawing.Size(75, 23);
 			this.browseBibEntryInitializationFileButton.TabIndex = 4;
 			this.browseBibEntryInitializationFileButton.Text = "Browse";
 			this.browseBibEntryInitializationFileButton.Click += new System.EventHandler(this.BrowseBibEntryInitializationButton_Click);
 			// 
-			// autoGenerateKeysCheckBox
-			// 
-			this.autoGenerateKeysCheckBox.AutoSize = true;
-			this.autoGenerateKeysCheckBox.Location = new System.Drawing.Point(7, 20);
-			this.autoGenerateKeysCheckBox.Name = "autoGenerateKeysCheckBox";
-			this.autoGenerateKeysCheckBox.Size = new System.Drawing.Size(161, 17);
-			this.autoGenerateKeysCheckBox.TabIndex = 1;
-			this.autoGenerateKeysCheckBox.Text = "Automatically generate keys.";
-			this.autoGenerateKeysCheckBox.UseVisualStyleBackColor = true;
-			// 
 			// ProjectSettingsForm
 			// 
-			this.AcceptButton = this.oKbutton;
+			this.AcceptButton = this.okButton;
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.CancelButton = this.cancelButton;
-			this.ClientSize = new System.Drawing.Size(721, 412);
+			this.ClientSize = new System.Drawing.Size(565, 412);
 			this.Controls.Add(this.bibEntryInitializationGroupBox);
 			this.Controls.Add(this.styleGroupBox);
 			this.Controls.Add(this.alignmentGroupBox);
@@ -424,12 +424,15 @@
 			this.Controls.Add(this.accessoryFilesGroupBox);
 			this.Controls.Add(this.bibFileGroupBox);
 			this.Controls.Add(this.cancelButton);
-			this.Controls.Add(this.oKbutton);
-			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+			this.Controls.Add(this.okButton);
 			this.MaximizeBox = false;
+			this.MaximumSize = new System.Drawing.Size(1081, 451);
 			this.MinimizeBox = false;
+			this.MinimumSize = new System.Drawing.Size(581, 451);
 			this.Name = "ProjectSettingsForm";
+			this.ShowIcon = false;
 			this.ShowInTaskbar = false;
+			this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
 			this.bibFileGroupBox.ResumeLayout(false);
 			this.bibFileGroupBox.PerformLayout();
