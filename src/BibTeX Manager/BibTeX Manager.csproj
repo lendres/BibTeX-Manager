@@ -166,11 +166,6 @@
     <None Include="Help\HIDD_ROOT_DIALOG.htm" />
     <None Include="Help\main_index.htm" />
     <Content Include="Forms\BibTex Manager.ico" />
-    <None Include="Forms\Resources\LELaTeX Logo-Rotated-CroppedForAbout.bmp" />
-    <None Include="Forms\Resources\Paste_64.png" />
-    <None Include="Forms\Resources\Paste_40.png" />
-    <None Include="Forms\Resources\Paste_Quality_40.png" />
-    <None Include="Forms\Resources\Quality Check_40.png" />
     <Content Include="Notes.txt" />
     <None Include="Properties\DataSources\BibTeXLibrary.BibEntry.datasource" />
     <None Include="Test Files\le-long.bib" />
@@ -217,6 +212,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controls\" />
+    <Folder Include="Forms\Resources\" />
     <Folder Include="Resources\" />
   </ItemGroup>
   <ProjectExtensions>
