@@ -38,7 +38,7 @@ namespace BibTeXManager.Quality
 		#endregion
 
 		#region Methods
-		
+
 		protected override string GetReplacement(string original)
 		{
 			return _replacement;
