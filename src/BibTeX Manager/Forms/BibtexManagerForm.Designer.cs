@@ -9,6 +9,8 @@ namespace BibtexManager
 
 		// Menu.
 		private System.Windows.Forms.MenuStrip									menuMain;
+
+		// File menu.
 		private System.Windows.Forms.ToolStripMenuItem							fileToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem							newToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem							openToolStripMenuItem;
@@ -20,9 +22,15 @@ namespace BibtexManager
 		private System.Windows.Forms.ToolStripSeparator							toolStripSeparatorFile2;
 		private System.Windows.Forms.ToolStripMenuItem							exitToolStripMenuItem;
 
+		// Project menu.
 		private DigitalProduction.Forms.EnableOpenProjectToolStripMenuItem		projectToolStripMenuItem;
 		private DigitalProduction.Forms.EnableOpenProjectToolStripMenuItem		modifyProjectToolStripMenuItem;
 
+		// Tools menu.
+		private System.Windows.Forms.ToolStripMenuItem							toolsToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem							optionsToolStripMenuItem;
+
+		// Help menu.
 		private System.Windows.Forms.ToolStripMenuItem							helpToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem							viewHelpToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem							aboutToolStripMenuItem;
@@ -404,7 +412,5 @@ namespace BibtexManager
 		}
 		#endregion
 
-		private System.Windows.Forms.ToolStripMenuItem toolsToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem optionsToolStripMenuItem;
 	} // End class.
 } // End namespace.
