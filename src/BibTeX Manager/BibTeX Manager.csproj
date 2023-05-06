@@ -156,6 +156,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Quality\Correction.cs" />
+    <Compile Include="Quality\QualityProcessor.cs" />
+    <Compile Include="Quality\StringReplacementTagProcessor.cs" />
+    <Compile Include="Quality\TagProcessor.cs" />
     <None Include="Test Files\Bib Entry Initialization.tagord">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -166,7 +170,6 @@
     <None Include="Help\HIDD_ROOT_DIALOG.htm" />
     <None Include="Help\main_index.htm" />
     <Content Include="Forms\BibTex Manager.ico" />
-    <Content Include="Notes.txt" />
     <None Include="Properties\DataSources\BibTeXLibrary.BibEntry.datasource" />
     <None Include="Test Files\le-long.bib" />
     <None Include="Test Files\le-short.bib" />
