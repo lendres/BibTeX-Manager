@@ -11,6 +11,7 @@ namespace BibtexManager
 	/// <summary>
 	/// The model.
 	/// </summary>
+	[XmlRoot("bibtexproject")]
 	public class BibtexProject : Project
 	{
 		#region Fields
