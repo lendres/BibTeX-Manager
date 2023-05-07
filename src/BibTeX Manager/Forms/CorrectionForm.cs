@@ -15,13 +15,17 @@ namespace BibTeXManager
 	{
 		#region Fields
 
-		private MessageBoxYesNoToAllResult			_dialogresult				= MessageBoxYesNoToAllResult.Cancel;
+		private MessageBoxYesNoToAllResult			_dialogresult				= MessageBoxYesNoToAllResult.Yes;
 		private Correction							_correction;
 
 		#endregion
 
 		#region Construction
 		
+		/// <summary>
+		/// Constructor.
+		/// </summary>
+		/// <param name="correction">Correction to display to the user.</param>
 		public CorrectionForm(Correction correction)
 		{
 			_correction = correction;
@@ -33,28 +37,48 @@ namespace BibTeXManager
 
 		#region Event Handlers
 
-		private void YesButton_Click(object sender, EventArgs e)
+		/// <summary>
+		/// Yes button click event handler.
+		/// </summary>
+		/// <param name="sender">Senders.</param>
+		/// <param name="eventArgs">Event arguments.</param>
+		private void YesButton_Click(object sender, EventArgs eventArgs)
 		{
 			_dialogresult = MessageBoxYesNoToAllResult.Yes;
 			PushEntriesToDataStructure(true);
 			Close();
 		}
 
-		private void YesToAllButton_Click(object sender, EventArgs e)
+		/// <summary>
+		/// Yes to all button click event handlers.
+		/// </summary>
+		/// <param name="sender">Senders.</param>
+		/// <param name="eventArgs">Event arguments.</param>
+		private void YesToAllButton_Click(object sender, EventArgs eventArgs)
 		{
 			_dialogresult = MessageBoxYesNoToAllResult.YesToAll;
 			PushEntriesToDataStructure(true);
 			Close();
 		}
 
-		private void NoButton_Click(object sender, EventArgs e)
+		/// <summary>
+		/// No button click event handler.
+		/// </summary>
+		/// <param name="sender">Senders.</param>
+		/// <param name="eventArgs">Event arguments.</param>
+		private void NoButton_Click(object sender, EventArgs eventArgs)
 		{
 			_dialogresult = MessageBoxYesNoToAllResult.No;
 			PushEntriesToDataStructure(false);
 			Close();
 		}
 
-		private void CancelButton_Click(object sender, EventArgs e)
+		/// <summary>
+		/// Cancel button click event handler
+		/// </summary>
+		/// <param name="sender">Senders.</param>
+		/// <param name="eventArgs">Event arguments.</param>
+		private void CancelButton_Click(object sender, EventArgs eventArgs)
 		{
 			_dialogresult = MessageBoxYesNoToAllResult.Cancel;
 			PushEntriesToDataStructure(false);
