@@ -95,8 +95,8 @@ namespace BibTeXManager
 		/// </summary>
 		protected void PopulateControls()
 		{
-			this.existingTextBox.Text		= _correction.Existing;
-			this.replacementTextBox.Text	= _correction.Replacement;
+			this.existingTextBox.Text		= _correction.MatchedText;
+			this.replacementTextBox.Text	= _correction.ReplacementText;
 		}
 
 		/// <summary>
@@ -104,8 +104,8 @@ namespace BibTeXManager
 		/// </summary>
 		protected void PushEntriesToDataStructure(bool replace)
 		{
-			_correction.Replacement	= this.replacementTextBox.Text;
-			_correction.Replace		= replace;
+			_correction.ReplacementText	= this.replacementTextBox.Text;
+			_correction.ReplaceText		= replace;
 		}
 
 		#endregion

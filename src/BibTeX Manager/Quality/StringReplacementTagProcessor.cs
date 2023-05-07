@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 
@@ -38,22 +39,39 @@ namespace BibTeXManager.Quality
 		[XmlAttribute("replacement")]
 		public string Replacement { get => _replacement; set => _replacement = value; }
 
+
+
 		#endregion
-
 		#region Methods
-
 		/// <summary>
 		/// Gets the replacement string for the input (original) string.
 		/// </summary>
-		/// <param name="original">Original string (matched pattern).</param>
-		protected override string GetReplacement(string original)
+		/// <param name="correction">Correction information.</param>
+		protected override void GetReplacement(Correction correction)
 		{
-			return _replacement;
+			// We need to make sure we don't replace a string with the intended output.  I.e., we have to make sure we
+			// don't replace "XXX" with "{XXX}" when the brackets already exist.  The matching (searching) part will find
+			// the "XXX" inside of "{XXX}" so we could end up with "{{XXX}}" if we don't check.
+
+			// Initialize.
+			correction.ReplacementText = _replacement;
+
+			// See if the replacement contains the original.  If it does, we needto do more checks.  Not every case will need
+			// this.  If we are replacing "&amp;" with "\&" we won't need to do anything.
+			int indexOf = _replacement.IndexOf(correction.MatchedText);
+			
+			if (indexOf > -1)
+			{
+				string beginsWith		= _replacement.Substring(0, indexOf);
+				string extendedMatch	= correction.FullText.Substring(correction.MatchStartIndex-beginsWith.Length, _replacement.Length);
+
+				if (extendedMatch == _replacement)
+				{
+					correction.PromptUser	= false;
+					correction.ReplaceText	= false;
+				}
+			}
 		}
-
-		#endregion
-
-		#region XML
 
 		#endregion
 

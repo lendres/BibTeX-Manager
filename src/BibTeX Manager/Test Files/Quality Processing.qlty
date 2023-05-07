@@ -7,6 +7,15 @@
 			replacement="\&amp;">
 			<tags></tags>
 		</tagprocessor>
-	</tagprocessors>
 
+		<tagprocessor xsi:type="StringReplacementTagProcessor"
+			processalltages="false"
+			pattern="PDC"
+			replacement="{PDC}">
+			<tags>
+				<tag>title</tag>
+			</tags>
+		</tagprocessor>
+
+	</tagprocessors>
 </qualityprocessor>

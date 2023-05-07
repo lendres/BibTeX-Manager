@@ -24,6 +24,8 @@ namespace BibTeXManager
 		/// </summary>
 		public Correction()
 		{
+			this.ReplaceText	= false;
+			this.PromptUser	= true;
 		}
 
 		#endregion
@@ -31,27 +33,39 @@ namespace BibTeXManager
 		#region Properties
 
 		/// <summary>
-		/// The existing text.
+		/// The full, original text.
 		/// </summary>
-		public string Existing { get; set; }
+		public string FullText { get; set; }
+
+		/// <summary>
+		/// The matched text.
+		/// </summary>
+		public string MatchedText { get; set; }
+
+		/// <summary>
+		/// Starting index of the match within the full text.
+		/// </summary>
+		public int MatchStartIndex { get; set; }
 
 		/// <summary>
 		/// Replacement text.
 		/// </summary>
-		public string Replacement { get; set; }
+		public string ReplacementText { get; set; }
 
 		/// <summary>
-		/// Specifies if the text should be replaced.
+		/// Specifies if the text should be replaced.  Output from user prompting or if the tag processor
+		/// determines that the text should not be replaced.
 		/// </summary>
-		public bool Replace { get; set; }
+		public bool ReplaceText { get; set; }
+
+		/// <summary>
+		/// Specifies if the user should be prompted for replacement.
+		/// </summary>
+		public bool PromptUser { get; set; }
 
 		#endregion
 
 		#region Methods
-
-		#endregion
-
-		#region XML
 
 		#endregion
 

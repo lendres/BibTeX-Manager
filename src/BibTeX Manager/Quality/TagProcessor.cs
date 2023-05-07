@@ -48,7 +48,22 @@ namespace BibTeXManager
 		/// Tag names to process.
 		/// </summary>
 		[XmlArray("tags"), XmlArrayItem("tag")]
-		public BindingList<string> TagNames { get => _tagNames; set => _tagNames = value; }
+		public BindingList<string> TagNames
+		{
+			get
+			{
+				return _tagNames;
+			}
+
+			set
+			{
+				_tagNames.Clear();
+				foreach (string tagName in value)
+				{
+					_tagNames.Add(tagName.ToLower());
+				}
+			}
+		}
 
 		[XmlAttribute("pattern")]
 		public string Pattern { get => _pattern; set => _pattern = value; }
@@ -65,7 +80,10 @@ namespace BibTeXManager
 		{
 			foreach (string tagName in entry.TagNames)
 			{
-				if (_processAllTags || _tagNames.Contains(tagName))
+				// If we are processing all tags or if the current tag name was specified as one to process.
+				// We do a case insensitive comparison of tag names.  See this.TagNames set for where this objects
+				// tag names are set to lower case.
+				if (_processAllTags || _tagNames.Contains(tagName.ToLower()))
 				{
 					foreach (Correction correction in ProcessTag(entry, tagName))
 					{
@@ -90,12 +108,15 @@ namespace BibTeXManager
 			{
 				if (match.Success && match.Groups.Count > 0)
 				{
-					Correction correction	= new Correction() { Existing = match.Value };
-					correction.Replacement	= GetReplacement(correction.Existing);
+					Correction correction		= new Correction() { FullText = tagValue, MatchedText = match.Value, MatchStartIndex = match.Index };
+					GetReplacement(correction);
 
-					yield return correction;
+					if (correction.PromptUser)
+					{
+						yield return correction;
+					}
 
-					lastIndex = ProcessCorrectionResult(tagValue, correction, output, lastIndex, match.Index);
+					lastIndex = ProcessCorrectionResult(correction, output, lastIndex);
 				}
 			}
 
@@ -111,19 +132,17 @@ namespace BibTeXManager
 		/// <summary>
 		/// Uses the information provided to update the output string.
 		/// </summary>
-		/// <param name="tagValue">Original value of the tag.</param>
 		/// <param name="correction">Correction data.</param>
 		/// <param name="output">Output string that is being built.</param>
 		/// <param name="lastIndex">The index position in the string that was last processed.</param>
-		/// <param name="startIndex">The starting index of the currently matched pattern.</param>
-		protected int ProcessCorrectionResult(string tagValue, Correction correction, StringBuilder output, int lastIndex, int startIndex)
+		protected int ProcessCorrectionResult(Correction correction, StringBuilder output, int lastIndex)
 		{
-			if (correction.Replace)
+			if (correction.ReplaceText)
 			{
-				output.Append(tagValue.Substring(lastIndex, startIndex-lastIndex));
-				output.Append(correction.Replacement);
+				output.Append(correction.FullText.Substring(lastIndex, correction.MatchStartIndex-lastIndex));
+				output.Append(correction.ReplacementText);
 
-				lastIndex = startIndex + correction.Existing.Length;
+				lastIndex = correction.MatchStartIndex + correction.MatchedText.Length;
 			}
 
 			return lastIndex;
@@ -132,8 +151,8 @@ namespace BibTeXManager
 		/// <summary>
 		/// Gets the replacement string for the input (original) string.
 		/// </summary>
-		/// <param name="original">Original string (matched pattern).</param>
-		protected abstract string GetReplacement(string original);
+		/// <param name="correction">Correction information.</param>
+		protected abstract void GetReplacement(Correction correction);
 
 		#endregion
 
