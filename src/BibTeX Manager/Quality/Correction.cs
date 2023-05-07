@@ -30,10 +30,19 @@ namespace BibTeXManager
 
 		#region Properties
 
+		/// <summary>
+		/// The existing text.
+		/// </summary>
 		public string Existing { get; set; }
 
+		/// <summary>
+		/// Replacement text.
+		/// </summary>
 		public string Replacement { get; set; }
 
+		/// <summary>
+		/// Specifies if the text should be replaced.
+		/// </summary>
 		public bool Replace { get; set; }
 
 		#endregion

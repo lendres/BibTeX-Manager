@@ -150,7 +150,11 @@ namespace BibTeXManager
 		{
 			if (Parse())
 			{
-				_project.CleanEntry(_bibEntry);
+				foreach (Correction correction in _project.CleanEntry(_bibEntry))
+				{
+					CorrectionForm correctionForm = new CorrectionForm(correction);
+					correctionForm.ShowDialog(this);
+				}
 				this.richTextBox.Text = _bibEntry.ToString(_project.WriteSettings);
 			}
 		}
