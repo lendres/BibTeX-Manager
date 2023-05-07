@@ -67,6 +67,9 @@
 			this.useBibEntryInitializationCheckBox = new System.Windows.Forms.CheckBox();
 			this.bibEntryInitializationFileTextBox = new System.Windows.Forms.TextBox();
 			this.browseBibEntryInitializationFileButton = new System.Windows.Forms.Button();
+			this.qualityProcessorGroupBox = new System.Windows.Forms.GroupBox();
+			this.qualityProcessingFileTextBox = new System.Windows.Forms.TextBox();
+			this.browseQualityProcessorButton = new System.Windows.Forms.Button();
 			this.bibFileGroupBox.SuspendLayout();
 			this.accessoryFilesGroupBox.SuspendLayout();
 			this.tabsGroupBox.SuspendLayout();
@@ -76,13 +79,14 @@
 			((System.ComponentModel.ISupportInitialize)(this.alignmentColumnNumericUpDown)).BeginInit();
 			this.styleGroupBox.SuspendLayout();
 			this.bibEntryInitializationGroupBox.SuspendLayout();
+			this.qualityProcessorGroupBox.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// cancelButton
 			// 
 			this.cancelButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.cancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-			this.cancelButton.Location = new System.Drawing.Point(473, 377);
+			this.cancelButton.Location = new System.Drawing.Point(473, 454);
 			this.cancelButton.Name = "cancelButton";
 			this.cancelButton.Size = new System.Drawing.Size(80, 23);
 			this.cancelButton.TabIndex = 25;
@@ -93,7 +97,7 @@
 			// 
 			this.okButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.okButton.DialogResult = System.Windows.Forms.DialogResult.OK;
-			this.okButton.Location = new System.Drawing.Point(375, 377);
+			this.okButton.Location = new System.Drawing.Point(375, 454);
 			this.okButton.Name = "okButton";
 			this.okButton.Size = new System.Drawing.Size(80, 23);
 			this.okButton.TabIndex = 24;
@@ -143,7 +147,7 @@
 			this.accessoryFilesGroupBox.Controls.Add(this.addButton);
 			this.accessoryFilesGroupBox.Controls.Add(this.removeButton);
 			this.accessoryFilesGroupBox.Controls.Add(this.assessoryFilesListBox);
-			this.accessoryFilesGroupBox.Location = new System.Drawing.Point(12, 156);
+			this.accessoryFilesGroupBox.Location = new System.Drawing.Point(12, 76);
 			this.accessoryFilesGroupBox.Name = "accessoryFilesGroupBox";
 			this.accessoryFilesGroupBox.Size = new System.Drawing.Size(541, 104);
 			this.accessoryFilesGroupBox.TabIndex = 27;
@@ -159,7 +163,7 @@
 			this.addButton.TabIndex = 4;
 			this.addButton.Text = "&Add";
 			this.addButton.UseVisualStyleBackColor = true;
-			this.addButton.Click += new System.EventHandler(this.AddButton_Click);
+			this.addButton.Click += new System.EventHandler(this.AddAssessoryFileButton_Click);
 			// 
 			// removeButton
 			// 
@@ -170,7 +174,7 @@
 			this.removeButton.TabIndex = 3;
 			this.removeButton.Text = "&Remove";
 			this.removeButton.UseVisualStyleBackColor = true;
-			this.removeButton.Click += new System.EventHandler(this.RemoveButton_Click);
+			this.removeButton.Click += new System.EventHandler(this.RemoveAssessoryFileButton_Click);
 			// 
 			// assessoryFilesListBox
 			// 
@@ -192,7 +196,7 @@
 			this.tabsGroupBox.Controls.Add(this.tabSizeNumericUpDown);
 			this.tabsGroupBox.Controls.Add(this.insertTabsRadioButton);
 			this.tabsGroupBox.Controls.Add(this.insertSpacesRadioButton);
-			this.tabsGroupBox.Location = new System.Drawing.Point(12, 268);
+			this.tabsGroupBox.Location = new System.Drawing.Point(12, 345);
 			this.tabsGroupBox.Name = "tabsGroupBox";
 			this.tabsGroupBox.Size = new System.Drawing.Size(164, 100);
 			this.tabsGroupBox.TabIndex = 28;
@@ -262,7 +266,7 @@
 			this.alignmentGroupBox.Controls.Add(this.alignmentColumnLabel);
 			this.alignmentGroupBox.Controls.Add(this.alignmentColumnNumericUpDown);
 			this.alignmentGroupBox.Controls.Add(this.alignTagValuesCheckBox);
-			this.alignmentGroupBox.Location = new System.Drawing.Point(192, 268);
+			this.alignmentGroupBox.Location = new System.Drawing.Point(192, 345);
 			this.alignmentGroupBox.Name = "alignmentGroupBox";
 			this.alignmentGroupBox.Size = new System.Drawing.Size(170, 100);
 			this.alignmentGroupBox.TabIndex = 29;
@@ -337,7 +341,7 @@
 			this.styleGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.styleGroupBox.Controls.Add(this.autoGenerateKeysCheckBox);
 			this.styleGroupBox.Controls.Add(this.removeLastCommaCheckBox);
-			this.styleGroupBox.Location = new System.Drawing.Point(378, 268);
+			this.styleGroupBox.Location = new System.Drawing.Point(378, 345);
 			this.styleGroupBox.Name = "styleGroupBox";
 			this.styleGroupBox.Size = new System.Drawing.Size(176, 100);
 			this.styleGroupBox.TabIndex = 30;
@@ -371,7 +375,7 @@
 			this.bibEntryInitializationGroupBox.Controls.Add(this.useBibEntryInitializationCheckBox);
 			this.bibEntryInitializationGroupBox.Controls.Add(this.bibEntryInitializationFileTextBox);
 			this.bibEntryInitializationGroupBox.Controls.Add(this.browseBibEntryInitializationFileButton);
-			this.bibEntryInitializationGroupBox.Location = new System.Drawing.Point(12, 73);
+			this.bibEntryInitializationGroupBox.Location = new System.Drawing.Point(12, 192);
 			this.bibEntryInitializationGroupBox.Name = "bibEntryInitializationGroupBox";
 			this.bibEntryInitializationGroupBox.Size = new System.Drawing.Size(541, 73);
 			this.bibEntryInitializationGroupBox.TabIndex = 27;
@@ -410,13 +414,48 @@
 			this.browseBibEntryInitializationFileButton.Text = "Browse";
 			this.browseBibEntryInitializationFileButton.Click += new System.EventHandler(this.BrowseBibEntryInitializationButton_Click);
 			// 
+			// qualityProcessorGroupBox
+			// 
+			this.qualityProcessorGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.qualityProcessorGroupBox.Controls.Add(this.qualityProcessingFileTextBox);
+			this.qualityProcessorGroupBox.Controls.Add(this.browseQualityProcessorButton);
+			this.qualityProcessorGroupBox.Location = new System.Drawing.Point(13, 279);
+			this.qualityProcessorGroupBox.Name = "qualityProcessorGroupBox";
+			this.qualityProcessorGroupBox.Size = new System.Drawing.Size(541, 51);
+			this.qualityProcessorGroupBox.TabIndex = 27;
+			this.qualityProcessorGroupBox.TabStop = false;
+			this.qualityProcessorGroupBox.Text = "Quality Processor File";
+			// 
+			// qualityProcessorFileTextBox
+			// 
+			this.qualityProcessingFileTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.qualityProcessingFileTextBox.Location = new System.Drawing.Point(10, 21);
+			this.qualityProcessingFileTextBox.Name = "qualityProcessorFileTextBox";
+			this.qualityProcessingFileTextBox.Size = new System.Drawing.Size(440, 20);
+			this.qualityProcessingFileTextBox.TabIndex = 3;
+			this.qualityProcessingFileTextBox.TabStop = false;
+			// 
+			// browseQualityProcessorButton
+			// 
+			this.browseQualityProcessorButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.browseQualityProcessorButton.FlatStyle = System.Windows.Forms.FlatStyle.System;
+			this.browseQualityProcessorButton.Location = new System.Drawing.Point(456, 19);
+			this.browseQualityProcessorButton.Name = "browseQualityProcessorButton";
+			this.browseQualityProcessorButton.Size = new System.Drawing.Size(75, 23);
+			this.browseQualityProcessorButton.TabIndex = 4;
+			this.browseQualityProcessorButton.Text = "Brow&se";
+			this.browseQualityProcessorButton.Click += new System.EventHandler(this.BrowseQualityProcessorButton_Click);
+			// 
 			// ProjectSettingsForm
 			// 
 			this.AcceptButton = this.okButton;
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.CancelButton = this.cancelButton;
-			this.ClientSize = new System.Drawing.Size(565, 412);
+			this.ClientSize = new System.Drawing.Size(565, 489);
+			this.Controls.Add(this.qualityProcessorGroupBox);
 			this.Controls.Add(this.bibEntryInitializationGroupBox);
 			this.Controls.Add(this.styleGroupBox);
 			this.Controls.Add(this.alignmentGroupBox);
@@ -426,7 +465,7 @@
 			this.Controls.Add(this.cancelButton);
 			this.Controls.Add(this.okButton);
 			this.MaximizeBox = false;
-			this.MaximumSize = new System.Drawing.Size(1081, 451);
+			this.MaximumSize = new System.Drawing.Size(1081, 951);
 			this.MinimizeBox = false;
 			this.MinimumSize = new System.Drawing.Size(581, 451);
 			this.Name = "ProjectSettingsForm";
@@ -448,6 +487,8 @@
 			this.styleGroupBox.PerformLayout();
 			this.bibEntryInitializationGroupBox.ResumeLayout(false);
 			this.bibEntryInitializationGroupBox.PerformLayout();
+			this.qualityProcessorGroupBox.ResumeLayout(false);
+			this.qualityProcessorGroupBox.PerformLayout();
 			this.ResumeLayout(false);
 
 		}
@@ -479,5 +520,8 @@
 		private System.Windows.Forms.Button browseBibEntryInitializationFileButton;
 		private System.Windows.Forms.CheckBox useBibEntryInitializationCheckBox;
 		private System.Windows.Forms.CheckBox autoGenerateKeysCheckBox;
+		private System.Windows.Forms.GroupBox qualityProcessorGroupBox;
+		private System.Windows.Forms.TextBox qualityProcessingFileTextBox;
+		private System.Windows.Forms.Button browseQualityProcessorButton;
 	} // End class.
 } // End namespace.

@@ -1,4 +1,5 @@
 ﻿using BibTeXLibrary;
+using BibTeXManager;
 using DigitalProduction.Projects;
 using System;
 using System.Collections.Generic;
@@ -17,9 +18,13 @@ namespace BibtexManager
 		#region Fields
 
 		private string								_bibFile;
+		private List<string>						_assessoryFiles					= new List<string>();
+		
 		private bool								_useBibEntryInitialization;
 		private string								_bibEntryInitializationFile;
-		private List<string>						_assessoryFiles					= new List<string>();
+		private string								_qualityProcessingFile;
+		private QualityProcessor					_qualityProcessor				= new QualityProcessor();
+
 		private readonly Bibliography				_bibliography					= new Bibliography();
 		private WriteSettings						_writeSettings					= new WriteSettings();
 		private bool								_autoGenerateKeys				= true;
@@ -89,9 +94,15 @@ namespace BibtexManager
 		public string BibEntryInitializationFile { get => _bibEntryInitializationFile; set => _bibEntryInitializationFile = value; }
 
 		/// <summary>
+		/// The path to the quality processor file.
+		/// </summary>
+		[XmlAttribute("qualityprocessorfile")]
+		public string QualityProcessingFile { get => _qualityProcessingFile; set => _qualityProcessingFile = value; }
+
+		/// <summary>
 		/// Assessory files that contain things like strings.
 		/// </summary>
-		[XmlArray("datanames"), XmlArrayItem("name")]
+		[XmlArray("assessoryfiles"), XmlArrayItem("file")]
 		public List<string> AssessoryFiles
 		{
 			get
@@ -166,11 +177,16 @@ namespace BibtexManager
 			return result.Item2;
 		}
 
-		public void CleanEntry(BibEntry entry)
+		public IEnumerable<Correction> CleanEntry(BibEntry entry)
 		{
 			if (_autoGenerateKeys)
 			{
 				_bibliography.AutoKeyEntry(entry);
+			}
+
+			foreach (Correction correction in _qualityProcessor.Process(entry))
+			{
+				yield return correction;
 			}
 		}
 
@@ -207,6 +223,7 @@ namespace BibtexManager
 		/// </summary>
 		public override void DeserializationInitialization()
 		{
+			_qualityProcessor = QualityProcessor.Deserialize(_qualityProcessingFile);
 		}
 
 		#endregion

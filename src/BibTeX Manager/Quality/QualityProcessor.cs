@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BibTeXLibrary;
+using DigitalProduction.XML.Serialization;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -11,11 +13,12 @@ namespace BibTeXManager
 	/// <summary>
 	/// 
 	/// </summary>
+	[XmlRoot("qualityprocessor")]
 	public class QualityProcessor
 	{
 		#region Fields
 
-		private BindingList<TagProcessor>				_processorList			= new BindingList<TagProcessor>();
+		private BindingList<TagProcessor>				_tagProcessors			= new BindingList<TagProcessor>();
 
 		#endregion
 
@@ -32,13 +35,36 @@ namespace BibTeXManager
 
 		#region Properties
 
+		[XmlArray("tagprocessors"), XmlArrayItem("tagprocessor")]
+		public BindingList<TagProcessor> TagProcessors { get => _tagProcessors; set => _tagProcessors = value; }
+
 		#endregion
 
 		#region Methods
 
-		#endregion
+		public IEnumerable<Correction> Process(BibEntry entry)
+		{
+			foreach (TagProcessor processor in _tagProcessors)
+			{
+				foreach (Correction correction in processor.Corrections(entry))
+				{
+					yield return correction;
+				}
+			}
+		}
 
-		#region XML
+	#endregion
+
+	#region XML
+
+	/// <summary>
+	/// Create an instance from a file.
+	/// </summary>
+	/// <param name="path">The file to read from.</param>
+	public static QualityProcessor Deserialize(string path)
+		{
+			return Serialization.DeserializeObject<QualityProcessor>(path);
+		}
 
 		#endregion
 

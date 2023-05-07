@@ -16,6 +16,7 @@ namespace BibtexManager
 
 		private readonly static string		_bibFileFilterString							= "\"BibTeX files (*.bib)|*.bib|Text files (*.txt)|*.txt|All files (*.*)|*.*\"";
 		private readonly static string		_bibEntryInitializationFileFilterString			= "\"Bibliography Tag Order files (*.tagord)|*.tagord|XML files (*.xml)|*.xml|All files (*.*)|*.*\"";
+		private readonly static string		_qualityProcessingFileFilterString				= "\"Quality Processing files (*.qlty)|*.qlty|XML files (*.xml)|*.xml|All files (*.*)|*.*\"";
 
 		private readonly BibtexProject		_project;
 
@@ -44,16 +45,6 @@ namespace BibtexManager
 		#region Event Handlers
 
 		/// <summary>
-		/// Align tag values checked change event handler.
-		/// </summary>
-		/// <param name="sender">Sender.</param>
-		/// <param name="eventArgs">Event arguments.</param>
-		private void AlignTagValuesCheckBox_CheckedChanged(object sender, EventArgs eventArgs)
-		{
-			SetControls();
-		}
-
-		/// <summary>
 		/// Browse for the BibTeX file.
 		/// </summary>
 		/// <param name="sender">Sender.</param>
@@ -67,6 +58,39 @@ namespace BibtexManager
 			if (path != "")
 			{
 				this.bibFileLocationTextBox.Text = path;
+			}
+		}
+
+
+		/// <summary>
+		/// Add assessory files.
+		/// </summary>
+		/// <param name="sender">Sender.</param>
+		/// <param name="eventArgs">Event arguments.</param>
+		private void AddAssessoryFileButton_Click(object sender, EventArgs eventArgs)
+		{
+			string initialDirectory = System.IO.Path.GetDirectoryName(_project.BibFile);
+
+			string[] paths = FileSelect.BrowseForMultipleFiles(this, _bibFileFilterString, "Select BibTeX File", initialDirectory, true);
+
+			if (paths != null)
+			{
+				this.assessoryFilesListBox.Items.AddRange(paths);
+			}
+		}
+
+		/// <summary>
+		/// Remove assessory files.
+		/// </summary>
+		/// <param name="sender">Sender.</param>
+		/// <param name="eventArgs">Event arguments.</param>
+		private void RemoveAssessoryFileButton_Click(object sender, EventArgs eventArgs)
+		{
+			ListBox.SelectedObjectCollection selectedItems = this.assessoryFilesListBox.SelectedItems;
+
+			foreach (string file in selectedItems.OfType<string>().ToList())
+			{
+				this.assessoryFilesListBox.Items.Remove(file);
 			}
 		}
 
@@ -98,35 +122,30 @@ namespace BibtexManager
 		}
 
 		/// <summary>
-		/// Add assessory files.
+		/// Browse for the quality processor file.
 		/// </summary>
 		/// <param name="sender">Sender.</param>
 		/// <param name="eventArgs">Event arguments.</param>
-		private void AddButton_Click(object sender, EventArgs eventArgs)
+		private void BrowseQualityProcessorButton_Click(object sender, EventArgs eventArgs)
 		{
-			string initialDirectory = System.IO.Path.GetDirectoryName(_project.BibFile);
+			string initialDirectory = System.IO.Path.GetDirectoryName(_project.QualityProcessingFile);
 
-			string[] paths = FileSelect.BrowseForMultipleFiles(this, _bibFileFilterString, "Select BibTeX File", initialDirectory, true);
+			string path = FileSelect.BrowseForAFile(this, _qualityProcessingFileFilterString, "Select a Quality Processing File", initialDirectory, true);
 
-			if (paths != null)
+			if (path != "")
 			{
-				this.assessoryFilesListBox.Items.AddRange(paths);
+				this.qualityProcessingFileTextBox.Text = path;
 			}
 		}
 
 		/// <summary>
-		/// Remove assessory files.
+		/// Align tag values checked change event handler.
 		/// </summary>
 		/// <param name="sender">Sender.</param>
 		/// <param name="eventArgs">Event arguments.</param>
-		private void RemoveButton_Click(object sender, EventArgs eventArgs)
+		private void AlignTagValuesCheckBox_CheckedChanged(object sender, EventArgs eventArgs)
 		{
-			ListBox.SelectedObjectCollection selectedItems = this.assessoryFilesListBox.SelectedItems;
-
-			foreach (string file in selectedItems.OfType<string>().ToList())
-			{
-				this.assessoryFilesListBox.Items.Remove(file);
-			}
+			SetControls();
 		}
 
 		/// <summary>
@@ -179,13 +198,16 @@ namespace BibtexManager
 			// Bibliography file.
 			this.bibFileLocationTextBox.Text				= _project.BibFile;
 
+			// Assessory files.
+			this.assessoryFilesListBox.Items.AddRange(_project.AssessoryFiles.ToArray());
+
 			// Bibliography entry initialization.
 			this.useBibEntryInitializationCheckBox.Checked	= _project.UseBibEntryInitialization;
 			this.bibEntryInitializationFileTextBox.Text		= _project.BibEntryInitializationFile;
 
-			// Assessory files.
-			this.assessoryFilesListBox.Items.AddRange(_project.AssessoryFiles.ToArray());
-
+			// Quality processing.
+			this.qualityProcessingFileTextBox.Text			= _project.QualityProcessingFile;
+			
 			// Write settings.
 			WriteSettings writeSettings						= _project.WriteSettings;
 
@@ -212,10 +234,6 @@ namespace BibtexManager
 			// Bibliography file.
 			_project.BibFile						= this.bibFileLocationTextBox.Text;
 
-			// Bibliography entry initialization.
-			_project.UseBibEntryInitialization		= this.useBibEntryInitializationCheckBox.Checked;
-			_project.BibEntryInitializationFile		= this.bibEntryInitializationFileTextBox.Text;
-
 			// Assessory files.
 			ListBox.ObjectCollection items			= this.assessoryFilesListBox.Items;
 			List<string> files						= new List<string>();
@@ -224,6 +242,13 @@ namespace BibtexManager
 				files.Add(item.ToString());
 			}
 			_project.AssessoryFiles = files;
+
+			// Bibliography entry initialization.
+			_project.UseBibEntryInitialization		= this.useBibEntryInitializationCheckBox.Checked;
+			_project.BibEntryInitializationFile		= this.bibEntryInitializationFileTextBox.Text;
+
+			// Quality processing.
+			_project.QualityProcessingFile			= this.qualityProcessingFileTextBox.Text;
 
 			// Write settings.
 			WriteSettings writeSettings				= _project.WriteSettings;

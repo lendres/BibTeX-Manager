@@ -1,4 +1,5 @@
 ﻿using BibTeXLibrary;
+using BibTeXManager.Quality;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,8 +12,9 @@ using System.Xml.Serialization;
 namespace BibTeXManager
 {
 	/// <summary>
-	/// 
+	/// Base class for tag processors.
 	/// </summary>
+	[XmlInclude(typeof(StringReplacementTagProcessor))]
 	public abstract class TagProcessor
 	{
 		#region Fields
@@ -106,6 +108,14 @@ namespace BibTeXManager
 			entry[tagName] = output.ToString();
 		}
 
+		/// <summary>
+		/// Uses the information provided to update the output string.
+		/// </summary>
+		/// <param name="tagValue">Original value of the tag.</param>
+		/// <param name="correction">Correction data.</param>
+		/// <param name="output">Output string that is being built.</param>
+		/// <param name="lastIndex">The index position in the string that was last processed.</param>
+		/// <param name="startIndex">The starting index of the currently matched pattern.</param>
 		protected int ProcessCorrectionResult(string tagValue, Correction correction, StringBuilder output, int lastIndex, int startIndex)
 		{
 			if (correction.Replace)
@@ -119,6 +129,10 @@ namespace BibTeXManager
 			return lastIndex;
 		}
 
+		/// <summary>
+		/// Gets the replacement string for the input (original) string.
+		/// </summary>
+		/// <param name="original">Original string (matched pattern).</param>
 		protected abstract string GetReplacement(string original);
 
 		#endregion
