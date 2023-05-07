@@ -42,6 +42,10 @@ namespace BibTeXManager
 
 		#region Methods
 
+		/// <summary>
+		/// Process a BibEntry and correct errors.
+		/// </summary>
+		/// <param name="entry">BibEntry to process and clean.</param>
 		public IEnumerable<Correction> Process(BibEntry entry)
 		{
 			foreach (TagProcessor processor in _tagProcessors)

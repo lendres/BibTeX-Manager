@@ -177,6 +177,10 @@ namespace BibtexManager
 			return result.Item2;
 		}
 
+		/// <summary>
+		/// Clean a single entry.
+		/// </summary>
+		/// <param name="entry">BibEntry to clean.</param>
 		public IEnumerable<Correction> CleanEntry(BibEntry entry)
 		{
 			if (_autoGenerateKeys)
