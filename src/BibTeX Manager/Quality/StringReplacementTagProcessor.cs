@@ -42,7 +42,9 @@ namespace BibTeXManager.Quality
 
 
 		#endregion
+
 		#region Methods
+
 		/// <summary>
 		/// Gets the replacement string for the input (original) string.
 		/// </summary>
@@ -67,6 +69,7 @@ namespace BibTeXManager.Quality
 
 				if (extendedMatch == _replacement)
 				{
+					// The replacement string already exists so don't prompt the user and don't replace the text.
 					correction.PromptUser	= false;
 					correction.ReplaceText	= false;
 				}
