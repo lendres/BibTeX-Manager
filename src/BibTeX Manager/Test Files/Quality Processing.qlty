@@ -17,5 +17,26 @@
 			</tags>
 		</tagprocessor>
 
+		<!-- Do not modify the pattern unless you really know what you are doing. -->
+		<tagprocessor xsi:type="SentanceEndingSpacesTagProcessor"
+			processalltages="false"
+			pattern="\.+[a-zA-Z]+"
+			frenchspacing="false">
+			<tags>
+				<tag>abstract</tag>
+			</tags>
+			<exceptions>
+				<exception>A.K.A.</exception>
+				<exception>D.C.</exception>
+				<exception>E.g.</exception>
+				<exception>e.g.</exception>
+				<exception>I.e.</exception>
+				<exception>i.e.</exception>
+				<exception>Ph.D.</exception>
+				<exception>U.S.</exception>
+				<exception>U.S.A.</exception>
+			</exceptions>
+		</tagprocessor>
+
 	</tagprocessors>
 </qualityprocessor>

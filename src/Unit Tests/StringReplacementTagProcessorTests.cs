@@ -5,7 +5,7 @@ using BibTeXManager.Quality;
 namespace BibTexManagerUnitTests
 {
 	[TestClass]
-	public class TagProcessoreTests
+	public class StringReplacementTagProcessorTests
 	{
 		/// <summary>
 		/// Base line test to replace text.
@@ -23,7 +23,7 @@ namespace BibTexManagerUnitTests
 			processor.Pattern		= "&amp;";
 			processor.Replacement	= @"\&";
 
-			RunProcessor(processor, entry);
+			Utilities.RunProcessor(processor, entry);
 
 			Assert.AreEqual(input, entry.Title);
 			Assert.AreEqual(solution, entry.Abstract);
@@ -44,7 +44,7 @@ namespace BibTexManagerUnitTests
 			processor.Pattern		= "&amp;";
 			processor.Replacement	= @"\&";
 
-			RunProcessor(processor, entry);
+			Utilities.RunProcessor(processor, entry);
 
 			Assert.AreEqual(solution, entry.Title);
 			Assert.AreEqual(solution, entry.Abstract);
@@ -67,25 +67,14 @@ namespace BibTexManagerUnitTests
 			processor.TagNames.Add("title");
 
 			// Test lower case tag name.
-			RunProcessor(processor, entry);
+			Utilities.RunProcessor(processor, entry);
 			Assert.AreEqual(solution, entry.Title);
 
 			// Test upper case tage name.
 			processor.TagNames.Clear();
 			processor.TagNames.Add("Title");
-			RunProcessor(processor, entry);
+			Utilities.RunProcessor(processor, entry);
 			Assert.AreEqual(solution, entry.Title);
-		}
-
-		private void RunProcessor(TagProcessor processor, BibEntry entry)
-		{
-			foreach (Correction correction in processor.Corrections(entry))
-			{
-				if (correction.PromptUser)
-				{
-					correction.ReplaceText = true;
-				}
-			}
 		}
 
 	} // End class.

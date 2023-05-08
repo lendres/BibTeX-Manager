@@ -14,6 +14,7 @@ namespace BibTeXManager
 	/// <summary>
 	/// Base class for tag processors.
 	/// </summary>
+	[XmlInclude(typeof(SentanceEndingSpacesTagProcessor))]
 	[XmlInclude(typeof(StringReplacementTagProcessor))]
 	public abstract class TagProcessor
 	{
@@ -109,7 +110,7 @@ namespace BibTeXManager
 				if (match.Success && match.Groups.Count > 0)
 				{
 					Correction correction		= new Correction() { FullText = tagValue, MatchedText = match.Value, MatchStartIndex = match.Index };
-					GetReplacement(correction);
+					ProcessPatternMatch(correction);
 
 					if (correction.PromptUser)
 					{
@@ -152,7 +153,7 @@ namespace BibTeXManager
 		/// Gets the replacement string for the input (original) string.
 		/// </summary>
 		/// <param name="correction">Correction information.</param>
-		protected abstract void GetReplacement(Correction correction);
+		protected abstract void ProcessPatternMatch(Correction correction);
 
 		#endregion
 

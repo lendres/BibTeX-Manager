@@ -39,8 +39,6 @@ namespace BibTeXManager.Quality
 		[XmlAttribute("replacement")]
 		public string Replacement { get => _replacement; set => _replacement = value; }
 
-
-
 		#endregion
 
 		#region Methods
@@ -49,7 +47,7 @@ namespace BibTeXManager.Quality
 		/// Gets the replacement string for the input (original) string.
 		/// </summary>
 		/// <param name="correction">Correction information.</param>
-		protected override void GetReplacement(Correction correction)
+		protected override void ProcessPatternMatch(Correction correction)
 		{
 			// We need to make sure we don't replace a string with the intended output.  I.e., we have to make sure we
 			// don't replace "XXX" with "{XXX}" when the brackets already exist.  The matching (searching) part will find
