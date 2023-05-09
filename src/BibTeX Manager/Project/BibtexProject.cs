@@ -7,7 +7,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Xml.Serialization;
-using static DigitalProduction.Forms.MessageBoxYesNoToAll;
 
 namespace BibtexManager
 {
@@ -326,6 +325,9 @@ namespace BibtexManager
 			}
 		}
 
+		/// <summary>
+		/// Get an array of all the names of the maps.
+		/// </summary>
 		public string[] GetBibEntryMapNames()
 		{
 			return _nameRemapper.Maps.Keys.ToArray();

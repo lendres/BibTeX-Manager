@@ -164,8 +164,8 @@
     </Compile>
     <Compile Include="Quality\Correction.cs" />
     <Compile Include="Quality\QualityProcessor.cs" />
-    <Compile Include="Quality\BibEntryMap.cs" />
-    <Compile Include="Quality\BibEntryRemapper.cs" />
+    <Compile Include="Name Remapping\BibEntryMap.cs" />
+    <Compile Include="Name Remapping\BibEntryRemapper.cs" />
     <Compile Include="Quality\SentanceEndingSpacesTagProcessor.cs" />
     <Compile Include="Quality\StringReplacementTagProcessor.cs" />
     <Compile Include="Quality\TagProcessingData.cs" />

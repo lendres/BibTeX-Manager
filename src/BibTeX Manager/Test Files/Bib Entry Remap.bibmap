@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="us-ascii"?>
-<bibentryremap xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<bibentryremapping xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<maps>
 		<item key="Proceedings to InProceedings">
 			<value nampe="Proceedings to InProceedings" totype="inproceedings">
@@ -17,4 +17,4 @@
 			</value>
 		</item>
 	</maps>
-</bibentryremap>
+</bibentryremapping>

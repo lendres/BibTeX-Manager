@@ -2,18 +2,14 @@
 using DigitalProduction.XML.Serialization;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml.Serialization;
 
 namespace BibTeXManager
 {
 	/// <summary>
-	/// 
+	/// A class to remap the type and tag names of a bibilography entry.
 	/// </summary>
-	[XmlRoot("bibentryremap")]
+	[XmlRoot("bibentryremapping")]
 	public class BibEntryRemapper
 	{
 		#region Fields
@@ -35,6 +31,9 @@ namespace BibTeXManager
 
 		#region Properties
 
+		/// <summary>
+		/// Bibliography entry maps.
+		/// </summary>
 		[XmlElement("maps")]
 		public SerializableDictionary<string, BibEntryMap> Maps { get => _maps; set => _maps = value; }
 		
@@ -42,6 +41,11 @@ namespace BibTeXManager
 
 		#region Methods
 
+		/// <summary>
+		/// Remap the type and tag names in a BibEntry.
+		/// </summary>
+		/// <param name="entry">BibEntry.</param>
+		/// <param name="mapName">Name of the map to use.</param>
 		public void RemapEntryNames(BibEntry entry, string mapName)
 		{
 			BibEntryMap map = _maps[mapName];
@@ -53,10 +57,12 @@ namespace BibTeXManager
 				entry.Type = map.ToType;
 			}
 
+			// Getting the tag names is a little expensive, so just do it once, outside of the loop.
 			List<string> tagNames = entry.TagNames;
 
 			foreach (KeyValuePair<string, string> tagMap in map.TagMaps)
 			{
+				// Only remap when the key exists.
 				if (tagNames.Contains(tagMap.Key))
 				{
 					entry.RenameTagKey(tagMap.Key, tagMap.Value);

@@ -1,9 +1,9 @@
-﻿using DigitalProduction.Forms;
+﻿using BibTeXLibrary;
+using DigitalProduction.Forms;
 using System;
-using System.Windows.Forms;
-using System.Linq;
 using System.Collections.Generic;
-using BibTeXLibrary;
+using System.Linq;
+using System.Windows.Forms;
 
 namespace BibtexManager
 {
@@ -61,7 +61,6 @@ namespace BibtexManager
 				this.bibFileLocationTextBox.Text = path;
 			}
 		}
-
 
 		/// <summary>
 		/// Add assessory files.
@@ -197,6 +196,10 @@ namespace BibtexManager
 			PushEntriesToDataStructure();
 		}
 
+		/// <summary>
+		/// Display a message that some data is not valid.
+		/// </summary>
+		/// <param name="message">Message to display.</param>
 		private void InvalidDataMessage(string message)
 		{
 			MessageBox.Show(this, message, "Invalid Data", MessageBoxButtons.OK, MessageBoxIcon.Error);
