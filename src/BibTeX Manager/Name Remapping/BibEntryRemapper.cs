@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 
-namespace BibTeXManager.Quality
+namespace BibTeXManager
 {
 	/// <summary>
 	/// 
@@ -41,6 +41,28 @@ namespace BibTeXManager.Quality
 		#endregion
 
 		#region Methods
+
+		public void RemapEntryNames(BibEntry entry, string mapName)
+		{
+			BibEntryMap map = _maps[mapName];
+
+			// Check the Type of the bibliography entry.  I.e., this allows mapping
+			// of "@proceedings" to "@inproceedings".
+			if (map.FromTypes.Contains(entry.Type))
+			{
+				entry.Type = map.ToType;
+			}
+
+			List<string> tagNames = entry.TagNames;
+
+			foreach (KeyValuePair<string, string> tagMap in map.TagMaps)
+			{
+				if (tagNames.Contains(tagMap.Key))
+				{
+					entry.RenameTagKey(tagMap.Key, tagMap.Value);
+				}
+			}
+		}
 
 		#endregion
 

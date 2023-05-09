@@ -224,9 +224,11 @@ namespace BibtexManager
 			this.bibEntryInitializationFileTextBox.Text		= _project.BibEntryInitializationFile;
 
 			// Quality processing.
+			this.useQualityProcessingCheckBox.Checked		= _project.UseQualityProcessing;
 			this.qualityProcessingFileTextBox.Text			= _project.QualityProcessingFile;
 
 			// BibEntry remapping.
+			this.useRemappingCheckBox.Checked				= _project.UseBibEntryRemapping;
 			this.remappingFileTextBox.Text					= _project.RemappingFile;
 			
 			// Write settings.
@@ -269,9 +271,11 @@ namespace BibtexManager
 			_project.BibEntryInitializationFile		= this.bibEntryInitializationFileTextBox.Text;
 
 			// Quality processing.
+			_project.UseQualityProcessing			= this.useQualityProcessingCheckBox.Checked;
 			_project.QualityProcessingFile			= this.qualityProcessingFileTextBox.Text;
 
 			// BibEntry remapping.
+			_project.UseBibEntryRemapping			= this.useRemappingCheckBox.Checked;
 			_project.RemappingFile					= this.remappingFileTextBox.Text;
 
 			// Write settings.
@@ -314,8 +318,8 @@ namespace BibtexManager
 				this.alignmentTabStopNumericUpDown.Enabled	= false;
 			}
 
-			this.bibEntryInitializationFileTextBox.Enabled		= this.useBibEntryInitializationCheckBox.Checked;
-			this.browseBibEntryInitializationFileButton.Enabled	= this.useBibEntryInitializationCheckBox.Checked;
+			//this.bibEntryInitializationFileTextBox.Enabled		= this.useBibEntryInitializationCheckBox.Checked;
+			//this.browseBibEntryInitializationFileButton.Enabled	= this.useBibEntryInitializationCheckBox.Checked;
 		}
 
 		#endregion

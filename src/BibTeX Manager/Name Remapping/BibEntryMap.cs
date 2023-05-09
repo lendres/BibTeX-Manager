@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 
-namespace BibTeXManager.Quality
+namespace BibTeXManager
 {
 	/// <summary>
 	/// A class for mapping BibEntry data.

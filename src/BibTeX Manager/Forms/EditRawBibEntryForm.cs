@@ -40,7 +40,7 @@ namespace BibTeXManager
 			this.richTextBox.Select();
 			this.KeyPreview = true;
 
-			//PopulateControls();
+			PopulateControls();
 		}
 
 		#endregion
@@ -123,6 +123,16 @@ namespace BibTeXManager
 		}
 
 		/// <summary>
+		/// BibEntryMap check box changed event handler.
+		/// </summary>
+		/// <param name="sender">Sender.</param>
+		/// <param name="eventArgs">Event arguments.</param>
+		private void BibEntryCheckBox_CheckedChanged(object sender, EventArgs eventArgs)
+		{
+			SetControls();
+		}
+
+		/// <summary>
 		/// Ok button event handler.
 		/// </summary>
 		/// <param name="sender">Sender.</param>
@@ -151,6 +161,10 @@ namespace BibTeXManager
 		{
 			if (Parse())
 			{
+				// Key.
+				_project.GenerateKey(_bibEntry);
+
+				// Cleaning.
 				bool breakNext = false;
 				foreach (TagProcessingData tagProcessingData in _project.CleanEntry(_bibEntry))
 				{
@@ -165,6 +179,12 @@ namespace BibTeXManager
 					correctionForm.ShowDialog(this);
 
 					breakNext = correctionForm.DialogResult == MessageBoxYesNoToAllResult.Cancel;
+				}
+
+				// Mapping.
+				if (this.useBibEntryMapCheckBox.Checked)
+				{
+					_project.RemapEntryNames(_bibEntry);
 				}
 
 				this.richTextBox.Text = _bibEntry.ToString(_project.WriteSettings);
@@ -256,11 +276,21 @@ namespace BibTeXManager
 			return dialogResultPair;
 		}
 
+		private void SetControls()
+		{
+			this.bibEntryMapComboBox.Enabled = useBibEntryMapCheckBox.Checked;
+		}
+
 		/// <summary>
 		/// Initialize the controls with the values from the data structure.
 		/// </summary>
 		protected void PopulateControls()
 		{
+			this.useBibEntryMapCheckBox.Checked = _project.UseBibEntryRemapping;
+			SetControls();
+			this.bibEntryMapComboBox.Items.Clear();
+			this.bibEntryMapComboBox.Items.AddRange(_project.GetBibEntryMapNames());
+			this.bibEntryMapComboBox.Text = _project.BibEntryMap;
 		}
 
 		/// <summary>
@@ -268,6 +298,8 @@ namespace BibTeXManager
 		/// </summary>
 		protected void PushEntriesToDataStructure()
 		{
+			_project.UseBibEntryRemapping = this.useBibEntryMapCheckBox.Checked;
+			_project.BibEntryMap = this.bibEntryMapComboBox.SelectedItem.ToString();
 		}
 
 		#endregion

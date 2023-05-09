@@ -24,10 +24,15 @@ namespace BibtexManager
 		
 		private bool								_useBibEntryInitialization;
 		private string								_bibEntryInitializationFile;
-		private string								_qualityProcessingFile;
-		private QualityProcessor					_qualityProcessor				= new QualityProcessor();
-		private string								_bibEntryRemappingFile;
-		private BibEntryRemapper					_bibEntryRemapper				= new BibEntryRemapper();
+
+		private bool								_useTagQualityProcessing;
+		private string								_tagQualityProcessingFile;
+		private QualityProcessor					_tagQualityProcessor			= new QualityProcessor();
+
+		private bool								_useNameRemapping				= false;
+		private string								_nameRemappingFile;
+		private string								_currentBibEntryMap				= "";
+		private BibEntryRemapper					_nameRemapper					= new BibEntryRemapper();
 
 		private readonly Bibliography				_bibliography					= new Bibliography();
 		private WriteSettings						_writeSettings					= new WriteSettings();
@@ -149,6 +154,27 @@ namespace BibtexManager
 		}
 
 		/// <summary>
+		/// Specifies if the tags should be processed to ensure their quality.
+		/// </summary>
+		[XmlAttribute("usequalityprocessing")]
+		public bool UseQualityProcessing
+		{
+			get
+			{
+				return _useTagQualityProcessing;
+			}
+
+			set
+			{
+				if (_useTagQualityProcessing != value)
+				{
+					_useTagQualityProcessing = value;
+					this.Modified = true;
+				}
+			}
+		}
+
+		/// <summary>
 		/// The path to the quality processor file.
 		/// </summary>
 		[XmlAttribute("qualityprocessorfile")]
@@ -156,14 +182,34 @@ namespace BibtexManager
 		{
 			get
 			{
-				return _qualityProcessingFile;
+				return _tagQualityProcessingFile;
 			}
 
 			set
 			{
-				if (_qualityProcessingFile != value)
+				if (_tagQualityProcessingFile != value)
 				{
-					_qualityProcessingFile = value;
+					_tagQualityProcessingFile = value;
+					this.Modified = true;
+				}
+			}
+		}
+
+		/// <summary>
+		/// Use BibEntry remapping.
+		/// </summary>
+		[XmlAttribute("usebibentryremapping")]
+		public bool UseBibEntryRemapping
+		{
+			get
+			{
+				return _useNameRemapping;
+			}
+			set
+			{
+				if (_useNameRemapping != value)
+				{
+					_useNameRemapping = value;
 					this.Modified = true;
 				}
 			}
@@ -177,14 +223,35 @@ namespace BibtexManager
 		{
 			get
 			{
-				return _bibEntryRemappingFile;
+				return _nameRemappingFile;
 			}
 
 			set
 			{
-				if (_bibEntryRemappingFile != value)
+				if (_nameRemappingFile != value)
 				{
-					_bibEntryRemappingFile = value;
+					_nameRemappingFile = value;
+					this.Modified = true;
+				}
+			}
+		}
+
+	
+		/// <summary>
+		/// The BibEntryMap to use for remapping.
+		/// </summary>
+		[XmlAttribute("bibentrymap")]
+		public string BibEntryMap
+		{
+			get
+			{
+				return _currentBibEntryMap;
+			}
+			set
+			{
+				if (_currentBibEntryMap != value)
+				{
+					_currentBibEntryMap = value;
 					this.Modified = true;
 				}
 			}
@@ -259,6 +326,11 @@ namespace BibtexManager
 			}
 		}
 
+		public string[] GetBibEntryMapNames()
+		{
+			return _nameRemapper.Maps.Keys.ToArray();
+		}
+
 		/// <summary>
 		/// Parse a string and return BibEntrys.
 		/// </summary>
@@ -280,19 +352,39 @@ namespace BibtexManager
 		}
 
 		/// <summary>
-		/// Clean a single entry.
+		/// If the option for automatically generating keys is on, a key is generated for the entry.
 		/// </summary>
-		/// <param name="entry">BibEntry to clean.</param>
-		public IEnumerable<TagProcessingData> CleanEntry(BibEntry entry)
+		/// <param name="entry">BibEntry.</param>
+		public void GenerateKey(BibEntry entry)
 		{
 			if (_autoGenerateKeys)
 			{
 				_bibliography.AutoKeyEntry(entry);
 			}
+		}
 
-			foreach (TagProcessingData tagProcessingData in _qualityProcessor.Process(entry))
+		/// <summary>
+		/// Clean a single entry.
+		/// </summary>
+		/// <param name="entry">BibEntry.</param>
+		public IEnumerable<TagProcessingData> CleanEntry(BibEntry entry)
+		{
+
+			foreach (TagProcessingData tagProcessingData in _tagQualityProcessor.Process(entry))
 			{
 				yield return tagProcessingData;
+			}
+		}
+
+		/// <summary>
+		/// Remaps the Key and Tag Keys to new names.
+		/// </summary>
+		/// <param name="entry">BibEntry.</param>
+		public void RemapEntryNames(BibEntry entry)
+		{
+			if (_useNameRemapping)
+			{
+				_nameRemapper.RemapEntryNames(entry, _currentBibEntryMap);
 			}
 		}
 
@@ -329,15 +421,15 @@ namespace BibtexManager
 		/// </summary>
 		public override void DeserializationInitialization()
 		{
-			if (System.IO.File.Exists(_qualityProcessingFile))
+			if (System.IO.File.Exists(_tagQualityProcessingFile))
 			{
-				_qualityProcessor = QualityProcessor.Deserialize(_qualityProcessingFile);
+				_tagQualityProcessor = QualityProcessor.Deserialize(_tagQualityProcessingFile);
 			}
 
-			if (System.IO.File.Exists(_bibEntryRemappingFile))
+			if (System.IO.File.Exists(_nameRemappingFile))
 			{
-				_bibEntryRemapper = BibEntryRemapper.Deserialize(_bibEntryRemappingFile);
-				}
+				_nameRemapper = BibEntryRemapper.Deserialize(_nameRemappingFile);
+			}
 		}
 
 		#endregion
