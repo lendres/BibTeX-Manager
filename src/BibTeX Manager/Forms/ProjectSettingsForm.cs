@@ -247,9 +247,10 @@ namespace BibtexManager
 			this.alignmentColumnNumericUpDown.Value			= writeSettings.AlignAtColumn;
 			this.alignmentTabStopNumericUpDown.Value		= writeSettings.AlignAtTabStop;
 
-			// Style.
+			// Style and automation.
 			this.autoGenerateKeysCheckBox.Checked			= _project.AutoGenerateKeys;
 			this.removeLastCommaCheckBox.Checked			= writeSettings.RemoveLastComma;
+			this.copyCiteKeyCheckBox.Checked				= _project.CopyCiteKeyOnEntryAdd;
 		}
 
 		/// <summary>
@@ -303,6 +304,7 @@ namespace BibtexManager
 			// Style
 			_project.AutoGenerateKeys				= this.autoGenerateKeysCheckBox.Checked;
 			writeSettings.RemoveLastComma			= this.removeLastCommaCheckBox.Checked;
+			_project.CopyCiteKeyOnEntryAdd			= this.copyCiteKeyCheckBox.Checked;
 		}
 
 		/// <summary>

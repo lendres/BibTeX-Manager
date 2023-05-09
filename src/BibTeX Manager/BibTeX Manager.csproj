@@ -182,6 +182,8 @@
     <Compile Include="Quality\StringReplacementTagProcessor.cs" />
     <Compile Include="Quality\TagProcessingData.cs" />
     <Compile Include="Quality\TagProcessor.cs" />
+    <None Include="Forms\Resources\PlusGreenAndTemplate_16x.png" />
+    <None Include="Forms\Resources\Copy Key_40.png" />
     <None Include="Test Files\Bib Entry Initialization.tagord">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -248,8 +250,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controls\" />
-    <Folder Include="Forms\Resources\" />
-    <Folder Include="Resources\" />
   </ItemGroup>
   <ProjectExtensions>
     <VisualStudio>

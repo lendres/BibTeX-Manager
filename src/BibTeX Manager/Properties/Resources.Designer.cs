@@ -63,6 +63,16 @@ namespace BibtexManager.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Copy_Key_40 {
+            get {
+                object obj = ResourceManager.GetObject("Copy Key_40", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap LELaTeX_Logo_Rotated_CroppedForAbout {
             get {
                 object obj = ResourceManager.GetObject("LELaTeX_Logo_Rotated_CroppedForAbout", resourceCulture);
@@ -86,6 +96,16 @@ namespace BibtexManager.Properties {
         internal static System.Drawing.Bitmap Paste_Quality_40 {
             get {
                 object obj = ResourceManager.GetObject("Paste Quality_40", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap PlusGreenAndTemplate_16x {
+            get {
+                object obj = ResourceManager.GetObject("PlusGreenAndTemplate_16x", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -36,7 +36,6 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BibManagerDataGridViewControl));
 			this.addRawTemplateButton = new System.Windows.Forms.Button();
 			this.SuspendLayout();
 			// 
@@ -46,7 +45,7 @@
 			// 
 			// addRawTemplateButton
 			// 
-			this.addRawTemplateButton.Image = ((System.Drawing.Image)(resources.GetObject("addRawTemplateButton.Image")));
+			this.addRawTemplateButton.Image = global::BibtexManager.Properties.Resources.PlusGreenAndTemplate_16x;
 			this.addRawTemplateButton.Location = new System.Drawing.Point(371, 0);
 			this.addRawTemplateButton.Name = "addRawTemplateButton";
 			this.addRawTemplateButton.Size = new System.Drawing.Size(40, 30);

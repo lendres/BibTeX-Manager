@@ -35,6 +35,7 @@ namespace BibtexManager
 		private readonly Bibliography				_bibliography					= new Bibliography();
 		private WriteSettings						_writeSettings					= new WriteSettings();
 		private bool								_autoGenerateKeys				= true;
+		private bool								_copyCiteKeyOnEntryAdd			= true;
 
 		#endregion
 
@@ -306,6 +307,26 @@ namespace BibtexManager
 				if (_autoGenerateKeys != value)
 				{
 					_autoGenerateKeys = value;
+					this.Modified = true;
+				}
+			}
+		}
+
+		/// <summary>
+		/// Copy the bibliography entry's cite key when the entry is added.
+		/// </summary>
+		public bool CopyCiteKeyOnEntryAdd
+		{
+			get
+			{
+				return _copyCiteKeyOnEntryAdd;
+			}
+
+			set
+			{
+				if (_copyCiteKeyOnEntryAdd != value)
+				{
+					_copyCiteKeyOnEntryAdd = value;
 					this.Modified = true;
 				}
 			}

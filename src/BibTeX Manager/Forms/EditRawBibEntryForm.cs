@@ -1,16 +1,9 @@
 ﻿using BibTeXLibrary;
-using BibtexManager;
 using DigitalProduction.Forms;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
-using static DigitalProduction.Forms.MessageBoxYesNoToAll;
 
 namespace BibtexManager
 {
@@ -119,6 +112,20 @@ namespace BibtexManager
 		private void CheckQualityButton_Click(object sender, EventArgs eventArgs)
 		{
 			CheckQuality();
+		}
+
+
+		/// <summary>
+		/// Copy the cite key.
+		/// </summary>
+		/// <param name="sender">Sender.</param>
+		/// <param name="eventArgs">Event arguments.</param>
+		private void CopyCiteKeyButton_Click(object sender, EventArgs eventArgs)
+		{
+			if (Parse())
+			{
+				Clipboard.SetText(_bibEntry.Key);
+			}
 		}
 
 		/// <summary>
@@ -239,6 +246,11 @@ namespace BibtexManager
 				return;
 			}
 
+			if (_project.CopyCiteKeyOnEntryAdd)
+			{
+				Clipboard.SetText(_bibEntry.Key);
+			}
+
 			PushEntriesToDataStructure();
 		}
 
@@ -297,8 +309,8 @@ namespace BibtexManager
 		/// </summary>
 		protected void PushEntriesToDataStructure()
 		{
-			_project.UseBibEntryRemapping = this.useBibEntryMapCheckBox.Checked;
-			_project.BibEntryMap = this.bibEntryMapComboBox.SelectedItem.ToString();
+			_project.UseBibEntryRemapping	= this.useBibEntryMapCheckBox.Checked;
+			_project.BibEntryMap			= this.bibEntryMapComboBox.SelectedItem.ToString();
 		}
 
 		#endregion
