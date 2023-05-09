@@ -17,6 +17,9 @@ namespace BibtexManager
 		private static RegistryAccess _registry = null;
 
 		#endregion
+
+		#region Main
+
 		/// <summary>
 		/// The main entry point for the application.
 		/// </summary>
@@ -27,6 +30,8 @@ namespace BibtexManager
 			Application.SetCompatibleTextRenderingDefault(false);
 			Application.Run(new BibtexManagerForm());
 		}
+
+		#endregion
 
 		#region Properties
 
