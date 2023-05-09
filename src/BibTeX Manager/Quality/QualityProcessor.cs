@@ -1,4 +1,5 @@
 ﻿using BibTeXLibrary;
+using BibTeXManager.Quality;
 using DigitalProduction.XML.Serialization;
 using System;
 using System.Collections.Generic;
@@ -46,26 +47,35 @@ namespace BibTeXManager
 		/// Process a BibEntry and correct errors.
 		/// </summary>
 		/// <param name="entry">BibEntry to process and clean.</param>
-		public IEnumerable<Correction> Process(BibEntry entry)
+		public IEnumerable<TagProcessingData> Process(BibEntry entry)
 		{
 			foreach (TagProcessor processor in _tagProcessors)
 			{
+				TagProcessingData tagProcessingData = new TagProcessingData();
 				foreach (Correction correction in processor.Corrections(entry))
 				{
-					yield return correction;
+					tagProcessingData.Correction = correction;
+					if (tagProcessingData.AcceptAll)
+					{
+						correction.ReplaceText = true;
+					}
+					else
+					{
+						yield return tagProcessingData;
+					}
 				}
 			}
 		}
 
 	#endregion
 
-	#region XML
+		#region XML
 
-	/// <summary>
-	/// Create an instance from a file.
-	/// </summary>
-	/// <param name="path">The file to read from.</param>
-	public static QualityProcessor Deserialize(string path)
+		/// <summary>
+		/// Create an instance from a file.
+		/// </summary>
+		/// <param name="path">The file to read from.</param>
+		public static QualityProcessor Deserialize(string path)
 		{
 			return Serialization.DeserializeObject<QualityProcessor>(path);
 		}

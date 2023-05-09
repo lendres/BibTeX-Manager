@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using BibTeXManager.Quality;
 using DigitalProduction.Forms;
 
 namespace BibTeXManager
@@ -15,22 +16,37 @@ namespace BibTeXManager
 	{
 		#region Fields
 
-		private MessageBoxYesNoToAllResult			_dialogresult				= MessageBoxYesNoToAllResult.Yes;
-		private Correction							_correction;
+		private MessageBoxYesNoToAllResult			_dialogresult				= MessageBoxYesNoToAllResult.Cancel;
+		private TagProcessingData					_tagProcessingData;
 
 		#endregion
 
 		#region Construction
-		
+
 		/// <summary>
 		/// Constructor.
 		/// </summary>
 		/// <param name="correction">Correction to display to the user.</param>
-		public CorrectionForm(Correction correction)
+		public CorrectionForm(TagProcessingData tagProcessingData)
 		{
-			_correction = correction;
+			_tagProcessingData = tagProcessingData;
 			InitializeComponent();
 			PopulateControls();
+		}
+
+		#endregion
+
+		#region Properties
+
+		/// <summary>
+		/// Result of the dialog.
+		/// </summary>
+		public new MessageBoxYesNoToAllResult DialogResult
+		{ 
+			get
+			{ 
+				return _dialogresult;
+			}
 		}
 
 		#endregion
@@ -57,6 +73,7 @@ namespace BibTeXManager
 		private void YesToAllButton_Click(object sender, EventArgs eventArgs)
 		{
 			_dialogresult = MessageBoxYesNoToAllResult.YesToAll;
+			_tagProcessingData.AcceptAll = true;
 			PushEntriesToDataStructure(true);
 			Close();
 		}
@@ -81,7 +98,6 @@ namespace BibTeXManager
 		private void CancelButton_Click(object sender, EventArgs eventArgs)
 		{
 			_dialogresult = MessageBoxYesNoToAllResult.Cancel;
-			PushEntriesToDataStructure(false);
 			Close();
 		}
 
@@ -89,14 +105,13 @@ namespace BibTeXManager
 
 		#region Methods
 
-
 		/// <summary>
 		/// Initialize the controls with the values from the data structure.
 		/// </summary>
 		protected void PopulateControls()
 		{
-			this.existingTextBox.Text		= _correction.MatchedText;
-			this.replacementTextBox.Text	= _correction.ReplacementText;
+			this.existingTextBox.Text		= _tagProcessingData.Correction.MatchedText;
+			this.replacementTextBox.Text	= _tagProcessingData.Correction.ReplacementText;
 		}
 
 		/// <summary>
@@ -104,8 +119,8 @@ namespace BibTeXManager
 		/// </summary>
 		protected void PushEntriesToDataStructure(bool replace)
 		{
-			_correction.ReplacementText	= this.replacementTextBox.Text;
-			_correction.ReplaceText		= replace;
+			_tagProcessingData.Correction.ReplacementText	= this.replacementTextBox.Text;
+			_tagProcessingData.Correction.ReplaceText		= replace;
 		}
 
 		#endregion

@@ -17,6 +17,7 @@ namespace BibtexManager
 		private readonly static string		_bibFileFilterString							= "\"BibTeX files (*.bib)|*.bib|Text files (*.txt)|*.txt|All files (*.*)|*.*\"";
 		private readonly static string		_bibEntryInitializationFileFilterString			= "\"Bibliography Tag Order files (*.tagord)|*.tagord|XML files (*.xml)|*.xml|All files (*.*)|*.*\"";
 		private readonly static string		_qualityProcessingFileFilterString				= "\"Quality Processing files (*.qlty)|*.qlty|XML files (*.xml)|*.xml|All files (*.*)|*.*\"";
+		private readonly static string		_remappingFileFilterString						= "\"Bibliography entry mapping files (*.bibmap)|*.bibmap|XML files (*.xml)|*.xml|All files (*.*)|*.*\"";
 
 		private readonly BibtexProject		_project;
 
@@ -139,6 +140,23 @@ namespace BibtexManager
 		}
 
 		/// <summary>
+		/// Browse for the remapping file.
+		/// </summary>
+		/// <param name="sender">Sender.</param>
+		/// <param name="eventArgs">Event arguments.</param>
+		private void RemappingFileBrowseButton_Click(object sender, EventArgs e)
+		{
+			string initialDirectory = System.IO.Path.GetDirectoryName(_project.RemappingFile);
+
+			string path = FileSelect.BrowseForAFile(this, _remappingFileFilterString, "Select a Bibliography Remapping File", initialDirectory, true);
+
+			if (path != "")
+			{
+				this.remappingFileTextBox.Text = path;
+			}
+		}
+
+		/// <summary>
 		/// Align tag values checked change event handler.
 		/// </summary>
 		/// <param name="sender">Sender.</param>
@@ -207,6 +225,9 @@ namespace BibtexManager
 
 			// Quality processing.
 			this.qualityProcessingFileTextBox.Text			= _project.QualityProcessingFile;
+
+			// BibEntry remapping.
+			this.remappingFileTextBox.Text					= _project.RemappingFile;
 			
 			// Write settings.
 			WriteSettings writeSettings						= _project.WriteSettings;
@@ -249,6 +270,9 @@ namespace BibtexManager
 
 			// Quality processing.
 			_project.QualityProcessingFile			= this.qualityProcessingFileTextBox.Text;
+
+			// BibEntry remapping.
+			_project.RemappingFile					= this.remappingFileTextBox.Text;
 
 			// Write settings.
 			WriteSettings writeSettings				= _project.WriteSettings;

@@ -96,6 +96,7 @@
             <value>doi</value>
             <value>url</value>
 			<value>href</value>
+			<value>note</value>
             <value>logline</value>
             <value>abstract</value>
         </item>

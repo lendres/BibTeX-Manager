@@ -109,7 +109,10 @@ namespace BibTeXManager
 			{
 				if (match.Success && match.Groups.Count > 0)
 				{
-					Correction correction		= new Correction() { FullText = tagValue, MatchedText = match.Value, MatchStartIndex = match.Index };
+					Correction correction = new Correction() { FullText = tagValue, MatchedText = match.Value, MatchStartIndex = match.Index };
+
+					// When processing a matched pattern, the TagProcessor can reject the match (Replace=false) and/or specify that the user
+					// does not need to be prompted for this particular match.
 					ProcessPatternMatch(correction);
 
 					if (correction.PromptUser)
@@ -154,10 +157,6 @@ namespace BibTeXManager
 		/// </summary>
 		/// <param name="correction">Correction information.</param>
 		protected abstract void ProcessPatternMatch(Correction correction);
-
-		#endregion
-
-		#region XML
 
 		#endregion
 

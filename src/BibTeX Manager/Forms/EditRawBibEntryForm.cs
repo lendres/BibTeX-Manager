@@ -1,5 +1,6 @@
 ﻿using BibTeXLibrary;
 using BibtexManager;
+using BibTeXManager.Quality;
 using DigitalProduction.Forms;
 using System;
 using System.Collections.Generic;
@@ -150,11 +151,22 @@ namespace BibTeXManager
 		{
 			if (Parse())
 			{
-				foreach (Correction correction in _project.CleanEntry(_bibEntry))
+				bool breakNext = false;
+				foreach (TagProcessingData tagProcessingData in _project.CleanEntry(_bibEntry))
 				{
-					CorrectionForm correctionForm = new CorrectionForm(correction);
+					// If the processing was cancelled, we break.  We have to loop back around here to give the
+					// processing a chance to finish (it was yielded).  Now exit before processing another entry.
+					if (breakNext)
+					{
+						break;
+					}
+
+					CorrectionForm correctionForm = new CorrectionForm(tagProcessingData);
 					correctionForm.ShowDialog(this);
+
+					breakNext = correctionForm.DialogResult == MessageBoxYesNoToAllResult.Cancel;
 				}
+
 				this.richTextBox.Text = _bibEntry.ToString(_project.WriteSettings);
 			}
 		}

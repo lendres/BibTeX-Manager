@@ -1,9 +1,11 @@
 ﻿using BibTeXLibrary;
 using BibTeXManager;
+using BibTeXManager.Quality;
 using DigitalProduction.Projects;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Xml.Serialization;
 using static DigitalProduction.Forms.MessageBoxYesNoToAll;
 
@@ -24,6 +26,8 @@ namespace BibtexManager
 		private string								_bibEntryInitializationFile;
 		private string								_qualityProcessingFile;
 		private QualityProcessor					_qualityProcessor				= new QualityProcessor();
+		private string								_bibEntryRemappingFile;
+		private BibEntryRemapper					_bibEntryRemapper				= new BibEntryRemapper();
 
 		private readonly Bibliography				_bibliography					= new Bibliography();
 		private WriteSettings						_writeSettings					= new WriteSettings();
@@ -82,24 +86,6 @@ namespace BibtexManager
 		}
 
 		/// <summary>
-		/// Determines if the bibiography entry initialization file.
-		/// </summary>
-		[XmlAttribute("usebibentryinitialization")]
-		public bool UseBibEntryInitialization { get => _useBibEntryInitialization; set => _useBibEntryInitialization = value; }
-
-		/// <summary>
-		/// The path to the bibiography entry initialization file.
-		/// </summary>
-		[XmlAttribute("bibentryinitializationfile")]
-		public string BibEntryInitializationFile { get => _bibEntryInitializationFile; set => _bibEntryInitializationFile = value; }
-
-		/// <summary>
-		/// The path to the quality processor file.
-		/// </summary>
-		[XmlAttribute("qualityprocessorfile")]
-		public string QualityProcessingFile { get => _qualityProcessingFile; set => _qualityProcessingFile = value; }
-
-		/// <summary>
 		/// Assessory files that contain things like strings.
 		/// </summary>
 		[XmlArray("assessoryfiles"), XmlArrayItem("file")]
@@ -112,10 +98,94 @@ namespace BibtexManager
 
 			set
 			{
-				if (_assessoryFiles != value)
+				if (!_assessoryFiles.SequenceEqual(value))
 				{
-					_assessoryFiles	= value;
-					this.Modified	= true;
+					_assessoryFiles = value;
+					this.Modified = true;
+				}
+			}
+		}
+
+		/// <summary>
+		/// Determines if the bibiography entry initialization file.
+		/// </summary>
+		[XmlAttribute("usebibentryinitialization")]
+		public bool UseBibEntryInitialization
+		{
+			get
+			{
+				return _useBibEntryInitialization;
+			}
+
+			set
+			{
+				if (_useBibEntryInitialization != value)
+				{
+					_useBibEntryInitialization = value;
+					this.Modified = true;
+				}
+			}
+		}
+
+		/// <summary>
+		/// The path to the bibiography entry initialization file.
+		/// </summary>
+		[XmlAttribute("bibentryinitializationfile")]
+		public string BibEntryInitializationFile
+		{
+			get
+			{
+				return _bibEntryInitializationFile;
+			}
+
+			set
+			{
+				if (_bibEntryInitializationFile != value)
+				{
+					_bibEntryInitializationFile = value;
+					this.Modified = true;
+				}
+			}
+		}
+
+		/// <summary>
+		/// The path to the quality processor file.
+		/// </summary>
+		[XmlAttribute("qualityprocessorfile")]
+		public string QualityProcessingFile
+		{
+			get
+			{
+				return _qualityProcessingFile;
+			}
+
+			set
+			{
+				if (_qualityProcessingFile != value)
+				{
+					_qualityProcessingFile = value;
+					this.Modified = true;
+				}
+			}
+		}
+
+		/// <summary>
+		/// The path to the bibliography remapping file.
+		/// </summary>
+		[XmlAttribute("remappingfile")]
+		public string RemappingFile
+		{
+			get
+			{
+				return _bibEntryRemappingFile;
+			}
+
+			set
+			{
+				if (_bibEntryRemappingFile != value)
+				{
+					_bibEntryRemappingFile = value;
+					this.Modified = true;
 				}
 			}
 		}
@@ -130,13 +200,45 @@ namespace BibtexManager
 		/// The settings for writing the bibliography file.
 		/// </summary>
 		[XmlElement("writesettings")]
-		public WriteSettings WriteSettings { get => _writeSettings; set => _writeSettings = value; }
+		public WriteSettings WriteSettings
+		{
+			get
+			{
+				return _writeSettings;
+			}
+
+			set
+			{
+				// WriteSettings needs to be able to override != ==.
+				if (_writeSettings != value)
+				{
+					_writeSettings = value;
+					_writeSettings.OnModifiedChanged += SetAsModified;
+					this.Modified = true;
+				}
+			}
+		}
 
 		/// <summary>
 		/// The settings for writing the bibliography file.
 		/// </summary>
 		[XmlAttribute("autogenerateekeys")]
-		public bool AutoGenerateKeys { get => _autoGenerateKeys; set => _autoGenerateKeys = value; }
+		public bool AutoGenerateKeys
+		{
+			get
+			{
+				return _autoGenerateKeys;
+			}
+
+			set
+			{
+				if (_autoGenerateKeys != value)
+				{
+					_autoGenerateKeys = value;
+					this.Modified = true;
+				}
+			}
+		}
 
 		#endregion
 
@@ -181,16 +283,16 @@ namespace BibtexManager
 		/// Clean a single entry.
 		/// </summary>
 		/// <param name="entry">BibEntry to clean.</param>
-		public IEnumerable<Correction> CleanEntry(BibEntry entry)
+		public IEnumerable<TagProcessingData> CleanEntry(BibEntry entry)
 		{
 			if (_autoGenerateKeys)
 			{
 				_bibliography.AutoKeyEntry(entry);
 			}
 
-			foreach (Correction correction in _qualityProcessor.Process(entry))
+			foreach (TagProcessingData tagProcessingData in _qualityProcessor.Process(entry))
 			{
-				yield return correction;
+				yield return tagProcessingData;
 			}
 		}
 
@@ -227,7 +329,15 @@ namespace BibtexManager
 		/// </summary>
 		public override void DeserializationInitialization()
 		{
-			_qualityProcessor = QualityProcessor.Deserialize(_qualityProcessingFile);
+			if (System.IO.File.Exists(_qualityProcessingFile))
+			{
+				_qualityProcessor = QualityProcessor.Deserialize(_qualityProcessingFile);
+			}
+
+			if (System.IO.File.Exists(_bibEntryRemappingFile))
+			{
+				_bibEntryRemapper = BibEntryRemapper.Deserialize(_bibEntryRemappingFile);
+				}
 		}
 
 		#endregion

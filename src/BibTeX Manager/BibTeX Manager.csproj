@@ -164,8 +164,11 @@
     </Compile>
     <Compile Include="Quality\Correction.cs" />
     <Compile Include="Quality\QualityProcessor.cs" />
+    <Compile Include="Quality\BibEntryMap.cs" />
+    <Compile Include="Quality\BibEntryRemapper.cs" />
     <Compile Include="Quality\SentanceEndingSpacesTagProcessor.cs" />
     <Compile Include="Quality\StringReplacementTagProcessor.cs" />
+    <Compile Include="Quality\TagProcessingData.cs" />
     <Compile Include="Quality\TagProcessor.cs" />
     <None Include="Test Files\Bib Entry Initialization.tagord">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -178,6 +181,7 @@
     <None Include="Help\main_index.htm" />
     <Content Include="Forms\BibTex Manager.ico" />
     <None Include="Properties\DataSources\BibTeXLibrary.BibEntry.datasource" />
+    <None Include="Test Files\Bib Entry Remap.bibmap" />
     <None Include="Test Files\le-long.bib" />
     <None Include="Test Files\le-short.bib" />
     <None Include="Test Files\Quality Processing.qlty" />

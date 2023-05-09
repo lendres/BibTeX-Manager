@@ -70,6 +70,9 @@
 			this.qualityProcessorGroupBox = new System.Windows.Forms.GroupBox();
 			this.qualityProcessingFileTextBox = new System.Windows.Forms.TextBox();
 			this.browseQualityProcessorButton = new System.Windows.Forms.Button();
+			this.remappingFileGroupBox = new System.Windows.Forms.GroupBox();
+			this.remappingFileTextBox = new System.Windows.Forms.TextBox();
+			this.remappingFileBrowseButton = new System.Windows.Forms.Button();
 			this.bibFileGroupBox.SuspendLayout();
 			this.accessoryFilesGroupBox.SuspendLayout();
 			this.tabsGroupBox.SuspendLayout();
@@ -80,13 +83,14 @@
 			this.styleGroupBox.SuspendLayout();
 			this.bibEntryInitializationGroupBox.SuspendLayout();
 			this.qualityProcessorGroupBox.SuspendLayout();
+			this.remappingFileGroupBox.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// cancelButton
 			// 
 			this.cancelButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.cancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-			this.cancelButton.Location = new System.Drawing.Point(473, 454);
+			this.cancelButton.Location = new System.Drawing.Point(473, 491);
 			this.cancelButton.Name = "cancelButton";
 			this.cancelButton.Size = new System.Drawing.Size(80, 23);
 			this.cancelButton.TabIndex = 25;
@@ -97,7 +101,7 @@
 			// 
 			this.okButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.okButton.DialogResult = System.Windows.Forms.DialogResult.OK;
-			this.okButton.Location = new System.Drawing.Point(375, 454);
+			this.okButton.Location = new System.Drawing.Point(375, 491);
 			this.okButton.Name = "okButton";
 			this.okButton.Size = new System.Drawing.Size(80, 23);
 			this.okButton.TabIndex = 24;
@@ -147,9 +151,9 @@
 			this.accessoryFilesGroupBox.Controls.Add(this.addButton);
 			this.accessoryFilesGroupBox.Controls.Add(this.removeButton);
 			this.accessoryFilesGroupBox.Controls.Add(this.assessoryFilesListBox);
-			this.accessoryFilesGroupBox.Location = new System.Drawing.Point(12, 76);
+			this.accessoryFilesGroupBox.Location = new System.Drawing.Point(12, 75);
 			this.accessoryFilesGroupBox.Name = "accessoryFilesGroupBox";
-			this.accessoryFilesGroupBox.Size = new System.Drawing.Size(541, 104);
+			this.accessoryFilesGroupBox.Size = new System.Drawing.Size(541, 81);
 			this.accessoryFilesGroupBox.TabIndex = 27;
 			this.accessoryFilesGroupBox.TabStop = false;
 			this.accessoryFilesGroupBox.Text = "Assessory Files";
@@ -186,7 +190,7 @@
 			this.assessoryFilesListBox.Location = new System.Drawing.Point(10, 18);
 			this.assessoryFilesListBox.Name = "assessoryFilesListBox";
 			this.assessoryFilesListBox.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
-			this.assessoryFilesListBox.Size = new System.Drawing.Size(440, 69);
+			this.assessoryFilesListBox.Size = new System.Drawing.Size(440, 43);
 			this.assessoryFilesListBox.TabIndex = 2;
 			// 
 			// tabsGroupBox
@@ -196,7 +200,7 @@
 			this.tabsGroupBox.Controls.Add(this.tabSizeNumericUpDown);
 			this.tabsGroupBox.Controls.Add(this.insertTabsRadioButton);
 			this.tabsGroupBox.Controls.Add(this.insertSpacesRadioButton);
-			this.tabsGroupBox.Location = new System.Drawing.Point(12, 345);
+			this.tabsGroupBox.Location = new System.Drawing.Point(12, 382);
 			this.tabsGroupBox.Name = "tabsGroupBox";
 			this.tabsGroupBox.Size = new System.Drawing.Size(164, 100);
 			this.tabsGroupBox.TabIndex = 28;
@@ -266,7 +270,7 @@
 			this.alignmentGroupBox.Controls.Add(this.alignmentColumnLabel);
 			this.alignmentGroupBox.Controls.Add(this.alignmentColumnNumericUpDown);
 			this.alignmentGroupBox.Controls.Add(this.alignTagValuesCheckBox);
-			this.alignmentGroupBox.Location = new System.Drawing.Point(192, 345);
+			this.alignmentGroupBox.Location = new System.Drawing.Point(192, 382);
 			this.alignmentGroupBox.Name = "alignmentGroupBox";
 			this.alignmentGroupBox.Size = new System.Drawing.Size(170, 100);
 			this.alignmentGroupBox.TabIndex = 29;
@@ -341,7 +345,7 @@
 			this.styleGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.styleGroupBox.Controls.Add(this.autoGenerateKeysCheckBox);
 			this.styleGroupBox.Controls.Add(this.removeLastCommaCheckBox);
-			this.styleGroupBox.Location = new System.Drawing.Point(378, 345);
+			this.styleGroupBox.Location = new System.Drawing.Point(378, 382);
 			this.styleGroupBox.Name = "styleGroupBox";
 			this.styleGroupBox.Size = new System.Drawing.Size(176, 100);
 			this.styleGroupBox.TabIndex = 30;
@@ -370,12 +374,12 @@
 			// 
 			// bibEntryInitializationGroupBox
 			// 
-			this.bibEntryInitializationGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+			this.bibEntryInitializationGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.bibEntryInitializationGroupBox.Controls.Add(this.useBibEntryInitializationCheckBox);
 			this.bibEntryInitializationGroupBox.Controls.Add(this.bibEntryInitializationFileTextBox);
 			this.bibEntryInitializationGroupBox.Controls.Add(this.browseBibEntryInitializationFileButton);
-			this.bibEntryInitializationGroupBox.Location = new System.Drawing.Point(12, 192);
+			this.bibEntryInitializationGroupBox.Location = new System.Drawing.Point(12, 167);
 			this.bibEntryInitializationGroupBox.Name = "bibEntryInitializationGroupBox";
 			this.bibEntryInitializationGroupBox.Size = new System.Drawing.Size(541, 73);
 			this.bibEntryInitializationGroupBox.TabIndex = 27;
@@ -416,23 +420,23 @@
 			// 
 			// qualityProcessorGroupBox
 			// 
-			this.qualityProcessorGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+			this.qualityProcessorGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.qualityProcessorGroupBox.Controls.Add(this.qualityProcessingFileTextBox);
 			this.qualityProcessorGroupBox.Controls.Add(this.browseQualityProcessorButton);
-			this.qualityProcessorGroupBox.Location = new System.Drawing.Point(13, 279);
+			this.qualityProcessorGroupBox.Location = new System.Drawing.Point(13, 253);
 			this.qualityProcessorGroupBox.Name = "qualityProcessorGroupBox";
 			this.qualityProcessorGroupBox.Size = new System.Drawing.Size(541, 51);
 			this.qualityProcessorGroupBox.TabIndex = 27;
 			this.qualityProcessorGroupBox.TabStop = false;
 			this.qualityProcessorGroupBox.Text = "Quality Processor File";
 			// 
-			// qualityProcessorFileTextBox
+			// qualityProcessingFileTextBox
 			// 
 			this.qualityProcessingFileTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.qualityProcessingFileTextBox.Location = new System.Drawing.Point(10, 21);
-			this.qualityProcessingFileTextBox.Name = "qualityProcessorFileTextBox";
+			this.qualityProcessingFileTextBox.Name = "qualityProcessingFileTextBox";
 			this.qualityProcessingFileTextBox.Size = new System.Drawing.Size(440, 20);
 			this.qualityProcessingFileTextBox.TabIndex = 3;
 			this.qualityProcessingFileTextBox.TabStop = false;
@@ -448,13 +452,48 @@
 			this.browseQualityProcessorButton.Text = "Brow&se";
 			this.browseQualityProcessorButton.Click += new System.EventHandler(this.BrowseQualityProcessorButton_Click);
 			// 
+			// remappingFileGroupBox
+			// 
+			this.remappingFileGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.remappingFileGroupBox.Controls.Add(this.remappingFileTextBox);
+			this.remappingFileGroupBox.Controls.Add(this.remappingFileBrowseButton);
+			this.remappingFileGroupBox.Location = new System.Drawing.Point(13, 316);
+			this.remappingFileGroupBox.Name = "remappingFileGroupBox";
+			this.remappingFileGroupBox.Size = new System.Drawing.Size(541, 51);
+			this.remappingFileGroupBox.TabIndex = 28;
+			this.remappingFileGroupBox.TabStop = false;
+			this.remappingFileGroupBox.Text = "Remapping File";
+			// 
+			// remappingFileTextBox
+			// 
+			this.remappingFileTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.remappingFileTextBox.Location = new System.Drawing.Point(10, 21);
+			this.remappingFileTextBox.Name = "remappingFileTextBox";
+			this.remappingFileTextBox.Size = new System.Drawing.Size(440, 20);
+			this.remappingFileTextBox.TabIndex = 3;
+			this.remappingFileTextBox.TabStop = false;
+			// 
+			// remappingFileBrowseButton
+			// 
+			this.remappingFileBrowseButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.remappingFileBrowseButton.FlatStyle = System.Windows.Forms.FlatStyle.System;
+			this.remappingFileBrowseButton.Location = new System.Drawing.Point(456, 19);
+			this.remappingFileBrowseButton.Name = "remappingFileBrowseButton";
+			this.remappingFileBrowseButton.Size = new System.Drawing.Size(75, 23);
+			this.remappingFileBrowseButton.TabIndex = 4;
+			this.remappingFileBrowseButton.Text = "Brow&se";
+			this.remappingFileBrowseButton.Click += new System.EventHandler(this.RemappingFileBrowseButton_Click);
+			// 
 			// ProjectSettingsForm
 			// 
 			this.AcceptButton = this.okButton;
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.CancelButton = this.cancelButton;
-			this.ClientSize = new System.Drawing.Size(565, 489);
+			this.ClientSize = new System.Drawing.Size(565, 526);
+			this.Controls.Add(this.remappingFileGroupBox);
 			this.Controls.Add(this.qualityProcessorGroupBox);
 			this.Controls.Add(this.bibEntryInitializationGroupBox);
 			this.Controls.Add(this.styleGroupBox);
@@ -467,7 +506,7 @@
 			this.MaximizeBox = false;
 			this.MaximumSize = new System.Drawing.Size(1081, 951);
 			this.MinimizeBox = false;
-			this.MinimumSize = new System.Drawing.Size(581, 451);
+			this.MinimumSize = new System.Drawing.Size(500, 565);
 			this.Name = "ProjectSettingsForm";
 			this.ShowIcon = false;
 			this.ShowInTaskbar = false;
@@ -489,6 +528,8 @@
 			this.bibEntryInitializationGroupBox.PerformLayout();
 			this.qualityProcessorGroupBox.ResumeLayout(false);
 			this.qualityProcessorGroupBox.PerformLayout();
+			this.remappingFileGroupBox.ResumeLayout(false);
+			this.remappingFileGroupBox.PerformLayout();
 			this.ResumeLayout(false);
 
 		}
@@ -523,5 +564,8 @@
 		private System.Windows.Forms.GroupBox qualityProcessorGroupBox;
 		private System.Windows.Forms.TextBox qualityProcessingFileTextBox;
 		private System.Windows.Forms.Button browseQualityProcessorButton;
+		private System.Windows.Forms.GroupBox remappingFileGroupBox;
+		private System.Windows.Forms.TextBox remappingFileTextBox;
+		private System.Windows.Forms.Button remappingFileBrowseButton;
 	} // End class.
 } // End namespace.
