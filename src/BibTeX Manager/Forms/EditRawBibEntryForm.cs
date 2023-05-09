@@ -1,6 +1,5 @@
 ﻿using BibTeXLibrary;
 using BibtexManager;
-using BibTeXManager.Quality;
 using DigitalProduction.Forms;
 using System;
 using System.Collections.Generic;
@@ -13,7 +12,7 @@ using System.Text;
 using System.Windows.Forms;
 using static DigitalProduction.Forms.MessageBoxYesNoToAll;
 
-namespace BibTeXManager
+namespace BibtexManager
 {
 	/// <summary>
 	/// 

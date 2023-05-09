@@ -3,14 +3,9 @@ using DigitalProduction.Forms;
 using DigitalProduction.Projects;
 using System;
 using System.ComponentModel;
-using System.Windows.Forms;
-using System.Resources;
 using System.Drawing;
-using static DigitalProduction.Forms.MessageBoxYesNoToAll;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
-using BibTeXManager.Forms;
-using BibTeXManager;
-using System.Diagnostics.Tracing;
+using System.Resources;
+using System.Windows.Forms;
 
 namespace BibtexManager
 {
@@ -102,6 +97,7 @@ namespace BibtexManager
 		{
 			InitializeDataBinding();
 			this.Project.OnClosed += this.RemoveDataBinding;
+			this.dataGridViewInterfaceControl.Project = this.Project;
 		}
 
 		#endregion
@@ -168,7 +164,7 @@ namespace BibtexManager
 		private void ModifyProjectToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			ProjectSettingsForm projectForm	= new ProjectSettingsForm(this.Project);
-			DialogResult result		= projectForm.ShowDialog(this);
+			DialogResult result				= projectForm.ShowDialog(this);
 		}
 
 		#endregion
@@ -213,7 +209,7 @@ namespace BibtexManager
 		private void AboutToolStripMenuItem_Click(object sender, EventArgs eventArgs)
 		{
 			// The resource manager will retrieve the value of the resource.
-			ResourceManager resourceManager = BibTeXManager.Properties.Resources.ResourceManager;
+			ResourceManager resourceManager = BibtexManager.Properties.Resources.ResourceManager;
 			Bitmap leftSideImage			= (Bitmap)resourceManager.GetObject("LELaTeX_Logo_Rotated_CroppedForAbout");
 			AboutForm1 about				= new AboutForm1("lendres@fifthrace.com", leftSideImage);
 			about.ShowDialog(this);
@@ -294,8 +290,6 @@ namespace BibtexManager
 		{
 			EditRawBibEntryForm editRawBibEntryForm = new EditRawBibEntryForm(this, this.Project);
 			return editRawBibEntryForm.ShowDialog(this, null, this.Project.WriteSettings);
-			//BibEntry entry = new BibEntry { Type = "inbook", Key = "ref:weasel2023a", ["author"] = "Weasel, Thanksgiving", ["Title"] = "A treaty in testing." };
-			//return new DialogResultPair(DialogResult.OK, entry);
 		}
 
 		#endregion

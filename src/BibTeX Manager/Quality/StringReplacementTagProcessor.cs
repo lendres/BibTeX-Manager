@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using System.Xml.Serialization;
+﻿using System.Xml.Serialization;
 
-namespace BibTeXManager.Quality
+namespace BibtexManager
 {
 	/// <summary>
 	/// Replaces each pattern found with the replacement string.

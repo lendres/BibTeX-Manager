@@ -1,15 +1,11 @@
 ﻿using BibTeXLibrary;
-using BibTeXManager.Quality;
-using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Xml.Serialization;
 
-namespace BibTeXManager
+namespace BibtexManager
 {
 	/// <summary>
 	/// Base class for tag processors.

@@ -1,8 +1,7 @@
-﻿namespace BibTeXManager.Forms
+﻿namespace BibtexManager
 {
 	partial class OptionsForm
 	{
-
 		#region Fields
 
 		private System.Windows.Forms.Button buttonCancel;

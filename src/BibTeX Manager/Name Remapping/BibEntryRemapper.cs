@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Xml.Serialization;
 
-namespace BibTeXManager
+namespace BibtexManager
 {
 	/// <summary>
 	/// A class to remap the type and tag names of a bibilography entry.

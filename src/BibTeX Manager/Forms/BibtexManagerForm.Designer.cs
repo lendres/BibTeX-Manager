@@ -46,7 +46,7 @@ namespace BibtexManager
 		private System.Windows.Forms.DataGridViewTextBoxColumn					authorDataGridViewTextBoxColumn;
 		private System.Windows.Forms.DataGridViewTextBoxColumn					Title;
 
-		private DigitalProduction.Forms.DataGridViewInterfaceControl			dataGridViewInterfaceControl;
+		private BibManagerDataGridViewControl									dataGridViewInterfaceControl;
 
 		// Components.
 		private System.ComponentModel.IContainer								components;
@@ -111,7 +111,7 @@ namespace BibtexManager
 			this.Key = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.authorDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.Title = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.dataGridViewInterfaceControl = new DigitalProduction.Forms.DataGridViewInterfaceControl();
+			this.dataGridViewInterfaceControl = new BibManagerDataGridViewControl();
 			((System.ComponentModel.ISupportInitialize)(this.referencesBindingSource)).BeginInit();
 			this.menuMain.SuspendLayout();
 			this.enableOpenProjectPanel.SuspendLayout();

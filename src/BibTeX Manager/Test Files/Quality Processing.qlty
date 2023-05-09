@@ -9,6 +9,13 @@
 		</tagprocessor>
 
 		<tagprocessor xsi:type="StringReplacementTagProcessor"
+			processalltages="true"
+			pattern="&amp;"
+			replacement="\&amp;">
+			<tags></tags>
+		</tagprocessor>
+		
+		<tagprocessor xsi:type="StringReplacementTagProcessor"
 			processalltages="false"
 			pattern="PDC"
 			replacement="{PDC}">

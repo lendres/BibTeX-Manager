@@ -1,14 +1,7 @@
 ﻿using BibTeXLibrary;
-using BibTeXManager;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Serialization;
+using BibtexManager;
 
-namespace BibTexManagerUnitTests
+namespace BibtexManagerUnitTests
 {
 	/// <summary>
 	/// 
@@ -24,7 +17,12 @@ namespace BibTexManagerUnitTests
 		#endregion
 
 		#region Methods
-
+		
+		/// <summary>
+		/// Run a TagProcessor on a BibEntry.
+		/// </summary>
+		/// <param name="processor">TagProcessor.</param>
+		/// <param name="entry">BibEntry.</param>
 		public static void RunProcessor(TagProcessor processor, BibEntry entry)
 		{
 			foreach (Correction correction in processor.Corrections(entry))

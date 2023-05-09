@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 
-namespace BibTeXManager.Quality
+namespace BibtexManager
 {
 	/// <summary>
 	/// Data used for processing by a single TagProcessor.

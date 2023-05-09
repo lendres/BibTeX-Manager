@@ -1,6 +1,4 @@
 ﻿using BibTeXLibrary;
-using BibTeXManager;
-using BibTeXManager.Quality;
 using DigitalProduction.Projects;
 using System;
 using System.Collections.Generic;
@@ -23,6 +21,7 @@ namespace BibtexManager
 		
 		private bool								_useBibEntryInitialization;
 		private string								_bibEntryInitializationFile;
+		private BibEntryInitialization				_bibEntryInitialization			= new BibEntryInitialization();
 
 		private bool								_useTagQualityProcessing;
 		private string								_tagQualityProcessingFile;
@@ -151,6 +150,12 @@ namespace BibtexManager
 				}
 			}
 		}
+
+		/// <summary>
+		/// BibEntryInitialization.
+		/// </summary>
+		[XmlIgnore()]
+		public BibEntryInitialization BibEntryInitialization { get => _bibEntryInitialization; }
 
 		/// <summary>
 		/// Specifies if the tags should be processed to ensure their quality.
@@ -341,9 +346,10 @@ namespace BibtexManager
 		{
 			StringReader textReader = new StringReader(text);
 			Tuple<List<string>, List<BibEntry>> result;
+
 			if (_useBibEntryInitialization)
 			{
-				result = BibParser.Parse(textReader, _bibEntryInitializationFile);
+				result = BibParser.Parse(textReader, _bibEntryInitialization);
 			}
 			else
 			{
@@ -423,6 +429,11 @@ namespace BibtexManager
 		/// </summary>
 		public override void DeserializationInitialization()
 		{
+			if (System.IO.File.Exists(_bibEntryInitializationFile))
+			{
+				_bibEntryInitialization = BibEntryInitialization.Deserialize(_bibEntryInitializationFile);
+			}
+
 			if (System.IO.File.Exists(_tagQualityProcessingFile))
 			{
 				_tagQualityProcessor = QualityProcessor.Deserialize(_tagQualityProcessingFile);

@@ -1,4 +1,4 @@
-﻿namespace BibTeXManager
+﻿namespace BibtexManager
 {
 	partial class EditRawBibEntryForm
 	{
@@ -89,7 +89,7 @@
 			// 
 			// checkQualityButton
 			// 
-			this.checkQualityButton.Image = global::BibTeXManager.Properties.Resources.Quality_Check_40;
+			this.checkQualityButton.Image = global::BibtexManager.Properties.Resources.Quality_Check_40;
 			this.checkQualityButton.Location = new System.Drawing.Point(122, 12);
 			this.checkQualityButton.Name = "checkQualityButton";
 			this.checkQualityButton.Size = new System.Drawing.Size(40, 40);
@@ -99,7 +99,7 @@
 			// 
 			// pasteAndCheckQualityButton
 			// 
-			this.pasteAndCheckQualityButton.Image = global::BibTeXManager.Properties.Resources.Paste_Quality_40;
+			this.pasteAndCheckQualityButton.Image = global::BibtexManager.Properties.Resources.Paste_Quality_40;
 			this.pasteAndCheckQualityButton.Location = new System.Drawing.Point(59, 12);
 			this.pasteAndCheckQualityButton.Name = "pasteAndCheckQualityButton";
 			this.pasteAndCheckQualityButton.Size = new System.Drawing.Size(40, 40);
@@ -109,7 +109,7 @@
 			// 
 			// pasteButton
 			// 
-			this.pasteButton.Image = global::BibTeXManager.Properties.Resources.Paste_40;
+			this.pasteButton.Image = global::BibtexManager.Properties.Resources.Paste_40;
 			this.pasteButton.Location = new System.Drawing.Point(13, 13);
 			this.pasteButton.Name = "pasteButton";
 			this.pasteButton.Size = new System.Drawing.Size(40, 40);

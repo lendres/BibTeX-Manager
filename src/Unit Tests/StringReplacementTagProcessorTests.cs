@@ -1,8 +1,7 @@
 using BibTeXLibrary;
-using BibTeXManager;
-using BibTeXManager.Quality;
+using BibtexManager;
 
-namespace BibTexManagerUnitTests
+namespace BibtexManagerUnitTests
 {
 	[TestClass]
 	public class StringReplacementTagProcessorTests

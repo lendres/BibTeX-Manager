@@ -17,7 +17,7 @@
     <DefaultTargetSchema>IE50</DefaultTargetSchema>
     <DelaySign>false</DelaySign>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>BibTeXManager</RootNamespace>
+    <RootNamespace>BibtexManager</RootNamespace>
     <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
     <StartupObject>
     </StartupObject>
@@ -119,6 +119,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Forms\BibManagerDataGridViewControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\BibManagerDataGridViewControl.Designer.cs">
+      <DependentUpon>BibManagerDataGridViewControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\CorrectionForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -142,6 +148,12 @@
     </Compile>
     <Compile Include="Forms\ProjectSettingsForm.Designer.cs">
       <DependentUpon>ProjectSettingsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\SelectBibEntryTemplate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\SelectBibEntryTemplate.Designer.cs">
+      <DependentUpon>SelectBibEntryTemplate.cs</DependentUpon>
     </Compile>
     <Compile Include="Program\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -189,6 +201,9 @@
     <None Include="Test Files\Test Project.bibproj" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Forms\BibManagerDataGridViewControl.resx">
+      <DependentUpon>BibManagerDataGridViewControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\BibtexManagerForm.resx">
       <DependentUpon>BibtexManagerForm.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -204,6 +219,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ProjectSettingsForm.resx">
       <DependentUpon>ProjectSettingsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SelectBibEntryTemplate.resx">
+      <DependentUpon>SelectBibEntryTemplate.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
