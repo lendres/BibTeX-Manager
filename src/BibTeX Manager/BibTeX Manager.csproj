@@ -182,6 +182,9 @@
     <Compile Include="Quality\StringReplacementTagProcessor.cs" />
     <Compile Include="Quality\TagProcessingData.cs" />
     <Compile Include="Quality\TagProcessor.cs" />
+    <Content Include="Forms\Resources\Paste Quality_40.png" />
+    <Content Include="Forms\Resources\Paste_40.png" />
+    <Content Include="Forms\Resources\Quality Check_40.png" />
     <None Include="Forms\Resources\PlusGreenAndTemplate_16x.png" />
     <None Include="Forms\Resources\Copy Key_40.png" />
     <None Include="Test Files\Bib Entry Initialization.tagord">
