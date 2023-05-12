@@ -124,7 +124,7 @@ namespace BibtexManager
 		{
 			if (Parse())
 			{
-				Clipboard.SetText(_bibEntry.Key);
+				CopyCiteKeyToClipboard();
 			}
 		}
 
@@ -248,10 +248,23 @@ namespace BibtexManager
 
 			if (_project.CopyCiteKeyOnEntryAdd)
 			{
-				Clipboard.SetText(_bibEntry.Key);
+				CopyCiteKeyToClipboard();
 			}
 
 			PushEntriesToDataStructure();
+		}
+
+		private void CopyCiteKeyToClipboard()
+		{
+			try
+			{
+				// Clipboard copy doesn't always work.
+				Clipboard.SetText(_bibEntry.Key);
+			}
+			catch (Exception)
+			{
+				MessageBox.Show("Clipboard copy of cite key failed.  This feature can be turned off in the project settings.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+			}
 		}
 
 		/// <summary>
