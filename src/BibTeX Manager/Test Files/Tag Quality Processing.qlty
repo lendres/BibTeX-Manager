@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="us-ascii"?>
+<qualityprocessor xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<tagprocessors>
+		<!-- Change month numbers to strings. -->
+		<!-- The regular expression [0]* matches leading zeros. -->
+		<tagprocessor xsi:type="StringReplacementTagProcessor" processalltages="false" pattern="[0]*1" replacement="January">
+			<tags><tag>month</tag></tags>
+		</tagprocessor>
+		
+		<tagprocessor xsi:type="StringReplacementTagProcessor" processalltages="false" pattern="[0]*2" replacement="February">
+			<tags><tag>month</tag></tags>
+		</tagprocessor>
+		
+		<tagprocessor xsi:type="StringReplacementTagProcessor" processalltages="false" pattern="[0]*3" replacement="March">
+			<tags><tag>month</tag></tags>
+		</tagprocessor>
+
+		<tagprocessor xsi:type="StringReplacementTagProcessor" processalltages="false" pattern="[0]*4" replacement="April">
+			<tags><tag>month</tag></tags>
+		</tagprocessor>
+
+		<tagprocessor xsi:type="StringReplacementTagProcessor" processalltages="false" pattern="[0]*5" replacement="May">
+			<tags><tag>month</tag></tags>
+		</tagprocessor>
+
+		<tagprocessor xsi:type="StringReplacementTagProcessor" processalltages="false" pattern="[0]*6" replacement="June">
+			<tags><tag>month</tag></tags>
+		</tagprocessor>
+
+		<tagprocessor xsi:type="StringReplacementTagProcessor" processalltages="false" pattern="[0]*7" replacement="July">
+			<tags><tag>month</tag></tags>
+		</tagprocessor>
+
+		<tagprocessor xsi:type="StringReplacementTagProcessor" processalltages="false" pattern="[0]*8" replacement="August">
+			<tags><tag>month</tag></tags>
+		</tagprocessor>
+
+		<tagprocessor xsi:type="StringReplacementTagProcessor" processalltages="false" pattern="[0]*9" replacement="September">
+			<tags><tag>month</tag></tags>
+		</tagprocessor>
+
+		<tagprocessor xsi:type="StringReplacementTagProcessor" processalltages="false" pattern="[0]*10" replacement="October">
+			<tags><tag>month</tag></tags>
+		</tagprocessor>
+		
+		<tagprocessor xsi:type="StringReplacementTagProcessor" processalltages="false" pattern="[0]*11" replacement="November">
+			<tags><tag>month</tag></tags>
+		</tagprocessor>
+		
+		<tagprocessor xsi:type="StringReplacementTagProcessor" processalltages="false" pattern="[0]*12" replacement="December">
+			<tags><tag>month</tag></tags>
+		</tagprocessor>
+
+		<!-- HTML characters. -->
+		<tagprocessor xsi:type="StringReplacementTagProcessor"
+			processalltages="true"
+			pattern="&amp;amp;"
+			replacement="\&amp;">
+			<tags></tags>
+		</tagprocessor>
+
+		<tagprocessor xsi:type="StringReplacementTagProcessor"
+			processalltages="true"
+			pattern="&amp;"
+			replacement="\&amp;">
+			<tags></tags>
+		</tagprocessor>
+		
+		<!-- Capital words/acronyms. -->
+		<tagprocessor xsi:type="StringReplacementTagProcessor"
+			processalltages="false"
+			pattern="PDC"
+			replacement="{PDC}">
+			<tags>
+				<tag>title</tag>
+			</tags>
+		</tagprocessor>
+
+		<!-- Do not modify the pattern unless you really know what you are doing. -->
+		<tagprocessor xsi:type="SentanceEndingSpacesTagProcessor"
+			processalltages="false"
+			pattern="\.+[a-zA-Z]+"
+			frenchspacing="false">
+			<tags>
+				<tag>abstract</tag>
+			</tags>
+			<exceptions>
+				<exception>A.K.A.</exception>
+				<exception>D.C.</exception>
+				<exception>E.g.</exception>
+				<exception>e.g.</exception>
+				<exception>I.e.</exception>
+				<exception>i.e.</exception>
+				<exception>Ph.D.</exception>
+				<exception>U.S.</exception>
+				<exception>U.S.A.</exception>
+			</exceptions>
+		</tagprocessor>
+
+	</tagprocessors>
+</qualityprocessor>
