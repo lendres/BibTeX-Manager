@@ -1,13 +1,8 @@
 ﻿using BibTeXLibrary;
 using DigitalProduction.Forms;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace BibtexManager
@@ -22,9 +17,15 @@ namespace BibtexManager
 
 		#region Construction
 
+		/// <summary>
+		/// Constructor.
+		/// </summary>
 		public BibManagerDataGridViewControl()
 		{
 			InitializeComponent();
+
+			this.ShowEditDialog	= this.ShowEditRawBibEntryDialog;
+			this.ShowAddDialog	= this.ShowAddRawBibEntryDialog;
 		}
 
 		#endregion
@@ -36,6 +37,8 @@ namespace BibtexManager
 		/// </summary>
 		//[Category("")]
 		public BibtexProject Project { get => _project; set => _project = value; }
+
+		private BibtexManagerForm BibtexManagerForm { get => (BibtexManagerForm) this.Parent.Parent; }
 
 		#endregion
 
@@ -55,7 +58,7 @@ namespace BibtexManager
 			{
 				BibEntry entry = BibEntry.NewBibEntryTemplate(_project.BibEntryInitialization, selectBibEntryType.SelectedType);
 
-				EditRawBibEntryForm editRawBibEntryForm = new EditRawBibEntryForm((BibtexManagerForm)this.Parent.Parent, this.Project);
+				EditRawBibEntryForm editRawBibEntryForm = new EditRawBibEntryForm(this.BibtexManagerForm, this.Project);
 				DialogResultPair dialogResultPair = editRawBibEntryForm.ShowDialog(this, entry, this.Project.WriteSettings);
 
 				if (dialogResultPair.Result == DialogResult.OK)
@@ -68,6 +71,59 @@ namespace BibtexManager
 		#endregion
 
 		#region Methods
+
+		/// <summary>
+		/// Delegate for showing the edit dialog.
+		/// </summary>
+		[Browsable(false)]
+		public override ShowEditDialogDelegate ShowEditDialog
+		{
+			get
+			{
+				return base.ShowEditDialog;
+			}
+
+			set
+			{
+				base.ShowEditDialog = this.ShowEditRawBibEntryDialog;
+			}
+		}
+
+		/// <summary>
+		/// Delegate for showing the add dialog.
+		/// </summary>
+		[Browsable(false)]
+		public override ShowAddDialogDelegate ShowAddDialog
+		{
+			get
+			{
+				return base.ShowAddDialog;
+			}
+
+			set
+			{
+				base.ShowAddDialog = this.ShowAddRawBibEntryDialog;
+			}
+		}
+
+		/// <summary>
+		/// Show the Edit Raw BibTeX Entry form.
+		/// </summary>
+		/// <param name="obj">Object to edit, the BibEntry.</param>
+		public DialogResultPair ShowEditRawBibEntryDialog(object obj)
+		{
+			EditRawBibEntryForm editRawBibEntryForm = new EditRawBibEntryForm(this.BibtexManagerForm, this.Project);
+			return editRawBibEntryForm.ShowDialog(this, (BibEntry)obj, this.Project.WriteSettings);
+		}
+
+		/// <summary>
+		/// Show the Add dialog box.
+		/// </summary>
+		public DialogResultPair ShowAddRawBibEntryDialog()
+		{
+			EditRawBibEntryForm editRawBibEntryForm = new EditRawBibEntryForm(this.BibtexManagerForm, this.Project);
+			return editRawBibEntryForm.ShowDialog(this, null, this.Project.WriteSettings);
+		}
 
 		#endregion
 

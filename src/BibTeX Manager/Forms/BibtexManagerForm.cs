@@ -42,9 +42,6 @@ namespace BibtexManager
 			
 			FindProjectControls(this);
 
-			this.dataGridViewInterfaceControl.ShowEditDialog	= this.ShowEditRawBibEntryDialog;
-			this.dataGridViewInterfaceControl.ShowAddDialog		= this.ShowAddRawBibEntryDialog;
-
 			InitializeFromRegistry();
 
 			// Allow the form to see key presses.
@@ -271,25 +268,6 @@ namespace BibtexManager
 		{
 			this.referencesBindingSource.DataSource	= null;
 			this.Project.Bibliography.Entries.ListChanged -= OnListChanged;
-		}
-
-		/// <summary>
-		/// Show the Edit Raw BibTeX Entry form.
-		/// </summary>
-		/// <param name="obj">Object to edit, the BibEntry.</param>
-		public DialogResultPair ShowEditRawBibEntryDialog(object obj)
-		{
-			EditRawBibEntryForm editRawBibEntryForm = new EditRawBibEntryForm(this, this.Project);
-			return editRawBibEntryForm.ShowDialog(this, (BibEntry)obj, this.Project.WriteSettings);
-		}
-
-		/// <summary>
-		/// Show the Add dialog box.
-		/// </summary>
-		public DialogResultPair ShowAddRawBibEntryDialog()
-		{
-			EditRawBibEntryForm editRawBibEntryForm = new EditRawBibEntryForm(this, this.Project);
-			return editRawBibEntryForm.ShowDialog(this, null, this.Project.WriteSettings);
 		}
 
 		#endregion

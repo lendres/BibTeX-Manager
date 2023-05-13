@@ -380,8 +380,6 @@ namespace BibtexManager
 			this.dataGridViewInterfaceControl.Location = new System.Drawing.Point(12, 13);
 			this.dataGridViewInterfaceControl.Name = "dataGridViewInterfaceControl";
 			this.dataGridViewInterfaceControl.ReadOnly = false;
-			this.dataGridViewInterfaceControl.ShowAddDialog = null;
-			this.dataGridViewInterfaceControl.ShowEditDialog = null;
 			this.dataGridViewInterfaceControl.ShowInsertButtons = false;
 			this.dataGridViewInterfaceControl.ShowMoveButtons = false;
 			this.dataGridViewInterfaceControl.Size = new System.Drawing.Size(516, 31);
