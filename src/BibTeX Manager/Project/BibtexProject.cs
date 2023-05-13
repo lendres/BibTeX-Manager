@@ -21,7 +21,9 @@ namespace BibtexManager
 
 		private List<string>						_assessoryFiles					= new List<string>();
 		private List<BibliographyDOM>				_assessoryFilesDOMs				= new List<BibliographyDOM>();
+
 		private bool								_useStringConstants				= false;
+		private StringConstantProcessor				_stringConstantProcessor		= new StringConstantProcessor();
 
 		private bool								_useBibEntryInitialization;
 		private string								_bibEntryInitializationFile;
@@ -91,6 +93,7 @@ namespace BibtexManager
 					if (this.Initialized)
 					{
 						ReadBibliographyFile();
+						BuildStringConstantMap();
 					}
 				}
 			}
@@ -113,6 +116,11 @@ namespace BibtexManager
 				{
 					_assessoryFiles = value;
 					this.Modified = true;
+					if (this.Initialized)
+					{
+						ReadAccessoryFiles();
+						BuildStringConstantMap();
+					}
 				}
 			}
 		}
@@ -436,6 +444,16 @@ namespace BibtexManager
 			}
 		}
 
+		/// <summary>
+		/// Build the string constants map.
+		/// </summary>
+		private void BuildStringConstantMap()
+		{
+			_stringConstantProcessor.Clear();
+			_stringConstantProcessor.AddStringConstantsToMap(_bibliography.DocumentObjectModel);
+			_stringConstantProcessor.AddStringConstantsToMap(_assessoryFilesDOMs);
+		}
+
 		#endregion
 
 		#region Methods
@@ -523,12 +541,15 @@ namespace BibtexManager
 			}
 		}
 
-
+		/// <summary>
+		/// Search for text that can be replaced with string constants.
+		/// </summary>
+		/// <param name="entry"></param>
 		public void ApplyStringConstants(BibEntry entry)
 		{
 			if (_useStringConstants)
 			{
-
+				_stringConstantProcessor.ApplyStringConstants(entry);
 			}
 		}
 
@@ -559,6 +580,7 @@ namespace BibtexManager
 			ReadNameMappingFile();
 			ReadBibliographyFile();
 			ReadAccessoryFiles();
+			BuildStringConstantMap();
 		}
 
 		#endregion

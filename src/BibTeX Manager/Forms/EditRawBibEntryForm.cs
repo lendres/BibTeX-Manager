@@ -115,7 +115,6 @@ namespace BibtexManager
 			CheckQuality();
 		}
 
-
 		/// <summary>
 		/// Copy the cite key.
 		/// </summary>
@@ -171,6 +170,12 @@ namespace BibtexManager
 				// Key.
 				_project.GenerateKey(_bibEntry);
 
+				// Mapping.
+				if (this.useBibEntryMapCheckBox.Checked)
+				{
+					_project.RemapEntryNames(_bibEntry);
+				}
+
 				// Cleaning.
 				bool breakNext = false;
 				foreach (TagProcessingData tagProcessingData in _project.CleanEntry(_bibEntry))
@@ -188,11 +193,8 @@ namespace BibtexManager
 					breakNext = correctionForm.DialogResult == MessageBoxYesNoToAllResult.Cancel;
 				}
 
-				// Mapping.
-				if (this.useBibEntryMapCheckBox.Checked)
-				{
-					_project.RemapEntryNames(_bibEntry);
-				}
+				// String constants replacement.
+				_project.ApplyStringConstants(_bibEntry);
 
 				this.richTextBox.Text = _bibEntry.ToString(_project.WriteSettings);
 			}
