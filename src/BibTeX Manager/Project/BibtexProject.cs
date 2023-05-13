@@ -439,7 +439,7 @@ namespace BibtexManager
 		{
 			if (_autoGenerateKeys)
 			{
-				_bibliography.AutoKeyEntry(entry);
+				_bibliography.AutoGenerateCiteKey(entry);
 			}
 		}
 
