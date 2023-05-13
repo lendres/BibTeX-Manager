@@ -18,7 +18,10 @@ namespace BibtexManager
 		#region Fields
 
 		private string								_bibFile;
+
 		private List<string>						_assessoryFiles					= new List<string>();
+		private List<BibliographyDOM>				_assessoryFilesDOMs				= new List<BibliographyDOM>();
+		private bool								_useStringConstants				= false;
 
 		private bool								_useBibEntryInitialization;
 		private string								_bibEntryInitializationFile;
@@ -109,6 +112,26 @@ namespace BibtexManager
 				if (!_assessoryFiles.SequenceEqual(value))
 				{
 					_assessoryFiles = value;
+					this.Modified = true;
+				}
+			}
+		}
+
+		/// <summary>
+		/// Replace tag values with string constants.
+		/// </summary>
+		public bool UseStringConstants
+		{
+			get
+			{
+				return _useStringConstants;
+			}
+
+			set
+			{
+				if (!_useStringConstants == value)
+				{
+					_useStringConstants = value;
 					this.Modified = true;
 				}
 			}
@@ -399,6 +422,20 @@ namespace BibtexManager
 			}
 		}
 
+		/// <summary>
+		/// Read assessory files.
+		/// </summary>
+		private void ReadAccessoryFiles()
+		{
+			foreach (string file in _assessoryFiles)
+			{
+				if (System.IO.File.Exists(file))
+				{
+					_assessoryFilesDOMs.Add(BibParser.Parse(file));
+				}
+			}
+		}
+
 		#endregion
 
 		#region Methods
@@ -502,11 +539,11 @@ namespace BibtexManager
 		/// </summary>
 		public override void DeserializationInitialization()
 		{
-
 			ReadBibEntryInitializationFiles();
 			ReadTagQualityProcessingFile();
 			ReadNameMappingFile();
 			ReadBibliographyFile();
+			ReadAccessoryFiles();
 		}
 
 		#endregion
