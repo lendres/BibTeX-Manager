@@ -470,6 +470,21 @@ namespace BibtexManager
 		}
 
 		/// <summary>
+		/// Clean up.
+		/// </summary>
+		public override void Close()
+		{
+			// Must call base first.  This calls the OnClose event which should clear all forms (unbind) and
+			// make it safe to close the Bibliography.
+			base.Close();
+			_bibliography.Close();
+		}
+
+		#endregion
+
+		#region Quality and Automation Methods
+
+		/// <summary>
 		/// If the option for automatically generating keys is on, a key is generated for the entry.
 		/// </summary>
 		/// <param name="entry">BibEntry.</param>
@@ -487,10 +502,12 @@ namespace BibtexManager
 		/// <param name="entry">BibEntry.</param>
 		public IEnumerable<TagProcessingData> CleanEntry(BibEntry entry)
 		{
-
-			foreach (TagProcessingData tagProcessingData in _tagQualityProcessor.Process(entry))
+			if (_useTagQualityProcessing)
 			{
-				yield return tagProcessingData;
+				foreach (TagProcessingData tagProcessingData in _tagQualityProcessor.Process(entry))
+				{
+					yield return tagProcessingData;
+				}
 			}
 		}
 
@@ -506,15 +523,13 @@ namespace BibtexManager
 			}
 		}
 
-		/// <summary>
-		/// Clean up.
-		/// </summary>
-		public override void Close()
+
+		public void ApplyStringConstants(BibEntry entry)
 		{
-			// Must call base first.  This calls the OnClose event which should clear all forms (unbind) and
-			// make it safe to close the Bibliography.
-			base.Close();
-			_bibliography.Close();
+			if (_useStringConstants)
+			{
+
+			}
 		}
 
 		#endregion

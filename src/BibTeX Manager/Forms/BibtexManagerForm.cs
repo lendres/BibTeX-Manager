@@ -136,7 +136,7 @@ namespace BibtexManager
 
 			// After we create a new project, it needs to be set up.
 			ProjectSettingsForm projectForm	= new ProjectSettingsForm(this.Project);
-			DialogResult result				= projectForm.ShowDialog(this);
+			projectForm.ShowDialog(this);
 		}
 
 		/// <summary>

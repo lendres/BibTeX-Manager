@@ -169,6 +169,7 @@
       <DependentUpon>BibtexManagerForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program\Program.cs" />
+    <Compile Include="Project\StringConstantProcessor.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

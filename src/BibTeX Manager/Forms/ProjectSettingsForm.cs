@@ -251,6 +251,7 @@ namespace BibtexManager
 			this.autoGenerateKeysCheckBox.Checked			= _project.AutoGenerateKeys;
 			this.removeLastCommaCheckBox.Checked			= writeSettings.RemoveLastComma;
 			this.copyCiteKeyCheckBox.Checked				= _project.CopyCiteKeyOnEntryAdd;
+			this.useConstantStringsCheckBox.Checked			= _project.UseStringConstants;
 		}
 
 		/// <summary>
@@ -305,6 +306,7 @@ namespace BibtexManager
 			_project.AutoGenerateKeys				= this.autoGenerateKeysCheckBox.Checked;
 			writeSettings.RemoveLastComma			= this.removeLastCommaCheckBox.Checked;
 			_project.CopyCiteKeyOnEntryAdd			= this.copyCiteKeyCheckBox.Checked;
+			_project.UseStringConstants				= this.useConstantStringsCheckBox.Checked;
 		}
 
 		/// <summary>
