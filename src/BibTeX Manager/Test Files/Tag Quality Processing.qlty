@@ -75,7 +75,30 @@
 				<tag>title</tag>
 			</tags>
 		</tagprocessor>
+		
+		<!-- Remove enclosing brackets. -->
+		<tagprocessor xsi:type="StringReplacementTagProcessor"
+			processalltages="false"
+			pattern="^{"
+			replacement="">
+			<tags>
+				<tag>title</tag>
+				<tag>booktitle</tag>
+				<tag>abstract</tag>
+			</tags>
+		</tagprocessor>
 
+		<tagprocessor xsi:type="StringReplacementTagProcessor"
+			processalltages="false"
+			pattern="}$"
+			replacement="">
+			<tags>
+				<tag>title</tag>
+				<tag>booktitle</tag>
+				<tag>abstract</tag>
+			</tags>
+		</tagprocessor>
+		
 		<!-- Do not modify the pattern unless you really know what you are doing. -->
 		<tagprocessor xsi:type="SentanceEndingSpacesTagProcessor"
 			processalltages="false"

@@ -76,5 +76,33 @@ namespace BibtexManagerUnitTests
 			Assert.AreEqual(solution, entry.Title);
 		}
 
+		/// <summary>
+		/// Test that a string replacement at the start and end of strings.
+		/// </summary>
+		[TestMethod]
+		public void ReplaceAtStartAndEnd()
+		{
+			string solution1 = @"The quick {Red} fox & quicker {Red} squirrel jumped over the fence & lazy dog.}";
+			string solution2 = @"The quick {Red} fox & quicker {Red} squirrel jumped over the fence & lazy dog.";
+			string input = @"{The quick {Red} fox & quicker {Red} squirrel jumped over the fence & lazy dog.}";
+
+			BibEntry entry = new BibEntry() { Title = input };
+			StringReplacementTagProcessor processor = new StringReplacementTagProcessor() { ProcessAllTags = true };
+
+			processor.Pattern = "^{";
+			processor.Replacement = "";
+			processor.TagNames.Add("title");
+
+			// Test lower case tag name.
+			Utilities.RunProcessor(processor, entry);
+			Assert.AreEqual(solution1, entry.Title);
+
+			// Test upper case tage name.
+			processor.Pattern = "}$";
+			processor.Replacement = "";
+			Utilities.RunProcessor(processor, entry);
+			Assert.AreEqual(solution2, entry.Title);
+		}
+
 	} // End class.
 } // End namespace.
