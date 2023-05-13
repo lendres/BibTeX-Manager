@@ -2,6 +2,7 @@
 using DigitalProduction.Projects;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Xml.Serialization;
@@ -71,7 +72,7 @@ namespace BibtexManager
 		/// The path to the bibiography file.
 		/// </summary>
 		[XmlAttribute("bibfile")]
-		public string BibFile
+		public string BibliographyFile
 		{
 			get
 			{
@@ -83,8 +84,11 @@ namespace BibtexManager
 				if (_bibFile != value)
 				{
 					_bibFile = value;
-					ReadBibliographyFile();
 					this.Modified = true;
+					if (this.Initialized)
+					{
+						ReadBibliographyFile();
+					}
 				}
 			}
 		}
@@ -147,8 +151,11 @@ namespace BibtexManager
 				if (_bibEntryInitializationFile != value)
 				{
 					_bibEntryInitializationFile = value;
-					ReadBibEntryInitializationFiles();
 					this.Modified = true;
+					if (this.Initialized)
+					{
+						ReadBibEntryInitializationFiles();
+					}
 				}
 			}
 		}
@@ -196,8 +203,11 @@ namespace BibtexManager
 				if (_tagQualityProcessingFile != value)
 				{
 					_tagQualityProcessingFile = value;
-					ReadTagQualityProcessingFile();
 					this.Modified = true;
+					if (this.Initialized)
+					{
+						ReadTagQualityProcessingFile();
+					}
 				}
 			}
 		}
@@ -238,8 +248,11 @@ namespace BibtexManager
 				if (_nameRemappingFile != value)
 				{
 					_nameRemappingFile = value;
-					ReadNameMappingFile();
 					this.Modified = true;
+					if (this.Initialized)
+					{
+						ReadNameMappingFile();
+					}
 				}
 			}
 		}
@@ -343,16 +356,13 @@ namespace BibtexManager
 		/// </summary>
 		private void ReadBibliographyFile()
 		{
-			if (this.Initialized)
+			if (_useBibEntryInitialization)
 			{
-				if (_useBibEntryInitialization)
-				{
-					_bibliography.Read(_bibFile, _bibEntryInitializationFile);
-				}
-				else
-				{
-					_bibliography.Read(_bibFile);
-				}
+				_bibliography.Read(_bibFile, _bibEntryInitializationFile);
+			}
+			else
+			{
+				_bibliography.Read(_bibFile);
 			}
 		}
 
@@ -361,12 +371,9 @@ namespace BibtexManager
 		/// </summary>
 		private void ReadBibEntryInitializationFiles()
 		{
-			if (this.Initialized)
+			if (System.IO.File.Exists(_bibEntryInitializationFile))
 			{
-				if (System.IO.File.Exists(_bibEntryInitializationFile))
-				{
-					_bibEntryInitialization = BibEntryInitialization.Deserialize(_bibEntryInitializationFile);
-				}
+				_bibEntryInitialization = BibEntryInitialization.Deserialize(_bibEntryInitializationFile);
 			}
 		}
 
@@ -375,12 +382,9 @@ namespace BibtexManager
 		/// </summary>
 		private void ReadTagQualityProcessingFile()
 		{
-			if (this.Initialized)
+			if (System.IO.File.Exists(_tagQualityProcessingFile))
 			{
-				if (System.IO.File.Exists(_tagQualityProcessingFile))
-				{
-					_tagQualityProcessor = QualityProcessor.Deserialize(_tagQualityProcessingFile);
-				}
+				_tagQualityProcessor = QualityProcessor.Deserialize(_tagQualityProcessingFile);
 			}
 		}
 
@@ -389,12 +393,9 @@ namespace BibtexManager
 		/// </summary>
 		private void ReadNameMappingFile()
 		{
-			if (this.Initialized)
+			if (System.IO.File.Exists(_nameRemappingFile))
 			{
-				if (System.IO.File.Exists(_nameRemappingFile))
-				{
-					_nameRemapper = BibEntryRemapper.Deserialize(_nameRemappingFile);
-				}
+				_nameRemapper = BibEntryRemapper.Deserialize(_nameRemappingFile);
 			}
 		}
 
@@ -414,10 +415,10 @@ namespace BibtexManager
 		/// Parse a string and return BibEntrys.
 		/// </summary>
 		/// <param name="text">Text to process.</param>
-		public List<BibEntry> ParseText(string text)
+		public BindingList<BibEntry> ParseText(string text)
 		{
 			StringReader textReader = new StringReader(text);
-			Tuple<List<string>, List<BibEntry>> result;
+			BibliographyDOM result;
 
 			if (_useBibEntryInitialization)
 			{
@@ -428,7 +429,7 @@ namespace BibtexManager
 				result = BibParser.Parse(textReader);
 			}
 
-			return result.Item2;
+			return result.BibiographyEntries;
 		}
 
 		/// <summary>

@@ -52,7 +52,7 @@ namespace BibtexManager
 		/// <param name="eventArgs">Event arguments.</param>
 		private void BrowseBibFileButton_Click(object sender, EventArgs eventArgs)
 		{
-			string initialDirectory	= System.IO.Path.GetDirectoryName(_project.BibFile);
+			string initialDirectory	= System.IO.Path.GetDirectoryName(_project.BibliographyFile);
 
 			string path = FileSelect.BrowseForAFile(this, _bibFileFilterString, "Select BibTeX File", initialDirectory, true);
 
@@ -69,7 +69,7 @@ namespace BibtexManager
 		/// <param name="eventArgs">Event arguments.</param>
 		private void AddAssessoryFileButton_Click(object sender, EventArgs eventArgs)
 		{
-			string initialDirectory = System.IO.Path.GetDirectoryName(_project.BibFile);
+			string initialDirectory = System.IO.Path.GetDirectoryName(_project.BibliographyFile);
 
 			string[] paths = FileSelect.BrowseForMultipleFiles(this, _bibFileFilterString, "Select BibTeX File", initialDirectory, true);
 
@@ -217,7 +217,7 @@ namespace BibtexManager
 		protected void PopulateControls()
 		{
 			// Bibliography file.
-			this.bibFileLocationTextBox.Text				= _project.BibFile;
+			this.bibFileLocationTextBox.Text				= _project.BibliographyFile;
 
 			// Assessory files.
 			this.assessoryFilesListBox.Items.AddRange(_project.AssessoryFiles.ToArray());
@@ -259,7 +259,7 @@ namespace BibtexManager
 		protected void PushEntriesToDataStructure()
 		{
 			// Bibliography file.
-			_project.BibFile						= this.bibFileLocationTextBox.Text;
+			_project.BibliographyFile						= this.bibFileLocationTextBox.Text;
 
 			// Assessory files.
 			ListBox.ObjectCollection items			= this.assessoryFilesListBox.Items;

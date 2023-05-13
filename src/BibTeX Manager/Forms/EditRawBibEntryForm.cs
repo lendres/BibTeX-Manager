@@ -1,6 +1,7 @@
 ﻿using BibTeXLibrary;
 using DigitalProduction.Forms;
 using System;
+using System.ComponentModel;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
@@ -206,7 +207,7 @@ namespace BibtexManager
 
 			try
 			{
-				List<BibEntry> entries = _project.ParseText(this.richTextBox.Text);
+				BindingList<BibEntry> entries = _project.ParseText(this.richTextBox.Text);
 				_bibEntry = entries[0];
 			}
 			catch (Exception exception)
