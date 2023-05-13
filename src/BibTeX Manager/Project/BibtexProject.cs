@@ -18,7 +18,7 @@ namespace BibtexManager
 
 		private string								_bibFile;
 		private List<string>						_assessoryFiles					= new List<string>();
-		
+
 		private bool								_useBibEntryInitialization;
 		private string								_bibEntryInitializationFile;
 		private BibEntryInitialization				_bibEntryInitialization			= new BibEntryInitialization();
@@ -82,9 +82,9 @@ namespace BibtexManager
 			{
 				if (_bibFile != value)
 				{
-					_bibFile		= value;
+					_bibFile = value;
 					ReadBibliographyFile();
-					this.Modified	= true;
+					this.Modified = true;
 				}
 			}
 		}
@@ -147,6 +147,7 @@ namespace BibtexManager
 				if (_bibEntryInitializationFile != value)
 				{
 					_bibEntryInitializationFile = value;
+					ReadBibEntryInitializationFiles();
 					this.Modified = true;
 				}
 			}
@@ -183,7 +184,7 @@ namespace BibtexManager
 		/// The path to the quality processor file.
 		/// </summary>
 		[XmlAttribute("qualityprocessorfile")]
-		public string QualityProcessingFile
+		public string TagQualityProcessingFile
 		{
 			get
 			{
@@ -195,6 +196,7 @@ namespace BibtexManager
 				if (_tagQualityProcessingFile != value)
 				{
 					_tagQualityProcessingFile = value;
+					ReadTagQualityProcessingFile();
 					this.Modified = true;
 				}
 			}
@@ -236,12 +238,12 @@ namespace BibtexManager
 				if (_nameRemappingFile != value)
 				{
 					_nameRemappingFile = value;
+					ReadNameMappingFile();
 					this.Modified = true;
 				}
 			}
 		}
 
-	
 		/// <summary>
 		/// The BibEntryMap to use for remapping.
 		/// </summary>
@@ -334,30 +336,79 @@ namespace BibtexManager
 
 		#endregion
 
-		#region Methods
+		#region File Reading Methods
 
 		/// <summary>
 		/// Read the bibliography file.
 		/// </summary>
-		public void ReadBibliographyFile()
+		private void ReadBibliographyFile()
 		{
-			if (_useBibEntryInitialization)
+			if (this.Initialized)
 			{
-				_bibliography.Read(_bibFile, _bibEntryInitializationFile);
-			}
-			else
-			{
-				_bibliography.Read(_bibFile);
+				if (_useBibEntryInitialization)
+				{
+					_bibliography.Read(_bibFile, _bibEntryInitializationFile);
+				}
+				else
+				{
+					_bibliography.Read(_bibFile);
+				}
 			}
 		}
+
+		/// <summary>
+		/// Read the bibliography entry initialization file.
+		/// </summary>
+		private void ReadBibEntryInitializationFiles()
+		{
+			if (this.Initialized)
+			{
+				if (System.IO.File.Exists(_bibEntryInitializationFile))
+				{
+					_bibEntryInitialization = BibEntryInitialization.Deserialize(_bibEntryInitializationFile);
+				}
+			}
+		}
+
+		/// <summary>
+		/// Read tag quality processing file.
+		/// </summary>
+		private void ReadTagQualityProcessingFile()
+		{
+			if (this.Initialized)
+			{
+				if (System.IO.File.Exists(_tagQualityProcessingFile))
+				{
+					_tagQualityProcessor = QualityProcessor.Deserialize(_tagQualityProcessingFile);
+				}
+			}
+		}
+
+		/// <summary>
+		/// Read name mapping file.
+		/// </summary>
+		private void ReadNameMappingFile()
+		{
+			if (this.Initialized)
+			{
+				if (System.IO.File.Exists(_nameRemappingFile))
+				{
+					_nameRemapper = BibEntryRemapper.Deserialize(_nameRemappingFile);
+				}
+			}
+		}
+
+		#endregion
+
+		#region Methods
 
 		/// <summary>
 		/// Get an array of all the names of the maps.
 		/// </summary>
 		public string[] GetBibEntryMapNames()
-		{
-			return _nameRemapper.Maps.Keys.ToArray();
-		}
+				{
+					return _nameRemapper.Maps.Keys.ToArray();
+				}
 
 		/// <summary>
 		/// Parse a string and return BibEntrys.
@@ -450,20 +501,11 @@ namespace BibtexManager
 		/// </summary>
 		public override void DeserializationInitialization()
 		{
-			if (System.IO.File.Exists(_bibEntryInitializationFile))
-			{
-				_bibEntryInitialization = BibEntryInitialization.Deserialize(_bibEntryInitializationFile);
-			}
 
-			if (System.IO.File.Exists(_tagQualityProcessingFile))
-			{
-				_tagQualityProcessor = QualityProcessor.Deserialize(_tagQualityProcessingFile);
-			}
-
-			if (System.IO.File.Exists(_nameRemappingFile))
-			{
-				_nameRemapper = BibEntryRemapper.Deserialize(_nameRemappingFile);
-			}
+			ReadBibEntryInitializationFiles();
+			ReadTagQualityProcessingFile();
+			ReadNameMappingFile();
+			ReadBibliographyFile();
 		}
 
 		#endregion

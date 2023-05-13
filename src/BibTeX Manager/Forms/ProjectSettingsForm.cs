@@ -128,7 +128,7 @@ namespace BibtexManager
 		/// <param name="eventArgs">Event arguments.</param>
 		private void BrowseQualityProcessorButton_Click(object sender, EventArgs eventArgs)
 		{
-			string initialDirectory = System.IO.Path.GetDirectoryName(_project.QualityProcessingFile);
+			string initialDirectory = System.IO.Path.GetDirectoryName(_project.TagQualityProcessingFile);
 
 			string path = FileSelect.BrowseForAFile(this, _qualityProcessingFileFilterString, "Select a Quality Processing File", initialDirectory, true);
 
@@ -228,7 +228,7 @@ namespace BibtexManager
 
 			// Quality processing.
 			this.useQualityProcessingCheckBox.Checked		= _project.UseQualityProcessing;
-			this.qualityProcessingFileTextBox.Text			= _project.QualityProcessingFile;
+			this.qualityProcessingFileTextBox.Text			= _project.TagQualityProcessingFile;
 
 			// BibEntry remapping.
 			this.useRemappingCheckBox.Checked				= _project.UseBibEntryRemapping;
@@ -276,7 +276,7 @@ namespace BibtexManager
 
 			// Quality processing.
 			_project.UseQualityProcessing			= this.useQualityProcessingCheckBox.Checked;
-			_project.QualityProcessingFile			= this.qualityProcessingFileTextBox.Text;
+			_project.TagQualityProcessingFile			= this.qualityProcessingFileTextBox.Text;
 
 			// BibEntry remapping.
 			_project.UseBibEntryRemapping			= this.useRemappingCheckBox.Checked;
