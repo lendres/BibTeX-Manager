@@ -11,43 +11,43 @@
 			<tags><tag>month</tag></tags>
 		</tagprocessor>
 		
-		<tagprocessor xsi:type="StringReplacementTagProcessor" processalltages="false" pattern="[0]*3$" replacement="March">
+		<tagprocessor xsi:type="StringReplacementTagProcessor" processalltages="false" pattern="^[0]*3$" replacement="March">
 			<tags><tag>month</tag></tags>
 		</tagprocessor>
 
-		<tagprocessor xsi:type="StringReplacementTagProcessor" processalltages="false" pattern="[0]*4" replacement="April">
+		<tagprocessor xsi:type="StringReplacementTagProcessor" processalltages="false" pattern="^[0]*4$" replacement="April">
 			<tags><tag>month</tag></tags>
 		</tagprocessor>
 
-		<tagprocessor xsi:type="StringReplacementTagProcessor" processalltages="false" pattern="[0]*5" replacement="May">
+		<tagprocessor xsi:type="StringReplacementTagProcessor" processalltages="false" pattern="^[0]*5$" replacement="May">
 			<tags><tag>month</tag></tags>
 		</tagprocessor>
 
-		<tagprocessor xsi:type="StringReplacementTagProcessor" processalltages="false" pattern="[0]*6" replacement="June">
+		<tagprocessor xsi:type="StringReplacementTagProcessor" processalltages="false" pattern="^[0]*6$" replacement="June">
 			<tags><tag>month</tag></tags>
 		</tagprocessor>
 
-		<tagprocessor xsi:type="StringReplacementTagProcessor" processalltages="false" pattern="[0]*7" replacement="July">
+		<tagprocessor xsi:type="StringReplacementTagProcessor" processalltages="false" pattern="^[0]*7$" replacement="July">
 			<tags><tag>month</tag></tags>
 		</tagprocessor>
 
-		<tagprocessor xsi:type="StringReplacementTagProcessor" processalltages="false" pattern="[0]*8" replacement="August">
+		<tagprocessor xsi:type="StringReplacementTagProcessor" processalltages="false" pattern="^[0]*8$" replacement="August">
 			<tags><tag>month</tag></tags>
 		</tagprocessor>
 
-		<tagprocessor xsi:type="StringReplacementTagProcessor" processalltages="false" pattern="[0]*9" replacement="September">
+		<tagprocessor xsi:type="StringReplacementTagProcessor" processalltages="false" pattern="^[0]*9$" replacement="September">
 			<tags><tag>month</tag></tags>
 		</tagprocessor>
 
-		<tagprocessor xsi:type="StringReplacementTagProcessor" processalltages="false" pattern="[0]*10" replacement="October">
+		<tagprocessor xsi:type="StringReplacementTagProcessor" processalltages="false" pattern="^[0]*10$" replacement="October">
 			<tags><tag>month</tag></tags>
 		</tagprocessor>
 		
-		<tagprocessor xsi:type="StringReplacementTagProcessor" processalltages="false" pattern="[0]*11" replacement="November">
+		<tagprocessor xsi:type="StringReplacementTagProcessor" processalltages="false" pattern="^[0]*11$" replacement="November">
 			<tags><tag>month</tag></tags>
 		</tagprocessor>
 		
-		<tagprocessor xsi:type="StringReplacementTagProcessor" processalltages="false" pattern="[0]*12" replacement="December">
+		<tagprocessor xsi:type="StringReplacementTagProcessor" processalltages="false" pattern="^[0]*12$" replacement="December">
 			<tags><tag>month</tag></tags>
 		</tagprocessor>
 

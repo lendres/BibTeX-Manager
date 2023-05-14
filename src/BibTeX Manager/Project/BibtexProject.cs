@@ -23,7 +23,7 @@ namespace BibtexManager
 		private List<string>						_assessoryFiles					= new List<string>();
 		private List<BibliographyDOM>				_assessoryFilesDOMs				= new List<BibliographyDOM>();
 
-		private bool								_useStringConstants				= false;
+		private bool								_useStringConstants				= true;
 		private StringConstantProcessor				_stringConstantProcessor		= new StringConstantProcessor();
 
 		private bool								_useBibEntryInitialization;
@@ -638,7 +638,9 @@ namespace BibtexManager
 		/// <exception cref="InvalidOperationException">Thrown when the projects path is not set or not valid.</exception>
 		public override void Serialize()
 		{
-			_bibliography.Write(_bibFile+".output.bib", _writeSettings);
+			string file = _bibFile;
+			//file += ".output.bib";
+			_bibliography.Write(file, _writeSettings);
 			base.Serialize();
 		}
 

@@ -92,9 +92,9 @@ namespace BibtexManager
 		/// </summary>
 		protected override void SetupProject()
 		{
+			this.dataGridViewInterfaceControl.Project = this.Project;
 			InitializeDataBinding();
 			this.Project.OnClosed += this.RemoveDataBinding;
-			this.dataGridViewInterfaceControl.Project = this.Project;
 		}
 
 		#endregion
@@ -141,8 +141,11 @@ namespace BibtexManager
 			base.NewToolStripItem_Click(sender, eventArgs);
 
 			// After we create a new project, it needs to be set up.
+			// Removing and adding the data binding is a hack to get this to work for now.
+			RemoveDataBinding();
 			ProjectSettingsForm projectForm	= new ProjectSettingsForm(this.Project);
 			projectForm.ShowDialog(this);
+			InitializeDataBinding();
 		}
 
 		/// <summary>

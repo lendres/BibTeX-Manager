@@ -259,10 +259,10 @@ namespace BibtexManager
 
 		private void CopyCiteKeyToClipboard()
 		{
+			// Clipboard copy might fail, so catch an errors.
 			try
 			{
-				// Clipboard copy doesn't always work.
-				Clipboard.SetText(_bibEntry.Key);
+				Clipboard.SetDataObject(_bibEntry.Key);
 			}
 			catch (Exception)
 			{
@@ -326,7 +326,10 @@ namespace BibtexManager
 		protected void PushEntriesToDataStructure()
 		{
 			_project.UseBibEntryRemapping	= this.useBibEntryMapCheckBox.Checked;
-			_project.BibEntryMap			= this.bibEntryMapComboBox.SelectedItem.ToString();
+			if (this.bibEntryMapComboBox.SelectedIndex != -1)
+			{
+				_project.BibEntryMap            = this.bibEntryMapComboBox.SelectedItem.ToString();
+			}
 		}
 
 		#endregion
