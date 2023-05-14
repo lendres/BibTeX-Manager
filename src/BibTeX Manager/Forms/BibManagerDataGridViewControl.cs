@@ -86,21 +86,7 @@ namespace BibtexManager
 		/// <param name="eventArgs">Event arguments.</param>
 		private void AddRawTemplateButton_Click(object sender, EventArgs eventArgs)
 		{
-			SelectBibEntryType selectBibEntryType = new SelectBibEntryType(_project.BibEntryInitialization.TypeNames);
-			DialogResult result = selectBibEntryType.ShowDialog();
-
-			if (result == DialogResult.OK)
-			{
-				BibEntry entry = BibEntry.NewBibEntryTemplate(_project.BibEntryInitialization, selectBibEntryType.SelectedType);
-
-				EditRawBibEntryForm editRawBibEntryForm = new EditRawBibEntryForm(this.BibtexManagerForm, this.Project);
-				DialogResultPair dialogResultPair = editRawBibEntryForm.ShowDialog(this, entry, this.Project.WriteSettings);
-
-				if (dialogResultPair.Result == DialogResult.OK)
-				{
-					AddNewObject(dialogResultPair.Object);
-				}
-			}
+			AddRawTemplate();
 		}
 
 		#endregion
@@ -124,6 +110,38 @@ namespace BibtexManager
 		{
 			EditRawBibEntryForm editRawBibEntryForm = new EditRawBibEntryForm(this.BibtexManagerForm, this.Project);
 			return editRawBibEntryForm.ShowDialog(this, null, this.Project.WriteSettings);
+		}
+
+		/// <summary>
+		/// Add a new entry based on a template.
+		/// </summary>
+		private void AddRawTemplate()
+		{
+			SelectBibEntryType selectBibEntryType	= new SelectBibEntryType(_project.BibEntryInitialization.TypeNames);
+			DialogResult result						= selectBibEntryType.ShowDialog();
+
+			if (result == DialogResult.OK)
+			{
+				BibEntry entry = BibEntry.NewBibEntryTemplate(_project.BibEntryInitialization, selectBibEntryType.SelectedType);
+
+				EditRawBibEntryForm editRawBibEntryForm = new EditRawBibEntryForm(this.BibtexManagerForm, this.Project);
+				DialogResultPair dialogResultPair = editRawBibEntryForm.ShowDialog(this, entry, this.Project.WriteSettings);
+
+				if (dialogResultPair.Result == DialogResult.OK)
+				{
+					Add(dialogResultPair.Object);
+				}
+			}
+		}
+
+		/// <summary>
+		/// Inserts a new entry at a location determined by the sorting type.
+		/// </summary>
+		/// <param name="newObject">Object to add.</param>
+		protected override void Add(object newObject)
+		{
+			int			index	= _project.GetEntryAddIndex((BibEntry)newObject);
+			Insert(index, newObject);
 		}
 
 		#endregion

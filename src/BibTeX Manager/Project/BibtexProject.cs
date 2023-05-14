@@ -529,7 +529,7 @@ namespace BibtexManager
 				result = BibParser.Parse(textReader);
 			}
 
-			return result.BibiographyEntries;
+			return result.BibliographyEntries;
 		}
 
 		/// <summary>
@@ -595,6 +595,18 @@ namespace BibtexManager
 			if (_useStringConstants)
 			{
 				_stringConstantProcessor.ApplyStringConstants(entry);
+			}
+		}
+
+		public int GetEntryAddIndex(BibEntry entry)
+		{
+			if (_sortBibliography)
+			{
+				return _bibliography.DocumentObjectModel.FindInsertIndex(entry, _bibliographySortMethod);
+			}
+			else
+			{
+				return _bibliography.DocumentObjectModel.NumberOfBibliographyEntries;
 			}
 		}
 
