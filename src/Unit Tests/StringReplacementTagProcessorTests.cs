@@ -104,5 +104,26 @@ namespace BibtexManagerUnitTests
 			Assert.AreEqual(solution2, entry.Title);
 		}
 
+		/// <summary>
+		/// Test that a string replacement at the start and end of strings.
+		/// </summary>
+		[TestMethod]
+		public void ReplaceInternationalSymbols()
+		{
+			string solution = @"The q{\o}ick.";
+			string input = @"The qøick.";
+
+			BibEntry entry = new BibEntry() { Title = input };
+			StringReplacementTagProcessor processor = new StringReplacementTagProcessor() { ProcessAllTags = true };
+
+			processor.Pattern = "ø";
+			processor.Replacement = @"{\o}";
+			processor.TagNames.Add("title");
+
+			// Test lower case tag name.
+			Utilities.RunProcessor(processor, entry);
+			Assert.AreEqual(solution, entry.Title);
+		}
+
 	} // End class.
 } // End namespace.
