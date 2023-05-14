@@ -17,6 +17,7 @@ namespace BibtexManager
 
 		private BibEntry		_bibEntry;
 		private BibtexProject	_project;
+		private bool            _addMode;
 
 		#endregion
 
@@ -168,12 +169,18 @@ namespace BibtexManager
 			if (Parse())
 			{
 				// Key.
-				_project.GenerateKey(_bibEntry);
+				if (_addMode)
+				{
+					_project.GenerateNewKey(_bibEntry);
+				}
+				else
+				{
+				}
 
 				// Mapping.
 				if (this.useBibEntryMapCheckBox.Checked)
 				{
-					_project.RemapEntryNames(_bibEntry);
+					_project.RemapEntryNames(_bibEntry, this.bibEntryMapComboBox.Text);
 				}
 
 				// Cleaning.
@@ -283,9 +290,14 @@ namespace BibtexManager
 			tabSize = spaceSize.Width;
 			this.richTextBox.SelectionTabs	= new int[] { tabSize, 2*tabSize, 3*tabSize, 4*tabSize, 5*tabSize, 6*tabSize, 7*tabSize, 8*tabSize };
 
-			// If there is a BibEntry provided, populate the form.
-			if (bibEntry != null)
+			// If there is a BibEntry provided, populate the form.  Also, tract if we are adding or editing.
+			if (bibEntry == null)
 			{
+				_addMode = true;
+			}
+			else
+			{
+				_addMode = false;
 				this.richTextBox.Text = bibEntry.ToString(writeSettings);
 			}
 
@@ -318,6 +330,10 @@ namespace BibtexManager
 			this.bibEntryMapComboBox.Items.Clear();
 			this.bibEntryMapComboBox.Items.AddRange(_project.GetBibEntryMapNames());
 			this.bibEntryMapComboBox.Text = _project.BibEntryMap;
+			if (this.bibEntryMapComboBox.Text == "" && this.bibEntryMapComboBox.Items.Count > 0)
+			{
+				this.bibEntryMapComboBox.SelectedIndex = 0;
+			}
 		}
 
 		/// <summary>

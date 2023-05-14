@@ -551,11 +551,26 @@ namespace BibtexManager
 		/// If the option for automatically generating keys is on, a key is generated for the entry.
 		/// </summary>
 		/// <param name="entry">BibEntry.</param>
-		public void GenerateKey(BibEntry entry)
+		public void GenerateNewKey(BibEntry entry)
 		{
 			if (_autoGenerateKeys)
 			{
-				_bibliography.AutoGenerateCiteKey(entry);
+				_bibliography.GenerateUniqueCiteKey(entry);
+			}
+		}
+
+		/// <summary>
+		/// If the option for automatically generating keys is on, a key is generated for the entry.
+		/// </summary>
+		/// <param name="entry">BibEntry.</param>
+		public void ValidateKey(BibEntry entry)
+		{
+			if (_autoGenerateKeys)
+			{
+				if (!_bibliography.HasValidAutoCiteKey(entry))
+				{
+					_bibliography.GenerateUniqueCiteKey(entry);
+				}
 			}
 		}
 
@@ -583,6 +598,19 @@ namespace BibtexManager
 			if (_useNameRemapping)
 			{
 				_nameRemapper.RemapEntryNames(entry, _currentBibEntryMap);
+			}
+		}
+
+		/// <summary>
+		/// Remaps the Key and Tag Keys to new names.
+		/// </summary>
+		/// <param name="entry">BibEntry.</param>
+		/// <param name="bibEntryMapName">Name of the map to use.</param>
+		public void RemapEntryNames(BibEntry entry, string bibEntryMapName)
+		{
+			if (_useNameRemapping)
+			{
+				_nameRemapper.RemapEntryNames(entry, bibEntryMapName);
 			}
 		}
 
