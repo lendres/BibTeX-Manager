@@ -175,6 +175,7 @@ namespace BibtexManager
 				}
 				else
 				{
+					_project.ValidateKey(_bibEntry);
 				}
 
 				// Mapping.

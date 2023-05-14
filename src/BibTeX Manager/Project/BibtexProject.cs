@@ -626,7 +626,12 @@ namespace BibtexManager
 			}
 		}
 
-		public int GetEntryAddIndex(BibEntry entry)
+		/// <summary>
+		/// Get the location to re-insert and editted entry.
+		/// </summary>
+		/// <param name="entry">BibEntry.</param>
+		/// <param name="proposedIndex">The current index of the BibEntry.</param>
+		public int GetEntryInsertIndex(BibEntry entry, int proposedIndex)
 		{
 			if (_sortBibliography)
 			{
@@ -634,7 +639,7 @@ namespace BibtexManager
 			}
 			else
 			{
-				return _bibliography.DocumentObjectModel.NumberOfBibliographyEntries;
+				return proposedIndex;
 			}
 		}
 

@@ -134,14 +134,21 @@ namespace BibtexManager
 			}
 		}
 
+		#endregion
+
+		#region Override and New Methods
+
 		/// <summary>
-		/// Inserts a new entry at a location determined by the sorting type.
+		/// Insert a new object at the specified location.
 		/// </summary>
-		/// <param name="newObject">Object to add.</param>
-		protected override void Add(object newObject)
+		/// <param name="index">Index to insert the at.</param>
+		/// <param name="newObject">New object instance to add.</param>
+		protected override void Insert(int index, object newObject)
 		{
-			int			index	= _project.GetEntryAddIndex((BibEntry)newObject);
-			Insert(index, newObject);
+			// The project can override the insertion location based on the settings.
+			index = _project.GetEntryInsertIndex((BibEntry)newObject, index);
+
+			base.Insert(index, newObject);
 		}
 
 		#endregion
