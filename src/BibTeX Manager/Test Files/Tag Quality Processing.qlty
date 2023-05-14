@@ -3,15 +3,15 @@
 	<tagprocessors>
 		<!-- Change month numbers to strings. -->
 		<!-- The regular expression [0]* matches leading zeros. -->
-		<tagprocessor xsi:type="StringReplacementTagProcessor" processalltages="false" pattern="[0]*1" replacement="January">
+		<tagprocessor xsi:type="StringReplacementTagProcessor" processalltages="false" pattern="^[0]*1$" replacement="January">
 			<tags><tag>month</tag></tags>
 		</tagprocessor>
 		
-		<tagprocessor xsi:type="StringReplacementTagProcessor" processalltages="false" pattern="[0]*2" replacement="February">
+		<tagprocessor xsi:type="StringReplacementTagProcessor" processalltages="false" pattern="^[0]*2$" replacement="February">
 			<tags><tag>month</tag></tags>
 		</tagprocessor>
 		
-		<tagprocessor xsi:type="StringReplacementTagProcessor" processalltages="false" pattern="[0]*3" replacement="March">
+		<tagprocessor xsi:type="StringReplacementTagProcessor" processalltages="false" pattern="[0]*3$" replacement="March">
 			<tags><tag>month</tag></tags>
 		</tagprocessor>
 
