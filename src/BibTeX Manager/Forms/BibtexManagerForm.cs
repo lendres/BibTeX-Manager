@@ -101,6 +101,11 @@ namespace BibtexManager
 
 		#region Form Event Handlers
 
+		/// <summary>
+		/// Form key press event handler.
+		/// </summary>
+		/// <param name="sender">Sender.</param>
+		/// <param name="eventArgs">Event arguments.</param>
 		private void Form_KeyUp(object sender, KeyEventArgs eventArgs)
 		{
 			switch (eventArgs.KeyCode)
@@ -110,6 +115,7 @@ namespace BibtexManager
 					eventArgs.Handled = true;
 					this.dataGridViewInterfaceControl.Add();
 					break;
+
 				case Keys.E:
 				case Keys.F2:
 					// Need to set this to true before opening the new form or that form will see the key press as well.
@@ -182,6 +188,16 @@ namespace BibtexManager
 			{
 				// Do we need to update the project?
 			}
+		}
+
+		/// <summary>
+		/// Sort all entries in the bibliography.
+		/// </summary>
+		/// <param name="sender">Sender.</param>
+		/// <param name="eventArgs">Event args.</param>
+		private void SortBibliographyEntriesToolStripMenuItem_Click(object sender, EventArgs eventArgs)
+		{
+			this.Project.SortBibliographyEntries();
 		}
 
 		#endregion
@@ -288,17 +304,6 @@ namespace BibtexManager
 		}
 
 		#endregion
-
-		//private void BibtexManagerForm_PreviewKeyDown(object sender, PreviewKeyDownEventArgs eventArgs)
-		//{
-		//	switch (eventArgs.KeyCode)
-		//	{
-		//		case Keys.F2:
-		//			this.dataGridViewInterfaceControl.Edit();
-
-		//			eventArgs.Handled = true;
-		//			break;
-		//	}
 
 		//}
 	} // End class.

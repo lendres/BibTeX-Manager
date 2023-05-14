@@ -18,6 +18,7 @@ namespace BibtexManager
 		#region Fields
 
 		private string								_bibFile;
+		private readonly Bibliography               _bibliography                   = new Bibliography();
 
 		private List<string>						_assessoryFiles					= new List<string>();
 		private List<BibliographyDOM>				_assessoryFilesDOMs				= new List<BibliographyDOM>();
@@ -38,10 +39,11 @@ namespace BibtexManager
 		private string								_currentBibEntryMap				= "";
 		private BibEntryRemapper					_nameRemapper					= new BibEntryRemapper();
 
-		private readonly Bibliography				_bibliography					= new Bibliography();
 		private WriteSettings						_writeSettings					= new WriteSettings();
 		private bool								_autoGenerateKeys				= true;
 		private bool								_copyCiteKeyOnEntryAdd			= true;
+		private bool                                _sortBibliography				= true;
+		private SortBy                              _bibliographySortMethod			= SortBy.Key;
 
 		#endregion
 
@@ -361,6 +363,7 @@ namespace BibtexManager
 		/// <summary>
 		/// Copy the bibliography entry's cite key when the entry is added.
 		/// </summary>
+		[XmlAttribute("copycitekeyonadd")]
 		public bool CopyCiteKeyOnEntryAdd
 		{
 			get
@@ -373,6 +376,48 @@ namespace BibtexManager
 				if (_copyCiteKeyOnEntryAdd != value)
 				{
 					_copyCiteKeyOnEntryAdd = value;
+					this.Modified = true;
+				}
+			}
+		}
+
+		/// <summary>
+		/// Sort the bibliography.
+		/// </summary>
+		[XmlAttribute("sortbibliography")]
+		public bool SortBibliography
+		{
+			get
+			{
+				return _sortBibliography;
+			}
+
+			set
+			{
+				if (_sortBibliography != value)
+				{
+					_sortBibliography = value;
+					this.Modified = true;
+				}
+			}
+		}
+
+		/// <summary>
+		/// Method to sort the bibliography by.
+		/// </summary>
+		[XmlAttribute("bibliographysortmethod")]
+		public SortBy BibliographySortMethod
+		{
+			get
+			{
+				return _bibliographySortMethod;
+			}
+
+			set
+			{
+				if (_bibliographySortMethod != value)
+				{
+					_bibliographySortMethod = value;
 					this.Modified = true;
 				}
 			}
@@ -552,6 +597,21 @@ namespace BibtexManager
 				_stringConstantProcessor.ApplyStringConstants(entry);
 			}
 		}
+
+		#region Entire Bibliography
+
+		/// <summary>
+		/// Sort the bibliography entries.
+		/// </summary>
+		public void SortBibliographyEntries()
+		{
+			if (_sortBibliography)
+			{
+				_bibliography.DocumentObjectModel.SortBibEntries(_bibliographySortMethod);
+			}
+		}
+
+		#endregion
 
 		#endregion
 

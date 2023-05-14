@@ -35,42 +35,11 @@ namespace BibtexManager
 		/// <summary>
 		/// Use this to add a property to the designer.
 		/// </summary>
-		//[Category("")]
+		[Browsable(false)]
 		public BibtexProject Project { get => _project; set => _project = value; }
 
+		[Browsable(false)]
 		private BibtexManagerForm BibtexManagerForm { get => (BibtexManagerForm) this.Parent.Parent; }
-
-		#endregion
-
-		#region Events
-
-		/// <summary>
-		/// Add a new raw bibliography entry based on a template.
-		/// </summary>
-		/// <param name="sender">Sender.</param>
-		/// <param name="eventArgs">Event arguments.</param>
-		private void AddRawTemplateButton_Click(object sender, EventArgs eventArgs)
-		{
-			SelectBibEntryType selectBibEntryType = new SelectBibEntryType(_project.BibEntryInitialization.TypeNames);
-			DialogResult result = selectBibEntryType.ShowDialog();
-
-			if (result == DialogResult.OK)
-			{
-				BibEntry entry = BibEntry.NewBibEntryTemplate(_project.BibEntryInitialization, selectBibEntryType.SelectedType);
-
-				EditRawBibEntryForm editRawBibEntryForm = new EditRawBibEntryForm(this.BibtexManagerForm, this.Project);
-				DialogResultPair dialogResultPair = editRawBibEntryForm.ShowDialog(this, entry, this.Project.WriteSettings);
-
-				if (dialogResultPair.Result == DialogResult.OK)
-				{
-					AddNewObject(dialogResultPair.Object);
-				}
-			}
-		}
-
-		#endregion
-
-		#region Methods
 
 		/// <summary>
 		/// Delegate for showing the edit dialog.
@@ -105,6 +74,38 @@ namespace BibtexManager
 				base.ShowAddDialog = this.ShowAddRawBibEntryDialog;
 			}
 		}
+
+		#endregion
+
+		#region Events
+
+		/// <summary>
+		/// Add a new raw bibliography entry based on a template.
+		/// </summary>
+		/// <param name="sender">Sender.</param>
+		/// <param name="eventArgs">Event arguments.</param>
+		private void AddRawTemplateButton_Click(object sender, EventArgs eventArgs)
+		{
+			SelectBibEntryType selectBibEntryType = new SelectBibEntryType(_project.BibEntryInitialization.TypeNames);
+			DialogResult result = selectBibEntryType.ShowDialog();
+
+			if (result == DialogResult.OK)
+			{
+				BibEntry entry = BibEntry.NewBibEntryTemplate(_project.BibEntryInitialization, selectBibEntryType.SelectedType);
+
+				EditRawBibEntryForm editRawBibEntryForm = new EditRawBibEntryForm(this.BibtexManagerForm, this.Project);
+				DialogResultPair dialogResultPair = editRawBibEntryForm.ShowDialog(this, entry, this.Project.WriteSettings);
+
+				if (dialogResultPair.Result == DialogResult.OK)
+				{
+					AddNewObject(dialogResultPair.Object);
+				}
+			}
+		}
+
+		#endregion
+
+		#region Methods
 
 		/// <summary>
 		/// Show the Edit Raw BibTeX Entry form.

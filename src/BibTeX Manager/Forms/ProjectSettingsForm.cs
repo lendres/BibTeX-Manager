@@ -166,6 +166,16 @@ namespace BibtexManager
 		}
 
 		/// <summary>
+		/// Sort bibliography check box event handler.
+		/// </summary>
+		/// <param name="sender">Sender.</param>
+		/// <param name="eventArgs">Event arguments.</param>
+		private void SortBibliographyEntriesCheckBox_CheckedChanged(object sender, EventArgs eventArgs)
+		{
+			SetControls();
+		}
+
+		/// <summary>
 		/// Ok button event handler.
 		/// </summary>
 		/// <param name="sender">Sender.</param>
@@ -217,41 +227,49 @@ namespace BibtexManager
 		protected void PopulateControls()
 		{
 			// Bibliography file.
-			this.bibFileLocationTextBox.Text				= _project.BibliographyFile;
+			this.bibFileLocationTextBox.Text						= _project.BibliographyFile;
 
 			// Assessory files.
 			this.assessoryFilesListBox.Items.AddRange(_project.AssessoryFiles.ToArray());
 
 			// Bibliography entry initialization.
-			this.useBibEntryInitializationCheckBox.Checked	= _project.UseBibEntryInitialization;
-			this.bibEntryInitializationFileTextBox.Text		= _project.BibEntryInitializationFile;
+			this.useBibEntryInitializationCheckBox.Checked			= _project.UseBibEntryInitialization;
+			this.bibEntryInitializationFileTextBox.Text				= _project.BibEntryInitializationFile;
 
 			// Quality processing.
-			this.useQualityProcessingCheckBox.Checked		= _project.UseQualityProcessing;
-			this.qualityProcessingFileTextBox.Text			= _project.TagQualityProcessingFile;
+			this.useQualityProcessingCheckBox.Checked				= _project.UseQualityProcessing;
+			this.qualityProcessingFileTextBox.Text					= _project.TagQualityProcessingFile;
 
 			// BibEntry remapping.
-			this.useRemappingCheckBox.Checked				= _project.UseBibEntryRemapping;
-			this.remappingFileTextBox.Text					= _project.RemappingFile;
+			this.useRemappingCheckBox.Checked						= _project.UseBibEntryRemapping;
+			this.remappingFileTextBox.Text							= _project.RemappingFile;
 			
 			// Write settings.
-			WriteSettings writeSettings						= _project.WriteSettings;
+			WriteSettings writeSettings								= _project.WriteSettings;
 
 			// Tabs.
-			this.tabSizeNumericUpDown.Value					= writeSettings.TabSize;
-			this.insertSpacesRadioButton.Checked			= writeSettings.WhiteSpace == WhiteSpace.Space;
-			this.insertTabsRadioButton.Checked				= writeSettings.WhiteSpace == WhiteSpace.Tab;
+			this.tabSizeNumericUpDown.Value							= writeSettings.TabSize;
+			this.insertSpacesRadioButton.Checked					= writeSettings.WhiteSpace == WhiteSpace.Space;
+			this.insertTabsRadioButton.Checked						= writeSettings.WhiteSpace == WhiteSpace.Tab;
 
 			// Alignment.
-			this.alignTagValuesCheckBox.Checked				= writeSettings.AlignTagValues;
-			this.alignmentColumnNumericUpDown.Value			= writeSettings.AlignAtColumn;
-			this.alignmentTabStopNumericUpDown.Value		= writeSettings.AlignAtTabStop;
+			this.alignTagValuesCheckBox.Checked						= writeSettings.AlignTagValues;
+			this.alignmentColumnNumericUpDown.Value					= writeSettings.AlignAtColumn;
+			this.alignmentTabStopNumericUpDown.Value				= writeSettings.AlignAtTabStop;
+
+			// Organization.
+			this.sortBibliographyEntriesCheckBox.Checked		= _project.SortBibliography;
+			for (SortBy i = 0; i < SortBy.Length; i++)
+			{
+				this.sortBibliographyEntriesComboBox.Items.Add(DigitalProduction.Reflection.Attributes.GetDescription(i));
+			}
+			this.sortBibliographyEntriesComboBox.SelectedIndex		= (int)_project.BibliographySortMethod;
 
 			// Style and automation.
-			this.autoGenerateKeysCheckBox.Checked			= _project.AutoGenerateKeys;
-			this.removeLastCommaCheckBox.Checked			= writeSettings.RemoveLastComma;
-			this.copyCiteKeyCheckBox.Checked				= _project.CopyCiteKeyOnEntryAdd;
-			this.useConstantStringsCheckBox.Checked			= _project.UseStringConstants;
+			this.autoGenerateKeysCheckBox.Checked					= _project.AutoGenerateKeys;
+			this.removeLastCommaCheckBox.Checked					= writeSettings.RemoveLastComma;
+			this.copyCiteKeyCheckBox.Checked						= _project.CopyCiteKeyOnEntryAdd;
+			this.useConstantStringsCheckBox.Checked					= _project.UseStringConstants;
 		}
 
 		/// <summary>
@@ -263,8 +281,8 @@ namespace BibtexManager
 			_project.BibliographyFile						= this.bibFileLocationTextBox.Text;
 
 			// Assessory files.
-			ListBox.ObjectCollection items			= this.assessoryFilesListBox.Items;
-			List<string> files						= new List<string>();
+			ListBox.ObjectCollection items					= this.assessoryFilesListBox.Items;
+			List<string> files								= new List<string>();
 			foreach (object item in items)
 			{
 				files.Add(item.ToString());
@@ -272,22 +290,22 @@ namespace BibtexManager
 			_project.AssessoryFiles = files;
 
 			// Bibliography entry initialization.
-			_project.UseBibEntryInitialization		= this.useBibEntryInitializationCheckBox.Checked;
-			_project.BibEntryInitializationFile		= this.bibEntryInitializationFileTextBox.Text;
+			_project.UseBibEntryInitialization				= this.useBibEntryInitializationCheckBox.Checked;
+			_project.BibEntryInitializationFile				= this.bibEntryInitializationFileTextBox.Text;
 
 			// Quality processing.
-			_project.UseQualityProcessing			= this.useQualityProcessingCheckBox.Checked;
-			_project.TagQualityProcessingFile			= this.qualityProcessingFileTextBox.Text;
+			_project.UseQualityProcessing					= this.useQualityProcessingCheckBox.Checked;
+			_project.TagQualityProcessingFile				= this.qualityProcessingFileTextBox.Text;
 
 			// BibEntry remapping.
-			_project.UseBibEntryRemapping			= this.useRemappingCheckBox.Checked;
-			_project.RemappingFile					= this.remappingFileTextBox.Text;
+			_project.UseBibEntryRemapping					= this.useRemappingCheckBox.Checked;
+			_project.RemappingFile							= this.remappingFileTextBox.Text;
 
 			// Write settings.
-			WriteSettings writeSettings				= _project.WriteSettings;
+			WriteSettings writeSettings						= _project.WriteSettings;
 
 			// Tabs.
-			_project.WriteSettings.TabSize			= (int)this.tabSizeNumericUpDown.Value;
+			_project.WriteSettings.TabSize					= (int)this.tabSizeNumericUpDown.Value;
 			if (this.insertSpacesRadioButton.Checked)
 			{
 				writeSettings.WhiteSpace = WhiteSpace.Space;
@@ -298,15 +316,19 @@ namespace BibtexManager
 			}
 
 			// Alignment.
-			writeSettings.AlignTagValues			= this.alignTagValuesCheckBox.Checked;
-			writeSettings.AlignAtColumn				= (int)this.alignmentColumnNumericUpDown.Value;
-			writeSettings.AlignAtTabStop			= (int)this.alignmentTabStopNumericUpDown.Value;
+			writeSettings.AlignTagValues					= this.alignTagValuesCheckBox.Checked;
+			writeSettings.AlignAtColumn						= (int)this.alignmentColumnNumericUpDown.Value;
+			writeSettings.AlignAtTabStop					= (int)this.alignmentTabStopNumericUpDown.Value;
 
-			// Style
-			_project.AutoGenerateKeys				= this.autoGenerateKeysCheckBox.Checked;
-			writeSettings.RemoveLastComma			= this.removeLastCommaCheckBox.Checked;
-			_project.CopyCiteKeyOnEntryAdd			= this.copyCiteKeyCheckBox.Checked;
-			_project.UseStringConstants				= this.useConstantStringsCheckBox.Checked;
+			// Organization.
+			_project.SortBibliography						= this.sortBibliographyEntriesCheckBox.Checked;
+			_project.BibliographySortMethod					= (SortBy)this.sortBibliographyEntriesComboBox.SelectedIndex;
+
+			// Automation.
+			_project.AutoGenerateKeys						= this.autoGenerateKeysCheckBox.Checked;
+			writeSettings.RemoveLastComma					= this.removeLastCommaCheckBox.Checked;
+			_project.CopyCiteKeyOnEntryAdd					= this.copyCiteKeyCheckBox.Checked;
+			_project.UseStringConstants						= this.useConstantStringsCheckBox.Checked;
 		}
 
 		/// <summary>
@@ -324,6 +346,8 @@ namespace BibtexManager
 				this.alignmentColumnNumericUpDown.Enabled	= false;
 				this.alignmentTabStopNumericUpDown.Enabled	= false;
 			}
+
+			this.sortBibliographyEntriesComboBox.Enabled    = this.sortBibliographyEntriesCheckBox.Checked;
 
 			//this.bibEntryInitializationFileTextBox.Enabled		= this.useBibEntryInitializationCheckBox.Checked;
 			//this.browseBibEntryInitializationFileButton.Enabled	= this.useBibEntryInitializationCheckBox.Checked;
