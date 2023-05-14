@@ -123,6 +123,10 @@ namespace BibtexManagerUnitTests
 			// Test lower case tag name.
 			Utilities.RunProcessor(processor, entry);
 			Assert.AreEqual(solution, entry.Title);
+
+			QualityProcessor qualityProcessor = new QualityProcessor();
+			qualityProcessor.TagProcessors.Add(processor);
+			qualityProcessor.Serialize(@"R:\Programming\BibTeX Manager\src\BibTeX Manager\Test Files\output.txt");
 		}
 
 	} // End class.

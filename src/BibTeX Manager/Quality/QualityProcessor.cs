@@ -1,5 +1,6 @@
 ﻿using BibTeXLibrary;
 using DigitalProduction.XML.Serialization;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Xml.Serialization;
@@ -62,9 +63,23 @@ namespace BibtexManager
 			}
 		}
 
-	#endregion
+		#endregion
 
 		#region XML
+
+		/// <summary>
+		/// Write this object to a file to the provided path.
+		/// </summary>
+		/// <param name="path">Path (full path and filename) to write to.</param>
+		/// <exception cref="InvalidOperationException">Thrown when the projects path is not valid.</exception>
+		public void Serialize(string path)
+		{
+			if (!DigitalProduction.IO.Path.PathIsWritable(path))
+			{
+				throw new InvalidOperationException("The file cannot be saved.  A valid path must be specified.");
+			}
+			Serialization.SerializeObject(this, path);
+		}
 
 		/// <summary>
 		/// Create an instance from a file.
