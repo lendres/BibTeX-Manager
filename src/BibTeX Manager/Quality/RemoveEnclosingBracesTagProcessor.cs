@@ -1,12 +1,18 @@
-﻿using BibtexManager.Quality;
+﻿using DigitalProduction.XML.Serialization;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Xml.Serialization;
 
-namespace BibtexManager
+namespace BibtexManager.Quality
 {
 	/// <summary>
-	/// Replaces each pattern found with the replacement string.
+	/// 
 	/// </summary>
-	public class StringReplacementTagProcessor : ReplacementTagProcessor
+	public class RemoveEnclosingBracesTagProcessor : ReplacementTagProcessor
 	{
 		#region Fields
 
@@ -17,14 +23,14 @@ namespace BibtexManager
 		/// <summary>
 		/// Default constructor.
 		/// </summary>
-		public StringReplacementTagProcessor()
+		public RemoveEnclosingBracesTagProcessor()
 		{
 		}
 
 		#endregion
 
 		#region Properties
-		
+
 		#endregion
 
 		#region Methods
@@ -35,6 +41,8 @@ namespace BibtexManager
 		/// <param name="correction">Correction information.</param>
 		protected override void ProcessPatternMatch(Correction correction)
 		{
+			throw new NotImplementedException();
+
 			// We need to make sure we don't replace a string with the intended output.  I.e., we have to make sure we
 			// don't replace "XXX" with "{XXX}" when the brackets already exist.  The matching (searching) part will find
 			// the "XXX" inside of "{XXX}" so we could end up with "{{XXX}}" if we don't check.
@@ -45,10 +53,10 @@ namespace BibtexManager
 			// See if the replacement contains the original.  If it does, we needto do more checks.  Not every case will need
 			// this.  If we are replacing "&amp;" with "\&" we won't need to do anything.
 			int indexOf = _replacement.IndexOf(correction.MatchedText);
-			
+
 			if (indexOf > -1)
 			{
-				string beginsWith		= _replacement.Substring(0, indexOf);
+				string beginsWith       = _replacement.Substring(0, indexOf);
 				int startIndex          = correction.MatchStartIndex-beginsWith.Length;
 
 				if (startIndex > -1 && correction.FullText.Length > startIndex+_replacement.Length)

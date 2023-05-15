@@ -85,37 +85,9 @@
 			</tagprocessors>
 		</tagprocessorgroup>
 
-
-		<tagprocessorgroup name="">
-			<tagprocessors>
-				<!-- Remove enclosing brackets. -->
-				<tagprocessor xsi:type="StringReplacementTagProcessor"
-					processalltages="false"
-					pattern="^{"
-					replacement="">
-					<tags>
-						<tag>title</tag>
-						<tag>booktitle</tag>
-						<tag>abstract</tag>
-					</tags>
-				</tagprocessor>
-
-				<tagprocessor xsi:type="StringReplacementTagProcessor"
-					processalltages="false"
-					pattern="}$"
-					replacement="">
-					<tags>
-						<tag>title</tag>
-						<tag>booktitle</tag>
-						<tag>abstract</tag>
-					</tags>
-				</tagprocessor>
-			</tagprocessors>
-		</tagprocessorgroup>
-
 		<tagprocessorgroup name="Sepcialized Processors">
 			<tagprocessors>
-			<!-- Do not modify the pattern unless you really know what you are doing. -->
+				<!-- Do not modify the pattern unless you really know what you are doing. -->
 				<tagprocessor xsi:type="SentanceEndingSpacesTagProcessor"
 					processalltages="false"
 					pattern="\.+[a-zA-Z]+"
@@ -135,6 +107,30 @@
 						<exception>U.S.A.</exception>
 					</exceptions>
 				</tagprocessor>
+
+				<!-- Remove enclosing brackets. -->
+				<!--<tagprocessor xsi:type="RemoveEnclosingBracesTagProcessor"
+					processalltages="false"
+					pattern="^{"
+					replacement="">
+					<tags>
+						<tag>title</tag>
+						<tag>booktitle</tag>
+						<tag>abstract</tag>
+					</tags>
+				</tagprocessor>
+
+				<tagprocessor xsi:type="RemoveEnclosingBracesTagProcessor"
+					processalltages="false"
+					pattern="}$"
+					replacement="">
+					<tags>
+						<tag>title</tag>
+						<tag>booktitle</tag>
+						<tag>abstract</tag>
+					</tags>
+				</tagprocessor>-->
+				
 			</tagprocessors>
 		</tagprocessorgroup>
 		
