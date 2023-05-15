@@ -34,7 +34,7 @@ namespace BibtexManager
 		#region Properties
 
 		[XmlArray("tagprocessorgroups"), XmlArrayItem("tagprocessorgroup")]
-		public BindingList<TagProcessorGroup> TagProcessors { get => _tagProcessorGroups; set => _tagProcessorGroups = value; }
+		public BindingList<TagProcessorGroup> TagProcessorGroups { get => _tagProcessorGroups; set => _tagProcessorGroups = value; }
 
 		#endregion
 
