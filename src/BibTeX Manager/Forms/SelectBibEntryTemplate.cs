@@ -24,7 +24,10 @@ namespace BibtexManager
 
 			this.templateComboBox.Items.Clear();
 			this.templateComboBox.Items.AddRange(templateNames.ToArray());
-
+			if (templateNames.Count > 0)
+			{
+				this.templateComboBox.SelectedIndex = 0;
+			}
 			//PopulateControls();
 		}
 

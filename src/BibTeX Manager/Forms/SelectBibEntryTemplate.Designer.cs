@@ -80,7 +80,7 @@
 			this.templateComboBox.Size = new System.Drawing.Size(309, 21);
 			this.templateComboBox.TabIndex = 26;
 			// 
-			// SelectBibEntryTemplate
+			// SelectBibEntryType
 			// 
 			this.AcceptButton = this.okButton;
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -93,8 +93,10 @@
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;
-			this.Name = "SelectBibEntryTemplate";
+			this.Name = "SelectBibEntryType";
+			this.ShowInTaskbar = false;
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+			this.Text = "Select a Template";
 			this.ResumeLayout(false);
 
 		}
