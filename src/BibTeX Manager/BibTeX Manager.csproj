@@ -183,6 +183,7 @@
     <Compile Include="Quality\StringReplacementTagProcessor.cs" />
     <Compile Include="Quality\TagProcessingData.cs" />
     <Compile Include="Quality\TagProcessor.cs" />
+    <Compile Include="Quality\TagProcessorGroup.cs" />
     <Content Include="Forms\Resources\Paste Quality_40.png" />
     <Content Include="Forms\Resources\Paste_40.png" />
     <Content Include="Forms\Resources\Quality Check_40.png" />
@@ -202,7 +203,7 @@
     <None Include="Test Files\Bib Entry Remap.bibmap" />
     <None Include="Test Files\le-long.bib" />
     <None Include="Test Files\le-short.bib" />
-    <None Include="Test Files\Tag Quality Processing.qlty" />
+    <None Include="Test Files\Tag Quality Processing---asdf.qlty" />
     <None Include="Test Files\strings.bib" />
     <None Include="Test Files\Test Project.bibproj" />
   </ItemGroup>

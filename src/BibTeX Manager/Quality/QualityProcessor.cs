@@ -1,4 +1,5 @@
 ﻿using BibTeXLibrary;
+using BibtexManager.Quality;
 using DigitalProduction.XML.Serialization;
 using System;
 using System.Collections.Generic;
@@ -15,7 +16,7 @@ namespace BibtexManager
 	{
 		#region Fields
 
-		private BindingList<TagProcessor>				_tagProcessors			= new BindingList<TagProcessor>();
+		private BindingList<TagProcessorGroup>				_tagProcessorGroups			= new BindingList<TagProcessorGroup>();
 
 		#endregion
 
@@ -32,8 +33,8 @@ namespace BibtexManager
 
 		#region Properties
 
-		[XmlArray("tagprocessors"), XmlArrayItem("tagprocessor")]
-		public BindingList<TagProcessor> TagProcessors { get => _tagProcessors; set => _tagProcessors = value; }
+		[XmlArray("tagprocessorgroups"), XmlArrayItem("tagprocessorgroup")]
+		public BindingList<TagProcessorGroup> TagProcessors { get => _tagProcessorGroups; set => _tagProcessorGroups = value; }
 
 		#endregion
 
@@ -45,19 +46,22 @@ namespace BibtexManager
 		/// <param name="entry">BibEntry to process and clean.</param>
 		public IEnumerable<TagProcessingData> Process(BibEntry entry)
 		{
-			foreach (TagProcessor processor in _tagProcessors)
+			foreach (TagProcessorGroup tagProcessorGroup in _tagProcessorGroups)
 			{
-				TagProcessingData tagProcessingData = new TagProcessingData();
-				foreach (Correction correction in processor.Corrections(entry))
+				foreach (TagProcessor processor in tagProcessorGroup.TagProcessors)
 				{
-					tagProcessingData.Correction = correction;
-					if (tagProcessingData.AcceptAll)
+					TagProcessingData tagProcessingData = new TagProcessingData();
+					foreach (Correction correction in processor.Corrections(entry))
 					{
-						correction.ReplaceText = true;
-					}
-					else
-					{
-						yield return tagProcessingData;
+						tagProcessingData.Correction = correction;
+						if (tagProcessingData.AcceptAll)
+						{
+							correction.ReplaceText = true;
+						}
+						else
+						{
+							yield return tagProcessingData;
+						}
 					}
 				}
 			}
