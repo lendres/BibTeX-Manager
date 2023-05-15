@@ -87,6 +87,7 @@
 			this.richTextBox.Size = new System.Drawing.Size(645, 385);
 			this.richTextBox.TabIndex = 26;
 			this.richTextBox.Text = "";
+			this.richTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.RichTextBox_KeyDown);
 			// 
 			// checkQualityButton
 			// 

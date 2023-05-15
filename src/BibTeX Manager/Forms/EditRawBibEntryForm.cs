@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
+using System.Diagnostics.Tracing;
 
 namespace BibtexManager
 {
@@ -46,7 +47,7 @@ namespace BibtexManager
 		#region Form Event Handlers
 
 		/// <summary>
-		/// Keyboard press event handler.
+		/// Keyboard press event handler for the form.
 		/// </summary>
 		/// <param name="sender">Sender.</param>
 		/// <param name="eventArgs">Event arguments.</param>
@@ -149,6 +150,23 @@ namespace BibtexManager
 			PerformOk();
 		}
 
+		/// <summary>
+		/// Intercept pasting into text box to remove formatting of pasted text.
+		/// </summary>
+		/// <param name="sender">Sender.</param>
+		/// <param name="eventArgs">Event arguments.</param>
+		private void RichTextBox_KeyDown(object sender, KeyEventArgs eventArgs)
+		{
+			if (eventArgs.Control && eventArgs.KeyCode == Keys.V)
+			{
+				// Paste the text.
+				Paste();
+
+				// Cancel the event.
+				eventArgs.Handled = true;
+			}
+		}
+
 		#endregion
 
 		#region Processing Methods
@@ -158,7 +176,29 @@ namespace BibtexManager
 		/// </summary>
 		private void Paste()
 		{
-			this.richTextBox.Text = Clipboard.GetText();
+			// Suspend layout to avoid blinking.
+			this.richTextBox.SuspendLayout();
+
+			// Get the insertion point.
+			int insPt = this.richTextBox.SelectionStart;
+
+			// Get the current text.
+			string text = this.richTextBox.Text;
+
+			// Preserve text from after the selcted text to end of RTF content.
+			string postRTFContent = text.Substring(insPt + this.richTextBox.SelectionLength);
+
+			// Remove the content after the insertion point.
+			text = text.Substring(0, insPt);
+
+			// Add the clipboard content and then the preserved postRTF content
+			this.richTextBox.Text = text + (string)Clipboard.GetData("Text") + postRTFContent;
+
+			// Adjust the insertion point to just after the inserted text.
+			this.richTextBox.SelectionStart = this.richTextBox.TextLength - postRTFContent.Length;
+
+			// Restore layout.
+			this.richTextBox.ResumeLayout();
 		}
 
 		/// <summary>
