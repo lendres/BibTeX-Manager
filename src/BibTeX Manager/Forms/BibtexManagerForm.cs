@@ -21,6 +21,9 @@ namespace BibtexManager
 
 		#region Construction
 
+		/// <summary>
+		/// Constructor.
+		/// </summary>
 		public BibtexManagerForm() :
 			base(BibtexProject.FilterString, "Digital Production", "BibTeX Manager")
 		{
@@ -201,6 +204,32 @@ namespace BibtexManager
 		private void SortBibliographyEntriesToolStripMenuItem_Click(object sender, EventArgs eventArgs)
 		{
 			this.Project.SortBibliographyEntries();
+		}
+
+		/// <summary>
+		/// Quality check all the tags.
+		/// </summary>
+		/// <param name="sender">Sender.</param>
+		/// <param name="eventArgs">Event args.</param>
+		private void CheckTagQualityToolStripMenuItem_Click(object sender, EventArgs eventArgs)
+		{
+			bool breakNext = false;
+			CorrectionForm correctionForm = new CorrectionForm();
+
+			foreach (TagProcessingData tagProcessingData in this.Project.CleanAllEntries())
+			{
+				// If the processing was cancelled, we break.  We have to loop back around here to give the
+				// processing a chance to finish (it was yielded).  Now exit before processing another entry.
+				if (breakNext)
+				{
+					break;
+				}
+
+				correctionForm.TagProcessingData = tagProcessingData;
+				DialogResult dialogResult = correctionForm.Show(this);
+
+				breakNext = dialogResult == DialogResult.Cancel;
+			}
 		}
 
 		#endregion

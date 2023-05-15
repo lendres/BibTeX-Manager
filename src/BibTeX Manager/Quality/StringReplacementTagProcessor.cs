@@ -56,13 +56,18 @@ namespace BibtexManager
 			if (indexOf > -1)
 			{
 				string beginsWith		= _replacement.Substring(0, indexOf);
-				string extendedMatch	= correction.FullText.Substring(correction.MatchStartIndex-beginsWith.Length, _replacement.Length);
+				int startIndex          = correction.MatchStartIndex-beginsWith.Length;
 
-				if (extendedMatch == _replacement)
+				if (startIndex > -1 && correction.FullText.Length > startIndex+_replacement.Length)
 				{
-					// The replacement string already exists so don't prompt the user and don't replace the text.
-					correction.PromptUser	= false;
-					correction.ReplaceText	= false;
+					string extendedMatch    = correction.FullText.Substring(startIndex, _replacement.Length);
+
+					if (extendedMatch == _replacement)
+					{
+						// The replacement string already exists so don't prompt the user and don't replace the text.
+						correction.PromptUser   = false;
+						correction.ReplaceText  = false;
+					}
 				}
 			}
 		}

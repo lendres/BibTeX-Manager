@@ -656,6 +656,34 @@ namespace BibtexManager
 			}
 		}
 
+		/// <summary>
+		/// Sort the bibliography entries.
+		/// </summary>
+		public IEnumerable<TagProcessingData> CleanAllEntries()
+		{
+			if (_useTagQualityProcessing)
+			{
+				bool modified = false;
+
+				foreach (BibEntry entry in _bibliography.DocumentObjectModel.BibliographyEntries)
+				{
+					foreach (TagProcessingData tagProcessingData in _tagQualityProcessor.Process(entry))
+					{
+						if (tagProcessingData.Correction.ReplaceText)
+						{
+							modified = true;
+						}
+						yield return tagProcessingData;
+					}
+				}
+
+				if (modified)
+				{
+					this.Modified = true;
+				}
+			}
+		}
+
 		#endregion
 
 		#endregion

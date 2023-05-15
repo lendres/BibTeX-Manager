@@ -46,11 +46,11 @@ namespace BibtexManager
 		/// <param name="entry">BibEntry to process and clean.</param>
 		public IEnumerable<TagProcessingData> Process(BibEntry entry)
 		{
+			TagProcessingData tagProcessingData = new TagProcessingData();
 			foreach (TagProcessorGroup tagProcessorGroup in _tagProcessorGroups)
 			{
 				foreach (TagProcessor processor in tagProcessorGroup.TagProcessors)
 				{
-					TagProcessingData tagProcessingData = new TagProcessingData();
 					foreach (Correction correction in processor.Corrections(entry))
 					{
 						tagProcessingData.Correction = correction;

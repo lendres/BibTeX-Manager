@@ -196,9 +196,9 @@ namespace BibtexManager
 					}
 
 					CorrectionForm correctionForm = new CorrectionForm(tagProcessingData);
-					correctionForm.ShowDialog(this);
+					DialogResult dialogResult = correctionForm.Show(this);
 
-					breakNext = correctionForm.DialogResult == MessageBoxYesNoToAllResult.Cancel;
+					breakNext = dialogResult == DialogResult.Cancel;
 				}
 
 				// String constants replacement.

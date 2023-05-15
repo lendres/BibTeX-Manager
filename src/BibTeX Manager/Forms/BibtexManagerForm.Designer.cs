@@ -84,11 +84,11 @@ namespace BibtexManager
 		{
 			this.components = new System.ComponentModel.Container();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BibtexManagerForm));
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle26 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle29 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle30 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle27 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle28 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
 			this.referencesBindingSource = new System.Windows.Forms.BindingSource(this.components);
 			this.menuMain = new System.Windows.Forms.MenuStrip();
 			this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -107,6 +107,7 @@ namespace BibtexManager
 			this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.qualityToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.sortBibliographyEntriesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.checkTagQualityToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.viewHelpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -258,7 +259,8 @@ namespace BibtexManager
 			// qualityToolStripMenuItem
 			// 
 			this.qualityToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.sortBibliographyEntriesToolStripMenuItem});
+            this.sortBibliographyEntriesToolStripMenuItem,
+            this.checkTagQualityToolStripMenuItem});
 			this.qualityToolStripMenuItem.Name = "qualityToolStripMenuItem";
 			this.qualityToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
 			this.qualityToolStripMenuItem.Text = "Quality";
@@ -269,6 +271,13 @@ namespace BibtexManager
 			this.sortBibliographyEntriesToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
 			this.sortBibliographyEntriesToolStripMenuItem.Text = "Sort Bibliography Entries";
 			this.sortBibliographyEntriesToolStripMenuItem.Click += new System.EventHandler(this.SortBibliographyEntriesToolStripMenuItem_Click);
+			// 
+			// checkTagQualityToolStripMenuItem
+			// 
+			this.checkTagQualityToolStripMenuItem.Name = "checkTagQualityToolStripMenuItem";
+			this.checkTagQualityToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
+			this.checkTagQualityToolStripMenuItem.Text = "Check Tag Quality";
+			this.checkTagQualityToolStripMenuItem.Click += new System.EventHandler(this.CheckTagQualityToolStripMenuItem_Click);
 			// 
 			// helpToolStripMenuItem
 			// 
@@ -316,39 +325,39 @@ namespace BibtexManager
 			this.bibEntriesDataGridView.AutoGenerateColumns = false;
 			this.bibEntriesDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
 			this.bibEntriesDataGridView.BackgroundColor = System.Drawing.SystemColors.Control;
-			dataGridViewCellStyle26.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-			dataGridViewCellStyle26.BackColor = System.Drawing.SystemColors.Control;
-			dataGridViewCellStyle26.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			dataGridViewCellStyle26.ForeColor = System.Drawing.SystemColors.WindowText;
-			dataGridViewCellStyle26.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-			dataGridViewCellStyle26.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-			dataGridViewCellStyle26.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-			this.bibEntriesDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle26;
+			dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+			dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+			dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+			dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+			dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+			dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+			this.bibEntriesDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
 			this.bibEntriesDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.bibEntriesDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Key,
             this.authorDataGridViewTextBoxColumn,
             this.Title});
 			this.bibEntriesDataGridView.DataSource = this.referencesBindingSource;
-			dataGridViewCellStyle29.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-			dataGridViewCellStyle29.BackColor = System.Drawing.SystemColors.Window;
-			dataGridViewCellStyle29.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			dataGridViewCellStyle29.ForeColor = System.Drawing.SystemColors.ControlText;
-			dataGridViewCellStyle29.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-			dataGridViewCellStyle29.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-			dataGridViewCellStyle29.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-			this.bibEntriesDataGridView.DefaultCellStyle = dataGridViewCellStyle29;
+			dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+			dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+			dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
+			dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+			dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+			dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+			this.bibEntriesDataGridView.DefaultCellStyle = dataGridViewCellStyle4;
 			this.bibEntriesDataGridView.Location = new System.Drawing.Point(12, 48);
 			this.bibEntriesDataGridView.Name = "bibEntriesDataGridView";
 			this.bibEntriesDataGridView.ReadOnly = true;
-			dataGridViewCellStyle30.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-			dataGridViewCellStyle30.BackColor = System.Drawing.SystemColors.Control;
-			dataGridViewCellStyle30.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			dataGridViewCellStyle30.ForeColor = System.Drawing.SystemColors.WindowText;
-			dataGridViewCellStyle30.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-			dataGridViewCellStyle30.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-			dataGridViewCellStyle30.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-			this.bibEntriesDataGridView.RowHeadersDefaultCellStyle = dataGridViewCellStyle30;
+			dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+			dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
+			dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
+			dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+			dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+			dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+			this.bibEntriesDataGridView.RowHeadersDefaultCellStyle = dataGridViewCellStyle5;
 			this.bibEntriesDataGridView.RowHeadersVisible = false;
 			this.bibEntriesDataGridView.RowHeadersWidth = 20;
 			this.bibEntriesDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -358,8 +367,8 @@ namespace BibtexManager
 			// Key
 			// 
 			this.Key.DataPropertyName = "Key";
-			dataGridViewCellStyle27.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-			this.Key.DefaultCellStyle = dataGridViewCellStyle27;
+			dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+			this.Key.DefaultCellStyle = dataGridViewCellStyle2;
 			this.Key.FillWeight = 10F;
 			this.Key.HeaderText = "Key";
 			this.Key.MinimumWidth = 100;
@@ -379,10 +388,10 @@ namespace BibtexManager
 			// 
 			this.Title.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
 			this.Title.DataPropertyName = "Title";
-			dataGridViewCellStyle28.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-			dataGridViewCellStyle28.Format = "N1";
-			dataGridViewCellStyle28.NullValue = null;
-			this.Title.DefaultCellStyle = dataGridViewCellStyle28;
+			dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+			dataGridViewCellStyle3.Format = "N1";
+			dataGridViewCellStyle3.NullValue = null;
+			this.Title.DefaultCellStyle = dataGridViewCellStyle3;
 			this.Title.FillWeight = 150F;
 			this.Title.HeaderText = "Title";
 			this.Title.MinimumWidth = 120;
@@ -431,5 +440,6 @@ namespace BibtexManager
 		}
 		#endregion
 
+		private System.Windows.Forms.ToolStripMenuItem checkTagQualityToolStripMenuItem;
 	} // End class.
 } // End namespace.
