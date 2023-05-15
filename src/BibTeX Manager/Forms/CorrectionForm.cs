@@ -121,7 +121,7 @@ namespace BibtexManager
 		/// </summary>
 		/// <param name="owner">The owner dialog.</param>
 		/// <exception cref="Exception">Bad value.</exception>
-		public DialogResult Show(IWin32Window owner)
+		public new DialogResult Show(IWin32Window owner)
 		{
 			if (_dialogResult == MessageBoxYesNoToAllResult.YesToAll)
 			{
