@@ -41,7 +41,7 @@
             <value>inproceedings</value>
         </item>
         <item key="techreport">
-            <value>basic</value>
+            <value>techreport</value>
         </item>
         <item key="unpublished">
             <value>basic</value>
@@ -124,6 +124,14 @@
             <value>issuedmonth</value>
             <value>issuedyear</value>
         </item>
+		<item key="techreport">
+			<value>author</value>
+			<value>title</value>
+			<value>institution</value>
+			<value>address</value>
+			<value>month</value>
+			<value>year</value>
+		</item>
         <item key="thesis">
             <value>author</value>
             <value>title</value>
