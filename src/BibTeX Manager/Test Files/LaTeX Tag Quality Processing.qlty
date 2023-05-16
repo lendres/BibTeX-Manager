@@ -26,7 +26,7 @@
 		</tagprocessor>
 		<tagprocessor xsi:type="StringReplacementTagProcessor"
 			tagstoprocess="ExcludeSpecified"
-			pattern="\u0026"
+			pattern="\s\u0026\s"
 			replacement="\&amp;">
 			<tags>
 				<tag>href</tag>

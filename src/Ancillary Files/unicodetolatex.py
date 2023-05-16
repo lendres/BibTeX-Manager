@@ -1,15 +1,24 @@
 # original XML at http://www.w3.org/Math/characters/unicode.xml
 # XSL for conversion: https://gist.github.com/798546
-# From:
+
+# The orgivnal Python version is from:
 # https://gist.githubusercontent.com/lmmx/de83ffaf9212cefe48d7/raw/df0e68f10ad065db6bf7ce062e10a4ab37986481/unicode_to_latex.py
 
+# The Python version was modified to write a file for use with the BibTeX Manager software.  Modifications include:
+#   Removing the leading characters that specify it as a unicode character (we only wanted to code number).
+#   Some characters that we don't want to covert have been commented out.
+#   Some characters that need to be used in math mode have had "$" added around them.
+#   Some characters have been modified to use in regular expressions so that the match is more precise.
+
+# Example from the original.
+# u"\u0020": "\\space ",
 
 unicode_codes_to_latex = {
     # "0020": "\\space{}",
     "0023": "\\#",
     # "0024": "\\textdollar{}",
     "0025": "\\%",
-    "0026": "\\&amp;",
+    "0026": "\s\\&amp;\s",
     # "0027": "\\textquotesingle{}",
     "002A": "\\ast{}",
     # "005C": "\\textbackslash{}",
