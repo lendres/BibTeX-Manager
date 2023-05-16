@@ -82,9 +82,18 @@
 						<tag>title</tag>
 					</tags>
 				</tagprocessor>
+
+				<tagprocessor xsi:type="StringReplacementTagProcessor"
+					processalltages="false"
+					pattern="3D"
+					replacement="{3D}">
+					<tags>
+						<tag>title</tag>
+					</tags>
+				</tagprocessor>
 			</tagprocessors>
 		</tagprocessorgroup>
-
+		
 		<tagprocessorgroup name="Sepcialized Processors">
 			<tagprocessors>
 				<!-- Do not modify the pattern unless you really know what you are doing. -->
@@ -109,28 +118,12 @@
 				</tagprocessor>
 
 				<!-- Remove enclosing brackets. -->
-				<!--<tagprocessor xsi:type="RemoveEnclosingBracesTagProcessor"
-					processalltages="false"
-					pattern="^{"
-					replacement="">
-					<tags>
-						<tag>title</tag>
-						<tag>booktitle</tag>
-						<tag>abstract</tag>
-					</tags>
-				</tagprocessor>
-
 				<tagprocessor xsi:type="RemoveEnclosingBracesTagProcessor"
-					processalltages="false"
-					pattern="}$"
-					replacement="">
-					<tags>
-						<tag>title</tag>
-						<tag>booktitle</tag>
-						<tag>abstract</tag>
-					</tags>
-				</tagprocessor>-->
-				
+					processalltages="true"
+					pattern="^{[\s\S]*}$">
+					<tags></tags>
+				</tagprocessor>
+			
 			</tagprocessors>
 		</tagprocessorgroup>
 		

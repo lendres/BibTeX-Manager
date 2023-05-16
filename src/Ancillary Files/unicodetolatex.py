@@ -15,7 +15,7 @@ unicode_codes_to_latex = {
     # "005C": "\\textbackslash{}",
     "005E": "\\^{}",
     "005F": "\\_",
-    "0060": "\\textasciigrave{}",
+    # "0060": "\\textasciigrave{}",
     # "007B": "\\lbrace{}",
     "007C": "\\vert{}",
     # "007D": "\\rbrace{}",

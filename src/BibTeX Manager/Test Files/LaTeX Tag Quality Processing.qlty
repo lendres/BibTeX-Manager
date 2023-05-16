@@ -39,12 +39,6 @@
 		</tagprocessor>
 		<tagprocessor xsi:type="StringReplacementTagProcessor"
 			processalltages="true"
-			pattern="\u0060"
-			replacement="\textasciigrave{}">
-			<tags></tags>
-		</tagprocessor>
-		<tagprocessor xsi:type="StringReplacementTagProcessor"
-			processalltages="true"
 			pattern="\u007C"
 			replacement="\vert{}">
 			<tags></tags>
