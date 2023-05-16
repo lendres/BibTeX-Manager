@@ -1,4 +1,5 @@
 ﻿using BibTeXLibrary;
+using BibtexManager.Quality;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
@@ -10,6 +11,7 @@ namespace BibtexManager
 	/// <summary>
 	/// Base class for tag processors.
 	/// </summary>
+	[XmlInclude(typeof(RemoveEnclosingBracesTagProcessor))]
 	[XmlInclude(typeof(SentanceEndingSpacesTagProcessor))]
 	[XmlInclude(typeof(StringReplacementTagProcessor))]
 	public abstract class TagProcessor

@@ -51,7 +51,7 @@ namespace BibtexManager
 				string beginsWith		= _replacement.Substring(0, indexOf);
 				int startIndex          = correction.MatchStartIndex-beginsWith.Length;
 
-				if (startIndex > -1 && correction.FullText.Length > startIndex+_replacement.Length)
+				if (startIndex > -1 && correction.FullText.Length >= startIndex+_replacement.Length)
 				{
 					string extendedMatch    = correction.FullText.Substring(startIndex, _replacement.Length);
 
