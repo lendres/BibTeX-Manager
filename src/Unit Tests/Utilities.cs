@@ -1,5 +1,6 @@
 ﻿using BibTeXLibrary;
 using BibtexManager;
+using BibtexManager.Quality;
 
 namespace BibtexManagerUnitTests
 {
@@ -30,6 +31,25 @@ namespace BibtexManagerUnitTests
 				if (correction.PromptUser)
 				{
 					correction.ReplaceText = true;
+				}
+			}
+		}
+
+		/// <summary>
+		/// Run a TagProcessor on a BibEntry.
+		/// </summary>
+		/// <param name="processor">TagProcessor.</param>
+		/// <param name="entry">BibEntry.</param>
+		public static void RunProcessors(List<TagProcessor> processors, BibEntry entry)
+		{
+			foreach (TagProcessor processor in processors)
+			{
+				foreach (Correction correction in processor.Corrections(entry))
+				{
+					if (correction.PromptUser)
+					{
+						correction.ReplaceText = true;
+					}
 				}
 			}
 		}
