@@ -154,6 +154,7 @@ namespace BibtexManager
 		/// </summary>
 		protected void PopulateControls()
 		{
+			this.tagNameTextBox.Text        = _tagProcessingData.Correction.TagName;
 			this.contextTextBox.Text        = _tagProcessingData.Correction.Context;
 			this.existingTextBox.Text		= _tagProcessingData.Correction.MatchedText;
 			this.replacementTextBox.Text	= _tagProcessingData.Correction.ReplacementText;

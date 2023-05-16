@@ -28,6 +28,11 @@
 		#region Properties
 
 		/// <summary>
+		/// The tag being processed.
+		/// </summary>
+		public string TagName { get; set; }
+
+		/// <summary>
 		/// The full, original text.
 		/// </summary>
 		public string FullText { get; set; }

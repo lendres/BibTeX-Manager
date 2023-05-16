@@ -106,6 +106,7 @@ namespace BibtexManager
 				{
 					foreach (Correction correction in ProcessTag(entry, tagName))
 					{
+						correction.TagName = tagName;
 						yield return correction;
 					}
 				}
