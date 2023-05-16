@@ -205,7 +205,6 @@
     <None Include="Properties\DataSources\BibTeXLibrary.BibEntry.datasource" />
     <None Include="Test Files\Bib Entry Remap.bibmap" />
     <None Include="Test Files\LaTeX Tag Quality Processing.qlty" />
-    <None Include="Test Files\le-long.bib" />
     <None Include="Test Files\le-short.bib" />
     <None Include="Test Files\strings.bib" />
     <None Include="Test Files\Tag Quality Processing.qlty" />
