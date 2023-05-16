@@ -60,6 +60,7 @@
             <value>month</value>
             <value>year</value>
             <value>pages</value>
+			<value>organization</value>
 			<value>speid</value>
 			<value>issn</value>
 			<value>doi</value>
