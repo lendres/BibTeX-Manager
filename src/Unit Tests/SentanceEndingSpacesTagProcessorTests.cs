@@ -24,7 +24,7 @@ namespace BibtexManagerUnitTests
 			string input	= @"The quick brown fox jumped.It was over the lazy dog.";
 
 			BibEntry entry			= new BibEntry() { Abstract = input };
-			TagProcessor processor	= new SentanceEndingSpacesTagProcessor() { ProcessAllTags = true };
+			TagProcessor processor	= new SentanceEndingSpacesTagProcessor() { TagsToProcess = TagsToProcess.All };
 			processor.Pattern		= _pattern;
 
 			Utilities.RunProcessor(processor, entry);
@@ -40,7 +40,7 @@ namespace BibtexManagerUnitTests
 			//string input = @"The fox went to D.C.I.e., the capital of the U.S.";
 
 			BibEntry entry								= new BibEntry() { Abstract = input };
-			SentanceEndingSpacesTagProcessor processor	= new SentanceEndingSpacesTagProcessor() { ProcessAllTags = true };
+			SentanceEndingSpacesTagProcessor processor	= new SentanceEndingSpacesTagProcessor() { TagsToProcess = TagsToProcess.All };
 			processor.Pattern							= _pattern;
 			processor.ExcludePatterns					= _excludePatterns;
 

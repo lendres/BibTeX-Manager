@@ -9,51 +9,51 @@
 				<!-- Change month numbers to strings. -->
 				<!-- The regular expression [0]* matches leading zeros. -->
 				<!-- The ^ and $ characters are used to match the entire string. -->
-				<tagprocessor xsi:type="StringReplacementTagProcessor" processalltages="false" pattern="^[0]*1$" replacement="January">
+				<tagprocessor xsi:type="StringReplacementTagProcessor" tagstoprocess="OnlySpecified" pattern="^[0]*1$" replacement="January">
 					<tags><tag>month</tag></tags>
 				</tagprocessor>
 		
-				<tagprocessor xsi:type="StringReplacementTagProcessor" processalltages="false" pattern="^[0]*2$" replacement="February">
+				<tagprocessor xsi:type="StringReplacementTagProcessor" tagstoprocess="OnlySpecified" pattern="^[0]*2$" replacement="February">
 					<tags><tag>month</tag></tags>
 				</tagprocessor>
 		
-				<tagprocessor xsi:type="StringReplacementTagProcessor" processalltages="false" pattern="^[0]*3$" replacement="March">
+				<tagprocessor xsi:type="StringReplacementTagProcessor" tagstoprocess="OnlySpecified" pattern="^[0]*3$" replacement="March">
 					<tags><tag>month</tag></tags>
 				</tagprocessor>
 
-				<tagprocessor xsi:type="StringReplacementTagProcessor" processalltages="false" pattern="^[0]*4$" replacement="April">
+				<tagprocessor xsi:type="StringReplacementTagProcessor" tagstoprocess="OnlySpecified" pattern="^[0]*4$" replacement="April">
 					<tags><tag>month</tag></tags>
 				</tagprocessor>
 
-				<tagprocessor xsi:type="StringReplacementTagProcessor" processalltages="false" pattern="^[0]*5$" replacement="May">
+				<tagprocessor xsi:type="StringReplacementTagProcessor" tagstoprocess="OnlySpecified" pattern="^[0]*5$" replacement="May">
 					<tags><tag>month</tag></tags>
 				</tagprocessor>
 
-				<tagprocessor xsi:type="StringReplacementTagProcessor" processalltages="false" pattern="^[0]*6$" replacement="June">
+				<tagprocessor xsi:type="StringReplacementTagProcessor" tagstoprocess="OnlySpecified" pattern="^[0]*6$" replacement="June">
 					<tags><tag>month</tag></tags>
 				</tagprocessor>
 
-				<tagprocessor xsi:type="StringReplacementTagProcessor" processalltages="false" pattern="^[0]*7$" replacement="July">
+				<tagprocessor xsi:type="StringReplacementTagProcessor" tagstoprocess="OnlySpecified" pattern="^[0]*7$" replacement="July">
 					<tags><tag>month</tag></tags>
 				</tagprocessor>
 
-				<tagprocessor xsi:type="StringReplacementTagProcessor" processalltages="false" pattern="^[0]*8$" replacement="August">
+				<tagprocessor xsi:type="StringReplacementTagProcessor" tagstoprocess="OnlySpecified" pattern="^[0]*8$" replacement="August">
 					<tags><tag>month</tag></tags>
 				</tagprocessor>
 
-				<tagprocessor xsi:type="StringReplacementTagProcessor" processalltages="false" pattern="^[0]*9$" replacement="September">
+				<tagprocessor xsi:type="StringReplacementTagProcessor" tagstoprocess="OnlySpecified" pattern="^[0]*9$" replacement="September">
 					<tags><tag>month</tag></tags>
 				</tagprocessor>
 
-				<tagprocessor xsi:type="StringReplacementTagProcessor" processalltages="false" pattern="^[0]*10$" replacement="October">
+				<tagprocessor xsi:type="StringReplacementTagProcessor" tagstoprocess="OnlySpecified" pattern="^[0]*10$" replacement="October">
 					<tags><tag>month</tag></tags>
 				</tagprocessor>
 		
-				<tagprocessor xsi:type="StringReplacementTagProcessor" processalltages="false" pattern="^[0]*11$" replacement="November">
+				<tagprocessor xsi:type="StringReplacementTagProcessor" tagstoprocess="OnlySpecified" pattern="^[0]*11$" replacement="November">
 					<tags><tag>month</tag></tags>
 				</tagprocessor>
 		
-				<tagprocessor xsi:type="StringReplacementTagProcessor" processalltages="false" pattern="^[0]*12$" replacement="December">
+				<tagprocessor xsi:type="StringReplacementTagProcessor" tagstoprocess="OnlySpecified" pattern="^[0]*12$" replacement="December">
 					<tags><tag>month</tag></tags>
 				</tagprocessor>
 			</tagprocessors>
@@ -63,7 +63,7 @@
 			<tagprocessors>
 				<!-- HTML characters. -->
 				<tagprocessor xsi:type="StringReplacementTagProcessor"
-					processalltages="true"
+					tagstoprocess="All"
 					pattern="&amp;amp;"
 					replacement="\&amp;">
 					<tags></tags>
@@ -75,7 +75,7 @@
 			<tagprocessors>
 				<!-- Capital words/acronyms. -->
 				<tagprocessor xsi:type="StringReplacementTagProcessor"
-					processalltages="false"
+					tagstoprocess="OnlySpecified"
 					pattern="PDC"
 					replacement="{PDC}">
 					<tags>
@@ -84,7 +84,7 @@
 				</tagprocessor>
 
 				<tagprocessor xsi:type="StringReplacementTagProcessor"
-					processalltages="false"
+					tagstoprocess="OnlySpecified"
 					pattern="3D"
 					replacement="{3D}">
 					<tags>
@@ -98,7 +98,7 @@
 			<tagprocessors>
 				<!-- Do not modify the pattern unless you really know what you are doing. -->
 				<tagprocessor xsi:type="SentanceEndingSpacesTagProcessor"
-					processalltages="false"
+					tagstoprocess="OnlySpecified"
 					pattern="\.+[a-zA-Z]+"
 					frenchspacing="false">
 					<tags>
@@ -119,7 +119,7 @@
 
 				<!-- Remove enclosing brackets. -->
 				<tagprocessor xsi:type="RemoveEnclosingBracesTagProcessor"
-					processalltages="true"
+					tagstoprocess="All"
 					pattern="^{[\s\S]*}$">
 					<tags></tags>
 				</tagprocessor>

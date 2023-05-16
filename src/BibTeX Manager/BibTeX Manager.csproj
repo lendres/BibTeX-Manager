@@ -186,6 +186,7 @@
     <Compile Include="Quality\TagProcessingData.cs" />
     <Compile Include="Quality\TagProcessor.cs" />
     <Compile Include="Quality\TagProcessorGroup.cs" />
+    <Compile Include="Quality\TagsToProcess.cs" />
     <Content Include="Forms\Resources\Paste Quality_40.png" />
     <Content Include="Forms\Resources\Paste_40.png" />
     <Content Include="Forms\Resources\Quality Check_40.png" />

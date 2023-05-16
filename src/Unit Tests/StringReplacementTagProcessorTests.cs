@@ -10,13 +10,13 @@ namespace BibtexManagerUnitTests
 		/// Base line test to replace text.
 		/// </summary>
 		[TestMethod]
-		public void ReplaceOneString()
+		public void ReplaceOnlyInSpecifiedTag()
 		{
 			string solution = @"The quick brown fox \& quicker red squirrel jumped over the fence \& lazy dog.";
 			string input	= @"The quick brown fox &amp; quicker red squirrel jumped over the fence &amp; lazy dog.";
 
 			BibEntry entry								= new BibEntry() { Title = input, Abstract = input };
-			StringReplacementTagProcessor processor		= new StringReplacementTagProcessor() { ProcessAllTags = false };
+			StringReplacementTagProcessor processor		= new StringReplacementTagProcessor() { TagsToProcess = TagsToProcess.OnlySpecified };
 			processor.TagNames.Add("abstract");
 
 			processor.Pattern		= "&amp;";
@@ -29,6 +29,28 @@ namespace BibtexManagerUnitTests
 		}
 
 		/// <summary>
+		/// Base line test to replace text.
+		/// </summary>
+		[TestMethod]
+		public void ExcludeTheSpecifiedTag()
+		{
+			string solution = @"The quick brown fox \& quicker red squirrel jumped over the fence \& lazy dog.";
+			string input    = @"The quick brown fox &amp; quicker red squirrel jumped over the fence &amp; lazy dog.";
+
+			BibEntry entry                              = new BibEntry() { Title = input, Abstract = input };
+			StringReplacementTagProcessor processor     = new StringReplacementTagProcessor() { TagsToProcess = TagsToProcess.ExcludeSpecified };
+			processor.TagNames.Add("abstract");
+
+			processor.Pattern       = "&amp;";
+			processor.Replacement   = @"\&";
+
+			Utilities.RunProcessor(processor, entry);
+
+			Assert.AreEqual(solution, entry.Title);
+			Assert.AreEqual(input, entry.Abstract);
+		}
+
+		/// <summary>
 		/// Tests that all tags are processed and that strings at the end of a line are replaced.
 		/// </summary>
 		[TestMethod]
@@ -38,7 +60,7 @@ namespace BibtexManagerUnitTests
 			string input	= @"The quick brown fox &amp; quicker red squirrel jumped over the fence lazy dog.&amp;";
 
 			BibEntry entry								= new BibEntry() { Title = input, Abstract = input };
-			StringReplacementTagProcessor processor		= new StringReplacementTagProcessor() { ProcessAllTags = true };
+			StringReplacementTagProcessor processor		= new StringReplacementTagProcessor() { TagsToProcess = TagsToProcess.All };
 
 			processor.Pattern		= "&amp;";
 			processor.Replacement	= @"\&";
@@ -59,7 +81,7 @@ namespace BibtexManagerUnitTests
 			string input	= @"The quick {Red} fox & quicker Red squirrel jumped over the fence & lazy dog.";
 
 			BibEntry entry = new BibEntry() { Title = input};
-			StringReplacementTagProcessor processor = new StringReplacementTagProcessor() { ProcessAllTags = true };
+			StringReplacementTagProcessor processor = new StringReplacementTagProcessor() { TagsToProcess = TagsToProcess.All };
 
 			processor.Pattern		= "Red";
 			processor.Replacement	= "{Red}";
@@ -87,7 +109,7 @@ namespace BibtexManagerUnitTests
 			string input = @"{The quick {Red} fox & quicker {Red} squirrel jumped over the fence & lazy dog.}";
 
 			BibEntry entry = new BibEntry() { Title = input };
-			StringReplacementTagProcessor processor = new StringReplacementTagProcessor() { ProcessAllTags = true };
+			StringReplacementTagProcessor processor = new StringReplacementTagProcessor() { TagsToProcess = TagsToProcess.All };
 
 			processor.Pattern = "^{";
 			processor.Replacement = "";
@@ -114,7 +136,7 @@ namespace BibtexManagerUnitTests
 			string input = @"The qøick.";
 
 			BibEntry entry = new BibEntry() { Title = input };
-			StringReplacementTagProcessor processor = new StringReplacementTagProcessor() { ProcessAllTags = true };
+			StringReplacementTagProcessor processor = new StringReplacementTagProcessor() { TagsToProcess = TagsToProcess.All };
 
 			processor.Pattern = "ø";
 			processor.Replacement = @"{\o}";

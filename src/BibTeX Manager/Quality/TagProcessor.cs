@@ -18,7 +18,7 @@ namespace BibtexManager
 	{
 		#region Fields
 
-		private bool						_processAllTags				= true;
+		private TagsToProcess               _tagsToProcess              = TagsToProcess.All;
 		private BindingList<string>			_tagNames					= new BindingList<string>();
 		protected string					_pattern;
 
@@ -40,8 +40,8 @@ namespace BibtexManager
 		/// <summary>
 		/// Process any tag or just those specified.
 		/// </summary>
-		[XmlAttribute("processalltages")]
-		public bool ProcessAllTags { get => _processAllTags; set => _processAllTags = value; }
+		[XmlAttribute("tagstoprocess")]
+		public TagsToProcess TagsToProcess { get => _tagsToProcess; set => _tagsToProcess = value; }
 
 		/// <summary>
 		/// Tag names to process.
@@ -79,10 +79,30 @@ namespace BibtexManager
 		{
 			foreach (string tagName in entry.TagNames)
 			{
+				bool processTags;
+
+				switch (_tagsToProcess)
+				{
+					case TagsToProcess.All:
+						processTags = true;
+						break;
+
+					case TagsToProcess.ExcludeSpecified:
+						processTags = !_tagNames.Contains(tagName.ToLower());
+						break;
+
+					case TagsToProcess.OnlySpecified:
+						processTags = _tagNames.Contains(tagName.ToLower());
+						break;
+
+					default:
+						throw new System.Exception("The value for TagsToProcess is out of range.");
+				}
+
 				// If we are processing all tags or if the current tag name was specified as one to process.
 				// We do a case insensitive comparison of tag names.  See this.TagNames set for where this objects
 				// tag names are set to lower case.
-				if (_processAllTags || _tagNames.Contains(tagName.ToLower()))
+				if (processTags)
 				{
 					foreach (Correction correction in ProcessTag(entry, tagName))
 					{
