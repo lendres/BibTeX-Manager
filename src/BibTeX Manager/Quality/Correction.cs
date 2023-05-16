@@ -7,6 +7,9 @@
 	{
 		#region Fields
 
+		private static int contextPrefix = 25;
+		private static int contextSuffix = 25;
+
 		#endregion
 
 		#region Construction
@@ -54,6 +57,29 @@
 		/// Specifies if the user should be prompted for replacement.
 		/// </summary>
 		public bool PromptUser { get; set; }
+
+		/// <summary>
+		/// Get the text surrounding the matched text.
+		/// </summary>
+		public string Context
+		{
+			get
+			{
+				int startIndex = this.MatchStartIndex - contextPrefix;
+				if (startIndex < 0)
+				{
+					startIndex = 0;
+				}
+
+				int length = contextPrefix + this.MatchedText.Length + contextSuffix;
+				if (startIndex+length > this.FullText.Length)
+				{
+					length = this.FullText.Length - startIndex;
+				}
+
+				return this.FullText.Substring(startIndex, length);
+			}
+		}
 
 		#endregion
 

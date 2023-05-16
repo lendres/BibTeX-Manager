@@ -29,7 +29,6 @@ namespace BibtexManager
 		/// <param name="correction">Correction to display to the user.</param>
 		public CorrectionForm(TagProcessingData tagProcessingData)
 		{
-			_tagProcessingData = tagProcessingData;
 			InitializeComponent();
 			this.TagProcessingData = tagProcessingData;
 		}
@@ -155,6 +154,7 @@ namespace BibtexManager
 		/// </summary>
 		protected void PopulateControls()
 		{
+			this.contextTextBox.Text        = _tagProcessingData.Correction.Context;
 			this.existingTextBox.Text		= _tagProcessingData.Correction.MatchedText;
 			this.replacementTextBox.Text	= _tagProcessingData.Correction.ReplacementText;
 		}

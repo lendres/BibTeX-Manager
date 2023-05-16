@@ -49,12 +49,14 @@
 			this.existingTextLabel = new System.Windows.Forms.Label();
 			this.replacementLabel = new System.Windows.Forms.Label();
 			this.replacementTextBox = new System.Windows.Forms.TextBox();
+			this.contextLabel = new System.Windows.Forms.Label();
+			this.contextTextBox = new System.Windows.Forms.TextBox();
 			this.SuspendLayout();
 			// 
 			// cancelButton
 			// 
 			this.cancelButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.cancelButton.Location = new System.Drawing.Point(342, 127);
+			this.cancelButton.Location = new System.Drawing.Point(342, 172);
 			this.cancelButton.Name = "cancelButton";
 			this.cancelButton.Size = new System.Drawing.Size(75, 23);
 			this.cancelButton.TabIndex = 9;
@@ -65,7 +67,7 @@
 			// noButton
 			// 
 			this.noButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.noButton.Location = new System.Drawing.Point(261, 127);
+			this.noButton.Location = new System.Drawing.Point(261, 172);
 			this.noButton.Name = "noButton";
 			this.noButton.Size = new System.Drawing.Size(75, 23);
 			this.noButton.TabIndex = 8;
@@ -76,7 +78,7 @@
 			// yesToAllButton
 			// 
 			this.yesToAllButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.yesToAllButton.Location = new System.Drawing.Point(180, 127);
+			this.yesToAllButton.Location = new System.Drawing.Point(180, 172);
 			this.yesToAllButton.Name = "yesToAllButton";
 			this.yesToAllButton.Size = new System.Drawing.Size(75, 23);
 			this.yesToAllButton.TabIndex = 7;
@@ -87,7 +89,7 @@
 			// yesButton
 			// 
 			this.yesButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.yesButton.Location = new System.Drawing.Point(99, 127);
+			this.yesButton.Location = new System.Drawing.Point(99, 172);
 			this.yesButton.Name = "yesButton";
 			this.yesButton.Size = new System.Drawing.Size(75, 23);
 			this.yesButton.TabIndex = 6;
@@ -99,9 +101,9 @@
 			// 
 			this.existingTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.existingTextBox.Enabled = false;
-			this.existingTextBox.Location = new System.Drawing.Point(12, 27);
+			this.existingTextBox.Location = new System.Drawing.Point(12, 77);
 			this.existingTextBox.Name = "existingTextBox";
+			this.existingTextBox.ReadOnly = true;
 			this.existingTextBox.Size = new System.Drawing.Size(405, 20);
 			this.existingTextBox.TabIndex = 10;
 			this.existingTextBox.TabStop = false;
@@ -109,7 +111,7 @@
 			// existingTextLabel
 			// 
 			this.existingTextLabel.AutoSize = true;
-			this.existingTextLabel.Location = new System.Drawing.Point(12, 11);
+			this.existingTextLabel.Location = new System.Drawing.Point(12, 61);
 			this.existingTextLabel.Name = "existingTextLabel";
 			this.existingTextLabel.Size = new System.Drawing.Size(66, 13);
 			this.existingTextLabel.TabIndex = 11;
@@ -118,7 +120,7 @@
 			// replacementLabel
 			// 
 			this.replacementLabel.AutoSize = true;
-			this.replacementLabel.Location = new System.Drawing.Point(12, 66);
+			this.replacementLabel.Location = new System.Drawing.Point(12, 116);
 			this.replacementLabel.Name = "replacementLabel";
 			this.replacementLabel.Size = new System.Drawing.Size(93, 13);
 			this.replacementLabel.TabIndex = 13;
@@ -128,17 +130,39 @@
 			// 
 			this.replacementTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.replacementTextBox.Location = new System.Drawing.Point(12, 82);
+			this.replacementTextBox.Location = new System.Drawing.Point(12, 132);
 			this.replacementTextBox.Name = "replacementTextBox";
 			this.replacementTextBox.Size = new System.Drawing.Size(405, 20);
 			this.replacementTextBox.TabIndex = 12;
 			this.replacementTextBox.TabStop = false;
 			// 
+			// contextLabel
+			// 
+			this.contextLabel.AutoSize = true;
+			this.contextLabel.Location = new System.Drawing.Point(12, 11);
+			this.contextLabel.Name = "contextLabel";
+			this.contextLabel.Size = new System.Drawing.Size(46, 13);
+			this.contextLabel.TabIndex = 15;
+			this.contextLabel.Text = "Context:";
+			// 
+			// contextTextBox
+			// 
+			this.contextTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.contextTextBox.Location = new System.Drawing.Point(12, 27);
+			this.contextTextBox.Name = "contextTextBox";
+			this.contextTextBox.ReadOnly = true;
+			this.contextTextBox.Size = new System.Drawing.Size(405, 20);
+			this.contextTextBox.TabIndex = 14;
+			this.contextTextBox.TabStop = false;
+			// 
 			// CorrectionForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(429, 162);
+			this.ClientSize = new System.Drawing.Size(429, 207);
+			this.Controls.Add(this.contextLabel);
+			this.Controls.Add(this.contextTextBox);
 			this.Controls.Add(this.replacementLabel);
 			this.Controls.Add(this.replacementTextBox);
 			this.Controls.Add(this.existingTextLabel);
@@ -162,5 +186,7 @@
 
 		#endregion
 
+		private System.Windows.Forms.Label contextLabel;
+		private System.Windows.Forms.TextBox contextTextBox;
 	} // End class.
 } // End namespace.
