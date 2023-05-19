@@ -180,8 +180,8 @@
     <Compile Include="Name Remapping\BibEntryMap.cs" />
     <Compile Include="Name Remapping\BibEntryRemapper.cs" />
     <Compile Include="Quality\RemoveEnclosingBracesTagProcessor.cs" />
-    <Compile Include="Quality\ReplacementTagProcessor.cs" />
     <Compile Include="Quality\SentanceEndingSpacesTagProcessor.cs" />
+    <Compile Include="Quality\StringCaseTagProcessor.cs" />
     <Compile Include="Quality\StringReplacementTagProcessor.cs" />
     <Compile Include="Quality\TagProcessingData.cs" />
     <Compile Include="Quality\TagProcessor.cs" />

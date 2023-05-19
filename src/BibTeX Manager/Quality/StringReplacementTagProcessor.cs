@@ -1,5 +1,4 @@
-﻿using BibtexManager.Quality;
-using System.Xml.Serialization;
+﻿using System.Xml.Serialization;
 
 namespace BibtexManager
 {
@@ -9,6 +8,8 @@ namespace BibtexManager
 	public class StringReplacementTagProcessor : ReplacementTagProcessor
 	{
 		#region Fields
+
+		protected string          _replacement;
 
 		#endregion
 
@@ -24,7 +25,13 @@ namespace BibtexManager
 		#endregion
 
 		#region Properties
-		
+
+		/// <summary>
+		/// String that replaces each found pattern.
+		/// </summary>
+		[XmlAttribute("replacement")]
+		public string Replacement { get => _replacement; set => _replacement = value; }
+
 		#endregion
 
 		#region Methods

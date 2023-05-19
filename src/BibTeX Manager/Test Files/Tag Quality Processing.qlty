@@ -4,6 +4,16 @@
 
 		<xi:include href="LaTeX Tag Quality Processing.qlty" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
 
+		<tagprocessorgroup name="Convert String Case">
+			<tagprocessors>
+				<!-- Change titles from UPPPER CASE to Title Case. -->
+				<tagprocessor xsi:type="StringCaseTagProcessor" tagstoprocess="OnlySpecified" pattern="^[A-Z\s\p{P}]*$" tocase="TitleCase">
+					<tags><tag>title</tag></tags>
+				</tagprocessor>
+				
+			</tagprocessors>
+		</tagprocessorgroup>
+
 		<tagprocessorgroup name="Convert Month Numbers to Text">
 			<tagprocessors>
 				<!-- Change month numbers to strings. -->
@@ -56,11 +66,13 @@
 				<tagprocessor xsi:type="StringReplacementTagProcessor" tagstoprocess="OnlySpecified" pattern="^[0]*12$" replacement="December">
 					<tags><tag>month</tag></tags>
 				</tagprocessor>
+				
 			</tagprocessors>
 		</tagprocessorgroup>
 
 		<tagprocessorgroup name="HTML Characters">
 			<tagprocessors>
+				
 				<!-- HTML characters. -->
 				<tagprocessor xsi:type="StringReplacementTagProcessor"
 					tagstoprocess="All"
@@ -68,11 +80,13 @@
 					replacement="\&amp;">
 					<tags></tags>
 				</tagprocessor>
+				
 			</tagprocessors>
 		</tagprocessorgroup>
 
 		<tagprocessorgroup name="Capitol Letters and Acronyms">
 			<tagprocessors>
+				
 				<!-- Capital words/acronyms. -->
 				<tagprocessor xsi:type="StringReplacementTagProcessor"
 					tagstoprocess="OnlySpecified"
@@ -91,11 +105,13 @@
 						<tag>title</tag>
 					</tags>
 				</tagprocessor>
+				
 			</tagprocessors>
 		</tagprocessorgroup>
 		
 		<tagprocessorgroup name="Sepcialized Processors">
 			<tagprocessors>
+				
 				<!-- Do not modify the pattern unless you really know what you are doing. -->
 				<tagprocessor xsi:type="SentanceEndingSpacesTagProcessor"
 					tagstoprocess="OnlySpecified"
