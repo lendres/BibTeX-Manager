@@ -637,7 +637,7 @@
 		<tagprocessor xsi:type="StringReplacementTagProcessor"
 			tagstoprocess="ExcludeSpecified"
 			pattern="\u00D8"
-			replacement="\{O}">
+			replacement="{\O}">
 			<tags>
 				<tag>href</tag>
 				<tag>url</tag>
@@ -957,7 +957,7 @@
 		<tagprocessor xsi:type="StringReplacementTagProcessor"
 			tagstoprocess="ExcludeSpecified"
 			pattern="\u00F8"
-			replacement="\{o}">
+			replacement="{\o}">
 			<tags>
 				<tag>href</tag>
 				<tag>url</tag>
