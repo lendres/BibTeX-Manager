@@ -137,6 +137,12 @@
     <Compile Include="Forms\EditRawBibEntryForm.Designer.cs">
       <DependentUpon>EditRawBibEntryForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\FindEntryForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FindEntryForm.Designer.cs">
+      <DependentUpon>FindEntryForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\OptionsForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -222,6 +228,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\EditRawBibEntryForm.resx">
       <DependentUpon>EditRawBibEntryForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FindEntryForm.resx">
+      <DependentUpon>FindEntryForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\OptionsForm.resx">
       <DependentUpon>OptionsForm.cs</DependentUpon>

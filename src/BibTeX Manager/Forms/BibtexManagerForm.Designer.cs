@@ -252,7 +252,7 @@ namespace BibtexManager
 			// optionsToolStripMenuItem
 			// 
 			this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-			this.optionsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.optionsToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
 			this.optionsToolStripMenuItem.Text = "&Options";
 			this.optionsToolStripMenuItem.Click += new System.EventHandler(this.OptionsToolStripMenuItem_Click);
 			// 
@@ -262,7 +262,7 @@ namespace BibtexManager
             this.sortBibliographyEntriesToolStripMenuItem,
             this.checkTagQualityToolStripMenuItem});
 			this.qualityToolStripMenuItem.Name = "qualityToolStripMenuItem";
-			this.qualityToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.qualityToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
 			this.qualityToolStripMenuItem.Text = "Quality";
 			// 
 			// sortBibliographyEntriesToolStripMenuItem
@@ -363,6 +363,7 @@ namespace BibtexManager
 			this.bibEntriesDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
 			this.bibEntriesDataGridView.Size = new System.Drawing.Size(516, 484);
 			this.bibEntriesDataGridView.TabIndex = 24;
+			this.bibEntriesDataGridView.KeyDown += new System.Windows.Forms.KeyEventHandler(this.DataGridView_KeyUp);
 			// 
 			// Key
 			// 

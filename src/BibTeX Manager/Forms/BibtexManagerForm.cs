@@ -1,4 +1,5 @@
 using BibTeXLibrary;
+using BibtexManager.Forms;
 using DigitalProduction.Forms;
 using DigitalProduction.Projects;
 using System;
@@ -14,8 +15,10 @@ namespace BibtexManager
 	/// </summary>
 	public partial class BibtexManagerForm : DigitalProduction.Forms.ProjectForm
 	{
-        #region Fields
+		#region Fields
 
+		private string          _findString			= null;
+		private int             _findStartRow       = 0;
 
 		#endregion
 
@@ -102,6 +105,27 @@ namespace BibtexManager
 
 		#endregion
 
+		#region Control Event Handlers
+
+		/// <summary>
+		/// The DataGridView seems to try to capture the F3 and sort which causes an error.  So we need to override
+		/// this behavior.
+		/// </summary>
+		/// <param name="sender">Sender.</param>
+		/// <param name="eventArgs">Event arguments.</param>
+		private void DataGridView_KeyUp(object sender, KeyEventArgs eventArgs)
+		{
+			switch (eventArgs.KeyCode)
+			{
+				case Keys.F3:
+					eventArgs.Handled = true;
+					FindOrShowFindDialog();
+					break;
+			}
+		}
+
+		#endregion
+
 		#region Form Event Handlers
 
 		/// <summary>
@@ -125,21 +149,125 @@ namespace BibtexManager
 					eventArgs.Handled = true;
 					this.dataGridViewInterfaceControl.Edit();
 					break;
+
+				case Keys.F:
+					if (eventArgs.Control)
+					{
+						eventArgs.Handled = true;
+						ShowFindDialogBox();
+					}
+					break;
 			}
 		}
 
-        #endregion
+		/// <summary>
+		/// If there is not a search string, we prompt the user for one.  Otherwise, continue searching with
+		/// the existing search string.
+		/// </summary>
+		private void FindOrShowFindDialog()
+		{
+			if (_findString == null)
+			{
+				ShowFindDialogBox();
+			}
+			else
+			{
+				FindInDataGridView();
+			}
+		}
 
-        #region Menu Event Handlers
+		/// <summary>
+		/// Shows the find dialog box.
+		/// </summary>
+		private void ShowFindDialogBox()
+		{
+			FindEntryForm findEntryForm		= new FindEntryForm();
+			DialogResult result				= findEntryForm.ShowDialog(this);
+			if (result == DialogResult.OK)
+			{
+				_findString		= findEntryForm.FindString;
+				_findStartRow	= this.bibEntriesDataGridView.SelectedRows[0].Index;
+				FindInDataGridView();
+			}
+		}
 
-        #region File
+		/// <summary>
+		/// Select a row by finding a string.
+		/// </summary>
+		private void FindInDataGridView()
+		{
+			int currentRow  = this.bibEntriesDataGridView.SelectedRows[0].Index;
 
-        /// <summary>
-        /// New item click handler.
-        /// </summary>
-        /// <param name="sender">Sender.</param>
-        /// <param name="eventArgs">Event arguments.</param>
-        protected override void NewToolStripItem_Click(object sender, EventArgs eventArgs)
+			// Search from the current location forward to the end.
+			int rowIndex = SearchRows(currentRow+1, this.bibEntriesDataGridView.Rows.Count);
+
+			// If the previous search did not find anything, search from the start to the current position.
+			if (rowIndex < 0)
+			{
+				rowIndex = SearchRows(0, currentRow);
+			}
+
+			// If row index is negative, we got to the end and didn't find a match.
+			// Therefore, display a message so the user knows nothing was found.
+			if (rowIndex < 0)
+			{
+				string message = "The string \"" + _findString + "\" could not be found.";
+				MessageBox.Show(message, "Find", MessageBoxButtons.OK, MessageBoxIcon.Information);
+			}
+			else
+			{
+				// We need to clear any selection first, so we don't have multiple rows selected.  Then the row that contains the
+				// found string is selected.  Finally, we scroll the DataGridView to the row that is selected.
+				this.bibEntriesDataGridView.ClearSelection();
+				this.bibEntriesDataGridView.Rows[rowIndex].Selected         = true;
+				this.bibEntriesDataGridView.FirstDisplayedScrollingRowIndex = this.bibEntriesDataGridView.SelectedRows[0].Index;
+			}
+		}
+
+		/// <summary>
+		/// Search from the start row to the last row for the string.
+		/// </summary>
+		/// <param name="startRow">Row to start searching from.</param>
+		/// <param name="lastRow">Stop searching before this row.</param>
+		private int SearchRows(int startRow, int lastRow)
+		{
+			DataGridViewRowCollection rows  = this.bibEntriesDataGridView.Rows;
+
+			for (int i = startRow; i < lastRow; i++)
+			{
+				DataGridViewRow row = rows[i];
+
+				// Loop over each column in the row.
+				for (int j = 0; j < row.Cells.Count; j++)
+				{
+					// Need to check for null if new row is exposed.
+					if (row.Cells[j].Value != null)
+					{
+						// Try to find the string in the contents of the cell.
+						if (row.Cells[j].Value.ToString().Contains(_findString))
+						{
+							return row.Index;
+						}
+					}
+				}
+			}
+
+			// Did not find a match.
+			return -1;
+		}
+
+		#endregion
+
+		#region Menu Event Handlers
+
+		#region File
+
+		/// <summary>
+		/// New item click handler.
+		/// </summary>
+		/// <param name="sender">Sender.</param>
+		/// <param name="eventArgs">Event arguments.</param>
+		protected override void NewToolStripItem_Click(object sender, EventArgs eventArgs)
 		{
 			base.NewToolStripItem_Click(sender, eventArgs);
 
@@ -261,26 +389,6 @@ namespace BibtexManager
 		}
 
 		#endregion
-
-		#endregion
-
-		#region Control Event Handlers
-
-		//private void DataGridView_KeyDown(object sender, KeyEventArgs eventArgs)
-		//{
-		//	switch (eventArgs.KeyCode)
-		//	{
-		//		case Keys.A:
-		//			this.dataGridViewInterfaceControl.Add();
-		//			eventArgs.Handled = true;
-		//			break;
-
-		//		case Keys.F2:
-		//			this.dataGridViewInterfaceControl.Edit();
-		//			eventArgs.Handled = true;
-		//			break;
-		//	}
-		//}
 
 		#endregion
 
