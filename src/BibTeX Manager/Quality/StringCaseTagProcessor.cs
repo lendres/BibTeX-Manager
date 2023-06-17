@@ -1,9 +1,4 @@
-﻿using BibtexManager.Quality;
-using DigitalProduction.Strings;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Globalization;
-using System.Text;
+﻿using DigitalProduction.Strings;
 using System.Xml.Serialization;
 
 namespace BibtexManager
