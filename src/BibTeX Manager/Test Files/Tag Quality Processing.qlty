@@ -132,11 +132,16 @@
 
 				<!-- Change titles from UPPPER CASE to Title Case. -->
 				<tagprocessor xsi:type="StringCaseTagProcessor" tagstoprocess="OnlySpecified" pattern="^[A-Z\s\p{P}]*$" tocase="TitleCase">
+					<tags><tag>title</tag></tags>
+				</tagprocessor>
+
+				<!-- Change quotes to LaTeX quotes. -->
+				<tagprocessor xsi:type="QuoteTagProcessor" tagstoprocess="All" pattern="&quot;.*&quot;">
 					<tags>
 						<tag>title</tag>
 					</tags>
 				</tagprocessor>
-			
+				
 			</tagprocessors>
 		</tagprocessorgroup>
 		

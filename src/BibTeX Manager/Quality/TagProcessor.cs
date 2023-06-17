@@ -11,6 +11,7 @@ namespace BibtexManager
 	/// <summary>
 	/// Base class for tag processors.
 	/// </summary>
+	[XmlInclude(typeof(QuoteTagProcessor))]
 	[XmlInclude(typeof(RemoveEnclosingBracesTagProcessor))]
 	[XmlInclude(typeof(SentanceEndingSpacesTagProcessor))]
 	[XmlInclude(typeof(StringCaseTagProcessor))]
