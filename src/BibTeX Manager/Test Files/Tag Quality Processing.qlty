@@ -4,16 +4,6 @@
 
 		<xi:include href="LaTeX Tag Quality Processing.qlty" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
 
-		<tagprocessorgroup name="Convert String Case">
-			<tagprocessors>
-				<!-- Change titles from UPPPER CASE to Title Case. -->
-				<tagprocessor xsi:type="StringCaseTagProcessor" tagstoprocess="OnlySpecified" pattern="^[A-Z\s\p{P}]*$" tocase="TitleCase">
-					<tags><tag>title</tag></tags>
-				</tagprocessor>
-				
-			</tagprocessors>
-		</tagprocessorgroup>
-
 		<tagprocessorgroup name="Convert Month Numbers to Text">
 			<tagprocessors>
 				<!-- Change month numbers to strings. -->
@@ -138,6 +128,13 @@
 					tagstoprocess="All"
 					pattern="^{[\s\S]*}$">
 					<tags></tags>
+				</tagprocessor>
+
+				<!-- Change titles from UPPPER CASE to Title Case. -->
+				<tagprocessor xsi:type="StringCaseTagProcessor" tagstoprocess="OnlySpecified" pattern="^[A-Z\s\p{P}]*$" tocase="TitleCase">
+					<tags>
+						<tag>title</tag>
+					</tags>
 				</tagprocessor>
 			
 			</tagprocessors>
