@@ -66,7 +66,7 @@ namespace BibtexManager
 		{
 			RegistryAccess registryAccess = Program.Registry;
 
-			this.openLastProjectCheckBox.Checked = registryAccess.LoadLastProjectAtStartUp;
+			this.openLastProjectCheckBox.Checked	= registryAccess.LoadLastProjectAtStartUp;
 		}
 
 		/// <summary>
@@ -76,7 +76,7 @@ namespace BibtexManager
 		{
 			RegistryAccess registryAccess = Program.Registry;
 
-			registryAccess.LoadLastProjectAtStartUp = this.openLastProjectCheckBox.Checked;
+			registryAccess.LoadLastProjectAtStartUp		= this.openLastProjectCheckBox.Checked;
 		}
 
 		#endregion

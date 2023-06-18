@@ -1,6 +1,4 @@
-﻿using DigitalProduction.Strings;
-
-namespace BibtexManager
+﻿namespace BibtexManager
 {
 	/// <summary>
 	/// Changes quotation marks ("...") to LaTeX quotations (``...'').
@@ -8,9 +6,6 @@ namespace BibtexManager
 	public class QuoteTagProcessor : TagProcessor
 	{
 		#region Fields
-
-		private StringCase          _toCase             = StringCase.TitleCase;
-		private string              _culture            = "en-US";
 
 		#endregion
 

@@ -18,6 +18,7 @@ namespace BibtexManager
 		#region Fields
 
 		private string								_bibFile;
+		private bool								_useRelativePaths				= true;
 		private readonly Bibliography               _bibliography                   = new Bibliography();
 
 		private List<string>						_assessoryFiles					= new List<string>();
@@ -97,6 +98,27 @@ namespace BibtexManager
 						ReadBibliographyFile();
 						BuildStringConstantMap();
 					}
+				}
+			}
+		}
+
+		/// <summary>
+		/// Use paths relative to the bibliography file.
+		/// </summary>
+		[XmlAttribute("userelativepaths")]
+		public bool UsePathsRelativeToBibFile
+		{
+			get
+			{
+				return _useRelativePaths;
+			}
+
+			set
+			{
+				if (_useRelativePaths != value)
+				{
+					_useRelativePaths = value;
+					this.Modified = true;
 				}
 			}
 		}
@@ -434,7 +456,7 @@ namespace BibtexManager
 		{
 			if (_useBibEntryInitialization)
 			{
-				_bibliography.Read(_bibFile, _bibEntryInitializationFile);
+				_bibliography.Read(_bibFile, ConvertToAbsolutePath(_bibEntryInitializationFile));
 			}
 			else
 			{
@@ -449,7 +471,7 @@ namespace BibtexManager
 		{
 			if (System.IO.File.Exists(_bibEntryInitializationFile))
 			{
-				_bibEntryInitialization = BibEntryInitialization.Deserialize(_bibEntryInitializationFile);
+				_bibEntryInitialization = BibEntryInitialization.Deserialize(ConvertToAbsolutePath(_bibEntryInitializationFile));
 			}
 		}
 
@@ -460,7 +482,7 @@ namespace BibtexManager
 		{
 			if (System.IO.File.Exists(_tagQualityProcessingFile))
 			{
-				_tagQualityProcessor = QualityProcessor.Deserialize(_tagQualityProcessingFile);
+				_tagQualityProcessor = QualityProcessor.Deserialize(ConvertToAbsolutePath(_tagQualityProcessingFile));
 			}
 		}
 
@@ -471,7 +493,7 @@ namespace BibtexManager
 		{
 			if (System.IO.File.Exists(_nameRemappingFile))
 			{
-				_nameRemapper = BibEntryRemapper.Deserialize(_nameRemappingFile);
+				_nameRemapper = BibEntryRemapper.Deserialize(ConvertToAbsolutePath(_nameRemappingFile));
 			}
 		}
 
@@ -484,9 +506,22 @@ namespace BibtexManager
 			{
 				if (System.IO.File.Exists(file))
 				{
-					_assessoryFilesDOMs.Add(BibParser.Parse(file));
+					_assessoryFilesDOMs.Add(BibParser.Parse(ConvertToAbsolutePath(file)));
 				}
 			}
+		}
+
+		/// <summary>
+		/// Convert a path to absolute path if the relative path option is in use.
+		/// </summary>
+		/// <param name="path">Path to convert.</param>
+		private string ConvertToAbsolutePath(string path)
+		{
+			if (this.UsePathsRelativeToBibFile)
+			{
+				path = DigitalProduction.IO.Path.ConvertToAbsolutePath(path, System.IO.Path.GetDirectoryName(_bibFile));
+			}
+			return path;
 		}
 
 		/// <summary>
