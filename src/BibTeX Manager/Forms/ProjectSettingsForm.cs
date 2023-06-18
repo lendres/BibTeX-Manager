@@ -67,7 +67,7 @@ namespace BibtexManager
 		/// </summary>
 		/// <param name="sender">Sender.</param>
 		/// <param name="eventArgs">Event arguments.</param>
-		private void useRelativePathsCheckBox_CheckedChanged(object sender, EventArgs e)
+		private void useRelativePathsCheckBox_CheckedChanged(object sender, EventArgs eventArgs)
 		{
 			List<TextBox> textBoxes = new List<TextBox>() { this.bibEntryInitializationFileTextBox, this.qualityProcessingFileTextBox, this.remappingFileTextBox };
 
@@ -185,7 +185,7 @@ namespace BibtexManager
 		/// </summary>
 		/// <param name="sender">Sender.</param>
 		/// <param name="eventArgs">Event arguments.</param>
-		private void RemappingFileBrowseButton_Click(object sender, EventArgs e)
+		private void RemappingFileBrowseButton_Click(object sender, EventArgs eventArgs)
 		{
 			string initialDirectory = System.IO.Path.GetDirectoryName(ConvertToAbsolutePath(this.remappingFileTextBox.Text));
 
