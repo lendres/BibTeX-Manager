@@ -199,17 +199,17 @@ namespace BibtexManager
 			int currentRow  = this.bibEntriesDataGridView.SelectedRows[0].Index;
 
 			// Search from the current location forward to the end.
-			int rowIndex = SearchRows(currentRow+1, this.bibEntriesDataGridView.Rows.Count);
+			Tuple<int, int> cell = SearchRows(currentRow+1, this.bibEntriesDataGridView.Rows.Count);
 
 			// If the previous search did not find anything, search from the start to the current position.
-			if (rowIndex < 0)
+			if (cell.Item1 < 0)
 			{
-				rowIndex = SearchRows(0, currentRow);
+				cell = SearchRows(0, currentRow);
 			}
 
 			// If row index is negative, we got to the end and didn't find a match.
 			// Therefore, display a message so the user knows nothing was found.
-			if (rowIndex < 0)
+			if (cell.Item1 < 0)
 			{
 				string message = "The string \"" + _findString + "\" could not be found.";
 				MessageBox.Show(message, "Find", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -217,10 +217,12 @@ namespace BibtexManager
 			else
 			{
 				// We need to clear any selection first, so we don't have multiple rows selected.  Then the row that contains the
-				// found string is selected.  Finally, we scroll the DataGridView to the row that is selected.
+				// found string is selected (this doesn't seem to be needed when selected in the cell).
+				// Finally, we scroll the DataGridView to the row that is selected.
 				this.bibEntriesDataGridView.ClearSelection();
-				this.bibEntriesDataGridView.Rows[rowIndex].Selected         = true;
-				this.bibEntriesDataGridView.FirstDisplayedScrollingRowIndex = this.bibEntriesDataGridView.SelectedRows[0].Index;
+				//this.bibEntriesDataGridView.Rows[cell.Item1].Selected		= true;
+				this.bibEntriesDataGridView.CurrentCell                     = this.bibEntriesDataGridView[cell.Item2, cell.Item1];
+				this.bibEntriesDataGridView.FirstDisplayedScrollingRowIndex	= this.bibEntriesDataGridView.SelectedRows[0].Index;
 			}
 		}
 
@@ -229,7 +231,7 @@ namespace BibtexManager
 		/// </summary>
 		/// <param name="startRow">Row to start searching from.</param>
 		/// <param name="lastRow">Stop searching before this row.</param>
-		private int SearchRows(int startRow, int lastRow)
+		private Tuple<int, int> SearchRows(int startRow, int lastRow)
 		{
 			DataGridViewRowCollection rows  = this.bibEntriesDataGridView.Rows;
 
@@ -246,14 +248,14 @@ namespace BibtexManager
 						// Try to find the string in the contents of the cell.
 						if (row.Cells[j].Value.ToString().Contains(_findString))
 						{
-							return row.Index;
+							return new Tuple<int, int>(row.Index, j);
 						}
 					}
 				}
 			}
 
 			// Did not find a match.
-			return -1;
+			return new Tuple<int, int>(-1, -1);
 		}
 
 		#endregion
