@@ -2,7 +2,7 @@
 <bibentryremapping xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<maps>
 		<item key="Proceedings to InProceedings">
-			<value nampe="Proceedings to InProceedings" totype="inproceedings">
+			<value name="Proceedings to InProceedings" totype="inproceedings">
 				<fromtypes>
 					<type>proceedings</type>
 				</fromtypes>
@@ -12,6 +12,18 @@
 					</item>
 					<item key="eprint">
 						<value>href</value>
+					</item>
+				</tagmaps>
+			</value>
+		</item>
+		<item key="Article">
+			<value name="Article" totype="article">
+				<fromtypes>
+					<type>article</type>
+				</fromtypes>
+				<tagmaps>
+					<item key="publisher">
+						<value>organization</value>
 					</item>
 				</tagmaps>
 			</value>
