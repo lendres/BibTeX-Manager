@@ -2,10 +2,8 @@
 using DigitalProduction.Forms;
 using System;
 using System.ComponentModel;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
-using System.Diagnostics.Tracing;
 
 namespace BibtexManager
 {
@@ -221,7 +219,11 @@ namespace BibtexManager
 				// Mapping.
 				if (this.useBibEntryMapCheckBox.Checked)
 				{
-					_project.RemapEntryNames(_bibEntry, this.bibEntryMapComboBox.Text);
+					// Need to have a selection to continue.
+					if (this.bibEntryMapComboBox.SelectedIndex > -1)
+					{
+						_project.RemapEntryNames(_bibEntry, this.bibEntryMapComboBox.Text);
+					}
 				}
 
 				// Cleaning.

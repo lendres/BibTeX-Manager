@@ -456,7 +456,12 @@ namespace BibtexManager
 		{
 			if (_useBibEntryInitialization)
 			{
-				_bibliography.Read(_bibFile, ConvertToAbsolutePath(_bibEntryInitializationFile));
+				string absolutePath = ConvertToAbsolutePath(_bibEntryInitializationFile);
+				if (!System.IO.File.Exists(absolutePath))
+				{
+					throw new Exception("The file \"" + absolutePath +" does not exist.\"");
+				}
+				_bibliography.Read(_bibFile, absolutePath);
 			}
 			else
 			{
@@ -469,10 +474,12 @@ namespace BibtexManager
 		/// </summary>
 		private void ReadBibEntryInitializationFiles()
 		{
-			if (System.IO.File.Exists(_bibEntryInitializationFile))
+			string absolutePath = ConvertToAbsolutePath(_bibEntryInitializationFile);
+			if (!System.IO.File.Exists(absolutePath))
 			{
-				_bibEntryInitialization = BibEntryInitialization.Deserialize(ConvertToAbsolutePath(_bibEntryInitializationFile));
+				throw new Exception("The file \"" + absolutePath +" does not exist.\"");
 			}
+			_bibEntryInitialization = BibEntryInitialization.Deserialize(absolutePath);
 		}
 
 		/// <summary>
@@ -480,10 +487,12 @@ namespace BibtexManager
 		/// </summary>
 		private void ReadTagQualityProcessingFile()
 		{
-			if (System.IO.File.Exists(_tagQualityProcessingFile))
+			string absolutePath = ConvertToAbsolutePath(_tagQualityProcessingFile);
+			if (!System.IO.File.Exists(absolutePath))
 			{
-				_tagQualityProcessor = QualityProcessor.Deserialize(ConvertToAbsolutePath(_tagQualityProcessingFile));
+				throw new Exception("The file \"" + absolutePath +" does not exist.\"");
 			}
+			_tagQualityProcessor = QualityProcessor.Deserialize(absolutePath);
 		}
 
 		/// <summary>
@@ -491,10 +500,12 @@ namespace BibtexManager
 		/// </summary>
 		private void ReadNameMappingFile()
 		{
-			if (System.IO.File.Exists(_nameRemappingFile))
+			string absolutePath = ConvertToAbsolutePath(_nameRemappingFile);
+			if (!System.IO.File.Exists(absolutePath))
 			{
-				_nameRemapper = BibEntryRemapper.Deserialize(ConvertToAbsolutePath(_nameRemappingFile));
+				throw new Exception("The file \"" + absolutePath +" does not exist.\"");
 			}
+			_nameRemapper = BibEntryRemapper.Deserialize(absolutePath);
 		}
 
 		/// <summary>
@@ -504,10 +515,13 @@ namespace BibtexManager
 		{
 			foreach (string file in _assessoryFiles)
 			{
-				if (System.IO.File.Exists(file))
+				string absolutePath = ConvertToAbsolutePath(file);
+				if (!System.IO.File.Exists(absolutePath))
 				{
-					_assessoryFilesDOMs.Add(BibParser.Parse(ConvertToAbsolutePath(file)));
+					throw new Exception("The file \"" + absolutePath +" does not exist.\"");
 				}
+
+				_assessoryFilesDOMs.Add(BibParser.Parse(absolutePath));
 			}
 		}
 
@@ -542,9 +556,9 @@ namespace BibtexManager
 		/// Get an array of all the names of the maps.
 		/// </summary>
 		public string[] GetBibEntryMapNames()
-				{
-					return _nameRemapper.Maps.Keys.ToArray();
-				}
+		{
+			return _nameRemapper.Maps.Keys.ToArray();
+		}
 
 		/// <summary>
 		/// Parse a string and return BibEntrys.
