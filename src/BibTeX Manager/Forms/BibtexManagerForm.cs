@@ -121,6 +121,11 @@ namespace BibtexManager
 					eventArgs.Handled = true;
 					FindOrShowFindDialog();
 					break;
+
+				case Keys.Enter:
+					eventArgs.Handled = true;
+					this.dataGridViewInterfaceControl.Edit();
+					break;
 			}
 		}
 
