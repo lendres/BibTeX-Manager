@@ -217,8 +217,11 @@ namespace BibtexManager
 			else
 			{
 				// We need to clear any selection first, so we don't have multiple rows selected.  Then the row that contains the
-				// found string is selected (this doesn't seem to be needed when selected in the cell).
-				// Finally, we scroll the DataGridView to the row that is selected.
+				// found string is selected (this doesn't seem to be needed when selected in the cell).  The cell is selected to
+				// make it active.  Just selecting the row means when you use the keyboard keys, it jumps back to where the selected
+				// cell is.  Note that selecting the cell seems to require the colums as the first value and the row as the second.
+				// Finally, we scroll the DataGridView to the row that is selected.  We want to be able to see what is next so we don't
+				// want the found item at the bottom of the window.
 				this.bibEntriesDataGridView.ClearSelection();
 				//this.bibEntriesDataGridView.Rows[cell.Item1].Selected		= true;
 				this.bibEntriesDataGridView.CurrentCell                     = this.bibEntriesDataGridView[cell.Item2, cell.Item1];
