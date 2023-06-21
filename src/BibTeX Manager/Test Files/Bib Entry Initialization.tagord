@@ -57,7 +57,8 @@
             <value>journal</value>
             <value>volume</value>
             <value>number</value>
-            <value>month</value>
+			<value>day</value>
+			<value>month</value>
             <value>year</value>
             <value>pages</value>
 			<value>organization</value>
