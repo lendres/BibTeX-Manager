@@ -307,6 +307,9 @@ namespace BibtexManager
 			PushEntriesToDataStructure();
 		}
 
+		/// <summary>
+		/// Copy the citation key to the clipboard.
+		/// </summary>
 		private void CopyCiteKeyToClipboard()
 		{
 			// Clipboard copy might fail, so catch an errors.
