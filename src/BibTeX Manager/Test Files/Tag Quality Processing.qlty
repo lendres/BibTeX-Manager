@@ -60,6 +60,60 @@
 			</tagprocessors>
 		</tagprocessorgroup>
 
+		<tagprocessorgroup name="Convert Month Numbers to Text">
+			<tagprocessors>
+				<!-- Change month abbreviations to full names. -->
+				<tagprocessor xsi:type="StringReplacementTagProcessor" tagstoprocess="OnlySpecified" pattern="jan" replacement="January">
+					<tags><tag>month</tag></tags>
+				</tagprocessor>
+
+				<tagprocessor xsi:type="StringReplacementTagProcessor" tagstoprocess="OnlySpecified" pattern="feb" replacement="February">
+					<tags><tag>month</tag></tags>
+				</tagprocessor>
+
+				<tagprocessor xsi:type="StringReplacementTagProcessor" tagstoprocess="OnlySpecified" pattern="mar" replacement="March">
+					<tags><tag>month</tag></tags>
+				</tagprocessor>
+
+				<tagprocessor xsi:type="StringReplacementTagProcessor" tagstoprocess="OnlySpecified" pattern="apr" replacement="April">
+					<tags><tag>month</tag></tags>
+				</tagprocessor>
+
+				<tagprocessor xsi:type="StringReplacementTagProcessor" tagstoprocess="OnlySpecified" pattern="may" replacement="May">
+					<tags><tag>month</tag></tags>
+				</tagprocessor>
+
+				<tagprocessor xsi:type="StringReplacementTagProcessor" tagstoprocess="OnlySpecified" pattern="jun" replacement="June">
+					<tags><tag>month</tag></tags>
+				</tagprocessor>
+
+				<tagprocessor xsi:type="StringReplacementTagProcessor" tagstoprocess="OnlySpecified" pattern="jul" replacement="July">
+					<tags><tag>month</tag></tags>
+				</tagprocessor>
+
+				<tagprocessor xsi:type="StringReplacementTagProcessor" tagstoprocess="OnlySpecified" pattern="aug" replacement="August">
+					<tags><tag>month</tag></tags>
+				</tagprocessor>
+
+				<tagprocessor xsi:type="StringReplacementTagProcessor" tagstoprocess="OnlySpecified" pattern="sep" replacement="September">
+					<tags><tag>month</tag></tags>
+				</tagprocessor>
+
+				<tagprocessor xsi:type="StringReplacementTagProcessor" tagstoprocess="OnlySpecified" pattern="oct" replacement="October">
+					<tags><tag>month</tag></tags>
+				</tagprocessor>
+
+				<tagprocessor xsi:type="StringReplacementTagProcessor" tagstoprocess="OnlySpecified" pattern="nov" replacement="November">
+					<tags><tag>month</tag></tags>
+				</tagprocessor>
+
+				<tagprocessor xsi:type="StringReplacementTagProcessor" tagstoprocess="OnlySpecified" pattern="dec" replacement="December">
+					<tags><tag>month</tag></tags>
+				</tagprocessor>
+				
+			</tagprocessors>
+		</tagprocessorgroup>
+		
 		<tagprocessorgroup name="HTML Characters">
 			<tagprocessors>
 				

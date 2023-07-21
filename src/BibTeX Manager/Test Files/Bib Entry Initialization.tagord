@@ -40,6 +40,9 @@
         <item key="proceedings">
             <value>inproceedings</value>
         </item>
+		<item key="software">
+			<value>software</value>
+		</item>
         <item key="techreport">
             <value>techreport</value>
         </item>
@@ -126,6 +129,15 @@
             <value>issuedmonth</value>
             <value>issuedyear</value>
         </item>
+		<item key="software">
+			<value>author</value>
+			<value>title</value>
+			<value>license</value>
+			<value>version</value>
+			<value>month</value>
+			<value>year</value>
+			<value>url</value>
+		</item>
 		<item key="techreport">
 			<value>author</value>
 			<value>title</value>

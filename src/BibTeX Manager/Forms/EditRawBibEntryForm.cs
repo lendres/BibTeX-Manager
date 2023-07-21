@@ -206,16 +206,6 @@ namespace BibtexManager
 		{
 			if (Parse())
 			{
-				// Key.
-				if (_addMode)
-				{
-					_project.GenerateNewKey(_bibEntry);
-				}
-				else
-				{
-					_project.ValidateKey(_bibEntry);
-				}
-
 				// Mapping.
 				if (this.useBibEntryMapCheckBox.Checked)
 				{
@@ -245,6 +235,16 @@ namespace BibtexManager
 
 				// String constants replacement.
 				_project.ApplyStringConstants(_bibEntry);
+
+				// Key.
+				if (_addMode)
+				{
+					_project.GenerateNewKey(_bibEntry);
+				}
+				else
+				{
+					_project.ValidateKey(_bibEntry);
+				}
 
 				this.richTextBox.Text = _bibEntry.ToString(_project.WriteSettings);
 			}
