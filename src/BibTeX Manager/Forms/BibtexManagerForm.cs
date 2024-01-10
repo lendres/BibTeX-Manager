@@ -254,7 +254,7 @@ namespace BibtexManager
 					if (row.Cells[j].Value != null)
 					{
 						// Try to find the string in the contents of the cell.
-						if (row.Cells[j].Value.ToString().Contains(_findString))
+						if (row.Cells[j].Value.ToString().ToLower().Contains(_findString.ToLower()))
 						{
 							return new Tuple<int, int>(row.Index, j);
 						}
