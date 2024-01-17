@@ -50,6 +50,7 @@
 			this.addRawTemplateButton.Name = "addRawTemplateButton";
 			this.addRawTemplateButton.Size = new System.Drawing.Size(40, 30);
 			this.addRawTemplateButton.TabIndex = 7;
+			this.dataGridViewControlToolTip.SetToolTip(this.addRawTemplateButton, "Add Entry from Template");
 			this.addRawTemplateButton.UseVisualStyleBackColor = true;
 			this.addRawTemplateButton.Click += new System.EventHandler(this.AddRawTemplateButton_Click);
 			// 

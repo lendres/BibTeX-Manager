@@ -26,6 +26,8 @@ namespace BibtexManager
 
 			this.ShowEditDialog	= this.ShowEditRawBibEntryDialog;
 			this.ShowAddDialog	= this.ShowAddRawBibEntryDialog;
+			
+			this.dataGridViewControlToolTip.SetToolTip(this.addButton, "Add a New Entry");
 		}
 
 		#endregion
