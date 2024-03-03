@@ -108,6 +108,7 @@
     <Reference Include="System.Drawing">
       <Name>System.Drawing</Name>
     </Reference>
+    <Reference Include="System.Net.Http" />
     <Reference Include="System.Windows.Forms">
       <Name>System.Windows.Forms</Name>
     </Reference>
@@ -160,6 +161,12 @@
     </Compile>
     <Compile Include="Forms\SelectBibEntryTemplate.Designer.cs">
       <DependentUpon>SelectBibEntryTemplate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\SearchForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\SearchForm.Designer.cs">
+      <DependentUpon>SearchForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -241,6 +248,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\SelectBibEntryTemplate.resx">
       <DependentUpon>SelectBibEntryTemplate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SearchForm.resx">
+      <DependentUpon>SearchForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

@@ -4,6 +4,7 @@ using System;
 using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace BibtexManager
 {
@@ -207,14 +208,7 @@ namespace BibtexManager
 			if (Parse())
 			{
 				// Mapping.
-				if (this.useBibEntryMapCheckBox.Checked)
-				{
-					// Need to have a selection to continue.
-					if (this.bibEntryMapComboBox.SelectedIndex > -1)
-					{
-						_project.RemapEntryNames(_bibEntry, this.bibEntryMapComboBox.Text);
-					}
-				}
+				_project.RemapEntryNames(_bibEntry);
 
 				// Cleaning.
 				bool breakNext = false;
@@ -259,8 +253,7 @@ namespace BibtexManager
 
 			try
 			{
-				BindingList<BibEntry> entries = _project.ParseText(this.richTextBox.Text);
-				_bibEntry = entries[0];
+				_bibEntry = _project.ParseSingleEntryText(this.richTextBox.Text);
 			}
 			catch (Exception exception)
 			{
@@ -327,7 +320,33 @@ namespace BibtexManager
 		/// Show the edit dialog.
 		/// </summary>
 		/// <param name="parent">Parent form.</param>
+		/// <param name="writeSettings">Settings to use when formatting the text for display.</param>
+		public DialogResultPair ShowDialog(IWin32Window parent, WriteSettings writeSettings)
+		{
+			// If there is a BibEntry provided, populate the form.  Also, tract if we are adding or editing.
+			_addMode = false;
+			return ShowDialog(parent, string.Empty, writeSettings);
+		}
+		/// <summary>
+		/// Show the edit dialog.
+		/// </summary>
+		/// <param name="parent">Parent form.</param>
+		/// <param name="bibEntry">BibEntry to populate the rich text box with.</param>
+		/// /// <param name="writeSettings">Settings to use when formatting the text for display.</param>
 		public DialogResultPair ShowDialog(IWin32Window parent, BibEntry bibEntry, WriteSettings writeSettings)
+		{
+			// If there is a BibEntry provided, populate the form.  Also, tract if we are adding or editing.
+			_addMode = true;
+			return ShowDialog(parent, bibEntry.ToString(writeSettings), writeSettings);
+		}
+
+		/// <summary>
+		/// Show the edit dialog.
+		/// </summary>
+		/// <param name="parent">Parent form.</param>
+		/// <param name="text">Text to populate the rich text box with.</param>
+		/// <param name="writeSettings">Settings to use when formatting the text for display.</param>
+		public DialogResultPair ShowDialog(IWin32Window parent, string text, WriteSettings writeSettings)
 		{
 			// Set tab size.  It is set in pixels, so we have to convert the font size to pixels.  We make an assumption the height is a good
 			// proxy for a space width.  We multiply that the tab size (number of spaces in a tab) to get the tab size.
@@ -337,16 +356,8 @@ namespace BibtexManager
 			this.richTextBox.SelectionTabs	= new int[] { tabSize, 2*tabSize, 3*tabSize, 4*tabSize, 5*tabSize, 6*tabSize, 7*tabSize, 8*tabSize };
 
 			// If there is a BibEntry provided, populate the form.  Also, tract if we are adding or editing.
-			if (bibEntry == null)
-			{
-				_addMode = true;
-			}
-			else
-			{
-				_addMode = false;
-				this.richTextBox.Text = bibEntry.ToString(writeSettings);
-			}
-
+			this.richTextBox.Text = text;
+	
 			// Create the new return instance and show the dialog, storing the result.
 			DialogResultPair dialogResultPair	= new DialogResultPair();
 			dialogResultPair.Result				= this.ShowDialog(parent);
@@ -363,7 +374,6 @@ namespace BibtexManager
 
 		private void SetControls()
 		{
-			this.bibEntryMapComboBox.Enabled = useBibEntryMapCheckBox.Checked;
 		}
 
 		/// <summary>
@@ -371,15 +381,7 @@ namespace BibtexManager
 		/// </summary>
 		protected void PopulateControls()
 		{
-			this.useBibEntryMapCheckBox.Checked = _project.UseBibEntryRemapping;
 			SetControls();
-			this.bibEntryMapComboBox.Items.Clear();
-			this.bibEntryMapComboBox.Items.AddRange(_project.GetBibEntryMapNames());
-			this.bibEntryMapComboBox.Text = _project.BibEntryMap;
-			if (this.bibEntryMapComboBox.Text == "" && this.bibEntryMapComboBox.Items.Count > 0)
-			{
-				this.bibEntryMapComboBox.SelectedIndex = 0;
-			}
 		}
 
 		/// <summary>
@@ -387,11 +389,6 @@ namespace BibtexManager
 		/// </summary>
 		protected void PushEntriesToDataStructure()
 		{
-			_project.UseBibEntryRemapping	= this.useBibEntryMapCheckBox.Checked;
-			if (this.bibEntryMapComboBox.SelectedIndex != -1)
-			{
-				_project.BibEntryMap            = this.bibEntryMapComboBox.SelectedItem.ToString();
-			}
 		}
 
 		#endregion

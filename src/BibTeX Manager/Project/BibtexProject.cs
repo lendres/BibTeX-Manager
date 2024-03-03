@@ -1,11 +1,18 @@
 ﻿using BibTeXLibrary;
+using DigitalProduction.Forms;
 using DigitalProduction.Projects;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
+using System.Windows.Forms;
 using System.Xml.Serialization;
+using System.Net.Http;
+using System.Threading.Tasks;
+using System.Security.Policy;
+using System.Data.SqlTypes;
+using System.Text;
 
 namespace BibtexManager
 {
@@ -45,6 +52,8 @@ namespace BibtexManager
 		private bool								_copyCiteKeyOnEntryAdd			= true;
 		private bool                                _sortBibliography				= true;
 		private SortBy                              _bibliographySortMethod			= SortBy.Key;
+
+		private static readonly HttpClient			_client							= new HttpClient();
 
 		#endregion
 
@@ -561,6 +570,17 @@ namespace BibtexManager
 		}
 
 		/// <summary>
+		/// Parse a string and return a single BibEntry.
+		/// </summary>
+		/// <param name="text">Text to process.</param>
+
+		public BibEntry ParseSingleEntryText(string text)
+		{
+			BindingList<BibEntry> entries = ParseText(text);
+			return entries[0];
+		}
+
+		/// <summary>
 		/// Parse a string and return BibEntrys.
 		/// </summary>
 		/// <param name="text">Text to process.</param>
@@ -595,6 +615,8 @@ namespace BibtexManager
 		#endregion
 
 		#region Quality and Automation Methods
+
+		#region Entry Automation and Quality
 
 		/// <summary>
 		/// If the option for automatically generating keys is on, a key is generated for the entry.
@@ -646,20 +668,7 @@ namespace BibtexManager
 		{
 			if (_useNameRemapping)
 			{
-				_nameRemapper.RemapEntryNames(entry, _currentBibEntryMap);
-			}
-		}
-
-		/// <summary>
-		/// Remaps the Key and Tag Keys to new names.
-		/// </summary>
-		/// <param name="entry">BibEntry.</param>
-		/// <param name="bibEntryMapName">Name of the map to use.</param>
-		public void RemapEntryNames(BibEntry entry, string bibEntryMapName)
-		{
-			if (_useNameRemapping)
-			{
-				_nameRemapper.RemapEntryNames(entry, bibEntryMapName);
+				_nameRemapper.RemapEntryNames(entry);
 			}
 		}
 
@@ -691,6 +700,30 @@ namespace BibtexManager
 				return proposedIndex;
 			}
 		}
+
+		/// <summary>
+		/// Apply all cleaning to an entry.  Automatically accepts suggested changes.
+		/// </summary>
+		/// <param name="entry">BibEntry to clean.</param>
+		public void ApplyAllCleaning(BibEntry entry)
+		{
+			// Mapping.
+			RemapEntryNames(entry);
+
+			// Cleaning.
+			foreach (TagProcessingData tagProcessingData in CleanEntry(entry))
+			{
+				tagProcessingData.AcceptAll = true;
+			}
+
+			// String constants replacement.
+			ApplyStringConstants(entry);
+
+			// Key.
+			GenerateNewKey(entry);
+		}
+
+		#endregion
 
 		#region Entire Bibliography
 
@@ -734,6 +767,94 @@ namespace BibtexManager
 		}
 
 		#endregion
+
+		#endregion
+
+		#region Importing
+
+		/// <summary>
+		/// Bulk SPE paper search and import.
+		/// </summary>
+		/// <param name="path">The path to a file that contains a list of search strings.</param>
+		public IEnumerable<BibEntry> BulkSpeImport(string path)
+		{
+			string[] lines			= File.ReadAllLines(path);
+			List<string> references	= new List<string>();
+
+			foreach (BibEntry bibtexEntry in BulkSpeImport(lines))
+			{
+				references.Add(bibtexEntry.Key);
+				yield return bibtexEntry;
+			}
+
+			string outputPath = DigitalProduction.IO.Path.GetFullPathWithoutExtension(path) + "-output.csv";
+			WriteCsvBulkImportResults(outputPath, references, lines);
+		}
+
+		/// <summary>
+		/// Writes the names of the references and titles to a file.
+		/// </summary>
+		/// <param name="filePath">The path and file name to write to.</param>
+		/// <param name="references">The reference names to write.</param>
+		/// <param name="searchedTerms">The terms searched for references.</param>
+		static void WriteCsvBulkImportResults(string filePath, List<string> references, string[] searchedTerms)
+		{
+			// Open or create the CSV file for writing.
+			using (StreamWriter writer = new StreamWriter(filePath, false, Encoding.UTF8))
+			{
+				// Write each row of data to the file.
+				for (int i = 0; i < references.Count; i++)
+				{
+					writer.Write(references[i]);
+					writer.Write(", ");
+					string formatedTerm = "\"" + searchedTerms[i].Replace("\"", "\"\"") + "\"";
+					writer.Write(formatedTerm);
+
+					// End the row with a new line.
+					writer.WriteLine();
+				}
+			}
+		}
+
+		/// <summary>
+		/// Bulk SPE paper search and import.
+		/// </summary>
+		/// <param name="searchStrings">Strings to search the internet for the papers.</param>
+		public IEnumerable<BibEntry> BulkSpeImport(string[] searchStrings)
+		{
+			foreach (string searchString in searchStrings)
+			{
+				string bibentryString	= SpeBibtexGet(searchString).Result;
+				BibEntry bibEntry		= ParseSingleEntryText(bibentryString);
+				ApplyAllCleaning(bibEntry);
+				yield return bibEntry;
+			}
+		}
+
+		/// <summary>
+		/// Search for and download the Bibtex entry for an SPE paper.
+		/// </summary>
+		/// <param name="searchTerms">Terms to search the web for the paper.</param>
+		async public Task<string> SpeBibtexGet(string searchTerms)
+		{
+			string website          = "onepetro.org";
+			List<string> results    = DigitalProduction.Http.Search.GoogleSearchResults(searchTerms);
+
+			foreach (string result in results)
+			{
+				if (result.Contains(website))
+				{
+					string				documentId		= result.Split('/').Last();
+					HttpResponseMessage	response		= _client.GetAsync("https://onepetro.org/Citation/Download?resourceId="+documentId+"&resourceType=3&citationFormat=2").Result;
+					HttpContent			content			= response.Content;
+					string				responseString	= await content.ReadAsStringAsync();
+
+					return DigitalProduction.Strings.Format.TrimStart(responseString, "\r\n");
+				}
+			}
+
+			return string.Empty;
+		}
 
 		#endregion
 

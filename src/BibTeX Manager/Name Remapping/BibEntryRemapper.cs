@@ -46,26 +46,23 @@ namespace BibtexManager
 		/// </summary>
 		/// <param name="entry">BibEntry.</param>
 		/// <param name="mapName">Name of the map to use.</param>
-		public void RemapEntryNames(BibEntry entry, string mapName)
+		public void RemapEntryNames(BibEntry entry)
 		{
-			BibEntryMap map = _maps[mapName];
-
-			// Check the Type of the bibliography entry.  I.e., this allows mapping
-			// of "@proceedings" to "@inproceedings".
-			if (map.FromTypes.Contains(entry.Type))
+			if (_maps.ContainsKey(entry.Type.ToLower()))
 			{
-				entry.Type = map.ToType;
-			}
+				BibEntryMap map = _maps[entry.Type.ToLower()];
+				entry.Type		= map.ToType;
 
-			// Getting the tag names is a little expensive, so just do it once, outside of the loop.
-			List<string> tagNames = entry.TagNames;
+				// Getting the tag names is a little expensive, so just do it once, outside of the loop.
+				List<string> tagNames = entry.TagNames;
 
-			foreach (KeyValuePair<string, string> tagMap in map.TagMaps)
-			{
-				// Only remap when the key exists.
-				if (tagNames.Contains(tagMap.Key))
+				foreach (KeyValuePair<string, string> tagMap in map.TagMaps)
 				{
-					entry.RenameTagKey(tagMap.Key, tagMap.Value);
+					// Only remap when the key exists.
+					if (tagNames.Contains(tagMap.Key))
+					{
+						entry.RenameTagKey(tagMap.Key, tagMap.Value);
+					}
 				}
 			}
 		}

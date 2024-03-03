@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace BibtexManager.Forms
+namespace BibtexManager
 {
 	/// <summary>
-	/// A form for finding an entry in the Project.
+	/// A simple form for entering search terms in a text box.
 	/// </summary>
-	public partial class FindEntryForm : Form
+	public partial class SearchForm : Form
 	{
 		#region Fields
 
@@ -17,14 +17,11 @@ namespace BibtexManager.Forms
 		/// <summary>
 		/// Default constructor.
 		/// </summary>
-		public FindEntryForm()
+		public SearchForm()
 		{
 			InitializeComponent();
 
 			PopulateControls();
-
-			// Put the cursor into the text box.
-			this.findTextBox.Select();
 		}
 
 		#endregion
@@ -32,9 +29,15 @@ namespace BibtexManager.Forms
 		#region Properties
 
 		/// <summary>
-		/// Get the "find" string.
+		/// The search terms from the text box.
 		/// </summary>
-		public string FindString { get => this.findTextBox.Text; }
+		public string SearchTerms
+		{
+			get
+			{
+				return this.searchTermsTextBox.Text.Trim();
+			}
+		}
 
 		#endregion
 

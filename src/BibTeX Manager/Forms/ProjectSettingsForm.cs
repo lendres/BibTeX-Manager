@@ -337,6 +337,7 @@ namespace BibtexManager
 			this.removeLastCommaCheckBox.Checked					= writeSettings.RemoveLastComma;
 			this.copyCiteKeyCheckBox.Checked						= _project.CopyCiteKeyOnEntryAdd;
 			this.useConstantStringsCheckBox.Checked					= _project.UseStringConstants;
+			this.useBibEntryMapCheckBox.Checked                     = _project.UseBibEntryRemapping;
 		}
 
 		/// <summary>
@@ -397,6 +398,7 @@ namespace BibtexManager
 			writeSettings.RemoveLastComma					= this.removeLastCommaCheckBox.Checked;
 			_project.CopyCiteKeyOnEntryAdd					= this.copyCiteKeyCheckBox.Checked;
 			_project.UseStringConstants						= this.useConstantStringsCheckBox.Checked;
+			_project.UseBibEntryRemapping                   = this.useBibEntryMapCheckBox.Checked;
 		}
 
 		/// <summary>

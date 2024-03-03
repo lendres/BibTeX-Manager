@@ -1,8 +1,11 @@
 ﻿using BibTeXLibrary;
 using DigitalProduction.Forms;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
+using System.Linq;
+using System.Net.Http;
 using System.Windows.Forms;
 
 namespace BibtexManager
@@ -11,7 +14,7 @@ namespace BibtexManager
 	{
 		#region Fields
 
-		private BibtexProject			_project;
+		private BibtexProject					_project;
 
 		#endregion
 
@@ -46,36 +49,36 @@ namespace BibtexManager
 		/// <summary>
 		/// Delegate for showing the edit dialog.
 		/// </summary>
-		[Browsable(false)]
-		public override ShowEditDialogDelegate ShowEditDialog
-		{
-			get
-			{
-				return base.ShowEditDialog;
-			}
+		//[Browsable(false)]
+		//public override ShowEditDialogDelegate ShowEditDialog
+		//{
+		//	get
+		//	{
+		//		return base.ShowEditDialog;
+		//	}
 
-			set
-			{
-				base.ShowEditDialog = this.ShowEditRawBibEntryDialog;
-			}
-		}
+		//	set
+		//	{
+		//		base.ShowEditDialog = this.ShowEditRawBibEntryDialog;
+		//	}
+		//}
 
-		/// <summary>
-		/// Delegate for showing the add dialog.
-		/// </summary>
-		[Browsable(false)]
-		public override ShowAddDialogDelegate ShowAddDialog
-		{
-			get
-			{
-				return base.ShowAddDialog;
-			}
+		///// <summary>
+		///// Delegate for showing the add dialog.
+		///// </summary>
+		//[Browsable(false)]
+		//public override ShowAddDialogDelegate ShowAddDialog
+		//{
+		//	get
+		//	{
+		//		return base.ShowAddDialog;
+		//	}
 
-			set
-			{
-				base.ShowAddDialog = this.ShowAddRawBibEntryDialog;
-			}
-		}
+		//	set
+		//	{
+		//		base.ShowAddDialog = this.ShowAddRawBibEntryDialog;
+		//	}
+		//}
 
 		#endregion
 
@@ -89,6 +92,16 @@ namespace BibtexManager
 		private void AddRawTemplateButton_Click(object sender, EventArgs eventArgs)
 		{
 			AddRawTemplate();
+		}
+
+		/// <summary>
+		/// Add a new raw bibliography based on a web search for an SPE paper.
+		/// </summary>
+		/// <param name="sender">Sender.</param>
+		/// <param name="eventArgs">Event arguments.</param>
+		private void AddSpeButton_Click(object sender, EventArgs eventArgs)
+		{
+			AddFromSpeSearch();
 		}
 
 		#endregion
@@ -111,7 +124,7 @@ namespace BibtexManager
 		public DialogResultPair ShowAddRawBibEntryDialog()
 		{
 			EditRawBibEntryForm editRawBibEntryForm = new EditRawBibEntryForm(this.BibtexManagerForm, this.Project);
-			return editRawBibEntryForm.ShowDialog(this, null, this.Project.WriteSettings);
+			return editRawBibEntryForm.ShowDialog(this, this.Project.WriteSettings);
 		}
 
 		/// <summary>
@@ -126,13 +139,36 @@ namespace BibtexManager
 			{
 				BibEntry entry = BibEntry.NewBibEntryTemplate(_project.BibEntryInitialization, selectBibEntryType.SelectedType);
 
-				EditRawBibEntryForm editRawBibEntryForm = new EditRawBibEntryForm(this.BibtexManagerForm, this.Project);
-				DialogResultPair dialogResultPair = editRawBibEntryForm.ShowDialog(this, entry, this.Project.WriteSettings);
+				EditRawBibEntryForm	editRawBibEntryForm	= new EditRawBibEntryForm(this.BibtexManagerForm, this.Project);
+				DialogResultPair	dialogResultPair	= editRawBibEntryForm.ShowDialog(this, entry, this.Project.WriteSettings);
 
 				if (dialogResultPair.Result == DialogResult.OK)
 				{
 					Add(dialogResultPair.Object);
 				}
+			}
+		}
+
+		/// <summary>
+		/// Create an entry from a web search for an SPE paper.
+		/// </summary>
+		async private void AddFromSpeSearch()
+		{
+			SearchForm searchForm       = new SearchForm();
+			DialogResult dialogResult   = searchForm.ShowDialog();
+
+			if (dialogResult == DialogResult.OK)
+			{
+				string responseString = await this.Project.SpeBibtexGet(searchForm.SearchTerms);
+
+				EditRawBibEntryForm editRawBibEntryForm = new EditRawBibEntryForm(this.BibtexManagerForm, this.Project);
+				DialogResultPair    dialogResultPair    = editRawBibEntryForm.ShowDialog(this, responseString, this.Project.WriteSettings);
+
+				if (dialogResultPair.Result == DialogResult.OK)
+				{
+					Add(dialogResultPair.Object);
+				}
+
 			}
 		}
 

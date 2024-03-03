@@ -370,10 +370,30 @@ namespace BibtexManager
 			}
 		}
 
+		/// <summary>
+		/// Bulk import of SPE papers.
+		/// </summary>
+		/// <param name="sender">Sender.</param>
+		/// <param name="eventArgs">Event args.</param>
+		private void BulkSpeToolStripMenuItem1_Click(object sender, EventArgs eventArgs)
+		{
+			//string result = this.Project.Test().Result;
+			//int doNothing = 1;
+
+			string file = DigitalProduction.Forms.FileSelect.BrowseForAFile(this, "", "Select a File with Search Terms");
+
+			foreach (BibEntry bibtexEntry in this.Project.BulkSpeImport(file))
+			{
+				int index = this.Project.GetEntryInsertIndex(bibtexEntry, 0);
+				this.referencesBindingSource.Insert(index, bibtexEntry);
+
+			}
+		}
+
+
+
 		#endregion
-
 		#region Help
-
 		/// <summary>
 		/// Show help.
 		/// </summary>
