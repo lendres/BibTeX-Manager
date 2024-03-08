@@ -778,13 +778,25 @@ namespace BibtexManager
 		/// <param name="path">The path to a file that contains a list of search strings.</param>
 		public IEnumerable<BibEntry> BulkSpeImport(string path)
 		{
-			string[] lines			= File.ReadAllLines(path);
-			List<string> references	= new List<string>();
+			string[] lines				= File.ReadAllLines(path);
+			List<string[]> references	= new List<string[]>();
 
-			foreach (BibEntry bibtexEntry in BulkSpeImport(lines))
+			foreach (string searchString in lines)
 			{
-				references.Add(bibtexEntry.Key);
-				yield return bibtexEntry;
+				BibEntry bibEntry = SpeBibtexGet(searchString).Result;
+
+				if (bibEntry is null)
+				{
+					// A bibliography entry was not found.
+					references.Add(new string[] { "", "" });
+				}
+				else
+				{
+					// A bibliography entry was found and returned as a string.
+					ApplyAllCleaning(bibEntry);
+					references.Add(new string[] { bibEntry.Key, bibEntry.Title });
+					yield return bibEntry;
+				}
 			}
 
 			string outputPath = DigitalProduction.IO.Path.GetFullPathWithoutExtension(path) + "-output.csv";
@@ -797,7 +809,7 @@ namespace BibtexManager
 		/// <param name="filePath">The path and file name to write to.</param>
 		/// <param name="references">The reference names to write.</param>
 		/// <param name="searchedTerms">The terms searched for references.</param>
-		static void WriteCsvBulkImportResults(string filePath, List<string> references, string[] searchedTerms)
+		static void WriteCsvBulkImportResults(string filePath, List<string[]> references, string[] searchedTerms)
 		{
 			// Open or create the CSV file for writing.
 			using (StreamWriter writer = new StreamWriter(filePath, false, Encoding.UTF8))
@@ -805,7 +817,9 @@ namespace BibtexManager
 				// Write each row of data to the file.
 				for (int i = 0; i < references.Count; i++)
 				{
-					writer.Write(references[i]);
+					writer.Write(references[i][0]);
+					writer.Write(", ");
+					writer.Write(references[i][1]);
 					writer.Write(", ");
 					string formatedTerm = "\"" + searchedTerms[i].Replace("\"", "\"\"") + "\"";
 					writer.Write(formatedTerm);
@@ -817,43 +831,45 @@ namespace BibtexManager
 		}
 
 		/// <summary>
-		/// Bulk SPE paper search and import.
-		/// </summary>
-		/// <param name="searchStrings">Strings to search the internet for the papers.</param>
-		public IEnumerable<BibEntry> BulkSpeImport(string[] searchStrings)
-		{
-			foreach (string searchString in searchStrings)
-			{
-				string bibentryString	= SpeBibtexGet(searchString).Result;
-				BibEntry bibEntry		= ParseSingleEntryText(bibentryString);
-				ApplyAllCleaning(bibEntry);
-				yield return bibEntry;
-			}
-		}
-
-		/// <summary>
 		/// Search for and download the Bibtex entry for an SPE paper.
 		/// </summary>
 		/// <param name="searchTerms">Terms to search the web for the paper.</param>
-		async public Task<string> SpeBibtexGet(string searchTerms)
+		async public Task<BibEntry> SpeBibtexGet(string searchTerms)
 		{
 			string website          = "onepetro.org";
 			List<string> results    = DigitalProduction.Http.Search.GoogleSearchResults(searchTerms);
 
 			foreach (string result in results)
 			{
+				// Look for resutls that contain the specified website.
 				if (result.Contains(website))
 				{
-					string				documentId		= result.Split('/').Last();
-					HttpResponseMessage	response		= _client.GetAsync("https://onepetro.org/Citation/Download?resourceId="+documentId+"&resourceType=3&citationFormat=2").Result;
-					HttpContent			content			= response.Content;
-					string				responseString	= await content.ReadAsStringAsync();
+					string documentId = result.Split('/').Last();
 
-					return DigitalProduction.Strings.Format.TrimStart(responseString, "\r\n");
+					// Did we find a OnePetro reference to a document or something else?  The documents end in a number.
+					if (int.TryParse(documentId, out int n))
+					{
+						// Attempt to download the bitex entry.
+						HttpResponseMessage response        = _client.GetAsync("https://onepetro.org/Citation/Download?resourceId="+documentId+"&resourceType=3&citationFormat=2").Result;
+						HttpContent         content         = response.Content;
+						string              responseString  = await content.ReadAsStringAsync();
+						responseString                      = DigitalProduction.Strings.Format.TrimStart(responseString, "\r\n");
+
+						if (!String.IsNullOrEmpty(responseString))
+						{
+							BibEntry bibEntry = ParseSingleEntryText(responseString);
+
+							// Check to see if we found the right bibliography entry by comparing the search terms to the title.
+							if (DigitalProduction.Strings.Format.Similarity(bibEntry.Title, searchTerms) > 0.9)
+							{
+								return bibEntry;
+							}
+						}
+					}
 				}
 			}
 
-			return string.Empty;
+			return null;
 		}
 
 		#endregion

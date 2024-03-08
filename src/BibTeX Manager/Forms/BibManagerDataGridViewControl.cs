@@ -159,10 +159,10 @@ namespace BibtexManager
 
 			if (dialogResult == DialogResult.OK)
 			{
-				string responseString = await this.Project.SpeBibtexGet(searchForm.SearchTerms);
+				BibEntry bibEntry = await this.Project.SpeBibtexGet(searchForm.SearchTerms);
 
 				EditRawBibEntryForm editRawBibEntryForm = new EditRawBibEntryForm(this.BibtexManagerForm, this.Project);
-				DialogResultPair    dialogResultPair    = editRawBibEntryForm.ShowDialog(this, responseString, this.Project.WriteSettings);
+				DialogResultPair    dialogResultPair    = editRawBibEntryForm.ShowDialog(this, bibEntry, this.Project.WriteSettings);
 
 				if (dialogResultPair.Result == DialogResult.OK)
 				{
