@@ -260,7 +260,7 @@
       <Project>{e453ff0b-97b0-4575-9a2e-b15dcbf7c47f}</Project>
       <Name>BibTeXLibrary</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\C-Sharp-Library\Library\Digital Production.csproj">
+    <ProjectReference Include="..\..\..\C Sharp Library\Library\Digital Production.csproj">
       <Project>{078ea7c0-7ee8-4d51-9421-8eedc779acbb}</Project>
       <Name>Digital Production</Name>
     </ProjectReference>

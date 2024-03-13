@@ -4,7 +4,7 @@ VisualStudioVersion = 17.5.33530.505
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BibTeX Manager", "BibTeX Manager\BibTeX Manager.csproj", "{F42EE1BE-ECB7-48E3-BF6C-13FE01B37919}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Digital Production", "..\..\C-Sharp-Library\Library\Digital Production.csproj", "{078EA7C0-7EE8-4D51-9421-8EEDC779ACBB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Digital Production", "..\..\C Sharp Library\Library\Digital Production.csproj", "{078EA7C0-7EE8-4D51-9421-8EEDC779ACBB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BibTeXLibrary", "..\..\BibTeXLibrary\BibTeXLibrary\BibTeXLibrary.csproj", "{E453FF0B-97B0-4575-9A2E-B15DCBF7C47F}"
 EndProject
