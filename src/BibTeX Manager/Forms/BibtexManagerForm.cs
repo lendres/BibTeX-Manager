@@ -382,17 +382,18 @@ namespace BibtexManager
 
 			string file = DigitalProduction.Forms.FileSelect.BrowseForAFile(this, "", "Select a File with Search Terms");
 
-			foreach (BibEntry bibtexEntry in this.Project.BulkSpeImport(file))
+			if (file != "")
 			{
-				int index = this.Project.GetEntryInsertIndex(bibtexEntry, 0);
-				this.referencesBindingSource.Insert(index, bibtexEntry);
-
+				foreach (BibEntry bibtexEntry in this.Project.BulkSpeImport(file))
+				{
+					int index = this.Project.GetEntryInsertIndex(bibtexEntry, 0);
+					this.referencesBindingSource.Insert(index, bibtexEntry);
+				}
 			}
 		}
 
-
-
 		#endregion
+
 		#region Help
 		/// <summary>
 		/// Show help.
