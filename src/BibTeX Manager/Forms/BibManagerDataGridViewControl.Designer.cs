@@ -82,12 +82,12 @@
 			// 
 			// addSpeButton
 			// 
-			this.addSpeButton.Image = global::BibtexManager.Properties.Resources.PlusGreenAndTemplate_16x;
-			this.addSpeButton.Location = new System.Drawing.Point(461, 0);
+			this.addSpeButton.Image = global::BibtexManager.Properties.Resources.Download_SPE_22x22;
+			this.addSpeButton.Location = new System.Drawing.Point(417, 0);
 			this.addSpeButton.Name = "addSpeButton";
 			this.addSpeButton.Size = new System.Drawing.Size(40, 30);
 			this.addSpeButton.TabIndex = 8;
-			this.dataGridViewControlToolTip.SetToolTip(this.addSpeButton, "Add Entry from Template");
+			this.dataGridViewControlToolTip.SetToolTip(this.addSpeButton, "Add Entry by a Web Search for an SPE Paper");
 			this.addSpeButton.UseVisualStyleBackColor = true;
 			this.addSpeButton.Click += new System.EventHandler(this.AddSpeButton_Click);
 			// 

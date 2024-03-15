@@ -201,9 +201,17 @@
     <Compile Include="Quality\TagProcessor.cs" />
     <Compile Include="Quality\TagProcessorGroup.cs" />
     <Compile Include="Quality\TagsToProcess.cs" />
+    <None Include="Forms\Resources\Download SPE 22x22.png" />
+    <Content Include="Forms\Resources\key.png" />
+    <Content Include="Forms\Resources\LELaTeX Logo-Rotated-CroppedForAbout.bmp" />
     <Content Include="Forms\Resources\Paste Quality_40.png" />
     <Content Include="Forms\Resources\Paste_40.png" />
     <Content Include="Forms\Resources\Quality Check_40.png" />
+    <None Include="Resources\Download SPE 22x223.png" />
+    <None Include="Resources\Download SPE 22x222.png" />
+    <None Include="Resources\Download SPE 22x221.png" />
+    <None Include="Resources\Download SPE 22x22.png" />
+    <None Include="Resources\Download SPE 16x161.png" />
     <None Include="Forms\Resources\PlusGreenAndTemplate_16x.png" />
     <None Include="Forms\Resources\Copy Key_40.png" />
     <None Include="Test Files\Bib Entry Initialization.tagord">

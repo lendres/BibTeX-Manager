@@ -1,18 +1,14 @@
 ﻿using BibTeXLibrary;
-using DigitalProduction.Forms;
 using DigitalProduction.Projects;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
-using System.Windows.Forms;
-using System.Xml.Serialization;
 using System.Net.Http;
-using System.Threading.Tasks;
-using System.Security.Policy;
-using System.Data.SqlTypes;
 using System.Text;
+using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace BibtexManager
 {

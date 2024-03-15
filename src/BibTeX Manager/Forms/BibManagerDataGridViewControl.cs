@@ -1,11 +1,8 @@
 ﻿using BibTeXLibrary;
 using DigitalProduction.Forms;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
-using System.Linq;
-using System.Net.Http;
 using System.Windows.Forms;
 
 namespace BibtexManager
@@ -203,6 +200,8 @@ namespace BibtexManager
 			this.addRawTemplateButton.Location = new Point(location, 0);
 
 			// Set the location of the remaining buttons.
+			location += 41;
+			this.addSpeButton.Location = new Point(location, 0);
 			location += 75;
 			this.modifyButton.Location = new Point(location, 0);
 			location += 75;
