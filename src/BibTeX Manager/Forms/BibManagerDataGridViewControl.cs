@@ -149,23 +149,29 @@ namespace BibtexManager
 		/// <summary>
 		/// Create an entry from a web search for an SPE paper.
 		/// </summary>
-		async private void AddFromSpeSearch()
+		private void AddFromSpeSearch()
 		{
 			SearchForm searchForm       = new SearchForm();
 			DialogResult dialogResult   = searchForm.ShowDialog();
 
 			if (dialogResult == DialogResult.OK)
 			{
-				BibEntry bibEntry = await this.Project.SpeBibtexGet(searchForm.SearchTerms);
+				BibEntry bibEntry = this.Project.SpeBibtexGet(searchForm.SearchTerms);
 
-				EditRawBibEntryForm editRawBibEntryForm = new EditRawBibEntryForm(this.BibtexManagerForm, this.Project);
-				DialogResultPair    dialogResultPair    = editRawBibEntryForm.ShowDialog(this, bibEntry, this.Project.WriteSettings);
-
-				if (dialogResultPair.Result == DialogResult.OK)
+				if (bibEntry != null)
 				{
-					Add(dialogResultPair.Object);
-				}
+					EditRawBibEntryForm editRawBibEntryForm = new EditRawBibEntryForm(this.BibtexManagerForm, this.Project);
+					DialogResultPair    dialogResultPair    = editRawBibEntryForm.ShowDialog(this, bibEntry, this.Project.WriteSettings);
 
+					if (dialogResultPair.Result == DialogResult.OK)
+					{
+						Add(dialogResultPair.Object);
+					}
+				}
+				else
+				{
+					MessageBox.Show("A bibliography entry was not found.", "Entry Not Found", MessageBoxButtons.OK);
+				}
 			}
 		}
 

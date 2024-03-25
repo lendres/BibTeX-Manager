@@ -76,10 +76,10 @@ namespace BibtexManager
 		/// <summary>
 		/// Create a new BibtexProject.
 		/// </summary>
-		protected override Project NewProject()
+		protected override DigitalProduction.Projects.Project NewProject()
 		{
 			BibtexProject project	= new BibtexProject();
-			return (Project)project;
+			return (DigitalProduction.Projects.Project)project;
 		}
 
 		/// <summary>

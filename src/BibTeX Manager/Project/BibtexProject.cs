@@ -1,4 +1,5 @@
 ﻿using BibTeXLibrary;
+using BibtexManager.Project;
 using DigitalProduction.Projects;
 using System;
 using System.Collections.Generic;
@@ -7,6 +8,7 @@ using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 
@@ -16,7 +18,7 @@ namespace BibtexManager
 	/// The model.
 	/// </summary>
 	[XmlRoot("bibtexproject")]
-	public class BibtexProject : Project
+	public class BibtexProject : DigitalProduction.Projects.Project
 	{
 		#region Fields
 
@@ -776,10 +778,21 @@ namespace BibtexManager
 		{
 			string[] lines				= File.ReadAllLines(path);
 			List<string[]> references	= new List<string[]>();
+			string outputPath			= DigitalProduction.IO.Path.GetFullPathWithoutExtension(path) + "-output.csv";
 
 			foreach (string searchString in lines)
 			{
-				BibEntry bibEntry = SpeBibtexGet(searchString).Result;
+				BibEntry bibEntry = null;
+				try
+				{
+					bibEntry = SpeBibtexGet(searchString);
+				}
+				catch (Exception exception)
+				{
+					break;
+				}
+				// Slow down the rate of inquiries to try to limit 429 errors (too many requests).
+				Thread.Sleep(5000);
 
 				if (bibEntry is null)
 				{
@@ -795,7 +808,7 @@ namespace BibtexManager
 				}
 			}
 
-			string outputPath = DigitalProduction.IO.Path.GetFullPathWithoutExtension(path) + "-output.csv";
+			// Write the results.
 			WriteCsvBulkImportResults(outputPath, references, lines);
 		}
 
@@ -830,38 +843,101 @@ namespace BibtexManager
 		/// Search for and download the Bibtex entry for an SPE paper.
 		/// </summary>
 		/// <param name="searchTerms">Terms to search the web for the paper.</param>
-		async public Task<BibEntry> SpeBibtexGet(string searchTerms)
+		public BibEntry SpeBibtexGet(string searchTerms)
 		{
 			string website          = "onepetro.org";
-			List<string> results    = DigitalProduction.Http.Search.GoogleSearchResults(searchTerms);
+			List<string> results    = DigitalProduction.Http.HttpGet.GoogleSearchResults(searchTerms + " " + website);
 
 			foreach (string result in results)
 			{
-				// Look for resutls that contain the specified website.
-				if (result.Contains(website))
+				WebPageType webPageType = SpeWebPageType(result, website);
+				BibEntry bibEntry       = null;
+
+				switch (webPageType)
 				{
-					string documentId = result.Split('/').Last();
+					case WebPageType.ArticlePage:
+						bibEntry = DownloadSpeBibtex(result, searchTerms).Result;
+						break;
 
-					// Did we find a OnePetro reference to a document or something else?  The documents end in a number.
-					if (int.TryParse(documentId, out int n))
-					{
-						// Attempt to download the bitex entry.
-						HttpResponseMessage response        = _client.GetAsync("https://onepetro.org/Citation/Download?resourceId="+documentId+"&resourceType=3&citationFormat=2").Result;
-						HttpContent         content         = response.Content;
-						string              responseString  = await content.ReadAsStringAsync();
-						responseString                      = DigitalProduction.Strings.Format.TrimStart(responseString, "\r\n");
+					case WebPageType.ConferencePage:
+						bibEntry = SearchConferencePageForArticle(result, searchTerms);
+						break;
 
-						if (!String.IsNullOrEmpty(responseString))
-						{
-							BibEntry bibEntry = ParseSingleEntryText(responseString);
+					case WebPageType.Unknown:
+						// No nothing and keep searching.
+						break;
+				}
 
-							// Check to see if we found the right bibliography entry by comparing the search terms to the title.
-							if (DigitalProduction.Strings.Format.Similarity(bibEntry.Title, searchTerms) > 0.9)
-							{
-								return bibEntry;
-							}
-						}
-					}
+				// If we found the correct entry, return it, otherwise we keep searching.
+				if (bibEntry != null)
+				{
+					return bibEntry;
+				}
+
+			}
+			return null;
+		}
+
+		private WebPageType SpeWebPageType(string result, string website)
+		{
+			// Look for resutls that contain the specified website.
+			if (!result.Contains(website))
+			{
+				return WebPageType.Unknown;
+			}
+
+			string lastPathElement = result.Split('/').Last();
+
+			// Did we find a OnePetro reference to a document or something else?  The documents end in a number.
+			if (int.TryParse(lastPathElement, out int n))
+			{
+				return WebPageType.ArticlePage;
+			}
+
+			if (result.Contains("conferences"))
+			{
+				return WebPageType.ConferencePage;
+			}
+
+			return WebPageType.Unknown;
+		}
+
+
+		async private Task<BibEntry> DownloadSpeBibtex(string result, string searchTerms)
+		{
+			// Extract the last path element.  For an SPE article, this should be the document ID.
+			string docuementID = result.Split('/').Last();
+
+			// Attempt to download the bitex entry.
+			HttpResponseMessage response        = _client.GetAsync("https://onepetro.org/Citation/Download?resourceId="+docuementID+"&resourceType=3&citationFormat=2").Result;
+			HttpContent         content         = response.Content;
+			string              responseString  = await content.ReadAsStringAsync();
+			responseString                      = DigitalProduction.Strings.Format.TrimStart(responseString, "\r\n");
+
+			if (!String.IsNullOrEmpty(responseString))
+			{
+				BibEntry bibEntry = ParseSingleEntryText(responseString);
+
+				// Check to see if we found the right bibliography entry by comparing the search terms to the title.
+				if (DigitalProduction.Strings.Format.Similarity(bibEntry.Title, searchTerms) > 0.9)
+				{
+					return bibEntry;
+				}
+			}
+
+			return null;
+		}
+
+		private BibEntry SearchConferencePageForArticle(string url, string searchTerms)
+		{
+			//List<string> links = DigitalProduction.Http.HttpGet.GetAllLinksOnPage(url);
+			List<string[]> links = DigitalProduction.Http.HttpGet.GetAllLinksOnPage(url);
+
+			foreach (string[] link in links)
+			{
+				if (DigitalProduction.Strings.Format.Similarity(link[0], searchTerms) > 0.9)
+				{
+					return DownloadSpeBibtex(link[1], searchTerms).Result;
 				}
 			}
 

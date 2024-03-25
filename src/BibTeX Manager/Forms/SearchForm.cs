@@ -22,6 +22,9 @@ namespace BibtexManager
 			InitializeComponent();
 
 			PopulateControls();
+
+			this.searchTermsTextBox.Focus();
+			this.searchTermsTextBox.Select();
 		}
 
 		#endregion
