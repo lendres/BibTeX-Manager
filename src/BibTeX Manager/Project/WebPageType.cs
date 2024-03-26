@@ -3,7 +3,7 @@
 namespace BibtexManager.Project
 {
 	/// <summary>
-	/// Add summary here.
+	/// Used to determine what type of webpage a search returned.
 	/// 
 	/// The "Description" attribute can be accessed using Reflection to get a string representing the enumeration type.
 	/// 

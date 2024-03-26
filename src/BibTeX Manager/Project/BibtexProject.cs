@@ -894,7 +894,7 @@ namespace BibtexManager
 				return WebPageType.ArticlePage;
 			}
 
-			if (result.Contains("conferences"))
+			if (result.Contains("conference"))
 			{
 				return WebPageType.ConferencePage;
 			}
