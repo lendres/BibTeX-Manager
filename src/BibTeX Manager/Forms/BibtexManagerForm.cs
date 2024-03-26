@@ -377,17 +377,21 @@ namespace BibtexManager
 		/// <param name="eventArgs">Event args.</param>
 		private void BulkSpeToolStripMenuItem1_Click(object sender, EventArgs eventArgs)
 		{
-			//string result = this.Project.Test().Result;
-			//int doNothing = 1;
-
 			string file = DigitalProduction.Forms.FileSelect.BrowseForAFile(this, "", "Select a File with Search Terms");
 
 			if (file != "")
 			{
-				foreach (BibEntry bibtexEntry in this.Project.BulkSpeImport(file))
+				try
 				{
-					int index = this.Project.GetEntryInsertIndex(bibtexEntry, 0);
-					this.referencesBindingSource.Insert(index, bibtexEntry);
+					foreach (BibEntry bibtexEntry in this.Project.BulkSpeImport(file))
+					{
+						int index = this.Project.GetEntryInsertIndex(bibtexEntry, 0);
+						this.referencesBindingSource.Insert(index, bibtexEntry);
+					}
+				}
+				catch (Exception exception)
+				{
+					MessageBox.Show("An error occured during the search.\nError: "+exception.Message, "Search Error", MessageBoxButtons.OK);
 				}
 			}
 		}

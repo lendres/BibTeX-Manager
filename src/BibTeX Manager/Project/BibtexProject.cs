@@ -10,6 +10,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using System.Xml.Serialization;
 
 namespace BibtexManager
@@ -789,7 +790,8 @@ namespace BibtexManager
 				}
 				catch (Exception exception)
 				{
-					break;
+					WriteCsvBulkImportResults(outputPath, references, lines);
+					throw exception;
 				}
 				// Slow down the rate of inquiries to try to limit 429 errors (too many requests).
 				Thread.Sleep(5000);

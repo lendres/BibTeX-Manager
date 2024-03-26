@@ -178,7 +178,7 @@ namespace BibtexManager
 				}
 				catch (Exception exception)
 				{
-					MessageBox.Show("An error occured during the search.\nError: "+exception.Message, "Search Error", MessageBoxButtons.OK);
+					MessageBox.Show(this.Parent, "An error occured during the search.\nError: "+exception.Message, "Search Error", MessageBoxButtons.OK);
 				}
 			}
 		}
