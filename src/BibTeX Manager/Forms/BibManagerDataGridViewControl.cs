@@ -156,21 +156,29 @@ namespace BibtexManager
 
 			if (dialogResult == DialogResult.OK)
 			{
-				BibEntry bibEntry = this.Project.SpeBibtexGet(searchForm.SearchTerms);
-
-				if (bibEntry != null)
+				try
 				{
-					EditRawBibEntryForm editRawBibEntryForm = new EditRawBibEntryForm(this.BibtexManagerForm, this.Project);
-					DialogResultPair    dialogResultPair    = editRawBibEntryForm.ShowDialog(this, bibEntry, this.Project.WriteSettings);
+					BibEntry bibEntry = this.Project.SpeBibtexGet(searchForm.SearchTerms);
 
-					if (dialogResultPair.Result == DialogResult.OK)
+					if (bibEntry != null)
 					{
-						Add(dialogResultPair.Object);
+						EditRawBibEntryForm editRawBibEntryForm = new EditRawBibEntryForm(this.BibtexManagerForm, this.Project);
+						DialogResultPair    dialogResultPair    = editRawBibEntryForm.ShowDialog(this, bibEntry, this.Project.WriteSettings);
+
+						if (dialogResultPair.Result == DialogResult.OK)
+						{
+							Add(dialogResultPair.Object);
+						}
 					}
+					else
+					{
+						MessageBox.Show(this.Parent, "A bibliography entry was not found.", "Entry Not Found", MessageBoxButtons.OK);
+					}
+
 				}
-				else
+				catch (Exception exception)
 				{
-					MessageBox.Show("A bibliography entry was not found.", "Entry Not Found", MessageBoxButtons.OK);
+					MessageBox.Show("An error occured during the search.\nError: "+exception.Message, "Search Error", MessageBoxButtons.OK);
 				}
 			}
 		}
