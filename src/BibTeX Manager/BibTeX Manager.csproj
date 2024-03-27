@@ -182,6 +182,8 @@
       <DependentUpon>BibtexManagerForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program\Program.cs" />
+    <Compile Include="Project\ImportResult.cs" />
+    <Compile Include="Project\ResultType.cs" />
     <Compile Include="Project\WebPageType.cs" />
     <Compile Include="Project\StringConstantProcessor.cs" />
     <Compile Include="Properties\Resources.Designer.cs">

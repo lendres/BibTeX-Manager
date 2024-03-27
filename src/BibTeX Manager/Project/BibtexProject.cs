@@ -4,6 +4,7 @@ using DigitalProduction.Projects;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
@@ -12,6 +13,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Serialization;
+using static System.Windows.Forms.LinkLabel;
 
 namespace BibtexManager
 {
@@ -53,6 +55,10 @@ namespace BibtexManager
 		private SortBy                              _bibliographySortMethod			= SortBy.Key;
 
 		private static readonly HttpClient			_client							= new HttpClient();
+		private System.Diagnostics.Stopwatch		_stopWatch						= null;
+		private bool                                _continue                       = true;
+		private Random								_random							= new Random(Environment.TickCount);
+
 
 		#endregion
 
@@ -775,28 +781,42 @@ namespace BibtexManager
 		/// Bulk SPE paper search and import.
 		/// </summary>
 		/// <param name="path">The path to a file that contains a list of search strings.</param>
-		public IEnumerable<BibEntry> BulkSpeImport(string path)
+		public IEnumerable<ImportResult> BulkSpeImport(string path)
 		{
 			string[] lines				= File.ReadAllLines(path);
 			List<string[]> references	= new List<string[]>();
 			string outputPath			= DigitalProduction.IO.Path.GetFullPathWithoutExtension(path) + "-output.csv";
+			_continue					= true;
 
 			foreach (string searchString in lines)
 			{
-				BibEntry bibEntry = null;
-				try
+				ImportResult importResult = null;
+				do
 				{
-					bibEntry = SpeBibtexGet(searchString);
-				}
-				catch (Exception exception)
-				{
-					WriteCsvBulkImportResults(outputPath, references, lines);
-					throw exception;
-				}
-				// Slow down the rate of inquiries to try to limit 429 errors (too many requests).
-				Thread.Sleep(5000);
+					importResult = ImportTry(searchString);
 
-				if (bibEntry is null)
+					if (importResult.Result == ResultType.Error)
+					{
+						yield return importResult;
+						if (_continue)
+						{
+							// Wait 10 minutes.  60s/m * 1000ms/s * 10m.
+							Wait(60*1000*10);
+							//Wait(10);
+						}
+					}
+				}
+				while (importResult.Result==ResultType.Error & _continue);
+
+				if (!_continue)
+				{
+					break;
+				}
+
+				// Slow down the rate of inquiries to try to limit 429 errors (too many requests).
+				Wait(5000);
+
+				if (importResult.BibEntry is null)
 				{
 					// A bibliography entry was not found.
 					references.Add(new string[] { "", "" });
@@ -804,14 +824,53 @@ namespace BibtexManager
 				else
 				{
 					// A bibliography entry was found and returned as a string.
-					ApplyAllCleaning(bibEntry);
-					references.Add(new string[] { bibEntry.Key, bibEntry.Title });
-					yield return bibEntry;
+					ApplyAllCleaning(importResult.BibEntry);
+					references.Add(new string[] { importResult.BibEntry.Key, importResult.BibEntry.Title });
+					yield return importResult;
 				}
 			}
 
 			// Write the results.
 			WriteCsvBulkImportResults(outputPath, references, lines);
+		}
+
+		public void SetContinue(bool continueImport)
+		{
+			_continue = continueImport;
+		}
+
+		public ImportResult ImportTry(string searchString)
+		{
+			_stopWatch = System.Diagnostics.Stopwatch.StartNew();
+
+			try
+			{
+				BibEntry bibEntry		= SpeBibtexGet(searchString);
+				ResultType resultType	= bibEntry==null ? ResultType.NotFound : ResultType.Successful;
+				return new ImportResult(resultType, bibEntry, "");
+			}
+			catch (Exception exception)
+			{
+				return new ImportResult(ResultType.Error, null, exception.Message);
+			}
+		}
+
+		private void Wait(long timeToWait)
+		{
+			_stopWatch.Stop();
+			long elapsedMs = _stopWatch.ElapsedMilliseconds;
+
+			// Add some random time to look less bot like.
+			timeToWait += _random.Next(0, 5000);
+
+			if (elapsedMs > timeToWait)
+			{
+				return;
+			}
+			else
+			{
+				Thread.Sleep((int)(timeToWait-elapsedMs));
+			}
 		}
 
 		/// <summary>

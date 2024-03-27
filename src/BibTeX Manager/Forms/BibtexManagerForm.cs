@@ -1,5 +1,6 @@
 using BibTeXLibrary;
 using BibtexManager.Forms;
+using BibtexManager.Project;
 using DigitalProduction.Forms;
 using DigitalProduction.Projects;
 using System;
@@ -17,8 +18,11 @@ namespace BibtexManager
 	{
 		#region Fields
 
-		private string          _findString			= null;
-		private int             _findStartRow       = 0;
+		private string						_findString			= null;
+		private int							_findStartRow       = 0;
+
+		private MessageBoxYesNoToAllResult  _messageBoxResult;
+		private int							_retryCount			= 0;
 
 		#endregion
 
@@ -381,18 +385,51 @@ namespace BibtexManager
 
 			if (file != "")
 			{
-				try
+				_messageBoxResult = MessageBoxYesNoToAllResult.Yes;
+
+				foreach (ImportResult importResult in this.Project.BulkSpeImport(file))
 				{
-					foreach (BibEntry bibtexEntry in this.Project.BulkSpeImport(file))
+					switch (importResult.Result)
 					{
-						int index = this.Project.GetEntryInsertIndex(bibtexEntry, 0);
-						this.referencesBindingSource.Insert(index, bibtexEntry);
+						case ResultType.Successful:
+							int index = this.Project.GetEntryInsertIndex(importResult.BibEntry, 0);
+							this.referencesBindingSource.Insert(index, importResult.BibEntry);
+							break;
+
+						case ResultType.NotFound:
+							// Do nothing.
+							break;
+
+						case ResultType.Error:
+							MessageBoxYesNoToAll messageBox = new MessageBoxYesNoToAll(this.StoreMessageBoxResult, true);
+							string message = "An error occured during the search." + Environment.NewLine +
+								"Error: " + importResult.Message + Environment.NewLine +
+								"Do you wish to try again?";
+							MessageBoxYesNoToAllResult result = messageBox.Show(this, message, "Import Error", MessageBoxYesNoToAllButtons.YesToAllNo);
+							this.Project.SetContinue(result == MessageBoxYesNoToAllResult.Yes);
+
+							// Have a retry limit.
+							_retryCount++;
+							if (_retryCount > 6)
+							{
+								_messageBoxResult	= MessageBoxYesNoToAllResult.Yes;
+								_retryCount			= 0;
+							}
+							break;
 					}
 				}
-				catch (Exception exception)
-				{
-					MessageBox.Show("An error occured during the search.\nError: "+exception.Message, "Search Error", MessageBoxButtons.OK);
-				}
+			}
+		}
+
+		private void StoreMessageBoxResult(ref MessageBoxYesNoToAllResult result, bool setvalue)
+		{
+			if (setvalue)
+			{
+				_messageBoxResult = result;
+			}
+			else
+			{
+				result = _messageBoxResult;
 			}
 		}
 
