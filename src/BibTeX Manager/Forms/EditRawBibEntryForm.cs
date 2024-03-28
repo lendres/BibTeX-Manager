@@ -322,7 +322,7 @@ namespace BibtexManager
 		public DialogResultPair ShowDialog(IWin32Window parent, WriteSettings writeSettings)
 		{
 			// If there is a BibEntry provided, populate the form.  Also, tract if we are adding or editing.
-			_addMode = false;
+			_addMode = true;
 			return ShowDialog(parent, string.Empty, writeSettings);
 		}
 		/// <summary>
@@ -334,7 +334,7 @@ namespace BibtexManager
 		public DialogResultPair ShowDialog(IWin32Window parent, BibEntry bibEntry, WriteSettings writeSettings)
 		{
 			// If there is a BibEntry provided, populate the form.  Also, tract if we are adding or editing.
-			_addMode = true;
+			_addMode = false;
 			return ShowDialog(parent, bibEntry.ToString(writeSettings), writeSettings);
 		}
 
@@ -348,8 +348,8 @@ namespace BibtexManager
 		{
 			// Set tab size.  It is set in pixels, so we have to convert the font size to pixels.  We make an assumption the height is a good
 			// proxy for a space width.  We multiply that the tab size (number of spaces in a tab) to get the tab size.
-			int tabSize						= writeSettings.TabSize * (richTextBox.Font.Height);
-			Size spaceSize = TextRenderer.MeasureText(new string(' ', writeSettings.TabSize), this.richTextBox.Font, new Size(int.MaxValue, int.MaxValue), TextFormatFlags.LeftAndRightPadding);
+			int tabSize		= writeSettings.TabSize * (richTextBox.Font.Height);
+			Size spaceSize	= TextRenderer.MeasureText(new string(' ', writeSettings.TabSize), this.richTextBox.Font, new Size(int.MaxValue, int.MaxValue), TextFormatFlags.LeftAndRightPadding);
 			tabSize = spaceSize.Width;
 			this.richTextBox.SelectionTabs	= new int[] { tabSize, 2*tabSize, 3*tabSize, 4*tabSize, 5*tabSize, 6*tabSize, 7*tabSize, 8*tabSize };
 
