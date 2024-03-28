@@ -96,6 +96,18 @@
     <Reference Include="CbtHook">
       <HintPath>..\..\References\CbtHook.dll</HintPath>
     </Reference>
+    <Reference Include="Google.Apis, Version=1.67.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Apis.1.67.0\lib\net462\Google.Apis.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Apis.Core, Version=1.67.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Apis.Core.1.67.0\lib\net462\Google.Apis.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Apis.CustomSearchAPI.v1, Version=1.67.0.3372, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Apis.CustomSearchAPI.v1.1.67.0.3372\lib\net462\Google.Apis.CustomSearchAPI.v1.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="Plossum CommandLine">
       <HintPath>..\..\References\Plossum CommandLine.dll</HintPath>
     </Reference>
@@ -210,6 +222,7 @@
     <Content Include="Forms\Resources\Paste Quality_40.png" />
     <Content Include="Forms\Resources\Paste_40.png" />
     <Content Include="Forms\Resources\Quality Check_40.png" />
+    <None Include="packages.config" />
     <None Include="Resources\Download SPE 22x223.png" />
     <None Include="Resources\Download SPE 22x222.png" />
     <None Include="Resources\Download SPE 22x221.png" />

@@ -1,19 +1,20 @@
 ﻿using BibTeXLibrary;
 using BibtexManager.Project;
-using DigitalProduction.Projects;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Windows.Forms;
 using System.Xml.Serialization;
-using static System.Windows.Forms.LinkLabel;
+using Google.Apis.CustomSearchAPI.v1;
+using Google.Apis.CustomSearchAPI.v1.Data;
+using Google.Apis.Services;
+
+
 
 namespace BibtexManager
 {
@@ -906,22 +907,23 @@ namespace BibtexManager
 		/// <param name="searchTerms">Terms to search the web for the paper.</param>
 		public BibEntry SpeBibtexGet(string searchTerms)
 		{
-			string website          = "onepetro.org";
-			List<string> results    = DigitalProduction.Http.HttpGet.GoogleSearchResults(searchTerms + " " + website);
+			string website			= "onepetro.org";
+			IList<Result> results	= DigitalProduction.Http.CustomSearch.Search(searchTerms + " " + website);
 
-			foreach (string result in results)
+			foreach (Result result in results)
 			{
-				WebPageType webPageType = SpeWebPageType(result, website);
+				string webSiteUrl       = result.Link;
+				WebPageType webPageType = SpeWebPageType(webSiteUrl, website);
 				BibEntry bibEntry       = null;
 
 				switch (webPageType)
 				{
 					case WebPageType.ArticlePage:
-						bibEntry = DownloadSpeBibtex(result, searchTerms).Result;
+						bibEntry = DownloadSpeBibtex(webSiteUrl, searchTerms).Result;
 						break;
 
 					case WebPageType.ConferencePage:
-						bibEntry = SearchConferencePageForArticle(result, searchTerms);
+						bibEntry = SearchConferencePageForArticle(webSiteUrl, searchTerms);
 						break;
 
 					case WebPageType.Unknown:
@@ -949,15 +951,15 @@ namespace BibtexManager
 
 			string lastPathElement = result.Split('/').Last();
 
+			if (result.Contains("conference"))
+			{
+				return WebPageType.ConferencePage;
+			}
+
 			// Did we find a OnePetro reference to a document or something else?  The documents end in a number.
 			if (int.TryParse(lastPathElement, out int n))
 			{
 				return WebPageType.ArticlePage;
-			}
-
-			if (result.Contains("conference"))
-			{
-				return WebPageType.ConferencePage;
 			}
 
 			return WebPageType.Unknown;
