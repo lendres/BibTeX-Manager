@@ -2,6 +2,7 @@ using BibTeXLibrary;
 using BibtexManager.Forms;
 using BibtexManager.Project;
 using DigitalProduction.Forms;
+using DigitalProduction.Http;
 using DigitalProduction.Projects;
 using System;
 using System.ComponentModel;
@@ -56,6 +57,9 @@ namespace BibtexManager
 
 			// Allow the form to see key presses.
 			this.KeyPreview = true;
+
+			// Search set up.
+			CustomSearch.SetCxAndKey(Program.Registry.CustomSearchEngineIdentifier, Program.Registry.SearchEngineApiKey);
 		}
 
 		#endregion
@@ -339,6 +343,23 @@ namespace BibtexManager
 		}
 
 		/// <summary>
+		/// Web search settings.
+		/// </summary>
+		/// <param name="sender">Sender.</param>
+		/// <param name="eventArgs">Event args.</param>
+		private void webSearchSettingsToolStripMenuItem_Click(object sender, EventArgs eventArgs)
+		{
+			GoogleSearchForm searchForm = new GoogleSearchForm(CustomSearch.Cx, CustomSearch.ApiKey);
+
+			if (searchForm.ShowDialog() == DialogResult.OK)
+			{
+				Program.Registry.CustomSearchEngineIdentifier	= searchForm.Cx;
+				Program.Registry.SearchEngineApiKey				= searchForm.ApiKey;
+			}
+		}
+
+
+		/// <summary>
 		/// Sort all entries in the bibliography.
 		/// </summary>
 		/// <param name="sender">Sender.</param>
@@ -514,7 +535,6 @@ namespace BibtexManager
 				OpenRecentFile();
 			}
 		}
-
 		#endregion
 
 		//}

@@ -128,16 +128,6 @@ namespace BibtexManager
 		}
 
 		/// <summary>
-		/// BibEntryMap check box changed event handler.
-		/// </summary>
-		/// <param name="sender">Sender.</param>
-		/// <param name="eventArgs">Event arguments.</param>
-		private void BibEntryCheckBox_CheckedChanged(object sender, EventArgs eventArgs)
-		{
-			SetControls();
-		}
-
-		/// <summary>
 		/// Ok button event handler.
 		/// </summary>
 		/// <param name="sender">Sender.</param>
@@ -370,16 +360,11 @@ namespace BibtexManager
 			return dialogResultPair;
 		}
 
-		private void SetControls()
-		{
-		}
-
 		/// <summary>
 		/// Initialize the controls with the values from the data structure.
 		/// </summary>
 		protected void PopulateControls()
 		{
-			SetControls();
 		}
 
 		/// <summary>

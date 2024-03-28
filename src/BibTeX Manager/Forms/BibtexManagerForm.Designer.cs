@@ -113,6 +113,7 @@ namespace BibtexManager
 			this.sortBibliographyEntriesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.checkTagQualityToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.importToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+			this.bulkSPEToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
 			this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.viewHelpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -122,7 +123,7 @@ namespace BibtexManager
 			this.authorDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.Title = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.dataGridViewInterfaceControl = new BibtexManager.BibManagerDataGridViewControl();
-			this.bulkSPEToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+			this.webSearchSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			((System.ComponentModel.ISupportInitialize)(this.referencesBindingSource)).BeginInit();
 			this.menuMain.SuspendLayout();
 			this.enableOpenProjectPanel.SuspendLayout();
@@ -250,6 +251,7 @@ namespace BibtexManager
 			// 
 			this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.optionsToolStripMenuItem,
+            this.webSearchSettingsToolStripMenuItem,
             this.qualityToolStripMenuItem,
             this.importToolStripMenuItem1});
 			this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
@@ -259,7 +261,7 @@ namespace BibtexManager
 			// optionsToolStripMenuItem
 			// 
 			this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-			this.optionsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.optionsToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
 			this.optionsToolStripMenuItem.Text = "&Options";
 			this.optionsToolStripMenuItem.Click += new System.EventHandler(this.OptionsToolStripMenuItem_Click);
 			// 
@@ -269,7 +271,7 @@ namespace BibtexManager
             this.sortBibliographyEntriesToolStripMenuItem,
             this.checkTagQualityToolStripMenuItem});
 			this.qualityToolStripMenuItem.Name = "qualityToolStripMenuItem";
-			this.qualityToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.qualityToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
 			this.qualityToolStripMenuItem.Text = "Quality";
 			// 
 			// sortBibliographyEntriesToolStripMenuItem
@@ -291,8 +293,15 @@ namespace BibtexManager
 			this.importToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.bulkSPEToolStripMenuItem1});
 			this.importToolStripMenuItem1.Name = "importToolStripMenuItem1";
-			this.importToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+			this.importToolStripMenuItem1.Size = new System.Drawing.Size(181, 22);
 			this.importToolStripMenuItem1.Text = "Import";
+			// 
+			// bulkSPEToolStripMenuItem1
+			// 
+			this.bulkSPEToolStripMenuItem1.Name = "bulkSPEToolStripMenuItem1";
+			this.bulkSPEToolStripMenuItem1.Size = new System.Drawing.Size(119, 22);
+			this.bulkSPEToolStripMenuItem1.Text = "Bulk SPE";
+			this.bulkSPEToolStripMenuItem1.Click += new System.EventHandler(this.BulkSpeToolStripMenuItem1_Click);
 			// 
 			// helpToolStripMenuItem
 			// 
@@ -431,12 +440,12 @@ namespace BibtexManager
 			this.dataGridViewInterfaceControl.Size = new System.Drawing.Size(516, 31);
 			this.dataGridViewInterfaceControl.TabIndex = 25;
 			// 
-			// bulkSPEToolStripMenuItem1
+			// webSearchSettingsToolStripMenuItem
 			// 
-			this.bulkSPEToolStripMenuItem1.Name = "bulkSPEToolStripMenuItem1";
-			this.bulkSPEToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
-			this.bulkSPEToolStripMenuItem1.Text = "Bulk SPE";
-			this.bulkSPEToolStripMenuItem1.Click += new System.EventHandler(this.BulkSpeToolStripMenuItem1_Click);
+			this.webSearchSettingsToolStripMenuItem.Name = "webSearchSettingsToolStripMenuItem";
+			this.webSearchSettingsToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
+			this.webSearchSettingsToolStripMenuItem.Text = "Web Search Settings";
+			this.webSearchSettingsToolStripMenuItem.Click += new System.EventHandler(this.webSearchSettingsToolStripMenuItem_Click);
 			// 
 			// BibtexManagerForm
 			// 
@@ -463,5 +472,6 @@ namespace BibtexManager
 		}
 		#endregion
 
+		private System.Windows.Forms.ToolStripMenuItem webSearchSettingsToolStripMenuItem;
 	} // End class.
 } // End namespace.

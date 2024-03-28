@@ -56,6 +56,38 @@ namespace BibtexManager
 			}
 		}
 
+		/// <summary>
+		/// Google search endige cx identifier.
+		/// </summary>
+		public string CustomSearchEngineIdentifier
+		{
+			get
+			{
+				return GetValue(OptionsKey(), "Custom Search Engine Identifier", "");
+			}
+
+			set
+			{
+				SetValue(OptionsKey(), "Custom Search Engine Identifier", value);
+			}
+		}
+
+		/// <summary>
+		/// Google search engine API key.
+		/// </summary>
+		public string SearchEngineApiKey
+		{
+			get
+			{
+				return GetValue(OptionsKey(), "Search Engine Api Key", "");
+			}
+
+			set
+			{
+				SetValue(OptionsKey(), "Search Engine Api Key", value);
+			}
+		}
+
 		#endregion
 
 	} // End class.
