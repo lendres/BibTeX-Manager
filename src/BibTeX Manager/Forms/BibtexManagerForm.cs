@@ -318,8 +318,15 @@ namespace BibtexManager
 		/// <param name="e">Event arguments.</param>
 		private void ModifyProjectToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			ProjectSettingsForm projectForm	= new ProjectSettingsForm(this.Project);
-			DialogResult result				= projectForm.ShowDialog(this);
+			try
+			{
+				ProjectSettingsForm projectForm = new ProjectSettingsForm(this.Project);
+				DialogResult result             = projectForm.ShowDialog(this);
+			}
+			catch (Exception exception)
+			{
+				MessageBox.Show(exception.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
 		}
 
 		#endregion
