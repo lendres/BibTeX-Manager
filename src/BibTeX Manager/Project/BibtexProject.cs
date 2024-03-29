@@ -1,5 +1,6 @@
 ﻿using BibTeXLibrary;
 using BibtexManager.Project;
+using Google.Apis.CustomSearchAPI.v1.Data;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -10,11 +11,6 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
-using Google.Apis.CustomSearchAPI.v1;
-using Google.Apis.CustomSearchAPI.v1.Data;
-using Google.Apis.Services;
-
-
 
 namespace BibtexManager
 {
@@ -813,9 +809,6 @@ namespace BibtexManager
 				{
 					break;
 				}
-
-				// Slow down the rate of inquiries to try to limit 429 errors (too many requests).
-				Wait(5000);
 
 				if (importResult.BibEntry is null)
 				{
