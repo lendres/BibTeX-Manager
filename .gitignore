@@ -241,3 +241,5 @@ src/BibTeX Manager/Test Files/Local Test File.bibproj
 src/Ancillary Files/LaTeX Tag Quality Processing.qlty
 
 *.spyproject
+
+customsearchkey.xml

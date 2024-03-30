@@ -180,6 +180,10 @@
     <Compile Include="Forms\SearchForm.Designer.cs">
       <DependentUpon>SearchForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Importing\Importer.cs" />
+    <Compile Include="Importing\IImporter.cs" />
+    <Compile Include="Importing\Spe\SpeHttpImporter.cs" />
+    <Compile Include="Importing\Spe\WebPageType.cs" />
     <Compile Include="Program\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -194,10 +198,9 @@
       <DependentUpon>BibtexManagerForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program\Program.cs" />
-    <Compile Include="Project\ImportResult.cs" />
-    <Compile Include="Project\ResultType.cs" />
-    <Compile Include="Project\WebPageType.cs" />
-    <Compile Include="Project\StringConstantProcessor.cs" />
+    <Compile Include="Importing\ImportResult.cs" />
+    <Compile Include="Importing\ResultType.cs" />
+    <Compile Include="Quality\StringConstantProcessor.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -230,9 +233,6 @@
     <None Include="Resources\Download SPE 16x161.png" />
     <None Include="Forms\Resources\PlusGreenAndTemplate_16x.png" />
     <None Include="Forms\Resources\Copy Key_40.png" />
-    <None Include="Test Files\Bib Entry Initialization.tagord">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <None Include="app.config" />
     <None Include="Help\BibTeX Manager.hhc" />
     <None Include="Help\BibTeX Manager.hhk" />
@@ -241,11 +241,6 @@
     <None Include="Help\main_index.htm" />
     <Content Include="Forms\BibTex Manager.ico" />
     <None Include="Properties\DataSources\BibTeXLibrary.BibEntry.datasource" />
-    <None Include="Test Files\Bib Entry Remap.bibmap" />
-    <None Include="Test Files\LaTeX Tag Quality Processing.qlty" />
-    <None Include="Test Files\le-short.bib" />
-    <None Include="Test Files\strings.bib" />
-    <None Include="Test Files\Tag Quality Processing.qlty" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Forms\BibManagerDataGridViewControl.resx">

@@ -123,12 +123,11 @@
 			// 
 			this.bibFileGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.bibFileGroupBox.Controls.Add(this.useRelativePathsCheckBox);
 			this.bibFileGroupBox.Controls.Add(this.bibFileLocationTextBox);
 			this.bibFileGroupBox.Controls.Add(this.browseBibFileButton);
-			this.bibFileGroupBox.Location = new System.Drawing.Point(12, 12);
+			this.bibFileGroupBox.Location = new System.Drawing.Point(12, 38);
 			this.bibFileGroupBox.Name = "bibFileGroupBox";
-			this.bibFileGroupBox.Size = new System.Drawing.Size(567, 77);
+			this.bibFileGroupBox.Size = new System.Drawing.Size(567, 51);
 			this.bibFileGroupBox.TabIndex = 26;
 			this.bibFileGroupBox.TabStop = false;
 			this.bibFileGroupBox.Text = "Bibliography File";
@@ -136,11 +135,11 @@
 			// useRelativePathsCheckBox
 			// 
 			this.useRelativePathsCheckBox.AutoSize = true;
-			this.useRelativePathsCheckBox.Location = new System.Drawing.Point(11, 51);
+			this.useRelativePathsCheckBox.Location = new System.Drawing.Point(22, 12);
 			this.useRelativePathsCheckBox.Name = "useRelativePathsCheckBox";
-			this.useRelativePathsCheckBox.Size = new System.Drawing.Size(201, 17);
+			this.useRelativePathsCheckBox.Size = new System.Drawing.Size(177, 17);
 			this.useRelativePathsCheckBox.TabIndex = 28;
-			this.useRelativePathsCheckBox.Text = "Use paths relative to bibliography file.";
+			this.useRelativePathsCheckBox.Text = "Use paths relative to project file.";
 			this.useRelativePathsCheckBox.UseVisualStyleBackColor = true;
 			this.useRelativePathsCheckBox.CheckedChanged += new System.EventHandler(this.useRelativePathsCheckBox_CheckedChanged);
 			// 
@@ -604,6 +603,7 @@
 			this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
 			this.CancelButton = this.cancelButton;
 			this.ClientSize = new System.Drawing.Size(591, 697);
+			this.Controls.Add(this.useRelativePathsCheckBox);
 			this.Controls.Add(this.organizationGroupBox);
 			this.Controls.Add(this.remappingFileGroupBox);
 			this.Controls.Add(this.qualityProcessorGroupBox);
@@ -645,6 +645,7 @@
 			this.organizationGroupBox.ResumeLayout(false);
 			this.organizationGroupBox.PerformLayout();
 			this.ResumeLayout(false);
+			this.PerformLayout();
 
 		}
 

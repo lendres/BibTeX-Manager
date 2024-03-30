@@ -1,12 +1,12 @@
 ﻿using BibTeXLibrary;
 using BibtexManager.Project;
+using DigitalProduction.Projects;
 using Google.Apis.CustomSearchAPI.v1.Data;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
-using System.Net.Http;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -50,12 +50,6 @@ namespace BibtexManager
 		private bool								_copyCiteKeyOnEntryAdd			= true;
 		private bool                                _sortBibliography				= true;
 		private SortBy                              _bibliographySortMethod			= SortBy.Key;
-
-		private static readonly HttpClient			_client							= new HttpClient();
-		private System.Diagnostics.Stopwatch		_stopWatch						= null;
-		private bool                                _continue                       = true;
-		private Random								_random							= new Random(Environment.TickCount);
-
 
 		#endregion
 
@@ -472,11 +466,11 @@ namespace BibtexManager
 				{
 					throw new Exception("The file \"" + absolutePath +" does not exist.\"");
 				}
-				_bibliography.Read(_bibFile, absolutePath);
+				_bibliography.Read(ConvertToAbsolutePath(_bibFile), absolutePath);
 			}
 			else
 			{
-				_bibliography.Read(_bibFile);
+				_bibliography.Read(ConvertToAbsolutePath(_bibFile));
 			}
 		}
 
@@ -524,6 +518,8 @@ namespace BibtexManager
 		/// </summary>
 		private void ReadAccessoryFiles()
 		{
+			_assessoryFilesDOMs.Clear();
+
 			foreach (string file in _assessoryFiles)
 			{
 				string absolutePath = ConvertToAbsolutePath(file);
@@ -544,7 +540,8 @@ namespace BibtexManager
 		{
 			if (this.UsePathsRelativeToBibFile)
 			{
-				path = DigitalProduction.IO.Path.ConvertToAbsolutePath(path, System.IO.Path.GetDirectoryName(_bibFile));
+				string filename = this.FileName;
+				path = DigitalProduction.IO.Path.ConvertToAbsolutePath(path, System.IO.Path.GetDirectoryName(this.Path));
 			}
 			return path;
 		}
@@ -774,232 +771,17 @@ namespace BibtexManager
 
 		#region Importing
 
-		/// <summary>
-		/// Bulk SPE paper search and import.
-		/// </summary>
-		/// <param name="path">The path to a file that contains a list of search strings.</param>
-		public IEnumerable<ImportResult> BulkSpeImport(string path)
+		public IEnumerable<ImportResult> BulkImport(IImporter importer, string path)
 		{
-			string[] lines				= File.ReadAllLines(path);
-			List<string[]> references	= new List<string[]>();
-			string outputPath			= DigitalProduction.IO.Path.GetFullPathWithoutExtension(path) + "-output.csv";
-			_continue					= true;
+			importer.SetBibliographyInitialization(_useBibEntryInitialization, _bibEntryInitialization);
 
-			foreach (string searchString in lines)
+			foreach (ImportResult importResult in importer.BulkImport(path))
 			{
-				ImportResult importResult = null;
-				do
-				{
-					importResult = ImportTry(searchString);
-
-					if (importResult.Result == ResultType.Error)
-					{
-						yield return importResult;
-						if (_continue)
-						{
-							// Wait 10 minutes.  60s/m * 1000ms/s * 10m.
-							Wait(60*1000*10);
-							//Wait(10);
-						}
-					}
-				}
-				while (importResult.Result==ResultType.Error & _continue);
-
-				if (!_continue)
-				{
-					break;
-				}
-
-				if (importResult.BibEntry is null)
-				{
-					// A bibliography entry was not found.
-					references.Add(new string[] { "", "" });
-				}
-				else
-				{
-					// A bibliography entry was found and returned as a string.
-					ApplyAllCleaning(importResult.BibEntry);
-					references.Add(new string[] { importResult.BibEntry.Key, importResult.BibEntry.Title });
-					yield return importResult;
-				}
-			}
-
-			// Write the results.
-			WriteCsvBulkImportResults(outputPath, references, lines);
-		}
-
-		public void SetContinue(bool continueImport)
-		{
-			_continue = continueImport;
-		}
-
-		public ImportResult ImportTry(string searchString)
-		{
-			_stopWatch = System.Diagnostics.Stopwatch.StartNew();
-
-			try
-			{
-				BibEntry bibEntry		= SpeBibtexGet(searchString);
-				ResultType resultType	= bibEntry==null ? ResultType.NotFound : ResultType.Successful;
-				return new ImportResult(resultType, bibEntry, "");
-			}
-			catch (Exception exception)
-			{
-				return new ImportResult(ResultType.Error, null, exception.Message);
+				ApplyAllCleaning(importResult.BibEntry);
+				yield return importResult;
 			}
 		}
-
-		private void Wait(long timeToWait)
-		{
-			_stopWatch.Stop();
-			long elapsedMs = _stopWatch.ElapsedMilliseconds;
-
-			// Add some random time to look less bot like.
-			timeToWait += _random.Next(0, 5000);
-
-			if (elapsedMs > timeToWait)
-			{
-				return;
-			}
-			else
-			{
-				Thread.Sleep((int)(timeToWait-elapsedMs));
-			}
-		}
-
-		/// <summary>
-		/// Writes the names of the references and titles to a file.
-		/// </summary>
-		/// <param name="filePath">The path and file name to write to.</param>
-		/// <param name="references">The reference names to write.</param>
-		/// <param name="searchedTerms">The terms searched for references.</param>
-		static void WriteCsvBulkImportResults(string filePath, List<string[]> references, string[] searchedTerms)
-		{
-			// Open or create the CSV file for writing.
-			using (StreamWriter writer = new StreamWriter(filePath, false, Encoding.UTF8))
-			{
-				// Write each row of data to the file.
-				for (int i = 0; i < references.Count; i++)
-				{
-					writer.Write(references[i][0]);
-					writer.Write(", ");
-					writer.Write(references[i][1]);
-					writer.Write(", ");
-					string formatedTerm = "\"" + searchedTerms[i].Replace("\"", "\"\"") + "\"";
-					writer.Write(formatedTerm);
-
-					// End the row with a new line.
-					writer.WriteLine();
-				}
-			}
-		}
-
-		/// <summary>
-		/// Search for and download the Bibtex entry for an SPE paper.
-		/// </summary>
-		/// <param name="searchTerms">Terms to search the web for the paper.</param>
-		public BibEntry SpeBibtexGet(string searchTerms)
-		{
-			string website			= "onepetro.org";
-			IList<Result> results	= DigitalProduction.Http.CustomSearch.Search(searchTerms + " " + website);
-
-			foreach (Result result in results)
-			{
-				string webSiteUrl       = result.Link;
-				WebPageType webPageType = SpeWebPageType(webSiteUrl, website);
-				BibEntry bibEntry       = null;
-
-				switch (webPageType)
-				{
-					case WebPageType.ArticlePage:
-						bibEntry = DownloadSpeBibtex(webSiteUrl, searchTerms).Result;
-						break;
-
-					case WebPageType.ConferencePage:
-						bibEntry = SearchConferencePageForArticle(webSiteUrl, searchTerms);
-						break;
-
-					case WebPageType.Unknown:
-						// No nothing and keep searching.
-						break;
-				}
-
-				// If we found the correct entry, return it, otherwise we keep searching.
-				if (bibEntry != null)
-				{
-					return bibEntry;
-				}
-
-			}
-			return null;
-		}
-
-		private WebPageType SpeWebPageType(string result, string website)
-		{
-			// Look for resutls that contain the specified website.
-			if (!result.Contains(website))
-			{
-				return WebPageType.Unknown;
-			}
-
-			string lastPathElement = result.Split('/').Last();
-
-			if (result.Contains("conference"))
-			{
-				return WebPageType.ConferencePage;
-			}
-
-			// Did we find a OnePetro reference to a document or something else?  The documents end in a number.
-			if (int.TryParse(lastPathElement, out int n))
-			{
-				return WebPageType.ArticlePage;
-			}
-
-			return WebPageType.Unknown;
-		}
-
-
-		async private Task<BibEntry> DownloadSpeBibtex(string result, string searchTerms)
-		{
-			// Extract the last path element.  For an SPE article, this should be the document ID.
-			string docuementID = result.Split('/').Last();
-
-			// Attempt to download the bitex entry.
-			HttpResponseMessage response        = _client.GetAsync("https://onepetro.org/Citation/Download?resourceId="+docuementID+"&resourceType=3&citationFormat=2").Result;
-			HttpContent         content         = response.Content;
-			string              responseString  = await content.ReadAsStringAsync();
-			responseString                      = DigitalProduction.Strings.Format.TrimStart(responseString, "\r\n");
-
-			if (!String.IsNullOrEmpty(responseString))
-			{
-				BibEntry bibEntry = ParseSingleEntryText(responseString);
-
-				// Check to see if we found the right bibliography entry by comparing the search terms to the title.
-				if (DigitalProduction.Strings.Format.Similarity(bibEntry.Title, searchTerms) > 0.9)
-				{
-					return bibEntry;
-				}
-			}
-
-			return null;
-		}
-
-		private BibEntry SearchConferencePageForArticle(string url, string searchTerms)
-		{
-			//List<string> links = DigitalProduction.Http.HttpGet.GetAllLinksOnPage(url);
-			List<string[]> links = DigitalProduction.Http.HttpGet.GetAllLinksOnPage(url);
-
-			foreach (string[] link in links)
-			{
-				if (DigitalProduction.Strings.Format.Similarity(link[0], searchTerms) > 0.9)
-				{
-					return DownloadSpeBibtex(link[1], searchTerms).Result;
-				}
-			}
-
-			return null;
-		}
-
+		
 		#endregion
 
 		#region XML
@@ -1023,6 +805,13 @@ namespace BibtexManager
 		/// Initialize references.
 		/// </summary>
 		public override void DeserializationInitialization()
+		{
+		}
+
+		/// <summary>
+		/// Initialize references.
+		/// </summary>
+		public void ReadAccessoaryFiles()
 		{
 			ReadBibEntryInitializationFiles();
 			ReadTagQualityProcessingFile();

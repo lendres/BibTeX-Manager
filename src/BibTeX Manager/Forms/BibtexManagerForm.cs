@@ -106,6 +106,7 @@ namespace BibtexManager
 		/// </summary>
 		protected override void SetupProject()
 		{
+			this.Project.ReadAccessoaryFiles();
 			this.dataGridViewInterfaceControl.Project = this.Project;
 			InitializeDataBinding();
 			this.Project.OnClosed += this.RemoveDataBinding;
@@ -413,9 +414,10 @@ namespace BibtexManager
 
 			if (file != "")
 			{
-				_messageBoxResult = MessageBoxYesNoToAllResult.Yes;
+				_messageBoxResult			= MessageBoxYesNoToAllResult.Yes;
+				SpeHttpImporter importer    = new SpeHttpImporter();
 
-				foreach (ImportResult importResult in this.Project.BulkSpeImport(file))
+				foreach (ImportResult importResult in this.Project.BulkImport(importer, file))
 				{
 					switch (importResult.Result)
 					{
@@ -434,7 +436,7 @@ namespace BibtexManager
 								"Error: " + importResult.Message + Environment.NewLine +
 								"Do you wish to try again?";
 							MessageBoxYesNoToAllResult result = messageBox.Show(this, message, "Import Error", MessageBoxYesNoToAllButtons.YesToAllNo);
-							this.Project.SetContinue(result == MessageBoxYesNoToAllResult.Yes);
+							importer.Continue = result == MessageBoxYesNoToAllResult.Yes;
 
 							// Have a retry limit.
 							_retryCount++;
