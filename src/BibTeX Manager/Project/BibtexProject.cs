@@ -1,5 +1,6 @@
 ﻿using BibTeXLibrary;
 using BibtexManager.Project;
+using DigitalProduction.IO;
 using DigitalProduction.Projects;
 using Google.Apis.CustomSearchAPI.v1.Data;
 using System;
@@ -712,7 +713,8 @@ namespace BibtexManager
 			// Cleaning.
 			foreach (TagProcessingData tagProcessingData in CleanEntry(entry))
 			{
-				tagProcessingData.AcceptAll = true;
+				tagProcessingData.Correction.ReplaceText	= true;
+				tagProcessingData.AcceptAll					= true;
 			}
 
 			// String constants replacement.
@@ -771,11 +773,11 @@ namespace BibtexManager
 
 		#region Importing
 
-		public IEnumerable<ImportResult> BulkImport(IImporter importer, string path)
+		public IEnumerable<ImportResult> BulkImport(IImporter importer)
 		{
 			importer.SetBibliographyInitialization(_useBibEntryInitialization, _bibEntryInitialization);
 
-			foreach (ImportResult importResult in importer.BulkImport(path))
+			foreach (ImportResult importResult in importer.BulkImport())
 			{
 				ApplyAllCleaning(importResult.BibEntry);
 				yield return importResult;
@@ -799,6 +801,14 @@ namespace BibtexManager
 			//file += ".output.bib";
 			_bibliography.Write(file, _writeSettings);
 			base.Serialize();
+		}
+
+		public static ProjectExtractor Deserialize(string path)
+		{
+			ProjectExtractor projectExtractor	= ProjectExtractor.ExtractAndDeserializeProject<BibtexProject>(path);
+			BibtexProject project				= (BibtexProject)projectExtractor.Project;
+			project.ReadAccessoaryFiles();
+			return projectExtractor;
 		}
 
 		/// <summary>

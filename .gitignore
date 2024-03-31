@@ -243,3 +243,5 @@ src/Ancillary Files/LaTeX Tag Quality Processing.qlty
 *.spyproject
 
 customsearchkey.xml
+src/Test Files/SPE Test Titles 2-output.csv
+src/Test Files/SPE Test Titles 1-output.csv

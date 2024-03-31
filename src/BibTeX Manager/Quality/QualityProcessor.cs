@@ -51,7 +51,7 @@ namespace BibtexManager
 			{
 				foreach (TagProcessor processor in tagProcessorGroup.TagProcessors)
 				{
-					foreach (Correction correction in processor.Corrections(entry))
+					foreach (Correction correction in processor.Process(entry))
 					{
 						tagProcessingData.Correction = correction;
 						if (tagProcessingData.AcceptAll)

@@ -209,8 +209,8 @@ namespace BibtexManager
 						break;
 					}
 
-					CorrectionForm correctionForm = new CorrectionForm(tagProcessingData);
-					DialogResult dialogResult = correctionForm.Show(this);
+					CorrectionForm correctionForm	= new CorrectionForm(tagProcessingData);
+					DialogResult dialogResult		= correctionForm.Show(this);
 
 					breakNext = dialogResult == DialogResult.Cancel;
 				}

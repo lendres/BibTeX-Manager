@@ -54,8 +54,7 @@ namespace BibTexManagerUnitTests
 		/// <summary>
 		/// Bulk SPE paper search and import.
 		/// </summary>
-		/// <param name="path">The path or URL to read the search items from.</param>
-		public override IEnumerable<ImportResult> BulkImport(string path)
+		public override IEnumerable<ImportResult> BulkImport()
 		{
 			foreach (string bibString in this.BibEntryStrings)
 			{

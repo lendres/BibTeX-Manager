@@ -11,6 +11,7 @@ using System.Xml.Serialization;
 using BibTeXLibrary;
 using BibtexManager.Project;
 using System.IO;
+using System.Runtime.InteropServices;
 
 namespace BibtexManager
 {
@@ -33,6 +34,8 @@ namespace BibtexManager
 
 		#region Fields
 
+		private string			_importPath			= null;
+
 		#endregion
 
 		#region Construction
@@ -42,6 +45,14 @@ namespace BibtexManager
 		/// </summary>
 		public SpeHttpImporter()
 		{
+		}
+
+		/// <summary>
+		/// Default constructor.
+		/// </summary>
+		public SpeHttpImporter(string importPath)
+		{
+			_importPath = importPath;
 		}
 
 		#endregion
@@ -98,9 +109,9 @@ namespace BibtexManager
 		/// Bulk SPE paper search and import.
 		/// </summary>
 		/// <param name="path">The path to a file that contains a list of search strings.</param>
-		public override IEnumerable<ImportResult> BulkImport(string path)
+		public override IEnumerable<ImportResult> BulkImport()
 		{
-			string[] lines = File.ReadAllLines(path);
+			string[] lines = File.ReadAllLines(_importPath);
 
 			foreach (ImportResult importResult in BulkImport(lines))
 			{
@@ -108,7 +119,7 @@ namespace BibtexManager
 			}
 
 			// Write the results.
-			string outputPath = DigitalProduction.IO.Path.GetFullPathWithoutExtension(path) + "-output.csv";
+			string outputPath = DigitalProduction.IO.Path.GetFullPathWithoutExtension(_importPath) + "-output.csv";
 			WriteCsvBulkImportResults(outputPath);
 		}
 

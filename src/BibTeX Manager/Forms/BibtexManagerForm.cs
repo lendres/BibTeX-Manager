@@ -95,7 +95,7 @@ namespace BibtexManager
 		/// </summary>
 		public override ProjectExtractor DeserializeProject(string path)
 		{
-			ProjectExtractor projectExtractor	= ProjectExtractor.ExtractAndDeserializeProject<BibtexProject>(path);
+			ProjectExtractor projectExtractor	= BibtexProject.Deserialize(path);
 			_project							= (BibtexProject)projectExtractor.Project;
 			return projectExtractor;
 		}
@@ -366,7 +366,6 @@ namespace BibtexManager
 			}
 		}
 
-
 		/// <summary>
 		/// Sort all entries in the bibliography.
 		/// </summary>
@@ -415,9 +414,9 @@ namespace BibtexManager
 			if (file != "")
 			{
 				_messageBoxResult			= MessageBoxYesNoToAllResult.Yes;
-				SpeHttpImporter importer    = new SpeHttpImporter();
+				SpeHttpImporter importer    = new SpeHttpImporter(file);
 
-				foreach (ImportResult importResult in this.Project.BulkImport(importer, file))
+				foreach (ImportResult importResult in this.Project.BulkImport(importer))
 				{
 					switch (importResult.Result)
 					{

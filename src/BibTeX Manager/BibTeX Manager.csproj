@@ -180,6 +180,7 @@
     <Compile Include="Forms\SearchForm.Designer.cs">
       <DependentUpon>SearchForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Importing\IBuildImporter.cs" />
     <Compile Include="Importing\Importer.cs" />
     <Compile Include="Importing\IImporter.cs" />
     <Compile Include="Importing\Spe\SpeHttpImporter.cs" />

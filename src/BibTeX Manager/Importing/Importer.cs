@@ -138,8 +138,7 @@ namespace BibtexManager
 		/// <summary>
 		/// Bulk SPE paper search and import.
 		/// </summary>
-		/// <param name="path">The path to a file that contains a list of search strings.</param>
-		public abstract IEnumerable<ImportResult> BulkImport(string path);
+		public abstract IEnumerable<ImportResult> BulkImport();
 
 		#endregion
 
