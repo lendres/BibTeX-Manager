@@ -1,14 +1,8 @@
-﻿using BibTeXLibrary;
-using DigitalProduction.XML.Serialization;
-using Google.Apis.CustomSearchAPI.v1.Data;
-using System;
+﻿using Google.Apis.CustomSearchAPI.v1.Data;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
-using System.Xml.Serialization;
 
 namespace BibtexManager
 {
@@ -113,7 +107,7 @@ namespace BibtexManager
 			return WebPageType.Unknown;
 		}
 
-		async static private Task<string> DownloadSpeBibtex(HttpClient client, string articleUrl)
+		async public static Task<string> DownloadSpeBibtex(HttpClient client, string articleUrl)
 		{
 			// Extract the last path element.  For an SPE article, this should be the document ID.
 			string docuementID = articleUrl.Split('/').Last();
@@ -129,7 +123,6 @@ namespace BibtexManager
 
 		private static string SearchConferencePageForArticle(HttpClient client, string url, string searchTerms)
 		{
-			//List<string> links = DigitalProduction.Http.HttpGet.GetAllLinksOnPage(url);
 			List<string[]> links = DigitalProduction.Http.HttpGet.GetAllLinksOnPage(url);
 
 			foreach (string[] link in links)

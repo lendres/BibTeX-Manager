@@ -1,7 +1,7 @@
 ﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="15.0">
   <PropertyGroup>
     <ProjectType>Local</ProjectType>
-    <ProductVersion>8.0.50727</ProductVersion>
+    <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{F42EE1BE-ECB7-48E3-BF6C-13FE01B37919}</ProjectGuid>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -105,6 +105,9 @@
     <Reference Include="Google.Apis.CustomSearchAPI.v1, Version=1.67.0.3372, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
       <HintPath>..\packages\Google.Apis.CustomSearchAPI.v1.1.67.0.3372\lib\net462\Google.Apis.CustomSearchAPI.v1.dll</HintPath>
     </Reference>
+    <Reference Include="HtmlAgilityPack, Version=1.11.60.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
+      <HintPath>..\packages\HtmlAgilityPack.1.11.60\lib\Net45\HtmlAgilityPack.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -185,6 +188,8 @@
     <Compile Include="Importing\SingleImporter.cs" />
     <Compile Include="Importing\ImporterBase.cs" />
     <Compile Include="Importing\ISingleImporter.cs" />
+    <Compile Include="Importing\Spe\ConferenceReferenceItem.cs" />
+    <Compile Include="Importing\Spe\SpeConferenceImporter.cs" />
     <Compile Include="Importing\Spe\SpeImportUtilities.cs" />
     <Compile Include="Importing\Spe\SpeBulkTitleImporter.cs" />
     <Compile Include="Importing\Spe\SpeTitleImporter.cs" />

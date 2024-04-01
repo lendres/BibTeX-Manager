@@ -1,6 +1,4 @@
 ﻿using BibTeXLibrary;
-using BibtexManager.Project;
-using System.Collections.Generic;
 
 namespace BibtexManager
 {

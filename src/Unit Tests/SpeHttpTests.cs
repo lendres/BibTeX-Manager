@@ -18,7 +18,6 @@ namespace BibtexManagerUnitTests
 			CustomSearch.SetCxAndKey(CustomSearchKey.Deserialize(@"..\..\..\customsearchkey.xml"));
 		}
 
-
 		/// <summary>
 		/// 
 		/// </summary>
@@ -34,8 +33,8 @@ namespace BibtexManagerUnitTests
 		[TestMethod]
 		public void SearchTest2()
 		{
-			string search1 = "A Novel Approach To Borehole Quality Measurement In Unconventional Drilling";
-			string search2 = "Proven Well Stabilization Technology for Trouble-Free Drilling and Cost Savings in Pressurized Permeable Formations";
+			//string search1 = "A Novel Approach To Borehole Quality Measurement In Unconventional Drilling";
+			//string search2 = "Proven Well Stabilization Technology for Trouble-Free Drilling and Cost Savings in Pressurized Permeable Formations";
 			string search3 = "Advancements in Weight Material Sag Evaluation: A New Perspective with Advanced Laboratory Equipment";
 			string searchTerms = search3;
 
@@ -53,30 +52,6 @@ namespace BibtexManagerUnitTests
 					resultString += ResultString(result) + Environment.NewLine + Environment.NewLine + Environment.NewLine;
 				}
 			}
-			//Assert.AreEqual(Statistics.Covariance(xValues, yValues), 2.9167, 0.0001, errorMessage);
-		}
-
-		/// <summary>
-		/// 
-		/// </summary>
-		[TestMethod]
-		public void SearchTest3()
-		{
-			CustomSearch.SetCxAndKey(CustomSearchKey.Deserialize(@"..\..\..\customsearchkey.xml"));
-
-
-			string search1 = "A Novel Approach To Borehole Quality Measurement In Unconventional Drilling";
-			//string search2 = "Proven Well Stabilization Technology for Trouble-Free Drilling and Cost Savings in Pressurized Permeable Formations";
-			string searchTerms = search1;
-
-			IList<Result> results = CustomSearch.Search(searchTerms);
-
-			string resultString = "Search: " + searchTerms + Environment.NewLine + Environment.NewLine;
-			foreach (Result result in results)
-			{
-				resultString += ResultString(result) + Environment.NewLine + Environment.NewLine + Environment.NewLine;
-			}
-
 			//Assert.AreEqual(Statistics.Covariance(xValues, yValues), 2.9167, 0.0001, errorMessage);
 		}
 

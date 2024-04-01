@@ -11,6 +11,10 @@ namespace BibtexManagerUnitTests
 	[TestClass]
 	public class BulkSpeImportTests
 	{
+		public BulkSpeImportTests()
+		{
+			CustomSearch.SetCxAndKey(CustomSearchKey.Deserialize(@"..\..\..\customsearchkey.xml"));
+		}
 
 		/// <summary>
 		/// 
@@ -37,16 +41,12 @@ namespace BibtexManagerUnitTests
 			}
 		}
 
-
 		/// <summary>
 		/// 
 		/// </summary>
 		[TestMethod]
 		public void SearchTest2()
 		{
-			CustomSearch.SetCxAndKey(CustomSearchKey.Deserialize(@"..\..\customsearchkey.xml"));
-
-
 			string search1 = "A Novel Approach To Borehole Quality Measurement In Unconventional Drilling";
 			//string search2 = "Proven Well Stabilization Technology for Trouble-Free Drilling and Cost Savings in Pressurized Permeable Formations";
 			string searchTerms = search1;

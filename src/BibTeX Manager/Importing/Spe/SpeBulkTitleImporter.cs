@@ -1,17 +1,8 @@
-﻿using DigitalProduction.XML.Serialization;
-using Google.Apis.CustomSearchAPI.v1.Data;
+﻿using BibTeXLibrary;
+using BibtexManager.Project;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Serialization;
-using BibTeXLibrary;
-using BibtexManager.Project;
 using System.IO;
-using System.Runtime.InteropServices;
 
 namespace BibtexManager
 {

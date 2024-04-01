@@ -1,17 +1,10 @@
 ﻿using BibTeXLibrary;
 using BibtexManager.Project;
-using DigitalProduction.XML.Serialization;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Net.Http;
 using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
-using System.Xml.Serialization;
 
 namespace BibtexManager
 {
@@ -24,8 +17,7 @@ namespace BibtexManager
 
 		private System.Diagnostics.Stopwatch		_stopWatch						= null;
 		private bool								_continue						= true;
-
-		List<string[]>                              _bulkImportResults              = new List<string[]>();
+		private List<string[]>						_bulkImportResults				= new List<string[]>();
 
 		#endregion
 
@@ -81,18 +73,39 @@ namespace BibtexManager
 					break;
 				}
 
-				if (importResult.BibEntry is null)
+				SaveResults(searchString, importResult);
+
+				if (importResult.BibEntry != null)
 				{
-					// A bibliography entry was not found.
-					_bulkImportResults.Add(new string[] { "", "", searchString });
-				}
-				else
-				{
-					// A bibliography entry was found and returned.
-					_bulkImportResults.Add(new string[] { importResult.BibEntry.Key, importResult.BibEntry.Title, searchString });
 					yield return importResult;
 				}
 			}
+		}
+
+		protected virtual void SaveResults(string searchString, ImportResult importResult)
+		{
+			if (importResult.BibEntry is null)
+			{
+				// A bibliography entry was not found.
+				AddResult(new string[] { "", "", searchString });
+			}
+			else
+			{
+				// A bibliography entry was found and returned.
+				AddResult(
+					new string[]
+					{ 
+						importResult.BibEntry.Key,
+						importResult.BibEntry.Title,
+						"\"" + searchString.Replace("\"", "\"\"") + "\""
+					}
+				);
+			}
+		}
+
+		protected void AddResult(string[] resultArray)
+		{
+			_bulkImportResults.Add(resultArray);
 		}
 
 		#endregion
@@ -112,9 +125,9 @@ namespace BibtexManager
 
 		#endregion
 
-		#region Private Methods
+		#region Methods
 
-		private ImportResult ImportTry(string searchString)
+		protected ImportResult ImportTry(string searchString)
 		{
 			_stopWatch = System.Diagnostics.Stopwatch.StartNew();
 
@@ -159,12 +172,14 @@ namespace BibtexManager
 				// Write each row of data to the file.
 				for (int i = 0; i < _bulkImportResults.Count; i++)
 				{
-					writer.Write(_bulkImportResults[i][0]);
-					writer.Write(", ");
-					writer.Write(_bulkImportResults[i][1]);
-					writer.Write(", ");
-					string formatedTerm = "\"" + _bulkImportResults[i][2].Replace("\"", "\"\"") + "\"";
-					writer.Write(formatedTerm);
+					for (int j = 0; j < _bulkImportResults[i].Length; j++)
+					{
+						writer.Write(_bulkImportResults[i][j]);
+						if (j < _bulkImportResults[i].Length-1)
+						{
+							writer.Write(", ");
+						}
+					}
 
 					// End the row with a new line.
 					writer.WriteLine();
