@@ -16,7 +16,7 @@ namespace BibTexManagerUnitTests
 	/// <summary>
 	/// 
 	/// </summary>
-	public class TestImporter : ImporterBase, ISingleImporter
+	public class TestBulkImporter : BulkImporter, IBulkImporter
 	{
 		#region Fields
 
@@ -27,7 +27,7 @@ namespace BibTexManagerUnitTests
 		/// <summary>
 		/// Default constructor.
 		/// </summary>
-		public TestImporter()
+		public TestBulkImporter()
 		{
 			this.BibEntryStrings = new string[] { "" };
 		}
@@ -46,9 +46,20 @@ namespace BibTexManagerUnitTests
 		/// Import a single entry from a search string.
 		/// </summary>
 		/// <param name="searchString">String containing search terms.</param>
-		public BibEntry Import(string searchString)
+		protected override BibEntry Import(string searchString)
 		{
 			return ParseSingleEntryText(this.BibEntryStrings[0]);
+		}
+
+		/// <summary>
+		/// Bulk SPE paper search and import.
+		/// </summary>
+		public override IEnumerable<ImportResult> BulkImport()
+		{
+			foreach (string bibString in this.BibEntryStrings)
+			{
+				yield return new ImportResult(ResultType.Successful, ParseSingleEntryText(bibString), "");
+			}
 		}
 
 		#endregion

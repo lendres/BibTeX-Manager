@@ -18,7 +18,7 @@ namespace BibtexManagerUnitTests
 		[TestMethod]
 		public void SearchTest1()
 		{
-			TestImporter importer = new TestImporter()
+			TestBulkImporter importer = new TestBulkImporter()
 			{
 				BibEntryStrings = new string[]
 				{

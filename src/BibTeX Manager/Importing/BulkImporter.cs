@@ -18,14 +18,10 @@ namespace BibtexManager
 	/// <summary>
 	/// 
 	/// </summary>
-	public abstract class Importer : IImporter
+	public abstract class BulkImporter : ImporterBase
 	{
 		#region Fields
 
-		private bool                                _useBibEntryInitialization      = false;
-		private BibEntryInitialization              _bibEntryInitialization         = new BibEntryInitialization();
-
-		protected static readonly HttpClient		_client							= new HttpClient();
 		private System.Diagnostics.Stopwatch		_stopWatch						= null;
 		private bool								_continue						= true;
 
@@ -38,39 +34,19 @@ namespace BibtexManager
 		/// <summary>	
 		/// Default constructor.
 		/// </summary>
-		public Importer()
+		public BulkImporter()
 		{
 		}
 
 		#endregion
 
 		#region Properties
+
 		public bool Continue { get => _continue; set => _continue=value; }
 
 		#endregion
 
 		#region Protected Methods
-
-		/// <summary>
-		/// Parse a string and return a single BibEntry.
-		/// </summary>
-		/// <param name="text">Text to process.</param>
-		protected BibEntry ParseSingleEntryText(string text)
-		{
-			StringReader textReader = new StringReader(text);
-			BibliographyDOM result;
-
-			if (_useBibEntryInitialization)
-			{
-				result = BibParser.Parse(textReader, _bibEntryInitialization);
-			}
-			else
-			{
-				result = BibParser.Parse(textReader);
-			}
-
-			return result.BibliographyEntries[0];
-		}
 
 		/// <summary>
 		/// Bulk SPE paper search and import.
@@ -127,13 +103,7 @@ namespace BibtexManager
 		/// Import a single entry from a search string.
 		/// </summary>
 		/// <param name="searchString">String containing search terms.</param>
-		public abstract BibEntry Import(string searchString);
-
-		public void SetBibliographyInitialization(bool useBibEntryInitialization, BibEntryInitialization bibEntryInitialization)
-		{
-			_useBibEntryInitialization	= useBibEntryInitialization;
-			_bibEntryInitialization     = bibEntryInitialization;
-		}
+		protected abstract BibEntry Import(string searchString);
 
 		/// <summary>
 		/// Bulk SPE paper search and import.

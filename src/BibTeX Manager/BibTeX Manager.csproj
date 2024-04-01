@@ -180,10 +180,14 @@
     <Compile Include="Forms\SearchForm.Designer.cs">
       <DependentUpon>SearchForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Importing\IBuildImporter.cs" />
-    <Compile Include="Importing\Importer.cs" />
-    <Compile Include="Importing\IImporter.cs" />
-    <Compile Include="Importing\Spe\SpeHttpImporter.cs" />
+    <Compile Include="Importing\IBulkImporter.cs" />
+    <Compile Include="Importing\BulkImporter.cs" />
+    <Compile Include="Importing\SingleImporter.cs" />
+    <Compile Include="Importing\ImporterBase.cs" />
+    <Compile Include="Importing\ISingleImporter.cs" />
+    <Compile Include="Importing\Spe\SpeImportUtilities.cs" />
+    <Compile Include="Importing\Spe\SpeBulkTitleImporter.cs" />
+    <Compile Include="Importing\Spe\SpeTitleImporter.cs" />
     <Compile Include="Importing\Spe\WebPageType.cs" />
     <Compile Include="Program\AssemblyInfo.cs">
       <SubType>Code</SubType>

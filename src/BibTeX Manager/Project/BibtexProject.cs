@@ -773,7 +773,7 @@ namespace BibtexManager
 
 		#region Importing
 
-		public IEnumerable<ImportResult> BulkImport(IImporter importer)
+		public IEnumerable<ImportResult> BulkImport(IBulkImporter importer)
 		{
 			importer.SetBibliographyInitialization(_useBibEntryInitialization, _bibEntryInitialization);
 

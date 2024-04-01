@@ -1,22 +1,24 @@
-﻿using DigitalProduction.XML.Serialization;
+﻿using BibTeXLibrary;
+using BibtexManager.Project;
+using DigitalProduction.XML.Serialization;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
-using BibTeXLibrary;
-using BibtexManager;
-using BibtexManager.Project;
 
-
-namespace BibTexManagerUnitTests
+namespace BibtexManager
 {
 	/// <summary>
 	/// 
 	/// </summary>
-	public class TestImporter : ImporterBase, ISingleImporter
+	public abstract class SingleImporter : ImporterBase, ISingleImporter
 	{
 		#region Fields
 
@@ -24,19 +26,20 @@ namespace BibTexManagerUnitTests
 
 		#region Construction
 
-		/// <summary>
+		/// <summary>	
 		/// Default constructor.
 		/// </summary>
-		public TestImporter()
+		public SingleImporter()
 		{
-			this.BibEntryStrings = new string[] { "" };
 		}
 
 		#endregion
 
 		#region Properties
 
-		public string[] BibEntryStrings { get; set; }
+		#endregion
+
+		#region Protected Methods
 
 		#endregion
 
@@ -46,10 +49,7 @@ namespace BibTexManagerUnitTests
 		/// Import a single entry from a search string.
 		/// </summary>
 		/// <param name="searchString">String containing search terms.</param>
-		public BibEntry Import(string searchString)
-		{
-			return ParseSingleEntryText(this.BibEntryStrings[0]);
-		}
+		public abstract BibEntry Import(string searchString);
 
 		#endregion
 

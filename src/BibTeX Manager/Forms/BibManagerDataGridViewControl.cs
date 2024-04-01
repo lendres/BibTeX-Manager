@@ -158,7 +158,7 @@ namespace BibtexManager
 			{
 				try
 				{
-					SpeHttpImporter importer	= new SpeHttpImporter();
+					SpeTitleImporter importer	= new SpeTitleImporter();
 					BibEntry bibEntry			= importer.Import(searchForm.SearchTerms);
 
 					if (bibEntry != null)

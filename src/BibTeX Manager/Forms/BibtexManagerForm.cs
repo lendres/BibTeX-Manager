@@ -413,8 +413,8 @@ namespace BibtexManager
 
 			if (file != "")
 			{
-				_messageBoxResult			= MessageBoxYesNoToAllResult.Yes;
-				SpeHttpImporter importer    = new SpeHttpImporter(file);
+				_messageBoxResult				= MessageBoxYesNoToAllResult.Yes;
+				SpeBulkTitleImporter importer	= new SpeBulkTitleImporter(file);
 
 				foreach (ImportResult importResult in this.Project.BulkImport(importer))
 				{

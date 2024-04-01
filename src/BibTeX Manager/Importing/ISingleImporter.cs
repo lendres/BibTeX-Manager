@@ -4,13 +4,14 @@ using System.Collections.Generic;
 
 namespace BibtexManager
 {
-	public interface IBulkImporter
+	public interface ISingleImporter
 	{
 		void SetBibliographyInitialization(bool useBibEntryInitialization, BibEntryInitialization bibEntryInitialization);
 
 		/// <summary>
-		/// Bulk SPE paper search and import.
+		/// Import a single entry from a search string.
 		/// </summary>
-		IEnumerable<ImportResult> BulkImport();
+		/// <param name="searchString">String containing search terms.</param>
+		BibEntry Import(string searchString);
 	}
 }
