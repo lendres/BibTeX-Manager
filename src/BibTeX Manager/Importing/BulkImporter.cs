@@ -73,12 +73,12 @@ namespace BibtexManager
 					break;
 				}
 
-				SaveResults(searchString, importResult);
-
 				if (importResult.BibEntry != null)
 				{
 					yield return importResult;
 				}
+
+				SaveResults(searchString, importResult);
 			}
 		}
 
