@@ -355,7 +355,7 @@ namespace BibtexManager
 		/// </summary>
 		/// <param name="sender">Sender.</param>
 		/// <param name="eventArgs">Event args.</param>
-		private void webSearchSettingsToolStripMenuItem_Click(object sender, EventArgs eventArgs)
+		private void WebSearchSettingsToolStripMenuItem_Click(object sender, EventArgs eventArgs)
 		{
 			GoogleSearchForm searchForm = new GoogleSearchForm(CustomSearch.Cx, CustomSearch.ApiKey);
 
@@ -446,6 +446,21 @@ namespace BibtexManager
 							}
 							break;
 					}
+				}
+			}
+		}
+
+		private void SpeConferenceToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			string file = DigitalProduction.Forms.FileSelect.BrowseForAFile(this, "", "Select a File with Search Terms");
+
+			if (file != "")
+			{
+				SpeConferenceImporter importer   = new SpeConferenceImporter(file);
+				foreach (ImportResult importResult in this.Project.BulkImport(importer))
+				{
+					int index = this.Project.GetEntryInsertIndex(importResult.BibEntry, 0);
+					this.referencesBindingSource.Insert(index, importResult.BibEntry);
 				}
 			}
 		}
@@ -543,6 +558,7 @@ namespace BibtexManager
 				OpenRecentFile();
 			}
 		}
+
 		#endregion
 
 		//}

@@ -11,18 +11,6 @@ namespace BibtexManager
 	/// </summary>
 	public static class SpeImportUtilities
 	{
-		#region Enumerations
-
-		#endregion
-
-		#region Delegates
-
-		#endregion
-
-		#region Events
-
-		#endregion
-
 		#region Fields
 
 		private static string		_website          = "onepetro.org";
@@ -34,6 +22,8 @@ namespace BibtexManager
 		#endregion
 
 		#region Properties
+
+		public static string Website { get => _website; set => _website=value; }
 
 		#endregion
 

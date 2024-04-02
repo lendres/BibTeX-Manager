@@ -9,6 +9,9 @@
 		/// </summary>
 		private System.ComponentModel.IContainer components = null;
 
+		protected System.Windows.Forms.Button addRawTemplateButton;
+		protected System.Windows.Forms.Button addSpeButton;
+
 		#endregion
 
 		#region Disposing
@@ -114,7 +117,5 @@
 
 		#endregion
 
-		protected System.Windows.Forms.Button addRawTemplateButton;
-		protected System.Windows.Forms.Button addSpeButton;
 	} // End class.
 } // End namespace.

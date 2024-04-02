@@ -16,23 +16,39 @@ namespace BibtexManager
 	{
 		#region Fields
 
-		private string						_importPath					= null;
+		private string[]							_conferencePageUrls                  = null;
 
-		private int							_currentReferenceItem		= 0;
+		private int									_currentReferenceItem		= 0;
 
-		List<ConferenceReferenceItem>		_conferenceItems			= new List<ConferenceReferenceItem>();
-		List<string>						_articleLinks				= new List<string>();
+		private List<ConferenceReferenceItem>		_conferenceItems			= new List<ConferenceReferenceItem>();
+		private List<string>						_articleLinks				= new List<string>();
+
+		private string                              _outputPath                 = "";
+
 
 		#endregion
 
 		#region Construction
 
 		/// <summary>
-		/// Default constructor.
+		/// Constructor.
 		/// </summary>
 		public SpeConferenceImporter(string importPath)
 		{
-			_importPath = importPath;
+			_conferencePageUrls = File.ReadAllLines(importPath);
+			_outputPath			= DigitalProduction.IO.Path.GetFullPathWithoutExtension(importPath) + "-output.csv";
+		}
+
+		/// <summary>
+		/// Constructor.
+		/// </summary>
+		public SpeConferenceImporter(string[] conferencePageUrls, string outputPath = null)
+		{
+			_conferencePageUrls = conferencePageUrls;
+			if (!string.IsNullOrEmpty(outputPath))
+			{
+				_outputPath = outputPath;
+			}
 		}
 
 		#endregion
@@ -65,11 +81,9 @@ namespace BibtexManager
 		/// <param name="path">The path to a file that contains a list of search strings.</param>
 		public override IEnumerable<ImportResult> BulkImport()
 		{
-			string[] conferencePageUrls = File.ReadAllLines(_importPath);
-
 			_currentReferenceItem = 0;
 
-			GenerateConferenceLinks(conferencePageUrls);
+			GenerateConferenceLinks(_conferencePageUrls);
 
 			foreach (ImportResult importResult in BulkImport(_articleLinks.ToArray()))
 			{
@@ -77,8 +91,10 @@ namespace BibtexManager
 			}
 
 			// Write the results.
-			string outputPath = DigitalProduction.IO.Path.GetFullPathWithoutExtension(_importPath) + "-output.csv";
-			WriteCsvBulkImportResults(outputPath);
+			if (!string.IsNullOrEmpty(_outputPath))
+			{
+				WriteCsvBulkImportResults(_outputPath);
+			}
 		}
 
 		private void GenerateConferenceLinks(string[] conferencePageUrls)
@@ -89,20 +105,22 @@ namespace BibtexManager
 
 				foreach (HtmlNode sessionSection in sessionSections)
 				{
-					string sessionName = sessionSection.FirstChild.InnerText;
+					string sessionName = sessionSection.SelectSingleNode("//h4").InnerText.Trim();
 
 					foreach (string articleLink in GetArticleLinks(sessionSection))
 					{
+						string articleAddress = SpeImportUtilities.Website + articleLink;
+
 						_conferenceItems.Add(
 							new ConferenceReferenceItem()
 							{
 								Day         = conferencePageUrl,
 								Session     = sessionName,
-								Url         = articleLink
+								Url         = articleAddress
 							}
 						);
 
-						_articleLinks.Add(articleLink);
+						_articleLinks.Add(articleAddress);
 					}
 				}
 			}
@@ -115,7 +133,7 @@ namespace BibtexManager
 			if (importResult.BibEntry != null)
 			{
 				referenceItem.Reference	= importResult.BibEntry.Key;
-				referenceItem.Title		= importResult.BibEntry.Title;
+				referenceItem.Title		= "\"" + importResult.BibEntry.Title.TrimStart('{').TrimEnd('}').Replace("\"", "\"\"") + "\"";
 			}
 
 			AddResult(referenceItem.ToStringArray());
