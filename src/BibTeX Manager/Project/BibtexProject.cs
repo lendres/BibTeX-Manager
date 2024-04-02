@@ -646,7 +646,7 @@ namespace BibtexManager
 		}
 
 		/// <summary>
-		/// Clean a single entry.
+		/// Clean a single entry.  Used to prompt a user if the issues should be changed or not.
 		/// </summary>
 		/// <param name="entry">BibEntry.</param>
 		public IEnumerable<TagProcessingData> CleanEntry(BibEntry entry)
@@ -656,6 +656,22 @@ namespace BibtexManager
 				foreach (TagProcessingData tagProcessingData in _tagQualityProcessor.Process(entry))
 				{
 					yield return tagProcessingData;
+				}
+			}
+		}
+
+		/// <summary>
+		/// Clean a single entry.  Used to automatically accept each change.
+		/// </summary>
+		/// <param name="entry">BibEntry.</param>
+		public void AutoCleanEntry(BibEntry entry)
+		{
+			if (_useTagQualityProcessing)
+			{
+				foreach (TagProcessingData tagProcessingData in CleanEntry(entry))
+				{
+					tagProcessingData.Correction.ReplaceText    = true;
+					tagProcessingData.AcceptAll                 = true;
 				}
 			}
 		}
@@ -711,11 +727,7 @@ namespace BibtexManager
 			RemapEntryNames(entry);
 
 			// Cleaning.
-			foreach (TagProcessingData tagProcessingData in CleanEntry(entry))
-			{
-				tagProcessingData.Correction.ReplaceText	= true;
-				tagProcessingData.AcceptAll					= true;
-			}
+			AutoCleanEntry(entry);
 
 			// String constants replacement.
 			ApplyStringConstants(entry);
@@ -797,7 +809,7 @@ namespace BibtexManager
 		/// <exception cref="InvalidOperationException">Thrown when the projects path is not set or not valid.</exception>
 		public override void Serialize()
 		{
-			string file = _bibFile;
+			string file = DigitalProduction.IO.Path.ConvertToAbsolutePath(_bibFile, System.IO.Path.GetDirectoryName(this.Path));
 			//file += ".output.bib";
 			_bibliography.Write(file, _writeSettings);
 			base.Serialize();
