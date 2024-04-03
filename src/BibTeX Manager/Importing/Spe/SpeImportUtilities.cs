@@ -89,7 +89,7 @@ namespace BibtexManager
 			}
 
 			// Did we find a OnePetro reference to a document or something else?  The documents end in a number.
-			if (int.TryParse(lastPathElement, out int n))
+			if (int.TryParse(lastPathElement, out _))
 			{
 				return WebPageType.ArticlePage;
 			}

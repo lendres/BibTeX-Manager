@@ -72,8 +72,8 @@ namespace BibtexManager
 			}
 
 			// Write the results.
-			string outputPath = DigitalProduction.IO.Path.GetFullPathWithoutExtension(_importPath) + "-output.csv";
-			WriteCsvBulkImportResults(outputPath);
+			string outputPath = DigitalProduction.IO.Path.GetFullPathWithoutExtension(_importPath) + "-output.xlsx";
+			WriteBulkImportResults(outputPath);
 		}
 
 		#endregion

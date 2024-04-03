@@ -1,12 +1,7 @@
 using BibTeXLibrary;
 using BibtexManager;
-using BibTexManagerUnitTests;
 using DigitalProduction.Http;
-using DigitalProduction.Projects;
 using Google.Apis.CustomSearchAPI.v1.Data;
-using System.Runtime.Intrinsics.X86;
-using System;
-using BibtexManager.Project;
 
 namespace BibtexManagerUnitTests
 {
@@ -24,7 +19,7 @@ namespace BibtexManagerUnitTests
 		[TestMethod]
 		public void SearchTest1()
 		{
-			SpeTitleImporter importer	= new SpeTitleImporter();
+			SpeTitleImporter importer	= new();
 			BibEntry bibEntry			= importer.Import("A Novel Approach To Borehole Quality Measurement In Unconventional Drilling");
 			//BibEntry bibEntry			= importer.Import("Advancements in Weight Material Sag Evaluation: A New Perspective with Advanced Laboratory Equipment");
 			Assert.IsNotNull(bibEntry);
@@ -35,8 +30,8 @@ namespace BibtexManagerUnitTests
 		{
 			//string search1 = "A Novel Approach To Borehole Quality Measurement In Unconventional Drilling";
 			//string search2 = "Proven Well Stabilization Technology for Trouble-Free Drilling and Cost Savings in Pressurized Permeable Formations";
-			string search3 = "Advancements in Weight Material Sag Evaluation: A New Perspective with Advanced Laboratory Equipment";
-			string searchTerms = search3;
+			string search3		= "Advancements in Weight Material Sag Evaluation: A New Perspective with Advanced Laboratory Equipment";
+			string searchTerms	= search3;
 
 			string resultString = "Search: " + searchTerms + Environment.NewLine + Environment.NewLine;
 			
@@ -49,13 +44,13 @@ namespace BibtexManagerUnitTests
 
 				foreach (Result result in results)
 				{
-					resultString += ResultString(result) + Environment.NewLine + Environment.NewLine + Environment.NewLine;
+					resultString += GetHtmlResultAsString(result) + Environment.NewLine + Environment.NewLine + Environment.NewLine;
 				}
 			}
 			//Assert.AreEqual(Statistics.Covariance(xValues, yValues), 2.9167, 0.0001, errorMessage);
 		}
 
-		private string ResultString(Result result)
+		private static string GetHtmlResultAsString(Result result)
 		{
 			string resultString = "";
 			resultString += "Title:        " + result.Title + Environment.NewLine;

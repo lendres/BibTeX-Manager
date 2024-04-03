@@ -1,4 +1,5 @@
 ﻿using BibTeXLibrary;
+using BibtexManager.Importing;
 using BibtexManager.Project;
 using System.Collections.Generic;
 
@@ -6,7 +7,7 @@ namespace BibtexManager
 {
 	public interface IBulkImporter
 	{
-		bool Continue { get; set; }
+		ImportErrorHandlingType Continue { get; set; }
 
 		void SetBibliographyInitialization(bool useBibEntryInitialization, BibEntryInitialization bibEntryInitialization);
 

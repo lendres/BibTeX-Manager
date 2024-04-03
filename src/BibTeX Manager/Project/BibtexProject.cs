@@ -28,10 +28,10 @@ namespace BibtexManager
 		private readonly Bibliography               _bibliography                   = new Bibliography();
 
 		private List<string>						_assessoryFiles					= new List<string>();
-		private List<BibliographyDOM>				_assessoryFilesDOMs				= new List<BibliographyDOM>();
+		private readonly List<BibliographyDOM>		_assessoryFilesDOMs				= new List<BibliographyDOM>();
 
 		private bool								_useStringConstants				= true;
-		private StringConstantProcessor				_stringConstantProcessor		= new StringConstantProcessor();
+		private readonly StringConstantProcessor	_stringConstantProcessor		= new StringConstantProcessor();
 
 		private bool								_useBibEntryInitialization;
 		private string								_bibEntryInitializationFile;
@@ -541,7 +541,6 @@ namespace BibtexManager
 		{
 			if (this.UsePathsRelativeToBibFile)
 			{
-				string filename = this.FileName;
 				path = DigitalProduction.IO.Path.ConvertToAbsolutePath(path, System.IO.Path.GetDirectoryName(this.Path));
 			}
 			return path;
@@ -781,21 +780,6 @@ namespace BibtexManager
 
 		#endregion
 
-		#endregion
-
-		#region Importing
-
-		public IEnumerable<ImportResult> BulkImport(IBulkImporter importer)
-		{
-			importer.SetBibliographyInitialization(_useBibEntryInitialization, _bibEntryInitialization);
-
-			foreach (ImportResult importResult in importer.BulkImport())
-			{
-				ApplyAllCleaning(importResult.BibEntry);
-				yield return importResult;
-			}
-		}
-		
 		#endregion
 
 		#region XML

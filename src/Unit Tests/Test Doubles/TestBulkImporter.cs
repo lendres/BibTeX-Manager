@@ -46,7 +46,7 @@ namespace BibTexManagerUnitTests
 		/// Import a single entry from a search string.
 		/// </summary>
 		/// <param name="searchString">String containing search terms.</param>
-		protected override BibEntry Import(string searchString)
+		protected override BibEntry? Import(string searchString)
 		{
 			return ParseSingleEntryText(this.BibEntryStrings[0]);
 		}

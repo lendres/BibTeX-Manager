@@ -1,5 +1,4 @@
 ﻿using BibTeXLibrary;
-using BibtexManager.Importing.Spe;
 using BibtexManager.Project;
 using HtmlAgilityPack;
 using System;
@@ -16,14 +15,14 @@ namespace BibtexManager
 	{
 		#region Fields
 
-		private string[]							_conferencePageUrls                  = null;
+		private readonly string[]							_conferencePageUrls			= null;
 
-		private int									_currentReferenceItem		= 0;
+		private int											_currentReferenceItem		= 0;
 
-		private List<ConferenceReferenceItem>		_conferenceItems			= new List<ConferenceReferenceItem>();
-		private List<string>						_articleLinks				= new List<string>();
+		private readonly List<ConferenceReferenceItem>		_conferenceItems			= new List<ConferenceReferenceItem>();
+		private readonly List<string>						_articleLinks				= new List<string>();
 
-		private string                              _outputPath                 = "";
+		private readonly string								_outputPath					= "";
 
 
 		#endregion
@@ -36,7 +35,7 @@ namespace BibtexManager
 		public SpeConferenceImporter(string importPath)
 		{
 			_conferencePageUrls = File.ReadAllLines(importPath);
-			_outputPath			= DigitalProduction.IO.Path.GetFullPathWithoutExtension(importPath) + "-output.csv";
+			_outputPath			= DigitalProduction.IO.Path.GetFullPathWithoutExtension(importPath) + "-output.xlsx";
 		}
 
 		/// <summary>
@@ -93,20 +92,27 @@ namespace BibtexManager
 			// Write the results.
 			if (!string.IsNullOrEmpty(_outputPath))
 			{
-				WriteCsvBulkImportResults(_outputPath);
+				WriteBulkImportResults(_outputPath, ConferenceReferenceItem.Headers);
 			}
 		}
 
 		private void GenerateConferenceLinks(string[] conferencePageUrls)
 		{
+			// Loop over each HTML page provided.
+			int pageNumber = 0;
 			foreach (string conferencePageUrl in conferencePageUrls)
 			{
+				pageNumber++;
 				List<HtmlNode> sessionSections = GetSessionSections(conferencePageUrl);
 
+				// Loop over each session.
 				foreach (HtmlNode sessionSection in sessionSections)
 				{
-					string sessionName = sessionSection.SelectSingleNode("//h4").InnerText.Trim();
+					// Extract the session name from a header element.
+					string sessionName = sessionSection.Descendants("h4").FirstOrDefault().InnerText.Trim();
+					//string sessionName = sessionSection.SelectSingleNode("//h4").InnerText.Trim();
 
+					// Find each paper by finding the links to articles.
 					foreach (string articleLink in GetArticleLinks(sessionSection))
 					{
 						string articleAddress = SpeImportUtilities.Website + articleLink;
@@ -114,9 +120,10 @@ namespace BibtexManager
 						_conferenceItems.Add(
 							new ConferenceReferenceItem()
 							{
-								Day         = conferencePageUrl,
-								Session     = sessionName,
-								Url         = articleAddress
+								Number          = pageNumber,
+								ConferencePage  = conferencePageUrl,
+								Session         = sessionName,
+								Url             = articleAddress
 							}
 						);
 
@@ -126,17 +133,17 @@ namespace BibtexManager
 			}
 		}
 
-		protected override void SaveResults(string searchString, ImportResult importResult)
+		protected override void FormatAndSaveResult(string searchString, ImportResult importResult)
 		{
 			ConferenceReferenceItem referenceItem = _conferenceItems[_currentReferenceItem++];
 
 			if (importResult.BibEntry != null)
 			{
 				referenceItem.Reference	= importResult.BibEntry.Key;
-				referenceItem.Title		= "\"" + importResult.BibEntry.Title.TrimStart('{').TrimEnd('}').Replace("\"", "\"\"") + "\"";
+				referenceItem.Title		= importResult.BibEntry.Title.TrimStart('{').TrimEnd('}');
 			}
 
-			AddResult(referenceItem.ToStringArray());
+			SaveResult(referenceItem.ToStringArray());
 		}
 
 		private List<HtmlNode> GetSessionSections(string url)

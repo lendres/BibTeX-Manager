@@ -1,5 +1,6 @@
 using BibTeXLibrary;
 using BibtexManager.Forms;
+using BibtexManager.Importing;
 using BibtexManager.Project;
 using DigitalProduction.Forms;
 using DigitalProduction.Http;
@@ -20,10 +21,6 @@ namespace BibtexManager
 		#region Fields
 
 		private string						_findString			= null;
-		private int							_findStartRow       = 0;
-
-		private MessageBoxYesNoToAllResult  _messageBoxResult;
-		private int							_retryCount			= 0;
 
 		#endregion
 
@@ -200,7 +197,6 @@ namespace BibtexManager
 			if (result == DialogResult.OK)
 			{
 				_findString		= findEntryForm.FindString;
-				_findStartRow	= this.bibEntriesDataGridView.SelectedRows[0].Index;
 				FindInDataGridView();
 			}
 		}
@@ -413,39 +409,44 @@ namespace BibtexManager
 
 			if (file != "")
 			{
-				_messageBoxResult				= MessageBoxYesNoToAllResult.Yes;
-				SpeBulkTitleImporter importer	= new SpeBulkTitleImporter(file);
+				BulkImport(new SpeBulkTitleImporter(file));
+			}
+		}
 
-				foreach (ImportResult importResult in this.Project.BulkImport(importer))
+		private void BulkImport(IBulkImporter importer)
+		{
+			importer.SetBibliographyInitialization(this.Project.UseBibEntryInitialization, this.Project.BibEntryInitialization);
+
+			foreach (ImportResult importResult in importer.BulkImport())
+			{
+				switch (importResult.Result)
 				{
-					switch (importResult.Result)
-					{
-						case ResultType.Successful:
-							int index = this.Project.GetEntryInsertIndex(importResult.BibEntry, 0);
-							this.referencesBindingSource.Insert(index, importResult.BibEntry);
-							break;
+					case ResultType.Successful:
+						this.Project.ApplyAllCleaning(importResult.BibEntry);
+						int index = this.Project.GetEntryInsertIndex(importResult.BibEntry, 0);
+						this.referencesBindingSource.Insert(index, importResult.BibEntry);
+						break;
 
-						case ResultType.NotFound:
-							// Do nothing.
-							break;
+					case ResultType.NotFound:
+						string message = "The item was not found during the search." + Environment.NewLine + Environment.NewLine;
+						if (!string.IsNullOrEmpty(importResult.Message))
+						{
+							message += importResult.Message + Environment.NewLine + Environment.NewLine;
+						}
+						message += "Do you wish to try again?";
+						ImportErrorForm messageBox = new ImportErrorForm(message, "Not Found");
+						messageBox.ShowDialog(this);
+						importer.Continue = messageBox.Result;
+						break;
 
-						case ResultType.Error:
-							MessageBoxYesNoToAll messageBox = new MessageBoxYesNoToAll(this.StoreMessageBoxResult, true);
-							string message = "An error occured during the search." + Environment.NewLine +
-								"Error: " + importResult.Message + Environment.NewLine +
+					case ResultType.Error:
+						message = "An error occured during the search." + Environment.NewLine + Environment.NewLine +
+								importResult.Message + Environment.NewLine + Environment.NewLine +
 								"Do you wish to try again?";
-							MessageBoxYesNoToAllResult result = messageBox.Show(this, message, "Import Error", MessageBoxYesNoToAllButtons.YesToAllNo);
-							importer.Continue = result == MessageBoxYesNoToAllResult.Yes;
-
-							// Have a retry limit.
-							_retryCount++;
-							if (_retryCount > 6)
-							{
-								_messageBoxResult	= MessageBoxYesNoToAllResult.Yes;
-								_retryCount			= 0;
-							}
-							break;
-					}
+						messageBox = new ImportErrorForm(message, "Import Error");
+						messageBox.ShowDialog(this);
+						importer.Continue = messageBox.Result;
+						break;
 				}
 			}
 		}
@@ -456,24 +457,7 @@ namespace BibtexManager
 
 			if (file != "")
 			{
-				SpeConferenceImporter importer   = new SpeConferenceImporter(file);
-				foreach (ImportResult importResult in this.Project.BulkImport(importer))
-				{
-					int index = this.Project.GetEntryInsertIndex(importResult.BibEntry, 0);
-					this.referencesBindingSource.Insert(index, importResult.BibEntry);
-				}
-			}
-		}
-
-		private void StoreMessageBoxResult(ref MessageBoxYesNoToAllResult result, bool setvalue)
-		{
-			if (setvalue)
-			{
-				_messageBoxResult = result;
-			}
-			else
-			{
-				result = _messageBoxResult;
+				BulkImport(new SpeConferenceImporter(file));
 			}
 		}
 

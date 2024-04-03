@@ -11,10 +11,10 @@ namespace BibtexManager
 	{
 		#region Fields
 
-		protected static readonly HttpClient        _httpClient                         = new HttpClient();
+		protected static readonly HttpClient		_httpClient						= new HttpClient();
 
-		private bool                                _useBibEntryInitialization      = false;
-		private BibEntryInitialization              _bibEntryInitialization         = new BibEntryInitialization();
+		private bool								_useBibEntryInitialization		= false;
+		private BibEntryInitialization				_bibEntryInitialization			= new BibEntryInitialization();
 
 		#endregion
 

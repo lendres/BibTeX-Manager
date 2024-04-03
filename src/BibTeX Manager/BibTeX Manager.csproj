@@ -26,7 +26,7 @@
     <UpgradeBackupLocation>
     </UpgradeBackupLocation>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
-    <OldToolsVersion>2.0</OldToolsVersion>
+    <OldToolsVersion>3.5</OldToolsVersion>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -235,6 +235,12 @@
     <Compile Include="Forms\FindEntryForm.Designer.cs">
       <DependentUpon>FindEntryForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\ImportErrorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ImportErrorForm.Designer.cs">
+      <DependentUpon>ImportErrorForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\OptionsForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -261,6 +267,7 @@
     </Compile>
     <Compile Include="Importing\IBulkImporter.cs" />
     <Compile Include="Importing\BulkImporter.cs" />
+    <Compile Include="Importing\ImportErrorHandlingType.cs" />
     <Compile Include="Importing\SingleImporter.cs" />
     <Compile Include="Importing\ImporterBase.cs" />
     <Compile Include="Importing\ISingleImporter.cs" />
@@ -344,6 +351,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FindEntryForm.resx">
       <DependentUpon>FindEntryForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ImportErrorForm.resx">
+      <DependentUpon>ImportErrorForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\OptionsForm.resx">
       <DependentUpon>OptionsForm.cs</DependentUpon>
