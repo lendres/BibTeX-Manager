@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="us-ascii"?>
 <bibentryremapping xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<maps>
-		<item key="Proceedings to InProceedings">
+		<item key="proceedings">
 			<value name="Proceedings to InProceedings" totype="inproceedings">
-				<fromtypes>
-					<type>proceedings</type>
-				</fromtypes>
 				<tagmaps>
 					<item key="series">
 						<value>booktitle</value>
@@ -16,11 +13,8 @@
 				</tagmaps>
 			</value>
 		</item>
-		<item key="Article">
-			<value name="Article" totype="article">
-				<fromtypes>
-					<type>article</type>
-				</fromtypes>
+		<item key="article">
+			<value name="Article to Article" totype="article">
 				<tagmaps>
 					<item key="publisher">
 						<value>organization</value>

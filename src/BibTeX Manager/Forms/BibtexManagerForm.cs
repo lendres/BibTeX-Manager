@@ -1,6 +1,9 @@
 using BibTeXLibrary;
 using BibtexManager.Forms;
+using BibtexManager.Importing;
+using BibtexManager.Project;
 using DigitalProduction.Forms;
+using DigitalProduction.Http;
 using DigitalProduction.Projects;
 using System;
 using System.ComponentModel;
@@ -17,8 +20,7 @@ namespace BibtexManager
 	{
 		#region Fields
 
-		private string          _findString			= null;
-		private int             _findStartRow       = 0;
+		private string						_findString			= null;
 
 		#endregion
 
@@ -52,6 +54,9 @@ namespace BibtexManager
 
 			// Allow the form to see key presses.
 			this.KeyPreview = true;
+
+			// Search set up.
+			CustomSearch.SetCxAndKey(Program.Registry.CustomSearchEngineIdentifier, Program.Registry.SearchEngineApiKey);
 		}
 
 		#endregion
@@ -76,10 +81,10 @@ namespace BibtexManager
 		/// <summary>
 		/// Create a new BibtexProject.
 		/// </summary>
-		protected override Project NewProject()
+		protected override DigitalProduction.Projects.Project NewProject()
 		{
 			BibtexProject project	= new BibtexProject();
-			return (Project)project;
+			return (DigitalProduction.Projects.Project)project;
 		}
 
 		/// <summary>
@@ -87,7 +92,7 @@ namespace BibtexManager
 		/// </summary>
 		public override ProjectExtractor DeserializeProject(string path)
 		{
-			ProjectExtractor projectExtractor	= ProjectExtractor.ExtractAndDeserializeProject<BibtexProject>(path);
+			ProjectExtractor projectExtractor	= BibtexProject.Deserialize(path);
 			_project							= (BibtexProject)projectExtractor.Project;
 			return projectExtractor;
 		}
@@ -98,6 +103,7 @@ namespace BibtexManager
 		/// </summary>
 		protected override void SetupProject()
 		{
+			this.Project.ReadAccessoaryFiles();
 			this.dataGridViewInterfaceControl.Project = this.Project;
 			InitializeDataBinding();
 			this.Project.OnClosed += this.RemoveDataBinding;
@@ -191,7 +197,6 @@ namespace BibtexManager
 			if (result == DialogResult.OK)
 			{
 				_findString		= findEntryForm.FindString;
-				_findStartRow	= this.bibEntriesDataGridView.SelectedRows[0].Index;
 				FindInDataGridView();
 			}
 		}
@@ -342,6 +347,22 @@ namespace BibtexManager
 		}
 
 		/// <summary>
+		/// Web search settings.
+		/// </summary>
+		/// <param name="sender">Sender.</param>
+		/// <param name="eventArgs">Event args.</param>
+		private void WebSearchSettingsToolStripMenuItem_Click(object sender, EventArgs eventArgs)
+		{
+			GoogleSearchForm searchForm = new GoogleSearchForm(CustomSearch.Cx, CustomSearch.ApiKey);
+
+			if (searchForm.ShowDialog() == DialogResult.OK)
+			{
+				Program.Registry.CustomSearchEngineIdentifier	= searchForm.Cx;
+				Program.Registry.SearchEngineApiKey				= searchForm.ApiKey;
+			}
+		}
+
+		/// <summary>
 		/// Sort all entries in the bibliography.
 		/// </summary>
 		/// <param name="sender">Sender.</param>
@@ -377,10 +398,72 @@ namespace BibtexManager
 			}
 		}
 
+		/// <summary>
+		/// Bulk import of SPE papers.
+		/// </summary>
+		/// <param name="sender">Sender.</param>
+		/// <param name="eventArgs">Event args.</param>
+		private void BulkSpeToolStripMenuItem1_Click(object sender, EventArgs eventArgs)
+		{
+			string file = DigitalProduction.Forms.FileSelect.BrowseForAFile(this, "", "Select a File with Search Terms");
+
+			if (file != "")
+			{
+				BulkImport(new SpeBulkTitleImporter(file));
+			}
+		}
+
+		private void BulkImport(IBulkImporter importer)
+		{
+			importer.SetBibliographyInitialization(this.Project.UseBibEntryInitialization, this.Project.BibEntryInitialization);
+
+			foreach (ImportResult importResult in importer.BulkImport())
+			{
+				switch (importResult.Result)
+				{
+					case ResultType.Successful:
+						this.Project.ApplyAllCleaning(importResult.BibEntry);
+						int index = this.Project.GetEntryInsertIndex(importResult.BibEntry, 0);
+						this.referencesBindingSource.Insert(index, importResult.BibEntry);
+						break;
+
+					case ResultType.NotFound:
+						string message = "The item was not found during the search." + Environment.NewLine + Environment.NewLine;
+						if (!string.IsNullOrEmpty(importResult.Message))
+						{
+							message += importResult.Message + Environment.NewLine + Environment.NewLine;
+						}
+						message += "Do you wish to try again?";
+						ImportErrorForm messageBox = new ImportErrorForm(message, "Not Found");
+						messageBox.ShowDialog(this);
+						importer.Continue = messageBox.Result;
+						break;
+
+					case ResultType.Error:
+						message = "An error occured during the search." + Environment.NewLine + Environment.NewLine +
+								importResult.Message + Environment.NewLine + Environment.NewLine +
+								"Do you wish to try again?";
+						messageBox = new ImportErrorForm(message, "Import Error");
+						messageBox.ShowDialog(this);
+						importer.Continue = messageBox.Result;
+						break;
+				}
+			}
+		}
+
+		private void SpeConferenceToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			string file = DigitalProduction.Forms.FileSelect.BrowseForAFile(this, "", "Select a File with Search Terms");
+
+			if (file != "")
+			{
+				BulkImport(new SpeConferenceImporter(file));
+			}
+		}
+
 		#endregion
 
 		#region Help
-
 		/// <summary>
 		/// Show help.
 		/// </summary>

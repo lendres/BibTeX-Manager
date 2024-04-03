@@ -36,9 +36,6 @@ namespace BibtexManager
 
 		[XmlAttribute("totype")]
 		public string ToType { get => _toType; set => _toType = value; }
-
-		[XmlArray("fromtypes"), XmlArrayItem("type")]
-		public List<string> FromTypes { get => _fromTypes; set => _fromTypes = value; }
 		
 		[XmlElement("tagmaps")]
 		public SerializableDictionary<string, string> TagMaps { get => _tagMaps; set => _tagMaps = value; }

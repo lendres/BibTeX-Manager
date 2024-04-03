@@ -47,8 +47,6 @@
 			this.checkQualityButton = new System.Windows.Forms.Button();
 			this.pasteAndCheckQualityButton = new System.Windows.Forms.Button();
 			this.pasteButton = new System.Windows.Forms.Button();
-			this.bibEntryMapComboBox = new System.Windows.Forms.ComboBox();
-			this.useBibEntryMapCheckBox = new System.Windows.Forms.CheckBox();
 			this.copyCiteKeyButton = new System.Windows.Forms.Button();
 			this.SuspendLayout();
 			// 
@@ -119,28 +117,6 @@
 			this.pasteButton.UseVisualStyleBackColor = true;
 			this.pasteButton.Click += new System.EventHandler(this.PasteButton_Click);
 			// 
-			// bibEntryMapComboBox
-			// 
-			this.bibEntryMapComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.bibEntryMapComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-			this.bibEntryMapComboBox.FormattingEnabled = true;
-			this.bibEntryMapComboBox.Location = new System.Drawing.Point(363, 31);
-			this.bibEntryMapComboBox.Name = "bibEntryMapComboBox";
-			this.bibEntryMapComboBox.Size = new System.Drawing.Size(295, 21);
-			this.bibEntryMapComboBox.TabIndex = 30;
-			// 
-			// useBibEntryMapCheckBox
-			// 
-			this.useBibEntryMapCheckBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.useBibEntryMapCheckBox.AutoSize = true;
-			this.useBibEntryMapCheckBox.Location = new System.Drawing.Point(364, 8);
-			this.useBibEntryMapCheckBox.Name = "useBibEntryMapCheckBox";
-			this.useBibEntryMapCheckBox.Size = new System.Drawing.Size(211, 17);
-			this.useBibEntryMapCheckBox.TabIndex = 31;
-			this.useBibEntryMapCheckBox.Text = "Use bibliography entry name remapping";
-			this.useBibEntryMapCheckBox.UseVisualStyleBackColor = true;
-			this.useBibEntryMapCheckBox.CheckedChanged += new System.EventHandler(this.BibEntryCheckBox_CheckedChanged);
-			// 
 			// copyCiteKeyButton
 			// 
 			this.copyCiteKeyButton.Image = global::BibtexManager.Properties.Resources.Copy_Key_40;
@@ -159,8 +135,6 @@
 			this.CancelButton = this.cancelButton;
 			this.ClientSize = new System.Drawing.Size(670, 494);
 			this.Controls.Add(this.copyCiteKeyButton);
-			this.Controls.Add(this.useBibEntryMapCheckBox);
-			this.Controls.Add(this.bibEntryMapComboBox);
 			this.Controls.Add(this.checkQualityButton);
 			this.Controls.Add(this.pasteAndCheckQualityButton);
 			this.Controls.Add(this.pasteButton);
@@ -177,7 +151,6 @@
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
 			this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Form_KeyUp);
 			this.ResumeLayout(false);
-			this.PerformLayout();
 
 		}
 
@@ -186,8 +159,6 @@
 		private System.Windows.Forms.Button pasteButton;
 		private System.Windows.Forms.Button pasteAndCheckQualityButton;
 		private System.Windows.Forms.Button checkQualityButton;
-		private System.Windows.Forms.ComboBox bibEntryMapComboBox;
-		private System.Windows.Forms.CheckBox useBibEntryMapCheckBox;
 		private System.Windows.Forms.Button copyCiteKeyButton;
 	} // End class.
 } // End namespace.

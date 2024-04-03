@@ -131,13 +131,13 @@
 		<tagprocessorgroup name="Capitol Letters and Acronyms">
 			<tagprocessors>
 				
-				<!-- Capital words/acronyms. -->
 				<tagprocessor xsi:type="StringReplacementTagProcessor"
 					tagstoprocess="OnlySpecified"
 					pattern="PDC"
 					replacement="{PDC}">
 					<tags>
 						<tag>title</tag>
+						<tag>abstract</tag>
 					</tags>
 				</tagprocessor>
 
@@ -147,9 +147,47 @@
 					replacement="{3D}">
 					<tags>
 						<tag>title</tag>
+						<tag>abstract</tag>
 					</tags>
 				</tagprocessor>
+
+				<tagprocessor xsi:type="StringReplacementTagProcessor"
+					tagstoprocess="OnlySpecified"
+					pattern="FEA"
+					replacement="{FEA}">
+					<tags>
+						<tag>title</tag>
+						<tag>abstract</tag>
+					</tags>
+				</tagprocessor>
+
+				<tagprocessor xsi:type="StringReplacementTagProcessor"
+					tagstoprocess="OnlySpecified"
+					pattern="CFD"
+					replacement="{CFD}">
+					<tags>
+						<tag>title</tag>
+						<tag>abstract</tag>
+					</tags>
+				</tagprocessor>
+
+			</tagprocessors>
+		</tagprocessorgroup>
+
+		<tagprocessorgroup name="Special Screw Ups by SPE">
+			<tagprocessors>
 				
+				<!-- Both how and why?  You suck SPE. -->
+				<tagprocessor xsi:type="StringReplacementTagProcessor"
+					tagstoprocess="OnlySpecified"
+					pattern="\\\\%"
+					replacement="\%">
+					<tags>
+						<tag>title</tag>
+						<tag>abstract</tag>
+					</tags>
+				</tagprocessor>
+
 			</tagprocessors>
 		</tagprocessorgroup>
 		
@@ -191,9 +229,7 @@
 
 				<!-- Change quotes to LaTeX quotes. -->
 				<tagprocessor xsi:type="QuoteTagProcessor" tagstoprocess="All" pattern="&quot;.*&quot;">
-					<tags>
-						<tag>title</tag>
-					</tags>
+					<tags></tags>
 				</tagprocessor>
 				
 			</tagprocessors>

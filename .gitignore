@@ -239,3 +239,9 @@ src/BibTeX Manager/Test Files/le-short.bib.output.bib
 src/BibTeX Manager/Forms/Resources/check-mark.eps
 src/BibTeX Manager/Test Files/Local Test File.bibproj
 src/Ancillary Files/LaTeX Tag Quality Processing.qlty
+
+*.spyproject
+
+customsearchkey.xml
+src/Test Files/SPE Test Titles 2-output.csv
+src/Test Files/SPE Test Titles 1-output.csv

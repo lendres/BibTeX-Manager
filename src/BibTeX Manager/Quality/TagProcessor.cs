@@ -77,7 +77,7 @@ namespace BibtexManager
 		/// Processes all the corrections for a single BibEntry.
 		/// </summary>
 		/// <param name="entry">BibEntry to process.</param>
-		public IEnumerable<Correction> Corrections(BibEntry entry)
+		public IEnumerable<Correction> Process(BibEntry entry)
 		{
 			foreach (string tagName in entry.TagNames)
 			{

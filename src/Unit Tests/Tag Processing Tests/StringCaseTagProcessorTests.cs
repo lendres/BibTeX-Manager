@@ -1,7 +1,5 @@
 using BibTeXLibrary;
 using BibtexManager;
-using BibtexManager.Quality;
-using System.Text.RegularExpressions;
 
 namespace BibtexManagerUnitTests
 {
@@ -19,7 +17,7 @@ namespace BibtexManagerUnitTests
 
 			StringCaseTagProcessor processor  = new() { Pattern=@"^[A-Z\s\p{P}]*$",  TagsToProcess = TagsToProcess.All };
 
-			BibEntry entry	= new BibEntry() { Title = input };
+			BibEntry entry	= new() { Title = input };
 			Utilities.RunProcessor(processor, entry);
 
 			Assert.AreEqual(solution, entry.Title);

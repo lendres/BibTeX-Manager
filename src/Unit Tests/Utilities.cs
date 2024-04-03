@@ -26,7 +26,7 @@ namespace BibtexManagerUnitTests
 		/// <param name="entry">BibEntry.</param>
 		public static void RunProcessor(TagProcessor processor, BibEntry entry)
 		{
-			foreach (Correction correction in processor.Corrections(entry))
+			foreach (Correction correction in processor.Process(entry))
 			{
 				if (correction.PromptUser)
 				{
@@ -44,7 +44,7 @@ namespace BibtexManagerUnitTests
 		{
 			foreach (TagProcessor processor in processors)
 			{
-				foreach (Correction correction in processor.Corrections(entry))
+				foreach (Correction correction in processor.Process(entry))
 				{
 					if (correction.PromptUser)
 					{

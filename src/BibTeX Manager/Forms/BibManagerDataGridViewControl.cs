@@ -11,7 +11,7 @@ namespace BibtexManager
 	{
 		#region Fields
 
-		private BibtexProject			_project;
+		private BibtexProject					_project;
 
 		#endregion
 
@@ -46,36 +46,36 @@ namespace BibtexManager
 		/// <summary>
 		/// Delegate for showing the edit dialog.
 		/// </summary>
-		[Browsable(false)]
-		public override ShowEditDialogDelegate ShowEditDialog
-		{
-			get
-			{
-				return base.ShowEditDialog;
-			}
+		//[Browsable(false)]
+		//public override ShowEditDialogDelegate ShowEditDialog
+		//{
+		//	get
+		//	{
+		//		return base.ShowEditDialog;
+		//	}
 
-			set
-			{
-				base.ShowEditDialog = this.ShowEditRawBibEntryDialog;
-			}
-		}
+		//	set
+		//	{
+		//		base.ShowEditDialog = this.ShowEditRawBibEntryDialog;
+		//	}
+		//}
 
-		/// <summary>
-		/// Delegate for showing the add dialog.
-		/// </summary>
-		[Browsable(false)]
-		public override ShowAddDialogDelegate ShowAddDialog
-		{
-			get
-			{
-				return base.ShowAddDialog;
-			}
+		///// <summary>
+		///// Delegate for showing the add dialog.
+		///// </summary>
+		//[Browsable(false)]
+		//public override ShowAddDialogDelegate ShowAddDialog
+		//{
+		//	get
+		//	{
+		//		return base.ShowAddDialog;
+		//	}
 
-			set
-			{
-				base.ShowAddDialog = this.ShowAddRawBibEntryDialog;
-			}
-		}
+		//	set
+		//	{
+		//		base.ShowAddDialog = this.ShowAddRawBibEntryDialog;
+		//	}
+		//}
 
 		#endregion
 
@@ -89,6 +89,16 @@ namespace BibtexManager
 		private void AddRawTemplateButton_Click(object sender, EventArgs eventArgs)
 		{
 			AddRawTemplate();
+		}
+
+		/// <summary>
+		/// Add a new raw bibliography based on a web search for an SPE paper.
+		/// </summary>
+		/// <param name="sender">Sender.</param>
+		/// <param name="eventArgs">Event arguments.</param>
+		private void AddSpeButton_Click(object sender, EventArgs eventArgs)
+		{
+			AddFromSpeSearch();
 		}
 
 		#endregion
@@ -111,7 +121,7 @@ namespace BibtexManager
 		public DialogResultPair ShowAddRawBibEntryDialog()
 		{
 			EditRawBibEntryForm editRawBibEntryForm = new EditRawBibEntryForm(this.BibtexManagerForm, this.Project);
-			return editRawBibEntryForm.ShowDialog(this, null, this.Project.WriteSettings);
+			return editRawBibEntryForm.ShowDialog(this, this.Project.WriteSettings);
 		}
 
 		/// <summary>
@@ -126,12 +136,50 @@ namespace BibtexManager
 			{
 				BibEntry entry = BibEntry.NewBibEntryTemplate(_project.BibEntryInitialization, selectBibEntryType.SelectedType);
 
-				EditRawBibEntryForm editRawBibEntryForm = new EditRawBibEntryForm(this.BibtexManagerForm, this.Project);
-				DialogResultPair dialogResultPair = editRawBibEntryForm.ShowDialog(this, entry, this.Project.WriteSettings);
+				EditRawBibEntryForm	editRawBibEntryForm	= new EditRawBibEntryForm(this.BibtexManagerForm, this.Project);
+				DialogResultPair	dialogResultPair	= editRawBibEntryForm.ShowDialog(this, entry, this.Project.WriteSettings);
 
 				if (dialogResultPair.Result == DialogResult.OK)
 				{
 					Add(dialogResultPair.Object);
+				}
+			}
+		}
+
+		/// <summary>
+		/// Create an entry from a web search for an SPE paper.
+		/// </summary>
+		private void AddFromSpeSearch()
+		{
+			SearchForm searchForm       = new SearchForm();
+			DialogResult dialogResult   = searchForm.ShowDialog();
+
+			if (dialogResult == DialogResult.OK)
+			{
+				try
+				{
+					SpeTitleImporter importer	= new SpeTitleImporter();
+					BibEntry bibEntry			= importer.Import(searchForm.SearchTerms);
+
+					if (bibEntry != null)
+					{
+						EditRawBibEntryForm editRawBibEntryForm = new EditRawBibEntryForm(this.BibtexManagerForm, this.Project);
+						DialogResultPair    dialogResultPair    = editRawBibEntryForm.ShowDialog(this, bibEntry, this.Project.WriteSettings);
+
+						if (dialogResultPair.Result == DialogResult.OK)
+						{
+							Add(dialogResultPair.Object);
+						}
+					}
+					else
+					{
+						MessageBox.Show(this.Parent, "A bibliography entry was not found.", "Entry Not Found", MessageBoxButtons.OK);
+					}
+
+				}
+				catch (Exception exception)
+				{
+					MessageBox.Show(this.Parent, "An error occured during the search.\nError: "+exception.Message, "Search Error", MessageBoxButtons.OK);
 				}
 			}
 		}
@@ -167,6 +215,8 @@ namespace BibtexManager
 			this.addRawTemplateButton.Location = new Point(location, 0);
 
 			// Set the location of the remaining buttons.
+			location += 41;
+			this.addSpeButton.Location = new Point(location, 0);
 			location += 75;
 			this.modifyButton.Location = new Point(location, 0);
 			location += 75;

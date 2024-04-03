@@ -1,10 +1,16 @@
 ﻿using BibTeXLibrary;
+using BibtexManager.Project;
+using DigitalProduction.IO;
 using DigitalProduction.Projects;
+using Google.Apis.CustomSearchAPI.v1.Data;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Xml.Serialization;
 
 namespace BibtexManager
@@ -13,7 +19,7 @@ namespace BibtexManager
 	/// The model.
 	/// </summary>
 	[XmlRoot("bibtexproject")]
-	public class BibtexProject : Project
+	public class BibtexProject : DigitalProduction.Projects.Project
 	{
 		#region Fields
 
@@ -22,10 +28,10 @@ namespace BibtexManager
 		private readonly Bibliography               _bibliography                   = new Bibliography();
 
 		private List<string>						_assessoryFiles					= new List<string>();
-		private List<BibliographyDOM>				_assessoryFilesDOMs				= new List<BibliographyDOM>();
+		private readonly List<BibliographyDOM>		_assessoryFilesDOMs				= new List<BibliographyDOM>();
 
 		private bool								_useStringConstants				= true;
-		private StringConstantProcessor				_stringConstantProcessor		= new StringConstantProcessor();
+		private readonly StringConstantProcessor	_stringConstantProcessor		= new StringConstantProcessor();
 
 		private bool								_useBibEntryInitialization;
 		private string								_bibEntryInitializationFile;
@@ -461,11 +467,11 @@ namespace BibtexManager
 				{
 					throw new Exception("The file \"" + absolutePath +" does not exist.\"");
 				}
-				_bibliography.Read(_bibFile, absolutePath);
+				_bibliography.Read(ConvertToAbsolutePath(_bibFile), absolutePath);
 			}
 			else
 			{
-				_bibliography.Read(_bibFile);
+				_bibliography.Read(ConvertToAbsolutePath(_bibFile));
 			}
 		}
 
@@ -513,6 +519,8 @@ namespace BibtexManager
 		/// </summary>
 		private void ReadAccessoryFiles()
 		{
+			_assessoryFilesDOMs.Clear();
+
 			foreach (string file in _assessoryFiles)
 			{
 				string absolutePath = ConvertToAbsolutePath(file);
@@ -533,7 +541,7 @@ namespace BibtexManager
 		{
 			if (this.UsePathsRelativeToBibFile)
 			{
-				path = DigitalProduction.IO.Path.ConvertToAbsolutePath(path, System.IO.Path.GetDirectoryName(_bibFile));
+				path = DigitalProduction.IO.Path.ConvertToAbsolutePath(path, System.IO.Path.GetDirectoryName(this.Path));
 			}
 			return path;
 		}
@@ -558,6 +566,17 @@ namespace BibtexManager
 		public string[] GetBibEntryMapNames()
 		{
 			return _nameRemapper.Maps.Keys.ToArray();
+		}
+
+		/// <summary>
+		/// Parse a string and return a single BibEntry.
+		/// </summary>
+		/// <param name="text">Text to process.</param>
+
+		public BibEntry ParseSingleEntryText(string text)
+		{
+			BindingList<BibEntry> entries = ParseText(text);
+			return entries[0];
 		}
 
 		/// <summary>
@@ -596,6 +615,8 @@ namespace BibtexManager
 
 		#region Quality and Automation Methods
 
+		#region Entry Automation and Quality
+
 		/// <summary>
 		/// If the option for automatically generating keys is on, a key is generated for the entry.
 		/// </summary>
@@ -624,7 +645,7 @@ namespace BibtexManager
 		}
 
 		/// <summary>
-		/// Clean a single entry.
+		/// Clean a single entry.  Used to prompt a user if the issues should be changed or not.
 		/// </summary>
 		/// <param name="entry">BibEntry.</param>
 		public IEnumerable<TagProcessingData> CleanEntry(BibEntry entry)
@@ -639,14 +660,18 @@ namespace BibtexManager
 		}
 
 		/// <summary>
-		/// Remaps the Key and Tag Keys to new names.
+		/// Clean a single entry.  Used to automatically accept each change.
 		/// </summary>
 		/// <param name="entry">BibEntry.</param>
-		public void RemapEntryNames(BibEntry entry)
+		public void AutoCleanEntry(BibEntry entry)
 		{
-			if (_useNameRemapping)
+			if (_useTagQualityProcessing)
 			{
-				_nameRemapper.RemapEntryNames(entry, _currentBibEntryMap);
+				foreach (TagProcessingData tagProcessingData in CleanEntry(entry))
+				{
+					tagProcessingData.Correction.ReplaceText    = true;
+					tagProcessingData.AcceptAll                 = true;
+				}
 			}
 		}
 
@@ -654,12 +679,11 @@ namespace BibtexManager
 		/// Remaps the Key and Tag Keys to new names.
 		/// </summary>
 		/// <param name="entry">BibEntry.</param>
-		/// <param name="bibEntryMapName">Name of the map to use.</param>
-		public void RemapEntryNames(BibEntry entry, string bibEntryMapName)
+		public void RemapEntryNames(BibEntry entry)
 		{
 			if (_useNameRemapping)
 			{
-				_nameRemapper.RemapEntryNames(entry, bibEntryMapName);
+				_nameRemapper.RemapEntryNames(entry);
 			}
 		}
 
@@ -691,6 +715,27 @@ namespace BibtexManager
 				return proposedIndex;
 			}
 		}
+
+		/// <summary>
+		/// Apply all cleaning to an entry.  Automatically accepts suggested changes.
+		/// </summary>
+		/// <param name="entry">BibEntry to clean.</param>
+		public void ApplyAllCleaning(BibEntry entry)
+		{
+			// Mapping.
+			RemapEntryNames(entry);
+
+			// Cleaning.
+			AutoCleanEntry(entry);
+
+			// String constants replacement.
+			ApplyStringConstants(entry);
+
+			// Key.
+			GenerateNewKey(entry);
+		}
+
+		#endregion
 
 		#region Entire Bibliography
 
@@ -748,16 +793,31 @@ namespace BibtexManager
 		/// <exception cref="InvalidOperationException">Thrown when the projects path is not set or not valid.</exception>
 		public override void Serialize()
 		{
-			string file = _bibFile;
+			string file = DigitalProduction.IO.Path.ConvertToAbsolutePath(_bibFile, System.IO.Path.GetDirectoryName(this.Path));
 			//file += ".output.bib";
 			_bibliography.Write(file, _writeSettings);
 			base.Serialize();
+		}
+
+		public static ProjectExtractor Deserialize(string path)
+		{
+			ProjectExtractor projectExtractor	= ProjectExtractor.ExtractAndDeserializeProject<BibtexProject>(path);
+			BibtexProject project				= (BibtexProject)projectExtractor.Project;
+			project.ReadAccessoaryFiles();
+			return projectExtractor;
 		}
 
 		/// <summary>
 		/// Initialize references.
 		/// </summary>
 		public override void DeserializationInitialization()
+		{
+		}
+
+		/// <summary>
+		/// Initialize references.
+		/// </summary>
+		public void ReadAccessoaryFiles()
 		{
 			ReadBibEntryInitializationFiles();
 			ReadTagQualityProcessingFile();

@@ -73,6 +73,16 @@ namespace BibtexManager.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Download_SPE_22x22 {
+            get {
+                object obj = ResourceManager.GetObject("Download SPE 22x22", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap LELaTeX_Logo_Rotated_CroppedForAbout {
             get {
                 object obj = ResourceManager.GetObject("LELaTeX_Logo_Rotated_CroppedForAbout", resourceCulture);

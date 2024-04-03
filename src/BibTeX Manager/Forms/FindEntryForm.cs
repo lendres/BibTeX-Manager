@@ -4,7 +4,7 @@ using System.Windows.Forms;
 namespace BibtexManager.Forms
 {
 	/// <summary>
-	/// 
+	/// A form for finding an entry in the Project.
 	/// </summary>
 	public partial class FindEntryForm : Form
 	{

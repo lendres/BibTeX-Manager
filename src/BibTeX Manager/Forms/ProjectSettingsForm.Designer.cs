@@ -43,6 +43,7 @@
 			this.cancelButton = new System.Windows.Forms.Button();
 			this.okButton = new System.Windows.Forms.Button();
 			this.bibFileGroupBox = new System.Windows.Forms.GroupBox();
+			this.useRelativePathsCheckBox = new System.Windows.Forms.CheckBox();
 			this.bibFileLocationTextBox = new System.Windows.Forms.TextBox();
 			this.browseBibFileButton = new System.Windows.Forms.Button();
 			this.accessoryFilesGroupBox = new System.Windows.Forms.GroupBox();
@@ -61,6 +62,7 @@
 			this.alignmentColumnNumericUpDown = new System.Windows.Forms.NumericUpDown();
 			this.alignTagValuesCheckBox = new System.Windows.Forms.CheckBox();
 			this.styleGroupBox = new System.Windows.Forms.GroupBox();
+			this.useBibEntryMapCheckBox = new System.Windows.Forms.CheckBox();
 			this.useConstantStringsCheckBox = new System.Windows.Forms.CheckBox();
 			this.copyCiteKeyCheckBox = new System.Windows.Forms.CheckBox();
 			this.autoGenerateKeysCheckBox = new System.Windows.Forms.CheckBox();
@@ -80,7 +82,6 @@
 			this.organizationGroupBox = new System.Windows.Forms.GroupBox();
 			this.sortBibliographyEntriesComboBox = new System.Windows.Forms.ComboBox();
 			this.sortBibliographyEntriesCheckBox = new System.Windows.Forms.CheckBox();
-			this.useRelativePathsCheckBox = new System.Windows.Forms.CheckBox();
 			this.bibFileGroupBox.SuspendLayout();
 			this.accessoryFilesGroupBox.SuspendLayout();
 			this.tabsGroupBox.SuspendLayout();
@@ -99,7 +100,7 @@
 			// 
 			this.cancelButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.cancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-			this.cancelButton.Location = new System.Drawing.Point(499, 659);
+			this.cancelButton.Location = new System.Drawing.Point(499, 662);
 			this.cancelButton.Name = "cancelButton";
 			this.cancelButton.Size = new System.Drawing.Size(80, 23);
 			this.cancelButton.TabIndex = 25;
@@ -110,7 +111,7 @@
 			// 
 			this.okButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.okButton.DialogResult = System.Windows.Forms.DialogResult.OK;
-			this.okButton.Location = new System.Drawing.Point(401, 659);
+			this.okButton.Location = new System.Drawing.Point(401, 662);
 			this.okButton.Name = "okButton";
 			this.okButton.Size = new System.Drawing.Size(80, 23);
 			this.okButton.TabIndex = 24;
@@ -122,15 +123,25 @@
 			// 
 			this.bibFileGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.bibFileGroupBox.Controls.Add(this.useRelativePathsCheckBox);
 			this.bibFileGroupBox.Controls.Add(this.bibFileLocationTextBox);
 			this.bibFileGroupBox.Controls.Add(this.browseBibFileButton);
-			this.bibFileGroupBox.Location = new System.Drawing.Point(12, 12);
+			this.bibFileGroupBox.Location = new System.Drawing.Point(12, 38);
 			this.bibFileGroupBox.Name = "bibFileGroupBox";
-			this.bibFileGroupBox.Size = new System.Drawing.Size(567, 77);
+			this.bibFileGroupBox.Size = new System.Drawing.Size(567, 51);
 			this.bibFileGroupBox.TabIndex = 26;
 			this.bibFileGroupBox.TabStop = false;
 			this.bibFileGroupBox.Text = "Bibliography File";
+			// 
+			// useRelativePathsCheckBox
+			// 
+			this.useRelativePathsCheckBox.AutoSize = true;
+			this.useRelativePathsCheckBox.Location = new System.Drawing.Point(22, 12);
+			this.useRelativePathsCheckBox.Name = "useRelativePathsCheckBox";
+			this.useRelativePathsCheckBox.Size = new System.Drawing.Size(177, 17);
+			this.useRelativePathsCheckBox.TabIndex = 28;
+			this.useRelativePathsCheckBox.Text = "Use paths relative to project file.";
+			this.useRelativePathsCheckBox.UseVisualStyleBackColor = true;
+			this.useRelativePathsCheckBox.CheckedChanged += new System.EventHandler(this.useRelativePathsCheckBox_CheckedChanged);
 			// 
 			// bibFileLocationTextBox
 			// 
@@ -163,7 +174,7 @@
 			this.accessoryFilesGroupBox.Controls.Add(this.assessoryFilesListBox);
 			this.accessoryFilesGroupBox.Location = new System.Drawing.Point(12, 101);
 			this.accessoryFilesGroupBox.Name = "accessoryFilesGroupBox";
-			this.accessoryFilesGroupBox.Size = new System.Drawing.Size(567, 92);
+			this.accessoryFilesGroupBox.Size = new System.Drawing.Size(567, 79);
 			this.accessoryFilesGroupBox.TabIndex = 27;
 			this.accessoryFilesGroupBox.TabStop = false;
 			this.accessoryFilesGroupBox.Text = "Assessory Files";
@@ -200,7 +211,7 @@
 			this.assessoryFilesListBox.Location = new System.Drawing.Point(10, 18);
 			this.assessoryFilesListBox.Name = "assessoryFilesListBox";
 			this.assessoryFilesListBox.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
-			this.assessoryFilesListBox.Size = new System.Drawing.Size(466, 56);
+			this.assessoryFilesListBox.Size = new System.Drawing.Size(466, 43);
 			this.assessoryFilesListBox.TabIndex = 2;
 			// 
 			// tabsGroupBox
@@ -210,7 +221,7 @@
 			this.tabsGroupBox.Controls.Add(this.tabSizeNumericUpDown);
 			this.tabsGroupBox.Controls.Add(this.insertTabsRadioButton);
 			this.tabsGroupBox.Controls.Add(this.insertSpacesRadioButton);
-			this.tabsGroupBox.Location = new System.Drawing.Point(12, 466);
+			this.tabsGroupBox.Location = new System.Drawing.Point(12, 451);
 			this.tabsGroupBox.Name = "tabsGroupBox";
 			this.tabsGroupBox.Size = new System.Drawing.Size(164, 100);
 			this.tabsGroupBox.TabIndex = 28;
@@ -280,7 +291,7 @@
 			this.alignmentGroupBox.Controls.Add(this.alignmentColumnLabel);
 			this.alignmentGroupBox.Controls.Add(this.alignmentColumnNumericUpDown);
 			this.alignmentGroupBox.Controls.Add(this.alignTagValuesCheckBox);
-			this.alignmentGroupBox.Location = new System.Drawing.Point(192, 466);
+			this.alignmentGroupBox.Location = new System.Drawing.Point(192, 451);
 			this.alignmentGroupBox.Name = "alignmentGroupBox";
 			this.alignmentGroupBox.Size = new System.Drawing.Size(170, 100);
 			this.alignmentGroupBox.TabIndex = 29;
@@ -352,22 +363,34 @@
 			// 
 			// styleGroupBox
 			// 
-			this.styleGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.styleGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.styleGroupBox.Controls.Add(this.useBibEntryMapCheckBox);
 			this.styleGroupBox.Controls.Add(this.useConstantStringsCheckBox);
 			this.styleGroupBox.Controls.Add(this.copyCiteKeyCheckBox);
 			this.styleGroupBox.Controls.Add(this.autoGenerateKeysCheckBox);
 			this.styleGroupBox.Controls.Add(this.removeLastCommaCheckBox);
-			this.styleGroupBox.Location = new System.Drawing.Point(12, 575);
+			this.styleGroupBox.Location = new System.Drawing.Point(12, 560);
 			this.styleGroupBox.Name = "styleGroupBox";
-			this.styleGroupBox.Size = new System.Drawing.Size(433, 74);
+			this.styleGroupBox.Size = new System.Drawing.Size(567, 92);
 			this.styleGroupBox.TabIndex = 30;
 			this.styleGroupBox.TabStop = false;
 			this.styleGroupBox.Text = "Automation";
 			// 
+			// useBibEntryMapCheckBox
+			// 
+			this.useBibEntryMapCheckBox.AutoSize = true;
+			this.useBibEntryMapCheckBox.Location = new System.Drawing.Point(233, 43);
+			this.useBibEntryMapCheckBox.Name = "useBibEntryMapCheckBox";
+			this.useBibEntryMapCheckBox.Size = new System.Drawing.Size(211, 17);
+			this.useBibEntryMapCheckBox.TabIndex = 32;
+			this.useBibEntryMapCheckBox.Text = "Use bibliography entry name remapping";
+			this.useBibEntryMapCheckBox.UseVisualStyleBackColor = true;
+			// 
 			// useConstantStringsCheckBox
 			// 
 			this.useConstantStringsCheckBox.AutoSize = true;
-			this.useConstantStringsCheckBox.Location = new System.Drawing.Point(211, 44);
+			this.useConstantStringsCheckBox.Location = new System.Drawing.Point(233, 20);
 			this.useConstantStringsCheckBox.Name = "useConstantStringsCheckBox";
 			this.useConstantStringsCheckBox.Size = new System.Drawing.Size(220, 17);
 			this.useConstantStringsCheckBox.TabIndex = 3;
@@ -377,7 +400,7 @@
 			// copyCiteKeyCheckBox
 			// 
 			this.copyCiteKeyCheckBox.AutoSize = true;
-			this.copyCiteKeyCheckBox.Location = new System.Drawing.Point(211, 20);
+			this.copyCiteKeyCheckBox.Location = new System.Drawing.Point(7, 43);
 			this.copyCiteKeyCheckBox.Name = "copyCiteKeyCheckBox";
 			this.copyCiteKeyCheckBox.Size = new System.Drawing.Size(191, 17);
 			this.copyCiteKeyCheckBox.TabIndex = 2;
@@ -397,7 +420,7 @@
 			// removeLastCommaCheckBox
 			// 
 			this.removeLastCommaCheckBox.AutoSize = true;
-			this.removeLastCommaCheckBox.Location = new System.Drawing.Point(7, 44);
+			this.removeLastCommaCheckBox.Location = new System.Drawing.Point(7, 66);
 			this.removeLastCommaCheckBox.Name = "removeLastCommaCheckBox";
 			this.removeLastCommaCheckBox.Size = new System.Drawing.Size(167, 17);
 			this.removeLastCommaCheckBox.TabIndex = 0;
@@ -411,7 +434,7 @@
 			this.bibEntryInitializationGroupBox.Controls.Add(this.useBibEntryInitializationCheckBox);
 			this.bibEntryInitializationGroupBox.Controls.Add(this.bibEntryInitializationFileTextBox);
 			this.bibEntryInitializationGroupBox.Controls.Add(this.browseBibEntryInitializationFileButton);
-			this.bibEntryInitializationGroupBox.Location = new System.Drawing.Point(12, 207);
+			this.bibEntryInitializationGroupBox.Location = new System.Drawing.Point(12, 192);
 			this.bibEntryInitializationGroupBox.Name = "bibEntryInitializationGroupBox";
 			this.bibEntryInitializationGroupBox.Size = new System.Drawing.Size(567, 73);
 			this.bibEntryInitializationGroupBox.TabIndex = 27;
@@ -457,7 +480,7 @@
 			this.qualityProcessorGroupBox.Controls.Add(this.useQualityProcessingCheckBox);
 			this.qualityProcessorGroupBox.Controls.Add(this.qualityProcessingFileTextBox);
 			this.qualityProcessorGroupBox.Controls.Add(this.browseQualityProcessorButton);
-			this.qualityProcessorGroupBox.Location = new System.Drawing.Point(13, 294);
+			this.qualityProcessorGroupBox.Location = new System.Drawing.Point(12, 279);
 			this.qualityProcessorGroupBox.Name = "qualityProcessorGroupBox";
 			this.qualityProcessorGroupBox.Size = new System.Drawing.Size(567, 73);
 			this.qualityProcessorGroupBox.TabIndex = 27;
@@ -502,7 +525,7 @@
 			this.remappingFileGroupBox.Controls.Add(this.useRemappingCheckBox);
 			this.remappingFileGroupBox.Controls.Add(this.remappingFileTextBox);
 			this.remappingFileGroupBox.Controls.Add(this.remappingFileBrowseButton);
-			this.remappingFileGroupBox.Location = new System.Drawing.Point(13, 380);
+			this.remappingFileGroupBox.Location = new System.Drawing.Point(12, 365);
 			this.remappingFileGroupBox.Name = "remappingFileGroupBox";
 			this.remappingFileGroupBox.Size = new System.Drawing.Size(567, 73);
 			this.remappingFileGroupBox.TabIndex = 28;
@@ -545,7 +568,7 @@
 			this.organizationGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.organizationGroupBox.Controls.Add(this.sortBibliographyEntriesComboBox);
 			this.organizationGroupBox.Controls.Add(this.sortBibliographyEntriesCheckBox);
-			this.organizationGroupBox.Location = new System.Drawing.Point(379, 469);
+			this.organizationGroupBox.Location = new System.Drawing.Point(379, 454);
 			this.organizationGroupBox.Name = "organizationGroupBox";
 			this.organizationGroupBox.Size = new System.Drawing.Size(200, 100);
 			this.organizationGroupBox.TabIndex = 31;
@@ -572,24 +595,15 @@
 			this.sortBibliographyEntriesCheckBox.UseVisualStyleBackColor = true;
 			this.sortBibliographyEntriesCheckBox.CheckedChanged += new System.EventHandler(this.SortBibliographyEntriesCheckBox_CheckedChanged);
 			// 
-			// useRelativePathsCheckBox
-			// 
-			this.useRelativePathsCheckBox.AutoSize = true;
-			this.useRelativePathsCheckBox.Location = new System.Drawing.Point(11, 51);
-			this.useRelativePathsCheckBox.Name = "useRelativePathsCheckBox";
-			this.useRelativePathsCheckBox.Size = new System.Drawing.Size(201, 17);
-			this.useRelativePathsCheckBox.TabIndex = 28;
-			this.useRelativePathsCheckBox.Text = "Use paths relative to bibliography file.";
-			this.useRelativePathsCheckBox.UseVisualStyleBackColor = true;
-			this.useRelativePathsCheckBox.CheckedChanged += new System.EventHandler(this.useRelativePathsCheckBox_CheckedChanged);
-			// 
 			// ProjectSettingsForm
 			// 
 			this.AcceptButton = this.okButton;
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
 			this.CancelButton = this.cancelButton;
-			this.ClientSize = new System.Drawing.Size(591, 694);
+			this.ClientSize = new System.Drawing.Size(591, 697);
+			this.Controls.Add(this.useRelativePathsCheckBox);
 			this.Controls.Add(this.organizationGroupBox);
 			this.Controls.Add(this.remappingFileGroupBox);
 			this.Controls.Add(this.qualityProcessorGroupBox);
@@ -604,7 +618,7 @@
 			this.MaximizeBox = false;
 			this.MaximumSize = new System.Drawing.Size(1081, 951);
 			this.MinimizeBox = false;
-			this.MinimumSize = new System.Drawing.Size(607, 707);
+			this.MinimumSize = new System.Drawing.Size(607, 720);
 			this.Name = "ProjectSettingsForm";
 			this.ShowIcon = false;
 			this.ShowInTaskbar = false;
@@ -631,6 +645,7 @@
 			this.organizationGroupBox.ResumeLayout(false);
 			this.organizationGroupBox.PerformLayout();
 			this.ResumeLayout(false);
+			this.PerformLayout();
 
 		}
 
@@ -675,5 +690,6 @@
 		private System.Windows.Forms.ComboBox sortBibliographyEntriesComboBox;
 		private System.Windows.Forms.CheckBox sortBibliographyEntriesCheckBox;
 		private System.Windows.Forms.CheckBox useRelativePathsCheckBox;
+		private System.Windows.Forms.CheckBox useBibEntryMapCheckBox;
 	} // End class.
 } // End namespace.

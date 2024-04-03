@@ -15,12 +15,14 @@ namespace BibtexManagerUnitTests
 			string solution = @"The quick brown fox \& quicker red squirrel jumped over the fence \& lazy dog.";
 			string input	= @"The quick brown fox &amp; quicker red squirrel jumped over the fence &amp; lazy dog.";
 
-			BibEntry entry								= new BibEntry() { Title = input, Abstract = input };
-			StringReplacementTagProcessor processor		= new StringReplacementTagProcessor() { TagsToProcess = TagsToProcess.OnlySpecified };
+			BibEntry entry								= new() { Title = input, Abstract = input };
+			StringReplacementTagProcessor processor		= new()
+			{
+				TagsToProcess = TagsToProcess.OnlySpecified,
+				Pattern     = "&amp;",
+				Replacement = @"\&"
+			};
 			processor.TagNames.Add("abstract");
-
-			processor.Pattern		= "&amp;";
-			processor.Replacement	= @"\&";
 
 			Utilities.RunProcessor(processor, entry);
 
@@ -37,12 +39,14 @@ namespace BibtexManagerUnitTests
 			string solution = @"The quick brown fox \& quicker red squirrel jumped over the fence \& lazy dog.";
 			string input    = @"The quick brown fox &amp; quicker red squirrel jumped over the fence &amp; lazy dog.";
 
-			BibEntry entry                              = new BibEntry() { Title = input, Abstract = input };
-			StringReplacementTagProcessor processor     = new StringReplacementTagProcessor() { TagsToProcess = TagsToProcess.ExcludeSpecified };
+			BibEntry entry                              = new() { Title = input, Abstract = input };
+			StringReplacementTagProcessor processor		= new()
+			{
+				TagsToProcess = TagsToProcess.ExcludeSpecified,
+				Pattern       = "&amp;",
+				Replacement   = @"\&"
+			};
 			processor.TagNames.Add("abstract");
-
-			processor.Pattern       = "&amp;";
-			processor.Replacement   = @"\&";
 
 			Utilities.RunProcessor(processor, entry);
 
@@ -59,11 +63,13 @@ namespace BibtexManagerUnitTests
 			string solution	= @"The quick brown fox \& quicker red squirrel jumped over the fence lazy dog.\&";
 			string input	= @"The quick brown fox &amp; quicker red squirrel jumped over the fence lazy dog.&amp;";
 
-			BibEntry entry								= new BibEntry() { Title = input, Abstract = input };
-			StringReplacementTagProcessor processor		= new StringReplacementTagProcessor() { TagsToProcess = TagsToProcess.All };
-
-			processor.Pattern		= "&amp;";
-			processor.Replacement	= @"\&";
+			BibEntry entry								= new() { Title = input, Abstract = input };
+			StringReplacementTagProcessor processor		= new()
+			{
+				TagsToProcess = TagsToProcess.All,
+				Pattern     = "&amp;",
+				Replacement = @"\&"
+			};
 
 			Utilities.RunProcessor(processor, entry);
 
@@ -80,11 +86,13 @@ namespace BibtexManagerUnitTests
 			string solution = @"The quick {Red} fox & quicker {Red} squirrel jumped over the fence & lazy dog.";
 			string input	= @"The quick {Red} fox & quicker Red squirrel jumped over the fence & lazy dog.";
 
-			BibEntry entry = new BibEntry() { Title = input};
-			StringReplacementTagProcessor processor = new StringReplacementTagProcessor() { TagsToProcess = TagsToProcess.All };
-
-			processor.Pattern		= "Red";
-			processor.Replacement	= "{Red}";
+			BibEntry entry							= new() { Title = input};
+			StringReplacementTagProcessor processor	= new()
+			{
+				TagsToProcess = TagsToProcess.All,
+				Pattern     = "Red",
+				Replacement = "{Red}"
+			};
 			processor.TagNames.Add("title");
 
 			// Test lower case tag name.
@@ -108,11 +116,13 @@ namespace BibtexManagerUnitTests
 			string solution2 = @"The quick {Red} fox & quicker {Red} squirrel jumped over the fence & lazy dog.";
 			string input = @"{The quick {Red} fox & quicker {Red} squirrel jumped over the fence & lazy dog.}";
 
-			BibEntry entry = new BibEntry() { Title = input };
-			StringReplacementTagProcessor processor = new StringReplacementTagProcessor() { TagsToProcess = TagsToProcess.All };
-
-			processor.Pattern = "^{";
-			processor.Replacement = "";
+			BibEntry entry							= new() { Title = input };
+			StringReplacementTagProcessor processor = new()
+			{
+				TagsToProcess = TagsToProcess.All,
+				Pattern = "^{",
+				Replacement = ""
+			};
 			processor.TagNames.Add("title");
 
 			// Test lower case tag name.
@@ -135,11 +145,13 @@ namespace BibtexManagerUnitTests
 			string solution = @"The q{\o}ick.";
 			string input = @"The qøick.";
 
-			BibEntry entry = new BibEntry() { Title = input };
-			StringReplacementTagProcessor processor = new StringReplacementTagProcessor() { TagsToProcess = TagsToProcess.All };
-
-			processor.Pattern = "ø";
-			processor.Replacement = @"{\o}";
+			BibEntry entry							= new() { Title = input };
+			StringReplacementTagProcessor processor = new()
+			{
+				TagsToProcess = TagsToProcess.All,
+				Pattern = "ø",
+				Replacement = @"{\o}"
+			};
 			processor.TagNames.Add("title");
 
 			// Test lower case tag name.
