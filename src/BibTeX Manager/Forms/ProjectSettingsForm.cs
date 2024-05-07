@@ -56,13 +56,16 @@ namespace BibtexManager
 
 			foreach (TextBox textBox in textBoxes)
 			{
-				if (this.useRelativePathsCheckBox.Checked)
+				if (!string.IsNullOrEmpty(textBox.Text))
 				{
-					textBox.Text = ConvertToRelativePath(textBox.Text, true);
-				}
-				else
-				{
-					textBox.Text = ConvertToAbsolutePath(textBox.Text, true);
+					if (this.useRelativePathsCheckBox.Checked)
+					{
+						textBox.Text = ConvertToRelativePath(textBox.Text, true);
+					}
+					else
+					{
+						textBox.Text = ConvertToAbsolutePath(textBox.Text, true);
+					}
 				}
 			}
 
@@ -91,7 +94,11 @@ namespace BibtexManager
 		/// <param name="eventArgs">Event arguments.</param>
 		private void BrowseBibFileButton_Click(object sender, EventArgs eventArgs)
 		{
-			string initialDirectory	= System.IO.Path.GetDirectoryName(ConvertToAbsolutePath(_project.BibliographyFile, true));
+			string initialDirectory = "";
+			if (!string.IsNullOrEmpty(_project.BibliographyFile))
+			{
+				System.IO.Path.GetDirectoryName(ConvertToAbsolutePath(_project.BibliographyFile, true));
+			}
 
 			string path = FileSelect.BrowseForAFile(this, _bibFileFilterString, "Select BibTeX File", initialDirectory, true);
 
@@ -108,7 +115,11 @@ namespace BibtexManager
 		/// <param name="eventArgs">Event arguments.</param>
 		private void AddAssessoryFileButton_Click(object sender, EventArgs eventArgs)
 		{
-			string initialDirectory = System.IO.Path.GetDirectoryName(ConvertToAbsolutePath(_project.BibliographyFile, true));
+			string initialDirectory = "";
+			if (!string.IsNullOrEmpty(_project.BibliographyFile))
+			{
+				initialDirectory = System.IO.Path.GetDirectoryName(ConvertToAbsolutePath(_project.BibliographyFile, true));
+			}
 
 			string[] paths = FileSelect.BrowseForMultipleFiles(this, _bibFileFilterString, "Select BibTeX File", initialDirectory, true);
 
@@ -153,7 +164,11 @@ namespace BibtexManager
 		/// <param name="eventArgs">Event arguments.</param>
 		private void BrowseBibEntryInitializationButton_Click(object sender, EventArgs eventArgs)
 		{
-			string initialDirectory = System.IO.Path.GetDirectoryName(ConvertToAbsolutePath(this.bibEntryInitializationFileTextBox.Text, true));
+			string initialDirectory = "";
+			if (!string.IsNullOrEmpty(this.bibEntryInitializationFileTextBox.Text))
+			{
+				System.IO.Path.GetDirectoryName(ConvertToAbsolutePath(this.bibEntryInitializationFileTextBox.Text, true));
+			}
 
 			string path = FileSelect.BrowseForAFile(this, _bibEntryInitializationFileFilterString, "Select a Bibliography Tag Order File", initialDirectory, true);
 
@@ -170,7 +185,11 @@ namespace BibtexManager
 		/// <param name="eventArgs">Event arguments.</param>
 		private void BrowseQualityProcessorButton_Click(object sender, EventArgs eventArgs)
 		{
-			string initialDirectory = System.IO.Path.GetDirectoryName(ConvertToAbsolutePath(this.qualityProcessingFileTextBox.Text, true));
+			string initialDirectory = "";
+			if (!string.IsNullOrEmpty(this.qualityProcessingFileTextBox.Text))
+			{
+				System.IO.Path.GetDirectoryName(ConvertToAbsolutePath(this.qualityProcessingFileTextBox.Text, true));
+			}
 
 			string path = FileSelect.BrowseForAFile(this, _qualityProcessingFileFilterString, "Select a Quality Processing File", initialDirectory, true);
 
@@ -187,7 +206,11 @@ namespace BibtexManager
 		/// <param name="eventArgs">Event arguments.</param>
 		private void RemappingFileBrowseButton_Click(object sender, EventArgs eventArgs)
 		{
-			string initialDirectory = System.IO.Path.GetDirectoryName(ConvertToAbsolutePath(this.remappingFileTextBox.Text, true));
+			string initialDirectory = "";
+			if (!string.IsNullOrEmpty(this.remappingFileTextBox.Text))
+			{
+				System.IO.Path.GetDirectoryName(ConvertToAbsolutePath(this.remappingFileTextBox.Text, true));
+			}
 
 			string path = FileSelect.BrowseForAFile(this, _remappingFileFilterString, "Select a Bibliography Remapping File", initialDirectory, true);
 

@@ -23,22 +23,22 @@ namespace BibtexManager
 	{
 		#region Fields
 
-		private string								_bibFile;
-		private bool								_useRelativePaths				= true;
+		private string								_bibFile						= "";
+		private bool								_useRelativePaths				= false;
 		private readonly Bibliography               _bibliography                   = new Bibliography();
 
 		private List<string>						_assessoryFiles					= new List<string>();
 		private readonly List<BibliographyDOM>		_assessoryFilesDOMs				= new List<BibliographyDOM>();
 
-		private bool								_useStringConstants				= true;
+		private bool								_useStringConstants				= false;
 		private readonly StringConstantProcessor	_stringConstantProcessor		= new StringConstantProcessor();
 
-		private bool								_useBibEntryInitialization;
-		private string								_bibEntryInitializationFile;
+		private bool								_useBibEntryInitialization		= false;
+		private string								_bibEntryInitializationFile		= "";
 		private BibEntryInitialization				_bibEntryInitialization			= new BibEntryInitialization();
 
-		private bool								_useTagQualityProcessing;
-		private string								_tagQualityProcessingFile;
+		private bool								_useTagQualityProcessing		= false;
+		private string								_tagQualityProcessingFile		= "";
 		private QualityProcessor					_tagQualityProcessor			= new QualityProcessor();
 
 		private bool								_useNameRemapping				= false;
@@ -460,18 +460,20 @@ namespace BibtexManager
 		/// </summary>
 		private void ReadBibliographyFile()
 		{
-			if (_useBibEntryInitialization)
+			string bibFile = ConvertToAbsolutePath(_bibFile);
+			if (!File.Exists(bibFile))
 			{
-				string absolutePath = ConvertToAbsolutePath(_bibEntryInitializationFile);
-				if (!System.IO.File.Exists(absolutePath))
-				{
-					throw new Exception("The file \"" + absolutePath +" does not exist.\"");
-				}
-				_bibliography.Read(ConvertToAbsolutePath(_bibFile), absolutePath);
+				return;
+			}
+
+			string bibEntryInitializaitonFile = ConvertToAbsolutePath(_bibEntryInitializationFile);
+			if (_useBibEntryInitialization && File.Exists(bibEntryInitializaitonFile))
+			{
+				_bibliography.Read(bibFile, bibEntryInitializaitonFile);
 			}
 			else
 			{
-				_bibliography.Read(ConvertToAbsolutePath(_bibFile));
+				_bibliography.Read(bibFile);
 			}
 		}
 
@@ -481,11 +483,10 @@ namespace BibtexManager
 		private void ReadBibEntryInitializationFiles()
 		{
 			string absolutePath = ConvertToAbsolutePath(_bibEntryInitializationFile);
-			if (!System.IO.File.Exists(absolutePath))
+			if (System.IO.File.Exists(absolutePath))
 			{
-				throw new Exception("The file \"" + absolutePath +" does not exist.\"");
+				_bibEntryInitialization = BibEntryInitialization.Deserialize(absolutePath);
 			}
-			_bibEntryInitialization = BibEntryInitialization.Deserialize(absolutePath);
 		}
 
 		/// <summary>
@@ -494,11 +495,10 @@ namespace BibtexManager
 		private void ReadTagQualityProcessingFile()
 		{
 			string absolutePath = ConvertToAbsolutePath(_tagQualityProcessingFile);
-			if (!System.IO.File.Exists(absolutePath))
+			if (System.IO.File.Exists(absolutePath))
 			{
-				throw new Exception("The file \"" + absolutePath +" does not exist.\"");
+				_tagQualityProcessor = QualityProcessor.Deserialize(absolutePath);
 			}
-			_tagQualityProcessor = QualityProcessor.Deserialize(absolutePath);
 		}
 
 		/// <summary>
@@ -507,11 +507,10 @@ namespace BibtexManager
 		private void ReadNameMappingFile()
 		{
 			string absolutePath = ConvertToAbsolutePath(_nameRemappingFile);
-			if (!System.IO.File.Exists(absolutePath))
+			if (System.IO.File.Exists(absolutePath))
 			{
-				throw new Exception("The file \"" + absolutePath +" does not exist.\"");
+				_nameRemapper = BibEntryRemapper.Deserialize(absolutePath);
 			}
-			_nameRemapper = BibEntryRemapper.Deserialize(absolutePath);
 		}
 
 		/// <summary>
@@ -524,12 +523,10 @@ namespace BibtexManager
 			foreach (string file in _assessoryFiles)
 			{
 				string absolutePath = ConvertToAbsolutePath(file);
-				if (!System.IO.File.Exists(absolutePath))
+				if (System.IO.File.Exists(absolutePath))
 				{
-					throw new Exception("The file \"" + absolutePath +" does not exist.\"");
+					_assessoryFilesDOMs.Add(BibParser.Parse(absolutePath));
 				}
-
-				_assessoryFilesDOMs.Add(BibParser.Parse(absolutePath));
 			}
 		}
 
@@ -539,7 +536,7 @@ namespace BibtexManager
 		/// <param name="path">Path to convert.</param>
 		private string ConvertToAbsolutePath(string path)
 		{
-			if (this.UsePathsRelativeToBibFile)
+			if (this.UsePathsRelativeToBibFile && !string.IsNullOrEmpty(this.Path))
 			{
 				path = DigitalProduction.IO.Path.ConvertToAbsolutePath(path, System.IO.Path.GetDirectoryName(this.Path));
 			}
@@ -793,9 +790,13 @@ namespace BibtexManager
 		/// <exception cref="InvalidOperationException">Thrown when the projects path is not set or not valid.</exception>
 		public override void Serialize()
 		{
-			string file = DigitalProduction.IO.Path.ConvertToAbsolutePath(_bibFile, System.IO.Path.GetDirectoryName(this.Path));
-			//file += ".output.bib";
-			_bibliography.Write(file, _writeSettings);
+			// Save the bibliography file from memory.
+			if (!string.IsNullOrEmpty(_bibFile))
+			{
+				string file = DigitalProduction.IO.Path.ConvertToAbsolutePath(_bibFile, System.IO.Path.GetDirectoryName(this.Path));
+				//file += ".output.bib";
+				_bibliography.Write(file, _writeSettings);
+			}
 			base.Serialize();
 		}
 

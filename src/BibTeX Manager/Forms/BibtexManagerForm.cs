@@ -284,11 +284,11 @@ namespace BibtexManager
 		/// <param name="eventArgs">Event arguments.</param>
 		protected override void NewToolStripItem_Click(object sender, EventArgs eventArgs)
 		{
-			base.NewToolStripItem_Click(sender, eventArgs);
-
 			// After we create a new project, it needs to be set up.
 			// Removing and adding the data binding is a hack to get this to work for now.
 			RemoveDataBinding();
+			New();
+			SaveAs();
 			ProjectSettingsForm projectForm	= new ProjectSettingsForm(this.Project);
 			projectForm.ShowDialog(this);
 			InitializeDataBinding();
@@ -523,7 +523,10 @@ namespace BibtexManager
 		private void RemoveDataBinding()
 		{
 			this.referencesBindingSource.DataSource	= null;
-			this.Project.Bibliography.Entries.ListChanged -= OnListChanged;
+			if (this.Project != null)
+			{
+				this.Project.Bibliography.Entries.ListChanged -= OnListChanged;
+			}
 		}
 
 		#endregion
