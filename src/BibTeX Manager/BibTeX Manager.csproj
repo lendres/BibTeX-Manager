@@ -390,9 +390,7 @@
       <Name>Digital Production</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Controls\" />
-  </ItemGroup>
+  <ItemGroup />
   <ProjectExtensions>
     <VisualStudio>
       <UserProperties UseXPTheme="TRUE" />
