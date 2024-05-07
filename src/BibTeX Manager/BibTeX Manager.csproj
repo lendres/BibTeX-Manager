@@ -96,27 +96,6 @@
     <Reference Include="CbtHook">
       <HintPath>..\..\References\CbtHook.dll</HintPath>
     </Reference>
-    <Reference Include="ClosedXML, Version=0.102.2.0, Culture=neutral, PublicKeyToken=fd1eb21b62ae805b, processorArchitecture=MSIL">
-      <HintPath>..\packages\ClosedXML.0.102.2\lib\netstandard2.0\ClosedXML.dll</HintPath>
-    </Reference>
-    <Reference Include="DocumentFormat.OpenXml, Version=2.16.0.0, Culture=neutral, PublicKeyToken=8fb06cb64d019a17, processorArchitecture=MSIL">
-      <HintPath>..\packages\DocumentFormat.OpenXml.2.16.0\lib\net46\DocumentFormat.OpenXml.dll</HintPath>
-    </Reference>
-    <Reference Include="ExcelNumberFormat, Version=1.1.0.0, Culture=neutral, PublicKeyToken=23c6f5d73be07eca, processorArchitecture=MSIL">
-      <HintPath>..\packages\ExcelNumberFormat.1.1.0\lib\net20\ExcelNumberFormat.dll</HintPath>
-    </Reference>
-    <Reference Include="Google.Apis, Version=1.67.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
-      <HintPath>..\packages\Google.Apis.1.67.0\lib\net462\Google.Apis.dll</HintPath>
-    </Reference>
-    <Reference Include="Google.Apis.Core, Version=1.67.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
-      <HintPath>..\packages\Google.Apis.Core.1.67.0\lib\net462\Google.Apis.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Google.Apis.CustomSearchAPI.v1, Version=1.67.0.3372, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
-      <HintPath>..\packages\Google.Apis.CustomSearchAPI.v1.1.67.0.3372\lib\net462\Google.Apis.CustomSearchAPI.v1.dll</HintPath>
-    </Reference>
-    <Reference Include="HtmlAgilityPack, Version=1.11.60.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
-      <HintPath>..\packages\HtmlAgilityPack.1.11.60\lib\Net45\HtmlAgilityPack.dll</HintPath>
-    </Reference>
     <Reference Include="Irony, Version=1.0.11.0, Culture=neutral, PublicKeyToken=ca48ace7223ead47, processorArchitecture=MSIL">
       <HintPath>..\packages\Irony.NetCore.1.0.11\lib\net461\Irony.dll</HintPath>
     </Reference>
@@ -265,22 +244,9 @@
     <Compile Include="Forms\SearchForm.Designer.cs">
       <DependentUpon>SearchForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Importing\IBulkImporter.cs" />
-    <Compile Include="Importing\BulkImporter.cs" />
-    <Compile Include="Importing\ImportErrorHandlingType.cs" />
-    <Compile Include="Importing\SingleImporter.cs" />
-    <Compile Include="Importing\ImporterBase.cs" />
-    <Compile Include="Importing\ISingleImporter.cs" />
-    <Compile Include="Importing\Spe\ConferenceReferenceItem.cs" />
-    <Compile Include="Importing\Spe\SpeConferenceImporter.cs" />
-    <Compile Include="Importing\Spe\SpeImportUtilities.cs" />
-    <Compile Include="Importing\Spe\SpeBulkTitleImporter.cs" />
-    <Compile Include="Importing\Spe\SpeTitleImporter.cs" />
-    <Compile Include="Importing\Spe\WebPageType.cs" />
     <Compile Include="Program\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Project\BibtexProject.cs" />
     <Compile Include="Program\RegistryAccess.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -291,27 +257,11 @@
       <DependentUpon>BibtexManagerForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program\Program.cs" />
-    <Compile Include="Importing\ImportResult.cs" />
-    <Compile Include="Importing\ResultType.cs" />
-    <Compile Include="Quality\StringConstantProcessor.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Quality\Correction.cs" />
-    <Compile Include="Quality\QualityProcessor.cs" />
-    <Compile Include="Name Remapping\BibEntryMap.cs" />
-    <Compile Include="Name Remapping\BibEntryRemapper.cs" />
-    <Compile Include="Quality\RemoveEnclosingBracesTagProcessor.cs" />
-    <Compile Include="Quality\SentanceEndingSpacesTagProcessor.cs" />
-    <Compile Include="Quality\QuoteTagProcessor.cs" />
-    <Compile Include="Quality\StringCaseTagProcessor.cs" />
-    <Compile Include="Quality\StringReplacementTagProcessor.cs" />
-    <Compile Include="Quality\TagProcessingData.cs" />
-    <Compile Include="Quality\TagProcessor.cs" />
-    <Compile Include="Quality\TagProcessorGroup.cs" />
-    <Compile Include="Quality\TagsToProcess.cs" />
     <None Include="Forms\Resources\Download SPE 22x22.png" />
     <Content Include="Forms\Resources\key.png" />
     <Content Include="Forms\Resources\LELaTeX Logo-Rotated-CroppedForAbout.bmp" />
@@ -388,6 +338,10 @@
     <ProjectReference Include="..\..\..\C Sharp Library\Library\Digital Production.csproj">
       <Project>{078ea7c0-7ee8-4d51-9421-8eedc779acbb}</Project>
       <Name>Digital Production</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BibTeX Project\BibTeX Project.csproj">
+      <Project>{07bb2290-3a6a-4d33-b8fa-01bf9071af31}</Project>
+      <Name>BibTeX Project</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />
