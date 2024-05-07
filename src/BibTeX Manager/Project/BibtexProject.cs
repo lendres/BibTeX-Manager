@@ -1,16 +1,10 @@
 ﻿using BibTeXLibrary;
-using BibtexManager.Project;
-using DigitalProduction.IO;
 using DigitalProduction.Projects;
-using Google.Apis.CustomSearchAPI.v1.Data;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Xml.Serialization;
 
 namespace BibtexManager

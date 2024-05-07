@@ -20,7 +20,7 @@
 		public Correction()
 		{
 			this.ReplaceText	= false;
-			this.PromptUser	= true;
+			this.PromptUser		= true;
 		}
 
 		#endregion
