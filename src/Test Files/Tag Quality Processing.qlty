@@ -113,6 +113,63 @@
 				
 			</tagprocessors>
 		</tagprocessorgroup>
+
+		<tagprocessorgroup name="Special Screw Ups by SPE">
+			<tagprocessors>
+
+				<!-- Both how and why?  You suck SPE. -->
+				<tagprocessor xsi:type="StringReplacementTagProcessor"
+					tagstoprocess="OnlySpecified"
+					pattern="\\\\%"
+					replacement="\%">
+					<tags>
+						<tag>title</tag>
+						<tag>abstract</tag>
+					</tags>
+				</tagprocessor>
+
+				<tagprocessor xsi:type="StringReplacementTagProcessor"
+					tagstoprocess="OnlySpecified"
+					pattern="\\\\&amp;amp;"
+					replacement="\&amp;">
+					<tags>
+						<tag>title</tag>
+						<tag>abstract</tag>
+					</tags>
+				</tagprocessor>
+
+				<tagprocessor xsi:type="StringReplacementTagProcessor"
+					tagstoprocess="OnlySpecified"
+					pattern="\\\\$"
+					replacement="\$">
+					<tags>
+						<tag>title</tag>
+						<tag>abstract</tag>
+					</tags>
+				</tagprocessor>
+
+				<tagprocessor xsi:type="StringReplacementTagProcessor"
+					tagstoprocess="OnlySpecified"
+					pattern="\\\\&amp;lt;"
+					replacement="\textless{}">
+					<tags>
+						<tag>title</tag>
+						<tag>abstract</tag>
+					</tags>
+				</tagprocessor>
+
+				<tagprocessor xsi:type="StringReplacementTagProcessor"
+					tagstoprocess="OnlySpecified"
+					pattern="\\\\&amp;gt;"
+					replacement="\textgreater{}">
+					<tags>
+						<tag>title</tag>
+						<tag>abstract</tag>
+					</tags>
+				</tagprocessor>
+
+			</tagprocessors>
+		</tagprocessorgroup>
 		
 		<tagprocessorgroup name="HTML Characters">
 			<tagprocessors>
@@ -174,23 +231,6 @@
 			</tagprocessors>
 		</tagprocessorgroup>
 
-		<tagprocessorgroup name="Special Screw Ups by SPE">
-			<tagprocessors>
-				
-				<!-- Both how and why?  You suck SPE. -->
-				<tagprocessor xsi:type="StringReplacementTagProcessor"
-					tagstoprocess="OnlySpecified"
-					pattern="\\\\%"
-					replacement="\%">
-					<tags>
-						<tag>title</tag>
-						<tag>abstract</tag>
-					</tags>
-				</tagprocessor>
-
-			</tagprocessors>
-		</tagprocessorgroup>
-		
 		<tagprocessorgroup name="Sepcialized Processors">
 			<tagprocessors>
 				
