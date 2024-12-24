@@ -6,7 +6,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BibTeX Manager", "BibTeX Ma
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Digital Production", "..\..\C Sharp Library\Library\Digital Production.csproj", "{078EA7C0-7EE8-4D51-9421-8EEDC779ACBB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BibTeXLibrary", "..\..\BibTeXLibrary\BibTeXLibrary\BibTeXLibrary.csproj", "{E453FF0B-97B0-4575-9A2E-B15DCBF7C47F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BibTeXLibrary", "..\..\BibTeXLibrary\src\BibTeXLibrary\BibTeXLibrary.csproj", "{E453FF0B-97B0-4575-9A2E-B15DCBF7C47F}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Unit Tests", "Unit Tests\Unit Tests.csproj", "{E00923FC-400F-4D44-A801-01ABF104DA8E}"
 EndProject

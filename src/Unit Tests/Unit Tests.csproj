@@ -22,7 +22,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\BibTeXLibrary\BibTeXLibrary\BibTeXLibrary.csproj" />
     <ProjectReference Include="..\BibTeX Manager\BibTeX Manager.csproj" />
   </ItemGroup>
 

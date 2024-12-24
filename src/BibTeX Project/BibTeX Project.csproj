@@ -7,7 +7,7 @@
     <ProjectGuid>{07BB2290-3A6A-4D33-B8FA-01BF9071AF31}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BibTeX_Project</RootNamespace>
+    <RootNamespace>BibTeXProject</RootNamespace>
     <AssemblyName>BibTeX Project</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -263,7 +263,7 @@
     <Compile Include="Quality\TagsToProcess.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\BibTeXLibrary\BibTeXLibrary\BibTeXLibrary.csproj">
+    <ProjectReference Include="..\..\..\BibTeXLibrary\src\BibTeXLibrary\BibTeXLibrary.csproj">
       <Project>{e453ff0b-97b0-4575-9a2e-b15dcbf7c47f}</Project>
       <Name>BibTeXLibrary</Name>
     </ProjectReference>

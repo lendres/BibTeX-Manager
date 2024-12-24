@@ -340,7 +340,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\BibTeXLibrary\BibTeXLibrary\BibTeXLibrary.csproj">
+    <ProjectReference Include="..\..\..\BibTeXLibrary\src\BibTeXLibrary\BibTeXLibrary.csproj">
       <Project>{e453ff0b-97b0-4575-9a2e-b15dcbf7c47f}</Project>
       <Name>BibTeXLibrary</Name>
     </ProjectReference>
