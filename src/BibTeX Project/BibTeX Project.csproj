@@ -263,6 +263,10 @@
     <Compile Include="Quality\TagsToProcess.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\..\..\BibTeXLibrary\src\BibTeXLibrary\BibTeXLibrary.csproj">
       <Project>{e453ff0b-97b0-4575-9a2e-b15dcbf7c47f}</Project>
       <Name>BibTeXLibrary</Name>
@@ -271,10 +275,6 @@
       <Project>{078ea7c0-7ee8-4d51-9421-8eedc779acbb}</Project>
       <Name>Digital Production</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="app.config" />
-    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\NETStandard.Library.2.0.3\build\netstandard2.0\NETStandard.Library.targets" Condition="Exists('..\packages\NETStandard.Library.2.0.3\build\netstandard2.0\NETStandard.Library.targets')" />
