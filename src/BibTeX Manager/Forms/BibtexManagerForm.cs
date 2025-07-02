@@ -1,6 +1,4 @@
-using BibTeXLibrary;
 using BibtexManager.Forms;
-using BibtexManager.Importing;
 using BibtexManager.Project;
 using DigitalProduction.Forms;
 using DigitalProduction.Http;
